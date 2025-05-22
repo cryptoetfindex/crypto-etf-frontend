@@ -1,0 +1,90 @@
+Crypto ETF Index Partnership Contract
+
+Effective Date: [Insert Date, e.g., May 22, 2025]
+
+Parties:
+- Crypto ETF Index, LLC ("Platform"), a Delaware limited liability company, with its principal office at [Insert Address, e.g., 123 Main St, Wilmington, DE 19801].
+- [Company Name] ("Partner"), a [State/Country of Incorporation] corporation, with its principal office at [Insert Partner Address].
+
+Recitals:
+WHEREAS, Platform provides a technology solution for visualizing crypto ETF analytics and launching tokenized stock offerings;
+WHEREAS, Partner seeks to use Platform's launchpad to deploy tokenized securities in compliance with U.S. Securities and Exchange Commission (SEC) regulations;
+WHEREAS, both parties agree to collaborate under the terms below;
+
+Agreement:
+1. Scope of Services
+   a. Platform shall provide Partner access to its tokenized stock launchpad, including visualization tools, technical support, and optional marketing services.
+   b. Partner shall select one of the following launch packages:
+      - 30-Day Rush ($10,000): Expedited launch within 30 days post-SEC approval, including basic visualization and technical support.
+      - 60-Day Standard ($7,500): Standard launch within 60 days, including testing, visualization, and moderate support.
+      - 90-Day Premium ($15,000): Comprehensive launch within 90 days, including extensive testing, visualization, and marketing support.
+   c. Services include 30 days of post-launch technical support for visualization and platform integration.
+
+2. Partner Responsibilities
+   a. Compliance: Partner shall maintain full compliance with SEC regulations, including registration (e.g., Form S-1, Form D) or exemptions (e.g., Regulation D, Regulation S).
+   b. Licenses: Partner shall hold necessary licenses (e.g., broker-dealer, FINRA, ATS) and provide proof (e.g., CIK, FINRA CRD).
+   c. KYC/AML: Partner shall submit notarized KYC/AML documents (PDF, <5 MB) for identity and sanctions verification.
+   d. Smart Contract: Partner shall provide a valid smart contract address (e.g., ERC-20, SPL) for tokenized stocks, verified on Etherscan, Solscan, or equivalent.
+   e. Contract: Partner shall sign and notarize this contract and upload it via Platform’s Company Registration page.
+   f. Liability: Partner assumes full responsibility for legal, regulatory, and financial risks associated with tokenized stock offerings.
+
+3. Platform Responsibilities
+   a. Technology: Platform shall provide a secure, scalable launchpad for tokenized stock visualization and analytics.
+   b. Support: Platform shall offer technical support for 30 days post-launch, including bug fixes and visualization updates.
+   c. Compliance: Platform shall verify Partner’s SEC filings, KYC/AML documents, and smart contract addresses before launch.
+   d. Limitation: Platform is a technology provider, not a broker-dealer or offering company, and does not assume liability for Partner’s offerings.
+
+4. Non-Disclosure Agreement (NDA)
+   a. Both parties agree to maintain confidentiality of proprietary information, including Platform’s technology and Partner’s offering details.
+   b. This NDA is effective for the lifetime of both parties, surviving termination of this contract.
+
+5. Non-Compete Agreement
+   a. Partner agrees not to develop, market, or deploy a competing tokenized stock launchpad using Platform’s technology or insights.
+   b. This non-compete is effective for the lifetime of both parties, surviving termination of this contract.
+
+6. Second Offering Option
+   a. Upon successful completion of the initial launch, Partner may request a second tokenized stock offering.
+   b. Platform shall provide a discounted rate (10% off selected package) for the second offering, subject to new SEC filings and compliance.
+
+7. Payment Terms
+   a. Partner shall pay the selected package fee ($10,000, $7,500, or $15,000) upon signing this contract.
+   b. Payments are non-refundable, except in cases of Platform’s failure to deliver services due to gross negligence.
+   c. Payment methods: Wire transfer or cryptocurrency (e.g., USDC, ETH) to Platform’s designated wallet.
+
+8. Term and Termination
+   a. This contract is effective from the Effective Date until 30 days post-launch, unless terminated earlier.
+   b. Either party may terminate with 30 days’ written notice if the other party breaches material terms (e.g., non-payment, non-compliance).
+   c. Upon termination, Platform shall cease services, and Partner shall cease using Platform’s technology.
+
+9. Indemnification
+   a. Partner shall indemnify Platform against claims arising from Partner’s offerings, including SEC violations, investor losses, or smart contract failures.
+   b. Platform shall indemnify Partner against claims arising from Platform’s technology failures, excluding Partner’s misuse.
+
+10. Governing Law
+    a. This contract is governed by the laws of the State of Delaware, USA.
+    b. Disputes shall be resolved in Delaware courts or through binding arbitration in Wilmington, DE.
+
+11. Disclaimer
+    a. Platform is a technology provider, not an offering company or broker-dealer. Information provided is for visualization only and does not constitute financial advice or a recommendation to buy/sell securities.
+    b. Partner assumes full responsibility for SEC compliance, licenses, and offerings. Platform is not liable for losses or violations.
+    c. This contract complies with U.S. laws and SEC regulations.
+
+Signatures:
+Crypto ETF Index, LLC
+By: _____________________________
+Name: [Insert Name]
+Title: Authorized Representative
+Date: [Insert Date]
+
+[Company Name]
+By: _____________________________
+Name: [Insert Partner Representative]
+Title: [Insert Title]
+Date: [Insert Date]
+
+Notarization:
+This contract must be notarized by a licensed notary public before submission to Platform.
+Notary Public: _____________________________
+Commission Number: ________________________
+Date: [Insert Date]
+Seal: [Notary Seal]
