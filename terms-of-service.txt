@@ -1,0 +1,60 @@
+Crypto ETF Index Terms of Service
+
+Effective Date: May 22, 2025
+
+1. Acceptance of Terms
+By accessing or using the Crypto ETF Index website (crypto-etf-frontend.pages.dev) or services ("Services"), you agree to these Terms of Service ("Terms"). If you do not agree, do not use our Services. These Terms apply to all users, including companies registering for our tokenized stock launchpad.
+
+2. Description of Services
+Crypto ETF Index, LLC ("we", "us", or "Platform"), a Delaware limited liability company, provides:
+a. Visualization tools for crypto ETF analytics and tokenized stock data.
+b. A launchpad for companies to deploy tokenized securities in compliance with U.S. Securities and Exchange Commission (SEC) regulations.
+c. Technical support and optional marketing services per the Partnership Contract.
+
+3. User Responsibilities
+a. Compliance: You must comply with all applicable laws, including SEC regulations (e.g., Form S-1, Form D, Regulation D).
+b. Licenses: Companies must hold necessary licenses (e.g., broker-dealer, FINRA, ATS) and provide proof (e.g., CIK, FINRA CRD).
+c. Accuracy: You must provide accurate information in the Company Registration form, including KYC/AML documents and smart contract addresses.
+d. Liability: You assume full responsibility for your tokenized stock offerings, including legal, regulatory, and financial risks.
+
+4. Platform Responsibilities
+a. We provide a secure, scalable technology platform for visualization and launchpad services.
+b. We verify SEC filings, KYC/AML documents, and smart contract addresses before launch.
+c. We are a technology provider, not a broker-dealer or offering company, and do not assume liability for your offerings.
+
+5. Intellectual Property
+a. All content on our website (e.g., code, designs, text) is owned by Crypto ETF Index, LLC or licensed to us.
+b. You may not copy, modify, or distribute our content without written permission.
+c. You grant us a non-exclusive license to use data submitted via forms (e.g., Company Registration) for service delivery.
+
+6. Prohibited Conduct
+You may not:
+a. Use our Services for illegal purposes or to violate SEC regulations.
+b. Attempt to hack, reverse-engineer, or disrupt our platform.
+c. Submit false or misleading information.
+
+7. Termination
+a. We may suspend or terminate your access for violating these Terms or at our discretion.
+b. You may stop using our Services at any time.
+
+8. Limitation of Liability
+a. Our Services are provided "as is" without warranties.
+b. We are not liable for losses, damages, or violations arising from your use of our Services, including tokenized stock offerings.
+c. Our total liability shall not exceed the fees paid for your selected launch package.
+
+9. Indemnification
+You agree to indemnify us against claims arising from your use of our Services, including SEC violations or investor losses.
+
+10. Governing Law
+These Terms are governed by the laws of Delaware, USA. Disputes shall be resolved in Delaware courts or through arbitration in Wilmington, DE.
+
+11. Changes to Terms
+We may update these Terms periodically. Continued use constitutes acceptance of the updated Terms.
+
+12. Contact Us
+For inquiries, use the Contact Form on our website or write to:
+Crypto ETF Index, LLC
+[Insert Address, e.g., 123 Main St, Wilmington, DE 19801]
+
+13. Disclaimer
+Crypto ETF Index is a technology provider, not a broker-dealer or offering company. Information is for visualization only and does not constitute financial advice. You are responsible for SEC compliance and offerings. We are not liable for losses or violations. Complies with U.S. laws.
