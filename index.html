@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Add Web3Modal and WalletConnect -->
+    <script src="https://unpkg.com/@web3modal/ethers@3.3.0/dist/index.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+    <style>
+        /* Existing styles unchanged */
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+        }
+        body { background: var(--background); color: var(--text-color); font-family: 'Orbitron', sans-serif; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 15px; width: 90%; max-width: 600px; box-shadow: 0 0 20px var(--shadow-color); }
+        .chart-modal { display: none; }
+        .chart-modal.active { display: block; }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <header class="bg-[var(--header-bg)] p-2 text-center">
+        <h1 class="text-4xl">Crypto ETF Index</h1>
+        <div class="auth-controls mt-2">
+            <button id="wallet-connect-btn" class="bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded">Connect Wallet</button>
+            <button id="logout-btn" class="bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded hidden">Disconnect</button>
+        </div>
+    </header>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <!-- Home Page (unchanged except for script) -->
+        <div id="home-page" class="page">
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Asset Distribution</h2>
+                <input type="file" id="csv-upload" accept=".csv" class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded" aria-label="Upload CSV">
+                <canvas id="asset-pie-chart" class="mt-4"></canvas>
+            </div>
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Contact Us</h2>
+                <form id="contact-form" class="flex flex-col gap-2">
+                    <input type="email" id="contact-email" placeholder="Your Email" required class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded">
+                    <textarea id="contact-message" placeholder="Your Message (max 500 characters)" maxlength="500" required class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded h-24"></textarea>
+                    <button type="submit" class="bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded">Submit</button>
+                </form>
+                <p id="contact-error" class="text-sm text-[var(--loss-color)] mt-2"></p>
+            </div>
+            <div class="policy-buttons flex gap-4 justify-center flex-wrap mt-4">
+                <a href="/privacy-policy.txt" download class="policy-btn bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded">Privacy Policy</a>
+                <a href="/terms-of-service.txt" download class="policy-btn bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded">Terms of Service</a>
+                <a href="/risk-policy.txt" download class="policy-btn bg-[var(--button-bg)] text-[var(--button-text)] p-2 rounded">Risk Policy</a>
+            </div>
+            <p class="copyright text-center text-sm mt-4">Copyright © Crypto ETF Index, May 2025</p>
+        </div>
+    </div>
+
+    <!-- Chart Modal (unchanged) -->
+    <div id="chart-modal" class="modal chart-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeChartModal()" aria-label="Close chart modal">×</span>
+            <h2 class="text-xl font-semibold mb-4" id="modal-title"></h2>
+            <select id="chart-type" class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded mb-4">
+                <option value="line">Line</option>
+            </select>
+            <canvas id="asset-chart"></canvas>
+            <p id="modal-error" class="text-sm text-[var(--loss-color)] mt-2"></p>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'https://crypto-etf-backend.YOUR_SUBDOMAIN.workers.dev';
+        let token = localStorage.getItem('token');
+        let userTier = localStorage.getItem('tier') || 'free';
+        let pieChart = null;
+
+        // Initialize Web3Modal
+        const projectId = 'YOUR_WALLETCONNECT_PROJECT_ID'; // Replace with your Project ID
+        const chains = [
+            { chainId: 1, name: 'Ethereum', currency: 'ETH', explorerUrl: 'https://etherscan.io', rpcUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_ID' }, // Placeholder
+            { chainId: 11155111, name: 'Sepolia', currency: 'ETH', explorerUrl: 'https://sepolia.etherscan.io', rpcUrl: 'https://sepolia.infura.io/v3/YOUR_INFURA_ID' }, // Placeholder
+            { chainId: 1399811149, name: 'Solana', currency: 'SOL', explorerUrl: 'https://solscan.io', rpcUrl: 'https://api.mainnet-beta.solana.com' }
+        ];
+        const web3Modal = new Web3Modal({
+            projectId,
+            chains,
+            walletConnectVersion: 2,
+            themeMode: localStorage.getItem('theme') || 'normal',
+            themeVariables: {
+                '--w3m-font-family': '"Orbitron", sans-serif',
+                '--w3m-accent-color': '#00ddeb',
+                '--w3m-background-color': '#1b263b'
+            }
+        });
+
+        // WalletConnect Authentication
+        async function connectWallet() {
+            try {
+                const provider = await web3Modal.connect();
+                const ethersProvider = new ethers.providers.Web3Provider(provider);
+                const signer = ethersProvider.getSigner();
+                const walletAddress = await signer.getAddress();
+                const message = `Crypto ETF Index Login: ${Date.now()}`;
+                const signature = await signer.signMessage(message);
+                const res = await axios.post(`${BACKEND_URL}/api/auth/wallet`, {
+                    walletAddress,
+                    signature,
+                    message
+                });
+                token = res.data.token;
+                userTier = res.data.tier;
+                localStorage.setItem('token', token);
+                localStorage.setItem('tier', userTier);
+                updateAuthUI();
+            } catch (err) {
+                console.error('Wallet connect failed:', err);
+                alert('Failed to connect wallet');
+            }
+        }
+
+        function disconnectWallet() {
+            web3Modal.disconnect();
+            token = null;
+            userTier = 'free';
+            localStorage.removeItem('token');
+            localStorage.removeItem('tier');
+            localStorage.removeItem('assetData');
+            updateAuthUI();
+            if (pieChart) pieChart.destroy();
+        }
+
+        // CSV Parsing (unchanged)
+        document.getElementById('csv-upload').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const text = await file.text();
+            const rows = text.split('\n').slice(1).filter(row => row.trim());
+            const assets = rows.map(row => {
+                const [asset, amount, valueUSD] = row.split(',');
+                return { asset, amount: parseFloat(amount), valueUSD: parseFloat(valueUSD) };
+            });
+            localStorage.setItem('assetData', JSON.stringify(assets));
+            renderPieChart(assets);
+        });
+
+        // Pie Chart (unchanged)
+        function renderPieChart(assets) {
+            if (pieChart) pieChart.destroy();
+            const ctx = document.getElementById('asset-pie-chart').getContext('2d');
+            const totalValue = assets.reduce((sum, a) => sum + a.valueUSD, 0);
+            pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: assets.map(a => a.asset),
+                    datasets: [{
+                        data: assets.map(a => (a.valueUSD / totalValue) * 100),
+                        backgroundColor: ['#00ddeb', '#ff00ff', '#00ff00', '#ff0000', '#ffff00'],
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: 'var(--text-color)' } }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length && userTier !== 'free') {
+                            const index = elements[0].index;
+                            const asset = assets[index].asset;
+                            openChartModal(asset);
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart Modal (unchanged)
+        async function openChartModal(asset) {
+            const modal = document.getElementById('chart-modal');
+            const title = document.getElementById('modal-title');
+            const chartTypeSelect = document.getElementById('chart-type');
+            const error = document.getElementById('modal-error');
+            title.textContent = `${asset} Historical Data`;
+            chartTypeSelect.innerHTML = userTier === 'enterprise' ? 
+                '<option value="line">Line</option><option value="bar">Bar</option><option value="candlestick">Candlestick</option>' :
+                userTier === 'pro' ? 
+                '<option value="line">Line</option><option value="bar">Bar</option>' :
+                '<option value="line">Line</option>';
+            modal.classList.add('active');
+            try {
+                const res = await axios.get(`${BACKEND_URL}/api/asset/${asset}/history`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const { prices, chartTypes } = res.data;
+                chartTypeSelect.innerHTML = chartTypes.map(type => `<option value="${type}">${type.charAt(0).toUpperCase() + type.slice(1)}</option>`).join('');
+                renderAssetChart(prices, chartTypeSelect.value);
+                chartTypeSelect.onchange = () => renderAssetChart(prices, chartTypeSelect.value);
+            } catch (err) {
+                error.textContent = 'Failed to load data';
+            }
+        }
+
+        function renderAssetChart(prices, type) {
+            const ctx = document.getElementById('asset-chart').getContext('2d');
+            if (window.assetChart) window.assetChart.destroy();
+            const config = type === 'candlestick' ? {
+                type: 'bar',
+                data: {
+                    datasets: [{
+                        label: 'Price (USD)',
+                        data: prices.map(p => ({ x: new Date(p.time), y: p.price })),
+                        backgroundColor: prices.map((p, i, arr) => 
+                            i > 0 && p.price >= arr[i-1].price ? 'var(--gain-color)' : 'var(--loss-color)'
+                        )
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { type: 'time', time: { unit: 'day' } },
+                        y: { beginAtZero: false }
+                    }
+                }
+            } : {
+                type,
+                data: {
+                    labels: prices.map(p => new Date(p.time).toLocaleDateString()),
+                    datasets: [{
+                        label: 'Price (USD)',
+                        data: prices.map(p => p.price),
+                        borderColor: 'var(--accent-color)',
+                        backgroundColor: type === 'bar' ? 'var(--accent-color)' : undefined,
+                        fill: type === 'line'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { ticks: { color: 'var(--text-color)' } },
+                        y: { ticks: { color: 'var(--text-color)' }, beginAtZero: false }
+                    },
+                    plugins: { legend: { labels: { color: 'var(--text-color)' } } }
+                }
+            };
+            window.assetChart = new Chart(ctx, config);
+        }
+
+        function closeChartModal() {
+            document.getElementById('chart-modal').classList.remove('active');
+            if (window.assetChart) window.assetChart.destroy();
+        }
+
+        // Contact Form (unchanged)
+        document.getElementById('contact-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+            try {
+                await axios.post(`${BACKEND_URL}/api/contact`, { email, message });
+                document.getElementById('contact-error').textContent = 'Message sent';
+            } catch (err) {
+                document.getElementById('contact-error').textContent = 'Error';
+            }
+        });
+
+        // Auth UI
+        function updateAuthUI() {
+            document.getElementById('wallet-connect-btn').classList.toggle('hidden', !!token);
+            document.getElementById('logout-btn').classList.toggle('hidden', !token);
+        }
+
+        // Event Listeners
+        document.getElementById('wallet-connect-btn').addEventListener('click', connectWallet);
+        document.getElementById('logout-btn').addEventListener('click', disconnectWallet);
+
+        // Initialize
+        updateAuthUI();
+        const savedAssets = localStorage.getItem('assetData');
+        if (savedAssets) renderPieChart(JSON.parse(savedAssets));
+
+        // Particle.js (unchanged)
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00d4ff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00d4ff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: true }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            }
+        });
+    </script>
+</body>
+</html>
