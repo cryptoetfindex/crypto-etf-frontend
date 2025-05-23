@@ -30,10 +30,10 @@ This project is intended for personal use by authorized contributors and end-use
 ### Installation
 1. Clone the repository for licensed users only. 
 
-   License
+  ### License
 This project is not open-source. All rights are reserved by the Crypto ETF Index team. See the Terms of Service for usage permissions.
 Contact
-For inquiries, use the contact form on the live site at https://crypto-etf-frontend.pages.dev or reach out to the maintainers via the project’s official channels (details available upon authorization).
+For inquiries, use the contact form on the live site at https://cryptoetfindex.com or reach out to the maintainers via the project’s official channels (details available upon authorization).
 Disclaimer
 Crypto ETF Index is a technology provider, not a broker-dealer. All investments carry risks. Consult a financial advisor before making investment decisions.
 
