@@ -1,0 +1,43 @@
+Crypto ETF Index Risk Policy
+
+Effective Date: May 22, 2025
+
+1. Introduction
+Crypto ETF Index, LLC ("we", "us", or "Platform"), a Delaware limited liability company, provides a technology platform for crypto ETF analytics and tokenized stock launchpads. This Risk Policy outlines the risks associated with using our website (crypto-etf-frontend.pages.dev) and services, particularly for companies launching tokenized securities.
+
+2. Investment Risks
+a. Volatility: Crypto ETFs and tokenized stocks are highly volatile, subject to significant price fluctuations.
+b. Loss of Capital: You may lose your entire investment due to market conditions, regulatory actions, or smart contract failures.
+c. No Guarantees: We do not guarantee returns or the success of any tokenized stock offering.
+
+3. Regulatory Risks
+a. SEC Compliance: Companies must comply with U.S. Securities and Exchange Commission (SEC) regulations (e.g., Form S-1, Form D, Regulation D). Non-compliance may result in penalties, fines, or legal action.
+b. Licensing: Companies must hold appropriate licenses (e.g., broker-dealer, FINRA, ATS). Failure to do so may invalidate offerings.
+c. Changing Regulations: U.S. and international laws may change, affecting the legality or feasibility of tokenized stock offerings.
+
+4. Technical Risks
+a. Smart Contracts: Tokenized stocks rely on blockchain smart contracts (e.g., ERC-20, SPL), which may contain bugs, vulnerabilities, or be subject to hacks.
+b. Platform Availability: Our services may experience downtime due to technical issues, maintenance, or cyberattacks.
+c. Data Security: Despite our security measures, data breaches may expose submitted information (e.g., KYC/AML documents).
+
+5. Operational Risks
+a. Third-Party Dependence: Our services rely on third parties (e.g., Cloudflare for hosting, blockchain networks like Ethereum, Solana). Their failures may disrupt our platform.
+b. Verification Limitations: While we verify SEC filings and smart contract addresses, we cannot guarantee their accuracy or legality.
+
+6. User Responsibilities
+a. Due Diligence: You must conduct your own research and consult financial, legal, and tax advisors before using our services.
+b. Compliance: Companies are solely responsible for maintaining SEC compliance, licenses, and accurate submissions.
+c. Risk Acceptance: By using our services, you acknowledge and accept all risks outlined in this policy.
+
+7. Limitation of Liability
+a. We are a technology provider, not a broker-dealer or offering company.
+b. We are not liable for losses, damages, or violations arising from your use of our services, including failed offerings or regulatory penalties.
+c. Our total liability shall not exceed the fees paid for your selected launch package.
+
+8. Contact Us
+For risk-related inquiries, use the Contact Form on our website or write to:
+Crypto ETF Index, LLC
+[Insert Address, e.g., 123 Main St, Wilmington, DE 19801]
+
+9. Disclaimer
+Crypto ETF Index provides visualization tools and a launchpad, not financial advice or investment recommendations. You are responsible for all risks associated with crypto ETFs and tokenized stocks. We are not liable for losses or violations. Complies with U.S. laws.
