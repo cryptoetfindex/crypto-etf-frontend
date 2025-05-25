@@ -1,0 +1,148 @@
+Crypto ETF Index Whitepaper
+Version 1.0
+Release Date: May 25, 2025
+
+---
+
+Table of Contents
+
+1. Introduction
+2. Mission and Vision
+3. Platform Design and Features
+4. Technical Architecture
+5. Regulatory Compliance
+6. Development and Funding Model
+7. Roadmap and Future Enhancements
+8. Conclusion
+9. Contact Information
+
+---
+
+1. Introduction
+The cryptocurrency market has experienced unprecedented growth, with the introduction of exchange-traded funds (ETFs) marking a significant milestone in mainstream adoption. As of May 2025, the U.S. Government and the Securities and Exchange Commission (SEC) are actively shaping regulatory frameworks to ensure investor protection and market stability. Crypto ETF Index emerges as a self-funded, innovative analytics platform designed to empower investors with advanced visualization tools for crypto ETF portfolios. Launched independently on July 24, 2025, this whitepaper details our approach, technology, and commitment to compliance in this evolving landscape.
+
+---
+
+2. Mission and Vision
+Mission : To provide a user-friendly, secure, and compliant platform that delivers actionable insights into crypto ETF portfolios, enabling investors to make informed decisions without reliance on traditional financial intermediaries.
+
+Vision : To become the leading analytics tool for crypto ETFs, fostering transparency and accessibility as the industry matures under regulatory oversight, while maintaining operational independence through self-funding.
+
+---
+
+3. Platform Design and Features
+Crypto ETF Index is engineered to address the unique needs of crypto ETF investors, offering a tiered access model with the following core features:
+
+- Portfolio Visualization :
+  - Pie Charts : Display asset distribution based on portfolio value (quantity × price).
+  - Line Charts : Track historical performance trends.
+  - Bar Charts : Analyze profit and loss (P&L) by asset.
+  - Starburst Charts : Offer advanced hierarchical views for Enterprise users, showing inter-asset relationships.
+- Data Input Options :
+  - CSV/Excel Uploads : Users can upload portfolio data with fields such as asset, quantity, and price.
+  - Wallet Connect Integration : Supports connection to crypto wallets (e.g., MetaMask) for real-time portfolio syncing.
+- Tiered Access :
+  - Free Tier : Basic pie chart visualization.
+  - Basic Tier : Pie and line charts.
+  - Pro Tier : Pie, line, and bar charts.
+  - Enterprise Tier : All charts, including starburst, with advanced analytics.
+- User Experience : Responsive design with theme options (normal, light, dark) and interactive chart controls (zoom, date filters).
+
+The platform is designed to launch with a countdown timer visible on the homepage, set to conclude on July 24, 2025, at 00:00:00 CDT.
+
+---
+
+4. Technical Architecture
+The Crypto ETF Index platform is built with a modular architecture separating frontend and backend components:
+
+- Frontend :
+  - Built with HTML5, CSS (Tailwind CSS), and JavaScript.
+  - Utilizes Chart.js for visualization, enhanced with plugins like chartjs-chart-sunburst and chartjs-plugin-zoom.
+  - Hosted on a public GitHub repository (crypto-etf-frontend) for transparency.
+  - Features particle.js for an engaging UI and axios for API requests.
+
+- Backend :
+  - Developed with Node.js and Express.js, hosted in a private GitHub repository (crypto-etf-backend).
+  - Handles CSV/Excel parsing with csv-parse and xlsx libraries.
+  - Manages file uploads via Multer, storing temporary files in an `uploads/` directory.
+  - Provides RESTful APIs:
+    - `/api/upload-file`: Processes CSV/Excel uploads.
+    - `/api/wallet-connect`: Accepts JSON wallet data.
+    - `/api/chart-data`: Returns pie chart data (expandable to other chart types).
+  - Uses in-memory storage for portfolios (to be upgraded to SQLite in future iterations).
+
+- Security :
+  - Implements CORS for cross-origin request handling.
+  - Requires `user-id` headers for authentication (to be replaced with JWT in production).
+  - Deletes uploaded files post-processing to minimize data retention.
+
+- Scalability : Designed for low initial load, with plans to integrate cloud hosting (e.g., AWS) and a database for persistent storage.
+
+---
+
+5. Regulatory Compliance
+Crypto ETF Index is developed with a proactive approach to U.S. regulatory requirements, ensuring alignment with SEC and industry standards:
+
+- SEC Compliance :
+  - Operates solely as a technology provider, not a broker-dealer or investment advisor, per the Investment Advisers Act of 1940 and Securities Exchange Act of 1934.
+  - Does not offer investment advice, manage funds, or engage in securities trading.
+  - Includes disclaimers advising users to consult licensed financial advisors.
+
+- Anti-Money Laundering (AML) and Know Your Customer (KYC) :
+  - Adheres to the Bank Secrecy Act (BSA), requiring KYC verification for any investor or partnership inquiries.
+  - Plans to integrate AML/KYC checks for wallet connect features in future updates.
+
+- Accredited Investor Standards :
+  - Complies with SEC Rule 501 of Regulation D, ensuring inquiries from individuals or firms meet accredited investor criteria where applicable.
+
+- Data Privacy :
+  - Aligns with the California Consumer Privacy Act (CCPA) and anticipates federal data protection laws.
+  - Implements data minimization by deleting uploaded files and limiting data retention.
+
+- Risk Disclosure :
+  - Highlights the inherent risks of crypto investments, including volatility and regulatory changes, in all user-facing materials.
+
+---
+
+6. Development and Funding Model
+Crypto ETF Index is a self-funded project, developed without external investor capital. This model offers several advantages:
+
+- Independence : Allows full control over design, compliance, and strategic direction.
+- Agility : Enables rapid iteration and deployment without investor pressure.
+- Transparency : Demonstrates operational efficiency, with all frontend code publicly available on GitHub.
+
+Development costs are covered through personal investment and lean operational practices, with plans to generate revenue via tiered subscriptions post-launch.
+
+---
+
+7. Roadmap and Future Enhancements
+- Q3 2025 (Post-Launch) :
+  - Full deployment of all tiers with enhanced wallet connect support.
+  - Integration of SQLite for persistent portfolio storage.
+- Q4 2025 :
+  - Introduction of real-time price feeds via third-party APIs.
+  - Expansion of chart types (e.g., candlestick charts).
+- 2026 :
+  - Cloud migration to AWS for scalability.
+  - Addition of AI-driven analytics for predictive insights.
+  - Potential mobile app development.
+
+Community feedback will guide prioritization, with updates communicated via the Crypto ETF Index website.
+
+---
+
+8. Conclusion
+Crypto ETF Index represents a forward-thinking solution for crypto ETF investors, combining cutting-edge visualization tools with a commitment to regulatory compliance. As a self-funded platform, we are poised to lead the market as regulations solidify, offering a secure and accessible analytics experience. We invite serious inquiries from registered firms and accredited individuals to explore potential collaborations.
+
+---
+
+9. Contact Information
+For investor relations or partnership inquiries, please contact us at:
+
+- Email : info@cryptoetfindex.com
+- Subject Line : Investor Relations
+- Process : Include your full name, firm name (if applicable), contact details, and a brief overview of your interest. All inquiries must comply with SEC regulations, including accredited investor verification. NDAs, Noncompete Agreements, and escrow proof of funds are required prior to sharing backend details.
+
+Disclaimer : Crypto ETF Index is a technology provider, not a financial advisor. Investments in crypto ETFs carry risks, and users should consult licensed professionals. Launch date: July 24, 2025, 00:00:00 CDT.
+
+---
