@@ -1,0 +1,50 @@
+Crypto ETF Index - Investor Relations and Inquiry
+
+Welcome to the Investor Relations page for Crypto ETF Index, a pioneering analytics platform dedicated to transforming how investors engage with crypto exchange-traded funds (ETFs). We appreciate your interest in our platform and are committed to fostering transparent and compliant communication with potential stakeholders.
+
+**About Crypto ETF Index: Design and Goals**
+Crypto ETF Index is a self-funded, innovative platform set to launch on July 24, 2025. Our mission is to empower investors by providing advanced visualization tools tailored for crypto ETF portfolios. We aim to bridge the gap between complex crypto market data and actionable insights through intuitive analytics, including:
+
+- **Asset Distribution Visualization**: Interactive pie charts to display portfolio allocations.
+- **Historical Performance Tracking**: Line, bar, and starburst charts to analyze asset trends over time.
+- **User-Centric Features**: Support for CSV/Excel portfolio uploads and wallet connect integration, ensuring seamless data input.
+- **Tiered Access Model**: From Free (basic pie charts) to Enterprise (advanced starburst charts), catering to diverse user needs.
+
+Our goal is to democratize access to sophisticated crypto analytics while maintaining the highest standards of usability and regulatory compliance. As the crypto industry evolves, Crypto ETF Index is positioned to become a trusted tool for retail and institutional investors alike.
+
+**Regulatory Context and Compliance**
+The U.S. Government and the Securities and Exchange Commission (SEC) are actively working to regulate the cryptocurrency industry, introducing frameworks to protect investors and ensure market integrity. Crypto ETF Index is developed with full awareness of these evolving regulations, and we are committed to adhering to all applicable U.S. laws, including but not limited to:
+
+- **SEC Compliance**: We operate as a technology provider, not a broker-dealer or investment advisor. We do not provide investment advice, manage client funds, or engage in activities requiring SEC registration under the Investment Advisers Act of 1940 or the Securities Exchange Act of 1934. Our platform is designed to provide data visualization tools only, and users are responsible for their investment decisions.
+- **Anti-Money Laundering (AML) and Know Your Customer (KYC)**: Any potential partnerships or investor engagements will require strict adherence to AML and KYC regulations, ensuring compliance with the Bank Secrecy Act (BSA) and related SEC guidelines.
+- **Accredited Investor Standards**: Inquiries from individuals or firms must comply with SEC Rule 501 of Regulation D, verifying accredited investor status where applicable.
+- **Data Privacy and Security**: We align with U.S. data protection laws, including the California Consumer Privacy Act (CCPA) and emerging federal standards, to safeguard user data and ensure transparency in data handling.
+
+As a self-funded entity, Crypto ETF Index has been developed without external investor funding, allowing us to maintain full control over our vision and compliance strategy. We are not actively seeking investment at this time but recognize the growing interest in crypto analytics platforms as the industry matures under regulatory oversight.
+
+**Investor Inquiry Process**
+We welcome serious inquiries from registered firms, accredited investors, and individuals interested in learning more about Crypto ETF Index. To ensure a professional and compliant process, please follow these steps:
+
+1. **Initial Contact**: Email your inquiry to info@cryptoetfindex.com with the subject line "Investor Relations." Please include your full name, firm name (if applicable), contact details, and a brief overview of your interest in Crypto ETF Index.
+2. **Compliance Verification**: All inquiries must adhere to U.S. investor regulations. We will verify the accreditation status of individuals or the registration status of firms in accordance with SEC guidelines.
+3. **Confidentiality and Agreements**: Prior to sharing any proprietary information, including backend systems or technical details, interested parties must sign Non-Disclosure Agreements (NDAs) and Noncompete Agreements. These agreements protect our intellectual property and ensure mutual trust.
+4. **Proof of Funds**: To proceed with detailed discussions, proof of funds via escrow will be required, ensuring that only serious inquiries move forward.
+5. **Engagement**: Once all agreements and verifications are complete, we will schedule a meeting to discuss potential collaboration opportunities, provide platform demonstrations, and address any questions.
+
+**Why Engage with Crypto ETF Index?**
+- **Market Opportunity**: The crypto ETF market is poised for significant growth as regulatory clarity increases. Our platform addresses a critical need for reliable, user-friendly analytics tools in this space.
+- **Innovative Technology**: Our visualization tools, including pie charts for asset distribution and advanced charting options, set us apart in a competitive landscape.
+- **Regulatory Readiness**: Our commitment to compliance ensures that partnerships align with U.S. legal standards, reducing risk for all parties.
+- **Proven Development**: As a self-funded platform, we have already built a robust foundation, launching without external capital, which demonstrates our operational efficiency and dedication.
+
+**Important Disclosures**
+Crypto ETF Index is a technology provider, not a broker-dealer or investment advisor. All investments in crypto ETFs carry inherent risks, including market volatility and regulatory changes. We strongly recommend consulting with a licensed financial advisor before making investment decisions. Crypto ETF Index does not guarantee returns and is not responsible for investment losses.
+
+**Contact Us**
+We look forward to engaging with serious, compliant parties who share our vision for the future of crypto analytics. Please reach out to us at:
+
+Email: info@cryptoetfindex.com  
+Subject: Investor Relations  
+Phone: (Available upon request after initial email verification)
+
+Thank you for your interest in Crypto ETF Index. We are excited to launch on July 24, 2025, and to explore potential synergies with like-minded stakeholders in a fully compliant manner.
