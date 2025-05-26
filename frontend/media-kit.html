@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index - Media Kit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <meta property="og:title" content="Crypto ETF Index - Media Kit">
+    <meta property="og:description" content="Access the Crypto ETF Index media kit for press and media inquiries. Launching July 24, 2025!">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/favicon.png">
+    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/media-kit.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Crypto ETF Index - Media Kit">
+    <meta name="twitter:description" content="Access the Crypto ETF Index media kit for press and media inquiries. Launching July 24, 2025!">
+    <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+            --gain-color: #00ff00;
+            --loss-color: #ff0000;
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --select-bg: rgba(0, 0, 0, 0.1);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 0.2);
+            --button-bg: #80e8f0;
+            --button-text: #333333;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+            --button-text: #0a121e;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header, .container {
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        .policy-btn, button {
+            background: var(--button-bg);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .policy-btn:hover, button:hover {
+            background: #00b7c3;
+        }
+        .theme-select {
+            background: var(--select-bg);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            border: 1px solid var(--accent-color);
+        }
+        header {
+            padding-top: 0.5rem;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .logo-img {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(0, 221, 235, 0.8))
+                    drop-shadow(0 0 20px rgba(0, 221, 235, 0.6))
+                    drop-shadow(0 0 30px rgba(0, 221, 235, 0.4));
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <header class="bg-[var(--header-bg)] text-center">
+        <img src="/frontend/CryptoETFIndex Logo.png" alt="Crypto ETF Index Logo" class="logo-img">
+        <div class="auth-controls mt-2 flex flex-col items-center gap-2">
+            <div class="flex gap-2">
+                <a href="/index.html" class="policy-btn">Home</a>
+            </div>
+            <select id="theme-select" class="theme-select" aria-label="Select theme">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">Media Kit</h2>
+            <p class="text-sm mb-4">Welcome to the Crypto ETF Index Media Kit. Below you'll find information about our upcoming platform, key features, and resources for press and media inquiries.</p>
+            
+            <h3 class="text-lg font-semibold mb-2">About Crypto ETF Index</h3>
+            <p class="text-sm mb-4">Crypto ETF Index is a technology platform designed to provide analytics and portfolio management tools for tokenized stocks and cryptocurrencies. Set to launch on July 24, 2025, our platform empowers users to visualize asset distributions, track historical data, and manage investments with ease.</p>
+            
+            <h3 class="text-lg font-semibold mb-2">Key Features</h3>
+            <ul class="list-disc pl-5 text-sm mb-4">
+                <li>Asset Distribution: Upload a CSV to visualize your portfolio as a pie chart (All Tiers).</li>
+                <li>Historical Data: View line, bar, or candlestick charts for assets (Basic+).</li>
+                <li>Portfolio Management: Track and manage tokenized stocks and crypto (Basic+).</li>
+                <li>Price Alerts: Set price notifications for assets (Basic+).</li>
+                <li>Voice Integration: Control the app with voice commands (Pro+).</li>
+                <li>Sharing: Share portfolio insights with others (Pro+).</li>
+                <li>Company Registration: Register businesses for advanced analytics (Enterprise).</li>
+            </ul>
+            
+            <h3 class="text-lg font-semibold mb-2">Pricing Tiers</h3>
+            <p class="text-sm mb-4">Our platform offers a range of tiers to suit different user needs:</p>
+            <ul class="list-disc pl-5 text-sm mb-4">
+                <li><strong>Free</strong>: Pie chart, track up to 5 tokens or ETFs.</li>
+                <li><strong>Basic</strong>: Pie chart, line chart, portfolio management, price alerts, track up to 50 tokens or ETFs.</li>
+                <li><strong>Pro</strong>: Line + bar charts, voice integration, sharing, track up to 200 tokens or ETFs.</li>
+                <li><strong>Enterprise</strong>: All charts (line, bar, candlestick), company registration, unlimited token and ETF tracking.</li>
+            </ul>
+            
+            <h3 class="text-lg font-semibold mb-2">Media Resources</h3>
+            <p class="text-sm mb-4">Download our media kit in plain text format for easy reference:</p>
+            <a href="/frontend/media-kit.txt" class="policy-btn mb-4" download>Download Media Kit (TXT)</a>
+            
+            <h3 class="text-lg font-semibold mb-2">Contact Information</h3>
+            <p class="text-sm mb-4">For media inquiries, please contact us at: <a href="mailto:info@cryptoetfindex.com" class="underline">info@cryptoetfindex.com</a></p>
+            
+            <h3 class="text-lg font-semibold mb-2">Disclaimers and Disclosures</h3>
+            <p class="text-sm mb-2"><strong>Pre-Launch Disclaimer</strong>: Tools, features, and pricing tiers described are subject to change without notice as we continue testing and development until our official launch on July 24, 2025.</p>
+            <p class="text-sm mb-2"><strong>Intellectual Property</strong>: All content, designs, and functionality of Crypto ETF Index are protected by copyright. Unauthorized use, reproduction, or distribution of any materials is strictly prohibited without prior written consent.</p>
+            <p class="text-sm mb-2"><strong>Forward-Looking Statements</strong>: Statements regarding the platform’s features, launch date, and capabilities are forward-looking and based on current plans. Actual results may differ due to development changes or unforeseen circumstances. Crypto ETF Index assumes no obligation to update these statements.</p>
+            <p class="text-sm mb-2"><strong>Not a Financial Advisor</strong>: Crypto ETF Index is a technology provider, not a broker-dealer or financial advisor. All investments carry risks, and users should consult a qualified financial advisor before making investment decisions.</p>
+            <p class="text-sm mb-2"><strong>Information Accuracy</strong>: While we strive to provide accurate and up-to-date information, Crypto ETF Index does not guarantee the completeness or accuracy of the information provided in this media kit or on our platform.</p>
+            <p class="text-sm mb-4"><strong>Media Usage</strong>: Media outlets may use the provided materials for editorial purposes, provided they credit Crypto ETF Index and adhere to copyright and usage terms. For permissions or additional assets, contact <a href="mailto:info@cryptoetfindex.com" class="underline">info@cryptoetfindex.com</a>.</p>
+            
+            <p class="text-center text-sm mt-4">Copyright © Crypto ETF Index, May 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Functions
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-select').value = theme;
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        // Theme Selector
+        document.getElementById('theme-select').addEventListener('change', (e) => {
+            applyTheme(e.target.value);
+        });
+
+        // Auto-apply theme on load
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+        });
+
+        // Particle.js (initial load)
+        applyTheme('normal');
+    </script>
+</body>
+</html>
