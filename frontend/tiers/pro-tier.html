@@ -1,0 +1,200 @@
+<section id="pro-tier-section">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index - Pro Tier Abilities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 1);
+            --button-bg: #80e8f0;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.5);
+            --button-bg: #ffbb00;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            text-align: center;
+            z-index: 10;
+        }
+        .policy-btn {
+            background: var(--button-bg);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .policy-btn:hover {
+            background: #00b7c3;
+        }
+        .chart-container {
+            max-width: 400px;
+            margin: 1rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <div class="modal-content">
+        <h2 class="text-xl font-semibold mb-4">Pro Tier Abilities</h2>
+        <ul class="text-sm mb-4 text-left">
+            <li><strong>Line Chart</strong>: Advanced asset analytics.</li>
+            <li><strong>Bar Chart</strong>: Performance comparisons.</li>
+            <li><strong>Voice Integration</strong>: Control with voice commands.</li>
+            <li><strong>Sharing</strong>: Share portfolio insights.</li>
+            <li><strong>Track Tokens/ETFs</strong>: Monitor up to 200 assets.</li>
+        </ul>
+        <div id="ability-preview" class="mb-4">
+            <div class="chart-container">
+                <canvas id="line-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="bar-chart"></canvas>
+            </div>
+        </div>
+        <a href="/frontend/dashboard.html" class="policy-btn">Return to Dashboard</a>
+    </div>
+    <script>
+        // Apply theme from localStorage
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        // Load theme and check login
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+
+            // Fetch Pro tier data
+            fetch('https://crypto-etf-backend-v2.onrender.com/api/tiers/pro', {
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+            .then(response => response.ok ? response.json() : Promise.reject('Unauthorized'))
+            .then(data => {
+                const preview = document.getElementById('ability-preview');
+                if (data.chartData) {
+                    if (data.chartData.line) {
+                        new Chart(document.getElementById('line-chart'), {
+                            type: 'line',
+                            data: {
+                                labels: data.chartData.line.labels,
+                                datasets: [{
+                                    label: 'Price',
+                                    data: data.chartData.line.data,
+                                    borderColor: '#00ddeb',
+                                    fill: false
+                                }]
+                            },
+                            options: { responsive: true }
+                        });
+                    }
+                    if (data.chartData.bar) {
+                        new Chart(document.getElementById('bar-chart'), {
+                            type: 'bar',
+                            data: {
+                                labels: data.chartData.bar.labels,
+                                datasets: [{
+                                    label: 'Price',
+                                    data: data.chartData.bar.data,
+                                    backgroundColor: '#00ddeb'
+                                }]
+                            },
+                            options: { responsive: true }
+                        });
+                    }
+                    preview.innerHTML += `<p class="text-sm">${data.message}</p>`;
+                } else {
+                    preview.innerHTML = `<p class="text-sm">${data.message || 'No chart data available'}</p>`;
+                }
+            })
+            .catch(error => {
+                localStorage.removeItem('token');
+                window.location.href = '/index.html';
+            });
+        });
+    </script>
+</body>
+</html>
+</section>
