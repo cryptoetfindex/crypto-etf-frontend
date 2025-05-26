@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <meta property="og:title" content="Crypto ETF Index">
+    <meta property="og:description" content="Visualize crypto exchange-traded fund index analytics with Crypto ETF Index. Launching July 24, 2025!">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/favicon.png">
+    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Crypto ETF Index">
+    <meta name="twitter:description" content="Visualize crypto exchange-traded fund index analytics with Crypto ETF Index. Launching July 24, 2025!">
+    <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+            --gain-color: #00ff00;
+            --loss-color: #ff0000;
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --select-bg: rgba(0, 0, 0, 0.1);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 240, 240, 0.2);
+            --button-bg: #80e8f0;
+            --button-text: #333333;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+            --button-text: #0a121e;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header, .container {
+            position: relative;
+            z-index: 1;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            text-align: center;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .countdown div {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+            text-align: center;
+            border: 1px solid var(--accent-color);
+        }
+        .countdown span {
+            display: block;
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+        .policy-btn, button {
+            background: var(--button-bg);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .policy-btn:hover, button:hover {
+            background: #00b7c3;
+        }
+        .theme-select {
+            background: var(--select-bg);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            border: 1px solid var(--accent-color);
+        }
+        header {
+            padding-top: 0.5rem;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .logo-img {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(0, 221, 235, 0.8))
+                    drop-shadow(0 0 20px rgba(0, 221, 235, 0.6))
+                    drop-shadow(0 0 30px rgba(0, 221, 235, 0.4));
+        }
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            background: #555555;
+        }
+        .minimized {
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <header class="bg-[var(--header-bg)] text-center">
+        <img src="/frontend/CryptoETFIndex Logo.png" alt="Crypto ETF Index Logo" class="logo-img">
+        <div class="auth-controls mt-2 flex flex-col items-center gap-2">
+            <div class="flex gap-2">
+                <button id="register-btn" class="policy-btn">Register</button>
+                <button id="login-btn" class="policy-btn">Login</button>
+            </div>
+            <select id="theme-select" class="theme-select" aria-label="Select theme">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <!-- Countdown Timer -->
+            <div class="card mb-4 text-center">
+                <h2 class="text-xl font-semibold mb-4">Coming Soon</h2>
+                <p class="text-sm mb-4">Crypto ETF Index is launching soon! Stay tuned for tokenized stock analytics.</p>
+                <div class="countdown" id="countdown">
+                    <div><span id="days">00</span><label>Days</label></div>
+                    <div><span id="hours">00</span><label>Hours</label></div>
+                    <div><span id="minutes">00</span><label>Minutes</label></div>
+                    <div><span id="seconds">00</span><label>Seconds</label></div>
+                </div>
+            </div>
+            <!-- Features -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Features</h2>
+                <ul class="list-disc pl-5 text-sm">
+                    <li>Asset Distribution: Upload a CSV to visualize your portfolio as a pie chart (All Tiers).</li>
+                    <li>Historical Data: View line, bar, or candlestick charts for assets (Basic+).</li>
+                    <li>Portfolio Management: Track and manage tokenized stocks and crypto (Basic+).</li>
+                    <li>Price Alerts: Set price notifications for assets (Basic+).</li>
+                    <li>Voice Integration: Control the app with voice commands (Pro+).</li>
+                    <li>Sharing: Share portfolio insights with others (Pro+).</li>
+                    <li>Company Registration: Register businesses for advanced analytics (Enterprise).</li>
+                </ul>
+            </div>
+            <!-- Tiers -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Pricing Tiers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
+                        <h3 class="text-lg font-semibold">Free</h3>
+                        <p class="text-sm">Pie chart, track up to 5 tokens or ETFs</p>
+                    </div>
+                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
+                        <h3 class="text-lg font-semibold">Basic</h3>
+                        <p class="text-sm">Pie chart, line chart, portfolio management, price alerts, track up to 50 tokens or ETFs</p>
+                    </div>
+                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
+                        <h3 class="text-lg font-semibold">Pro</h3>
+                        <p class="text-sm">Line + bar charts, voice integration, sharing, track up to 200 tokens or ETFs</p>
+                    </div>
+                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
+                        <h3 class="text-lg font-semibold">Enterprise</h3>
+                        <p class="text-sm">All charts (line, bar, candlestick), company registration, unlimited token and ETF tracking</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact Form -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Contact Us</h2>
+                <form id="contact-form" class="flex flex-col gap-2">
+                    <input type="email" id="contact-email" placeholder="Your Email" required class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded">
+                    <textarea id="contact-message" placeholder="Your Message (max 500 characters)" maxlength="500" required class="p-2 bg-[var(--select-bg)] text-[var(--text-color)] rounded h-24"></textarea>
+                    <button type="submit" class="policy-btn">Submit</button>
+                </form>
+                <p id="contact-error" class="text-sm text-[var(--loss-color)] mt-2"></p>
+            </div>
+            <!-- Policy Buttons -->
+            <div class="policy-buttons flex gap-4 justify-center flex-wrap mt-4">
+                <a href="/frontend/privacy-policy.html" class="policy-btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="policy-btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="policy-btn">Risk Policy</a>
+                <a href="/frontend/investor-inquiry.html" class="policy-btn">Investor Inquiry</a>
+                <a href="/frontend/whitepaper.html" class="policy-btn">Whitepaper</a>
+                <a href="/frontend/media-kit.html" class="policy-btn">Media Kit</a>
+            </div>
+            <!-- Copyright and Legal Notice -->
+            <p class="copyright text-center text-sm mt-4">Copyright © Crypto ETF Index, May 2025</p>
+            <p class="text-center text-sm mt-2">All designs and functionality are protected by copyright. Unauthorized use is prohibited.</p>
+            <!-- SEC Disclaimer -->
+            <p class="text-center text-xs mt-2">Crypto ETF Index is a technology provider, not a broker-dealer. All investments carry risks. Consult a financial advisor.</p>
+        </div>
+
+        <!-- Coming Soon Modal -->
+        <div id="coming-soon-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('coming-soon-modal')" aria-label="Close coming soon modal">×</span>
+                <h2 class="text-xl font-semibold mb-4">Coming Soon</h2>
+                <p class="text-sm mb-4">Crypto ETF Index is launching soon! Stay tuned for tokenized stock analytics.</p>
+                <div class="countdown" id="modal-countdown">
+                    <div><span id="modal-days">00</span><label>Days</label></div>
+                    <div><span id="modal-hours">00</span><label>Hours</label></div>
+                    <div><span id="modal-minutes">00</span><label>Minutes</label></div>
+                    <div><span id="modal-seconds">00</span><label>Seconds</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Controls
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Theme Functions
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-select').value = theme;
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        // Countdown Timer (for both homepage and modal)
+        const launchDate = new Date('2025-07-24T00:00:00').getTime();
+        const countdown = setInterval(() => {
+            const now = new Date('2025-05-26T09:40:00-05:00').getTime(); // Current time: May 26, 2025, 09:40 AM CDT
+            const distance = launchDate - now;
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerHTML = '<p>We are LIVE!</p>';
+                document.getElementById('modal-countdown').innerHTML = '<p>We are LIVE!</p>';
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            document.getElementById('modal-days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('modal-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('modal-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('modal-seconds').textContent = seconds.toString().padStart(2, '0');
+        }, 1000);
+
+        // Button and Form Event Listeners for Coming Soon Modal
+        document.getElementById('register-btn').addEventListener('click', () => {
+            openModal('coming-soon-modal');
+        });
+        document.getElementById('login-btn').addEventListener('click', () => {
+            openModal('coming-soon-modal');
+        });
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            openModal('coming-soon-modal');
+        });
+
+        // Theme Selector
+        document.getElementById('theme-select').addEventListener('change', (e) => {
+            applyTheme(e.target.value);
+        });
+
+        // Auto-apply theme on load
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+        });
+
+        // Particle.js (initial load)
+        applyTheme('normal');
+    </script>
+</body>
+</html>
