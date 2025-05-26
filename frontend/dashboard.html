@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --select-bg: rgba(0, 221, 235, 0.1);
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --select-bg: rgba(0, 221, 235, 0.1);
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 0.2);
+            --button-bg: #80e8f0;
+            --select-bg: rgba(128, 232, 240, 0.1);
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+            --select-bg: rgba(255, 187, 0, 0.1);
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            margin-bottom: 1.5rem;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 0 10px var(--shadow-color);
+        }
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .policy-btn {
+            background: var(--button-bg);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .policy-btn:hover {
+            background: #00b7c3;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .chart-container {
+            max-width: 400px;
+            margin: 1rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <div class="container">
+        <!-- Header -->
+        <div class="card flex justify-between items-center mb-4">
+            <div class="flex items-center">
+                <img src="/frontend/CryptoETFIndex Logo.png" alt="Crypto ETF Index Logo" class="h-12 mr-4">
+                <h1 class="text-2xl font-semibold">Crypto ETF Index Dashboard</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <select id="theme-switcher" class="bg-[var(--select-bg)] text-[var(--text-color)] p-2 rounded">
+                    <option value="normal">Normal</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <a href="#" id="logout-btn" class="policy-btn">Logout</a>
+            </div>
+        </div>
+
+        <!-- User Tier Info -->
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-2">Your Subscription</h2>
+            <p id="user-tier" class="text-sm">Loading tier...</p>
+        </div>
+
+        <!-- Tier Dropdowns -->
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Your Tools</h2>
+            <!-- Free Tier -->
+            <div class="dropdown mb-2">
+                <button class="policy-btn w-full text-left" onclick="toggleDropdown('free')">Free Tier Tools</button>
+                <div id="free-content" class="dropdown-content">
+                    <div id="free-pie-chart" class="chart-container">
+                        <canvas id="free-pie-canvas"></canvas>
+                    </div>
+                    <p id="free-tracking" class="text-sm">Track up to 5 tokens/ETFs</p>
+                </div>
+            </div>
+            <!-- Basic Tier -->
+            <div class="dropdown mb-2">
+                <button id="basic-btn" class="policy-btn w-full text-left" onclick="toggleDropdown('basic')">Basic Tier Tools</button>
+                <div id="basic-content" class="dropdown-content">
+                    <div id="basic-pie-chart" class="chart-container">
+                        <canvas id="basic-pie-canvas"></canvas>
+                    </div>
+                    <div id="basic-line-chart" class="chart-container">
+                        <canvas id="basic-line-canvas"></canvas>
+                    </div>
+                    <p id="basic-portfolio" class="text-sm">Portfolio Management</p>
+                    <p id="basic-alerts" class="text-sm">Price Alerts</p>
+                    <p id="basic-tracking" class="text-sm">Track up to 50 tokens/ETFs</p>
+                </div>
+            </div>
+            <!-- Pro Tier -->
+            <div class="dropdown mb-2">
+                <button id="pro-btn" class="policy-btn w-full text-left" onclick="toggleDropdown('pro')">Pro Tier Tools</button>
+                <div id="pro-content" class="dropdown-content">
+                    <div id="pro-line-chart" class="chart-container">
+                        <canvas id="pro-line-canvas"></canvas>
+                    </div>
+                    <div id="pro-bar-chart" class="chart-container">
+                        <canvas id="pro-bar-canvas"></canvas>
+                    </div>
+                    <p id="pro-voice" class="text-sm">Voice Integration</p>
+                    <p id="pro-sharing" class="text-sm">Sharing</p>
+                    <p id="pro-tracking" class="text-sm">Track up to 200 tokens/ETFs</p>
+                </div>
+            </div>
+            <!-- Enterprise Tier -->
+            <div class="dropdown mb-2">
+                <button id="enterprise-btn" class="policy-btn w-full text-left" onclick="toggleDropdown('enterprise')">Enterprise Tier Tools</button>
+                <div id="enterprise-content" class="dropdown-content">
+                    <div id="enterprise-line-chart" class="chart-container">
+                        <canvas id="enterprise-line-canvas"></canvas>
+                    </div>
+                    <div id="enterprise-bar-chart" class="chart-container">
+                        <canvas id="enterprise-bar-canvas"></canvas>
+                    </div>
+                    <div id="enterprise-candlestick-chart" class="chart-container">
+                        <canvas id="enterprise-candlestick-canvas"></canvas>
+                    </div>
+                    <p id="enterprise-registration" class="text-sm">Company Registration</p>
+                    <p id="enterprise-tracking" class="text-sm">Unlimited Token/ETF Tracking</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upgrade Modal -->
+        <div id="upgrade-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="text-xl font-semibold mb-4">Upgrade Required</h2>
+                <p class="text-sm mb-4">This feature is available in a higher tier. Please upgrade your subscription to access it.</p>
+                <a href="/index.html#pricing" class="policy-btn mr-2">View Plans</a>
+                <button class="policy-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Apply theme and particles
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        // Toggle dropdown
+        function toggleDropdown(tier) {
+            const dropdown = document.getElementById(`${tier}-content`).parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        // Show upgrade modal
+        function showModal() {
+            document.getElementById('upgrade-modal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('upgrade-modal').classList.remove('active');
+        }
+
+        // Check login and load data
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Apply saved theme
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+            document.getElementById('theme-switcher').value = savedTheme;
+
+            // Theme switcher
+            document.getElementById('theme-switcher').addEventListener('change', (e) => {
+                const theme = e.target.value;
+                localStorage.setItem('theme', theme);
+                applyTheme(theme);
+            });
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                window.location.href = '/index.html';
+            });
+
+            // Fetch user tier and data
+            fetch('https://crypto-etf-backend-v2.onrender.com/api/tiers/free', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(response => response.ok ? response.json() : Promise.reject('Unauthorized'))
+            .then(data => {
+                const userTier = data.message.includes('Free') ? 'free' :
+                                data.message.includes('Basic') ? 'basic' :
+                                data.message.includes('Pro') ? 'pro' : 'enterprise';
+                document.getElementById('user-tier').textContent = `Current Tier: ${userTier.charAt(0).toUpperCase() + userTier.slice(1)}`;
+
+                const tierOrder = { free: 1, basic: 2, pro: 3, enterprise: 4 };
+                const userTierLevel = tierOrder[userTier];
+
+                // Free Tier (always available)
+                if (data.chartData.type === 'pie') {
+                    new Chart(document.getElementById('free-pie-canvas'), {
+                        type: 'pie',
+                        data: {
+                            labels: data.chartData.labels,
+                            datasets: [{ data: data.chartData.data, backgroundColor: ['#00ddeb', '#ffbb00', '#80e8f0', '#1b263b', '#f0f0f0'] }]
+                        }
+                    });
+                }
+
+                // Basic Tier
+                if (userTierLevel >= 2) {
+                    fetch('https://crypto-etf-backend-v2.onrender.com/api/tiers/basic', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.chartData.pie) {
+                            new Chart(document.getElementById('basic-pie-canvas'), {
+                                type: 'pie',
+                                data: {
+                                    labels: data.chartData.pie.labels,
+                                    datasets: [{ data: data.chartData.pie.data, backgroundColor: ['#00ddeb', '#ffbb00', '#80e8f0', '#1b263b', '#f0f0f0'] }]
+                                }
+                            });
+                        }
+                        if (data.chartData.line) {
+                            new Chart(document.getElementById('basic-line-canvas'), {
+                                type: 'line',
+                                data: {
+                                    labels: data.chartData.line.labels,
+                                    datasets: [{ label: 'Price', data: data.chartData.line.data, borderColor: '#00ddeb', fill: false }]
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    document.getElementById('basic-content').classList.add('disabled');
+                    document.getElementById('basic-btn').addEventListener('click', showModal);
+                }
+
+                // Pro Tier
+                if (userTierLevel >= 3) {
+                    fetch('https://crypto-etf-backend-v2.onrender.com/api/tiers/pro', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.chartData.line) {
+                            new Chart(document.getElementById('pro-line-canvas'), {
+                                type: 'line',
+                                data: {
+                                    labels: data.chartData.line.labels,
+                                    datasets: [{ label: 'Price', data: data.chartData.line.data, borderColor: '#00ddeb', fill: false }]
+                                }
+                            });
+                        }
+                        if (data.chartData.bar) {
+                            new Chart(document.getElementById('pro-bar-canvas'), {
+                                type: 'bar',
+                                data: {
+                                    labels: data.chartData.bar.labels,
+                                    datasets: [{ label: 'Price', data: data.chartData.bar.data, backgroundColor: '#00ddeb' }]
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    document.getElementById('pro-content').classList.add('disabled');
+                    document.getElementById('pro-btn').addEventListener('click', showModal);
+                }
+
+                // Enterprise Tier
+                if (userTierLevel >= 4) {
+                    fetch('https://crypto-etf-backend-v2.onrender.com/api/tiers/enterprise', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.chartData.line) {
+                            new Chart(document.getElementById('enterprise-line-canvas'), {
+                                type: 'line',
+                                data: {
+                                    labels: data.chartData.line.labels,
+                                    datasets: [{ label: 'Price', data: data.chartData.line.data, borderColor: '#00ddeb', fill: false }]
+                                }
+                            });
+                        }
+                        if (data.chartData.bar) {
+                            new Chart(document.getElementById('enterprise-bar-canvas'), {
+                                type: 'bar',
+                                data: {
+                                    labels: data.chartData.bar.labels,
+                                    datasets: [{ label: 'Price', data: data.chartData.bar.data, backgroundColor: '#00ddeb' }]
+                                }
+                            });
+                        }
+                        if (data.chartData.candlestick) {
+                            new Chart(document.getElementById('enterprise-candlestick-canvas'), {
+                                type: 'candlestick',
+                                data: {
+                                    datasets: [{
+                                        label: 'OHLC',
+                                        data: data.chartData.candlestick.data
+                                    }]
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    document.getElementById('enterprise-content').classList.add('disabled');
+                    document.getElementById('enterprise-btn').addEventListener('click', showModal);
+                }
+            })
+            .catch(error => {
+                localStorage.removeItem('token');
+                window.location.href = '/index.html';
+            });
+        });
+    </script>
+</body>
+</html>
