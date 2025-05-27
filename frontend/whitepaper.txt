@@ -19,7 +19,7 @@ Table of Contents
 ---
 
 1. Introduction
-The cryptocurrency market has experienced unprecedented growth, with the introduction of exchange-traded funds (ETFs) marking a significant milestone in mainstream adoption. As of May 2025, the U.S. Government and the Securities and Exchange Commission (SEC) are actively shaping regulatory frameworks to ensure investor protection and market stability. Crypto ETF Index emerges as a self-funded, innovative analytics platform designed to empower investors with advanced visualization tools for crypto ETF portfolios. Launched independently on July 24, 2025, this whitepaper details our approach, technology, and commitment to compliance in this evolving landscape.
+The cryptocurrency market has experienced unprecedented growth, with the introduction of exchange-traded funds (ETFs) marking a significant milestone in mainstream adoption. As of May 2025, the U.S. Government and the Securities and Exchange Commission (SEC) are actively shaping regulatory frameworks to ensure investor protection and market stability. Crypto ETF Index emerges as a self-funded, innovative analytics platform designed to empower investors with advanced visualization tools for crypto ETF portfolios. Launched independently on July 25, 2025, this whitepaper details our approach, technology, and commitment to compliance in this evolving landscape.
 
 ---
 
@@ -48,7 +48,7 @@ Crypto ETF Index is engineered to address the unique needs of crypto ETF investo
   - Enterprise Tier : All charts, including starburst, with advanced analytics.
 - User Experience : Responsive design with theme options (normal, light, dark) and interactive chart controls (zoom, date filters).
 
-The platform is designed to launch with a countdown timer visible on the homepage, set to conclude on July 24, 2025, at 00:00:00 CDT.
+The platform is designed to launch with a countdown timer visible on the homepage, set to conclude on July 25, 2025, at 00:00:00 CDT.
 
 ---
 
@@ -62,7 +62,7 @@ The Crypto ETF Index platform is built with a modular architecture separating fr
   - Features particle.js for an engaging UI and axios for API requests.
 
 - Backend :
-  - Developed with Node.js and Express.js, hosted in a private GitHub repository (crypto-etf-backend).
+  - Developed with Node.js and Express.js, hosted in a private GitHub repository.
   - Handles CSV/Excel parsing with csv-parse and xlsx libraries.
   - Manages file uploads via Multer, storing temporary files in an `uploads/` directory.
   - Provides RESTful APIs:
