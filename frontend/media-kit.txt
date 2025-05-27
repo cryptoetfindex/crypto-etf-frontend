@@ -2,12 +2,12 @@ Crypto ETF Index Media Kit
 Last Updated: May 25, 2025
 
 About Crypto ETF Index
-Crypto ETF Index is a technology platform designed to provide analytics and portfolio management tools for tokenized stocks and cryptocurrencies. Set to launch on July 24, 2025, our platform empowers users to visualize asset distributions, track historical data, and manage investments with ease.
+Crypto ETF Index is a technology platform designed to provide analytics and portfolio management tools for tokenized stocks and cryptocurrencies. Set to launch on July 25, 2025, our platform empowers users to visualize asset distributions, track historical data, and manage investments with ease.
 
 Key Features
 - Asset Distribution: Upload a CSV to visualize your portfolio as a pie chart (All Tiers).
 - Historical Data: View line, bar, or candlestick charts for assets (Basic+).
-- Portfolio Management: Track and manage tokenized stocks and crypto (Basic+).
+- Portfolio Management: Track and visualize tokenized stocks and crypto (Basic+).
 - Price Alerts: Set price notifications for assets (Basic+).
 - Voice Integration: Control the app with voice commands (Pro+).
 - Sharing: Share portfolio insights with others (Pro+).
@@ -26,7 +26,7 @@ Contact Information
 For media inquiries, please contact: info@cryptoetfindex.com
 
 Disclaimers and Disclosures
-- Pre-Launch Disclaimer: Tools, features, and pricing tiers described are subject to change without notice as we continue testing and development until our official launch on July 24, 2025.
+- Pre-Launch Disclaimer: Tools, features, and pricing tiers described are subject to change without notice as we continue testing and development until our official launch on July 25, 2025.
 - Intellectual Property: All content, designs, and functionality of Crypto ETF Index are protected by copyright. Unauthorized use, reproduction, or distribution of any materials is strictly prohibited without prior written consent.
 - Forward-Looking Statements: Statements regarding the platform’s features, launch date, and capabilities are forward-looking and based on current plans. Actual results may differ due to development changes or unforeseen circumstances. Crypto ETF Index assumes no obligation to update these statements.
 - Not a Financial Advisor: Crypto ETF Index is a technology provider, not a broker-dealer or financial advisor. All investments carry risks, and users should consult a qualified financial advisor before making investment decisions.
