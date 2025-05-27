@@ -6,7 +6,7 @@ Effective Date: May 22, 2025
 By accessing or using the Crypto ETF Index website (crypto-etf-frontend.pages.dev) or services ("Services"), you agree to these Terms of Service ("Terms"). If you do not agree, do not use our Services. These Terms apply to all users, including companies registering for our tokenized stock launchpad.
 
 2. Description of Services
-Crypto ETF Index, LLC ("we", "us", or "Platform"), a Delaware limited liability company, provides:
+Crypto ETF Index, ("we", "us", or "Platform"), a Texas company, provides:
 a. Visualization tools for crypto ETF analytics and tokenized stock data.
 b. A launchpad for companies to deploy tokenized securities in compliance with U.S. Securities and Exchange Commission (SEC) regulations.
 c. Technical support and optional marketing services per the Partnership Contract.
@@ -23,7 +23,7 @@ b. We verify SEC filings, KYC/AML documents, and smart contract addresses before
 c. We are a technology provider, not a broker-dealer or offering company, and do not assume liability for your offerings.
 
 5. Intellectual Property
-a. All content on our website (e.g., code, designs, text) is owned by Crypto ETF Index, LLC or licensed to us.
+a. All content on our website (e.g., code, designs, text) is owned by Crypto ETF Index, or licensed to us.
 b. You may not copy, modify, or distribute our content without written permission.
 c. You grant us a non-exclusive license to use data submitted via forms (e.g., Company Registration) for service delivery.
 
@@ -46,15 +46,14 @@ c. Our total liability shall not exceed the fees paid for your selected launch p
 You agree to indemnify us against claims arising from your use of our Services, including SEC violations or investor losses.
 
 10. Governing Law
-These Terms are governed by the laws of Delaware, USA. Disputes shall be resolved in Delaware courts or through arbitration in Wilmington, DE.
+These Terms are governed by the laws of Texas, USA. Disputes shall be resolved in Texas courts or through arbitration in Texas.
 
 11. Changes to Terms
 We may update these Terms periodically. Continued use constitutes acceptance of the updated Terms.
 
 12. Contact Us
 For inquiries, use the Contact Form on our website or write to:
-Crypto ETF Index, LLC
-[Insert Address, e.g., 123 Main St, Wilmington, DE 19801]
+Info@CryptoETFIndex.com
 
 13. Disclaimer
 Crypto ETF Index is a technology provider, not a broker-dealer or offering company. Information is for visualization only and does not constitute financial advice. You are responsible for SEC compliance and offerings. We are not liable for losses or violations. Complies with U.S. laws.
