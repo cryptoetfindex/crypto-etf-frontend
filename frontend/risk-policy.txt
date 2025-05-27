@@ -3,7 +3,7 @@ Crypto ETF Index Risk Policy
 Effective Date: May 22, 2025
 
 1. Introduction
-Crypto ETF Index, LLC ("we", "us", or "Platform"), a Delaware limited liability company, provides a technology platform for crypto ETF analytics and tokenized stock launchpads. This Risk Policy outlines the risks associated with using our website (crypto-etf-frontend.pages.dev) and services, particularly for companies launching tokenized securities.
+Crypto ETF Index, ("we", "us", or "Platform"), a Texas company, provides a technology platform for crypto ETF analytics and tokenized stock launchpads. This Risk Policy outlines the risks associated with using our website (CryptoETFIndex.com) and services, particularly for companies launching tokenized securities.
 
 2. Investment Risks
 a. Volatility: Crypto ETFs and tokenized stocks are highly volatile, subject to significant price fluctuations.
@@ -36,8 +36,8 @@ c. Our total liability shall not exceed the fees paid for your selected launch p
 
 8. Contact Us
 For risk-related inquiries, use the Contact Form on our website or write to:
-Crypto ETF Index, LLC
-[Insert Address, e.g., 123 Main St, Wilmington, DE 19801]
+Info@CryptoETFIndex.com
+
 
 9. Disclaimer
 Crypto ETF Index provides visualization tools and a launchpad, not financial advice or investment recommendations. You are responsible for all risks associated with crypto ETFs and tokenized stocks. We are not liable for losses or violations. Complies with U.S. laws.
