@@ -11,7 +11,7 @@ Crypto ETF Index is a technology provider focused on delivering innovative tools
 This project is intended for personal use by authorized contributors and end-users under the terms outlined in the [Terms of Service](https://crypto-etf-frontend.pages.dev/terms-of-service.txt) and [Privacy Policy](https://crypto-etf-frontend.pages.dev/privacy-policy.txt). Commercial use or derivative works require a separate license agreement.
 
 ## Features
-- **Countdown Timer**: Displays time until the official launch on July 24, 2025.
+- **Countdown Timer**: Displays time until the official launch on July 25, 2025.
 - **Theme Modes**: Switch between Normal, Light, Dark, High-Contrast, Minimalist, Colorblind, Performance, Pro, and Enterprise themes.
 - **Registration & UI Access**: Secure registration modal and link to the user interface.
 - **Contact Form**: Submit inquiries directly from the homepage.
