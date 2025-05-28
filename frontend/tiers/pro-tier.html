@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Dashboard - Crypto ETF Index</title>
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+            --gain-color: #00ff00;
+            --loss-color: #ff0000;
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+            --button-text: #0d1b2a;
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --select-bg: rgba(0, 0, 0, 0.1);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 0.2);
+            --button-bg: #80e8f0;
+            --button-text: #333333;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+            --button-text: #0a121e;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header, .container {
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        .policy-btn {
+            background: var(--button-bg);
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .policy-btn:hover {
+            background: #00b7c3;
+        }
+        .theme-select {
+            background: var(--select-bg);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent-color);
+        }
+        .brain-upload {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .brain-upload svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        .brain-upload:hover svg {
+            transform: scale(1.1);
+        }
+        .brain-upload input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <header class="bg-[var(--header-bg)] text-center py-4">
+        <h1 class="text-2xl font-bold">Pro Dashboard</h1>
+        <div class="flex justify-center gap-4 mt-2">
+            <button id="logout-btn" class="policy-btn">Logout</button>
+            <select id="theme-select" class="theme-select" aria-label="Select theme">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">Welcome, <span id="user-email">User</span></h2>
+            <p class="text-sm">Explore your Pro-tier features, including the Dynamic Neural Network Flow Interface (DNNFI).</p>
+        </div>
+        <div class="card mb-4 text-center">
+            <h2 class="text-xl font-semibold mb-4">Visualize Portfolio with DNNFI</h2>
+            <div class="brain-upload">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h4v2h-4v4h-2v-4H7v-2h4V7z"/>
+                </svg>
+                <input type="file" id="portfolio-file" accept=".csv,.xlsx" onchange="handleFileUpload(event)">
+            </div>
+            <p class="text-sm mt-4">Upload a CSV or Excel file to visualize your portfolio using DNNFI.</p>
+            <p id="upload-error" class="text-sm text-[var(--loss-color)] mt-2"></p>
+        </div>
+    </div>
+
+    <script>
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-select').value = theme;
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        async function fetchUserInfo() {
+            try {
+                const response = await axios.get('https://crypto-etf-backend-v2.onrender.com/api/auth/user', {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
+                document.getElementById('user-email').textContent = response.data.email;
+                if (response.data.tier !== 'Pro' && response.data.tier !== 'Enterprise') {
+                    window.location.href = '/frontend/index.html';
+                }
+            } catch (error) {
+                localStorage.removeItem('token');
+                window.location.href = '/frontend/index.html';
+            }
+        }
+
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            const errorElement = document.getElementById('upload-error');
+            if (!file) {
+                errorElement.textContent = 'Please select a file.';
+                return;
+            }
+            if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+                errorElement.textContent = 'Only CSV or Excel files are allowed.';
+                return;
+            }
+            const formData = new FormData();
+            formData.append('file', file);
+            try {
+                const response = await axios.post('https://crypto-etf-dnnfi.your-account.workers.dev/api/upload', formData, {
+                    headers: { 
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                window.location.href = `/frontend/dnnfi.html?file=${encodeURIComponent(response.data.fileId)}`;
+            } catch (error) {
+                errorElement.textContent = error.response?.data || 'Upload failed. Try again.';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+            document.getElementById('theme-select').addEventListener('change', (e) => {
+                applyTheme(e.target.value);
+            });
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                window.location.href = '/frontend/index.html';
+            });
+            fetchUserInfo();
+        });
+    </script>
+</body>
+</html>
