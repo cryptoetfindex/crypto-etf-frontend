@@ -1,20 +1,21 @@
-<!DOCTYPE html> 
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Index</title>
-    <link rel="icon" type="image/png" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:title" content="Crypto ETF Index">
-    <meta property="og:description" content="Visualize crypto exchange-traded fund index analytics with Crypto ETF Index. Launching July 25, 2025!">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/favicon.ico">
+    <meta property="og:description" content="CETFi Chain Testnet: Tokenized stock market blockchain with a dual orderbook liquidity pool model, powered by AI for decentralized trading and analytics. Launching July 25, 2025!">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://crypto-etf-frontend.pages.dev">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Crypto ETF Index">
-    <meta name="twitter:description" content="Visualize crypto exchange-traded fund index analytics with Crypto ETF Index. Launching July 25, 2025!">
-    <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/favicon.ico">
+    <meta name="twitter:description" content="CETFi Chain Testnet: Tokenized stock market blockchain with a dual orderbook liquidity pool model, powered by AI for decentralized trading and analytics. Launching July 25, 2025!">
+    <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -80,27 +81,6 @@
             position: relative;
             z-index: 1;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px var(--shadow-color);
-            text-align: center;
-        }
         .card {
             background: var(--card-bg);
             padding: 1.5rem;
@@ -128,7 +108,7 @@
         }
         .policy-btn, button {
             background: var(--button-bg);
-            color: #000000; /* Black text for all themes */
+            color: #000000;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             border: none;
@@ -141,7 +121,12 @@
         }
         .policy-btn:hover, button:hover {
             background: #00b7c3;
-            color: #000000; /* Ensure black text on hover */
+        }
+        [data-theme="light"] .policy-btn:hover, [data-theme="light"] button:hover {
+            background: #66b3cc;
+        }
+        [data-theme="dark"] .policy-btn:hover, [data-theme="dark"] button:hover {
+            background: #cc8800;
         }
         .theme-select {
             background: var(--select-bg);
@@ -157,9 +142,9 @@
             overflow-x: hidden;
         }
         .logo-img {
-            width: 90vw; /* Take up most of viewport width */
-            max-width: 600px; /* Upper limit for larger screens */
-            height: auto; /* Maintain aspect ratio */
+            width: 90vw;
+            max-width: 600px;
+            height: auto;
             margin: 0 auto;
             display: block;
             object-fit: contain;
@@ -167,41 +152,20 @@
                     drop-shadow(0 0 20px rgba(0, 221, 235, 0.6))
                     drop-shadow(0 0 30px rgba(0, 221, 235, 0.4));
         }
-        /* Media Queries for Responsive Logo Sizing */
         @media (max-width: 640px) {
             .logo-img {
-                width: 90vw; /* Full width for mobile */
+                width: 90vw;
             }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
             .logo-img {
-                width: 80vw; /* Slightly smaller for tablets */
+                width: 80vw;
             }
         }
         @media (min-width: 1025px) {
             .logo-img {
-                max-width: 600px; /* Cap for desktops */
+                max-width: 600px;
             }
-        }
-        .disabled {
-            opacity: 0.5;
-            pointer-events: none;
-            background: #555555;
-        }
-        .minimized {
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        input, textarea {
-            background: var(--select-bg);
-            color: var(--text-color);
-            border: 1px solid var(--accent-color);
-            padding: 0.5rem;
-            border-radius: 8px;
-            width: 100%;
-            margin-bottom: 1rem;
         }
         .contact-section {
             background: var(--card-bg);
@@ -229,6 +193,17 @@
         .contact-section a:hover {
             text-decoration: underline;
         }
+        .node-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .node-section p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -236,10 +211,6 @@
     <header class="bg-[var(--header-bg)] text-center">
         <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="logo-img">
         <div class="auth-controls mt-2 flex flex-col items-center gap-2">
-            <div class="flex gap-2">
-                <button id="register-btn" class="policy-btn">Register</button>
-                <button id="login-btn" class="policy-btn">Login</button>
-            </div>
             <select id="theme-select" class="theme-select" aria-label="Select theme">
                 <option value="normal">Normal</option>
                 <option value="light">Light</option>
@@ -262,44 +233,71 @@
                     <div><span id="seconds">00</span><label>Seconds</label></div>
                 </div>
             </div>
-            <!-- Features -->
+            <!-- CETFi Chain Testnet -->
             <div class="card mb-4">
-                <h2 class="text-xl font-semibold mb-4">Features</h2>
-                <ul class="list-disc pl-5 text-sm">
-                    <li>Asset Distribution: Upload a CSV to visualize your portfolio as a pie chart (All Tiers).</li>
-                    <li>Historical Data: View line, bar, or candlestick charts for assets (Basic+).</li>
-                    <li>Portfolio Management: Track and manage tokenized stocks and crypto (Basic+).</li>
-                    <li>Price Alerts: Set price notifications for assets (Basic+).</li>
-                    <li>Voice Integration: Control the app with voice commands (Pro+).</li>
-                    <li>Sharing: Share portfolio insights with others (Pro+).</li>
-                    <li>Company Registration: Register businesses for advanced analytics (Enterprise).</li>
-                </ul>
+                <h2 class="text-xl font-semibold mb-4">CETFi Chain Testnet</h2>
+                <p class="text-sm mb-4">CETFi Chain is a pioneering tokenized stock market blockchain as a network service (BaaNS), revolutionizing decentralized trading and analytics. Our dual orderbook liquidity pool model combines traditional orderbook trading with automated liquidity pools, ensuring efficient price discovery and robust market depth. This hybrid approach supports tokenized stocks, such as StockA (AlphaTech Solutions), by balancing high-frequency trading with stable liquidity provision. AI-powered features enhance trading strategies, optimize node performance, and provide predictive analytics, enabling seamless participation for retail and institutional investors. Join the testnet to explore decentralized trading, financial report uploads as NFT-like assets, and compliance-ready infrastructure.</p>
             </div>
-            <!-- Tiers -->
+            <!-- Retail Nodes -->
             <div class="card mb-4">
-                <h2 class="text-xl font-semibold mb-4">Pricing Tiers</h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
-                        <h3 class="text-lg font-semibold mb-2">Free</h3>
-                        <p class="text-sm mb-4">Pie chart, track up to 5 tokens or ETFs</p>
-                        <a href="/frontend/tiers/free-tier.html" onclick="return checkLogin();" class="policy-btn w-full">View Abilities</a>
-                    </div>
-                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
-                        <h3 class="text-lg font-semibold mb-2">Basic</h3>
-                        <p class="text-sm mb-4">Pie chart, line chart, portfolio management, price alerts, track up to 50 tokens or ETFs</p>
-                        <a href="/frontend/tiers/basic-tier.html" onclick="return checkLogin();" class="policy-btn w-full">View Abilities</a>
-                    </div>
-                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
-                        <h3 class="text-lg font-semibold mb-2">Pro</h3>
-                        <p class="text-sm mb-4">Line + bar charts, voice integration, sharing, Dynamic Neural Network Flow Interface (DNNFI) for advanced portfolio visualization, track up to 200 tokens or ETFs</p>
-                        <a href="/frontend/tiers/pro-tier.html" onclick="return checkLogin();" class="policy-btn w-full">View Abilities</a>
-                    </div>
-                    <div class="tier-card p-4 bg-[var(--select-bg)] rounded">
-                        <h3 class="text-lg font-semibold mb-2">Enterprise</h3>
-                        <p class="text-sm mb-4">All charts (line, bar, candlestick), company registration, unlimited token and ETF tracking</p>
-                        <a href="/frontend/tiers/enterprise-tier.html" onclick="return checkLogin();" class="policy-btn w-full">View Abilities</a>
-                    </div>
+                <h2 class="text-xl font-semibold mb-4">Retail Nodes</h2>
+                <div class="node-section">
+                    <h3>Day Trader Node</h3>
+                    <p>Designed for retail investors engaging in frequent trading, adhering to SEC day trading rules: minimum $25,000 account balance, limited to 3 day trades in a 5-day period unless classified as a pattern day trader. Download to test tokenized stock trading.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiDayTraderNode.zip" class="policy-btn">Download Day Trader Node</a>
                 </div>
+                <div class="node-section mt-4">
+                    <h3>Normal Node</h3>
+                    <p>Future-focused node for retail investors, pending regulatory approval for 24/7/365 tokenized stock trading. Enables continuous trading without traditional market hour restrictions.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiNormalNode.zip" class="policy-btn">Download Normal Node</a>
+                </div>
+            </div>
+            <!-- Vendor Nodes -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Vendor Nodes</h2>
+                <div class="node-section">
+                    <h3>Banking Node</h3>
+                    <p>Facilitates onboarding of fiat to CETFIUSD, enabling seamless conversion for tokenized stock trading. Designed for financial institutions integrating with the CETFi Chain.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiBankingNode.zip" class="policy-btn">Download Banking Node</a>
+                </div>
+                <div class="node-section mt-4">
+                    <h3>Hedge Fund Node</h3>
+                    <p>Enables hedge funds to manage tokenized stock portfolios with advanced strategies, leveraging CETFi Chain’s decentralized infrastructure for high-frequency trading and analytics.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiHedgeFundNode.zip" class="policy-btn">Download Hedge Fund Node</a>
+                </div>
+                <div class="node-section mt-4">
+                    <h3>Market Maker Node</h3>
+                    <p>Provides large-scale liquidity for tokenized stocks and supports over-the-counter (OTC) trading, ensuring market stability and efficient trade execution.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiMarketMakerNode.zip" class="policy-btn">Download Market Maker Node</a>
+                </div>
+            </div>
+            <!-- Compliance Nodes -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Compliance Nodes</h2>
+                <div class="node-section">
+                    <h3>Issuer Node</h3>
+                    <p>Manages the issuance of CETFIUSD and tokenized stocks, ensuring compliance with regulatory standards and secure asset creation on the CETFi Chain.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiIssuerNode.zip" class="policy-btn">Download Issuer Node</a>
+                </div>
+                <div class="node-section mt-4">
+                    <h3>Liquidity Provider Node</h3>
+                    <p>Specialized node for providing liquidity to the CETFi Chain, earning rewards based on contribution to market depth and stability.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiLiquidityProviderNode.zip" class="policy-btn">Download Liquidity Provider Node</a>
+                </div>
+            </div>
+            <!-- Data Nodes -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Data Nodes</h2>
+                <div class="node-section">
+                    <h3>Oracle Node</h3>
+                    <p>Enables the upload of financial reports (e.g., SEC S-1 forms, quarterly/annual reports) as NFT-like assets on the CETFi Chain, viewable on CETFiScan. Download to test report uploads.</p>
+                    <a href="https://github.com/your-repo/cetfi-chain-contracts/releases/download/testnet/CETFiOracleNode.zip" class="policy-btn">Download Oracle Node</a>
+                </div>
+            </div>
+            <!-- Compliance and KYC -->
+            <div class="card mb-4">
+                <h2 class="text-xl font-semibold mb-4">Compliance and KYC</h2>
+                <p class="text-sm mb-4">A large majority of activity on CETFi Chain is tracked for compliance with KYC and Anti-Money Laundering (AML) laws. Rewards are based on node uptime, and running a node is required to hold a mainnet wallet. Vendor onboarding will occur after testnet completion. No real money is transferred on the testnet, and there is no guarantee of any kind from testnet use. Everything is in the test phase and subject to change without notice. Any illegal activity will result in an IP address ban, so use caution.</p>
             </div>
             <!-- Contact Section -->
             <div class="contact-section">
@@ -312,64 +310,17 @@
                 <a href="/frontend/terms-of-service.html" class="policy-btn">Terms of Service</a>
                 <a href="/frontend/risk-policy.html" class="policy-btn">Risk Policy</a>
                 <a href="/frontend/investor-inquiry.html" class="policy-btn">Investor Inquiry</a>
-                <a href="/frontend/whitepaper.html" class="policy-btn">Whitepaper</a>
                 <a href="/frontend/media-kit.html" class="policy-btn">Media Kit</a>
             </div>
             <!-- Copyright and Legal Notice -->
-            <p class="copyright text-center text-sm mt-4">Copyright © Crypto ETF Index, May 2025</p>
+            <p class="copyright text-center text-sm mt-4">Copyright © Crypto ETF Index, July 2025</p>
             <p class="text-center text-sm mt-2">All designs and functionality are protected by copyright. Unauthorized use is prohibited.</p>
             <!-- SEC Disclaimer -->
             <p class="text-center text-xs mt-2">Crypto ETF Index is a technology provider, not a broker-dealer. All investments carry risks. Consult a financial advisor.</p>
         </div>
-
-        <!-- Login Modal -->
-        <div id="login-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('login-modal')" aria-label="Close login modal">×</span>
-                <h2 class="text-xl font-semibold mb-4">Login</h2>
-                <form id="login-form" class="flex flex-col gap-2">
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit" class="policy-btn">Login</button>
-                </form>
-                <p id="login-error" class="text-sm text-[var(--loss-color)] mt-2"></p>
-            </div>
-        </div>
-
-        <!-- Coming Soon Modal (for Register) -->
-        <div id="coming-soon-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('coming-soon-modal')" aria-label="Close coming soon modal">×</span>
-                <h2 class="text-xl font-semibold mb-4">Coming Soon</h2>
-                <p class="text-sm mb-4">Crypto ETF Index is launching soon! Stay tuned for tokenized stock analytics.</p>
-                <div class="countdown" id="modal-countdown">
-                    <div><span id="modal-days">00</span><label>Days</label></div>
-                    <div><span id="modal-hours">00</span><label>Hours</label></div>
-                    <div><span id="modal-minutes">00</span><label>Minutes</label></div>
-                    <div><span id="modal-seconds">00</span><label>Seconds</label></div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
-        // Modal Controls
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        // Check Login for Tier Pages
-        function checkLogin() {
-            if (!localStorage.getItem('token')) {
-                openModal('login-modal');
-                return false;
-            }
-            return true;
-        }
-
         // Theme Functions
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
@@ -393,7 +344,7 @@
             });
         }
 
-        // Countdown Timer (for both homepage and modal)
+        // Countdown Timer
         const launchDate = new Date('2025-07-25T19:00:00-05:00').getTime();
         const countdown = setInterval(() => {
             const now = new Date().getTime();
@@ -401,7 +352,6 @@
             if (distance < 0) {
                 clearInterval(countdown);
                 document.getElementById('countdown').innerHTML = '<p>We are LIVE!</p>';
-                document.getElementById('modal-countdown').innerHTML = '<p>We are LIVE!</p>';
                 return;
             }
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -412,10 +362,6 @@
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            document.getElementById('modal-days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('modal-hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('modal-minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('modal-seconds').textContent = seconds.toString().padStart(2, '0');
         }, 1000);
 
         // Event Listeners
@@ -428,34 +374,8 @@
             document.getElementById('theme-select').addEventListener('change', (e) => {
                 applyTheme(e.target.value);
             });
-
-            // Register Button (Coming Soon)
-            document.getElementById('register-btn').addEventListener('click', () => {
-                openModal('coming-soon-modal');
-            });
-
-            // Login Button (Open Login Modal)
-            document.getElementById('login-btn').addEventListener('click', () => {
-                openModal('login-modal');
-            });
-
-            // Login Form Submission
-            document.getElementById('login-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                try {
-                    const response = await axios.post('https://crypto-etf-backend-v2.onrender.com/api/auth/login', {
-                        email,
-                        password
-                    });
-                    localStorage.setItem('token', response.data.token);
-                    window.location.href = '/frontend/dashboard.html';
-                } catch (error) {
-                    document.getElementById('login-error').textContent = 'Invalid credentials. Please try again.';
-                }
-            });
         });
     </script>
 </body>
 </html>
+```
