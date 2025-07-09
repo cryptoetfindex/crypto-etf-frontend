@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://crypto-etf-frontend.pages.dev/frontend/sitemap.xml
