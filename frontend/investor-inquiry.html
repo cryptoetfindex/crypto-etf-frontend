@@ -1,111 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index - Investor Inquiry</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-        }
-        [data-theme="normal"] {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 235, 235, 0.2);
-        }
-        [data-theme="light"] {
-            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
-            --text-color: #333333;
-            --card-bg: rgba(245, 245, 245, 0.9);
-            --accent-color: #80e8f0;
-            --shadow-color: rgba(128, 232, 240, 0.2);
-        }
-        [data-theme="dark"] {
-            --background: linear-gradient(135deg, #0a121232, #15283a);
-            --text-color: #d3dad3;
-            --card-bg: rgba(21, 40, 58, 0.9);
-            --accent-color: #ffbb00;
-            --shadow-color: rgba(255, 187, 255, 0.2);
-        }
-        body {
-            background: var(--background);
-            color: var(--text-color);
-            font-family: 'Orbitron', sans-serif;
-            min-height: 100vh;
-            margin: 0;
-            padding: 2rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
-        }
-        a {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-        pre {
-            color: var(--text-color);
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 1rem;
-            max-height: 600px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <h1 class="text-2xl font-semibold mb-4">Investor Inquiry</h1>
-            <div id="policy-content">
-                <pre>Loading...</pre>
-            </div>
-            <p class="text-sm mt-4"><a href="/index.html">Back to Home</a></p>
-        </div>
-    </div>
-    <script>
-        // Apply theme from localStorage
-        function applyTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-        }
+Crypto ETF Index Investor Inquiry Guidelines
 
-        // Load theme on page load
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'normal';
-            applyTheme(savedTheme);
-        });
+Effective Date: July 15, 2025
 
-        // Fetch and display .txt content
-        fetch('/frontend/investor-inquiry.txt')
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to load Investor Inquiry');
-                return response.text();
-            })
-            .then(text => {
-                document.getElementById('policy-content').innerHTML = `<pre>${text}</pre>`;
-            })
-            .catch(error => {
-                document.getElementById('policy-content').innerHTML = `
-                    <p class="text-sm mb-4">Unable to load Investor Inquiry. Contact <a href="mailto:info@cryptoetfindex.com">info@cryptoetfindex.com</a>.</p>
-                `;
-            });
-    </script>
-</body>
-</html>
+1.  Introduction Crypto ETF Index (“we”, “us”, or “Company”), a Texas-based AI research company specializing in machine learning and blockchain as a network service (BaaNS), welcomes inquiries from potential investors interested in our innovative research initiatives. This document outlines the process for investor inquiries and key considerations as we focus on advancing our machine learning models and AI-driven blockchain technologies.
+
+2.  Company Overview Crypto ETF Index is dedicated to pioneering AI research, with our CETFi Chain models already trained on billions of data points. We are exploring novel applications of machine learning to enhance blockchain efficiency, security, and scalability. Our websites are cryptoetfindex.com and cetfichain.com.
+
+3.  Investor Inquiry Process a. Submission: To inquire about investment opportunities, please email info@cryptoetfindex.com with the following:
+	•  Your name, contact information, and affiliation (e.g., individual investor, venture firm).
+	•  A brief description of your investment interest and background.
+	•  Any specific questions regarding our AI research, machine learning models, or blockchain developments. b. Review: Our team will review inquiries and respond within 10-15 business days. Due to our focus on research, we prioritize alignments with AI and blockchain innovation. c. Confidentiality: All inquiries are treated confidentially. We may request an NDA for detailed discussions.
+
+4.  Research Focus and Opportunities a. We are pivoting to deepen our AI research, emphasizing machine learning models for blockchain applications. This includes exploring high-performance systems and novel discoveries from controlled experiments. b. Potential investment opportunities may involve supporting our R&D efforts, but we are not currently offering securities or tokenized assets for sale. c. Updates on our progress, including new white papers, will be shared via our websites.
+
+5.  Risks and Disclaimers a. Investments in AI and blockchain research carry significant risks, including technological uncertainties, regulatory changes, and market volatility. b. Crypto ETF Index is a research entity, not a broker-dealer or investment advisor. We do not provide financial advice. c. Consult independent financial, legal, and tax advisors before considering any investment. d. No representations or warranties are made regarding future performance or outcomes of our research.
+
+6.  Data Handling for Inquiries a. Personal information from inquiries is used solely for evaluation and response purposes. b. We comply with applicable privacy laws; refer to our Privacy Policy on cryptoetfindex.com for details.
+
+7.  Changes to Guidelines We may update these guidelines periodically. Changes will be posted on our websites with the updated effective date.
+
+8.  Contact Us For investor inquiries or questions, email info@cryptoetfindex.com.
+
+9.  Legal Notice Crypto ETF Index is a technology research provider. All communications are subject to U.S. laws. This document does not constitute an offer to sell or solicitation of an offer to buy securities.
