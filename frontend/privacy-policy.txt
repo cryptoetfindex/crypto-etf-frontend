@@ -1,18 +1,30 @@
 Crypto ETF Index Privacy Policy
-Effective Date: May 22, 2025
+
+Effective Date: July 15, 2025
+
 1.  Introduction Crypto ETF Index (“we”, “us”, or “Platform”), a Texas-based AI research company focusing on machine learning and blockchain as a network service (BaaNS), is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our websites (CryptoETFIndex.com or cetfichain.com) or services for AI-driven blockchain research and machine learning model development.
+
 2.  Information We Collect a. Personal Information: When you interact with our research platform, we may collect:
 	•  Company Name, EIN (if applicable), and other identifiers for partnership or inquiry purposes.
 	•  Documents related to research collaborations (PDF, <5 MB), signed agreements (text).
 	•  Email and message via the Contact Form. b. Non-Personal Information: We collect analytics data (e.g., page views, click events) via cookies and similar technologies. c. Research Data: We may collect anonymized data points for machine learning training, such as IP fingerprints or usage patterns, which are publicly or aggregated in nature.
+
 3.  How We Use Your Information a. To process inquiries and verify compliance for research collaborations. b. To provide technical support and resources for machine learning and blockchain research. c. To respond to Contact Form inquiries. d. To improve our websites and research models through analytics and aggregated data.
+
 4.  Data Sharing a. We do not sell or rent your personal information. b. We may share data with:
 	•  Regulatory authorities to ensure compliance with research standards.
 	•  Service providers (e.g., Cloudflare for hosting) under strict confidentiality. c. Aggregated research data (e.g., anonymized ML training sets) is not considered personal information.
+
 5.  Data Security a. We use industry-standard encryption (e.g., HTTPS) and secure storage. b. Research documents and agreements are stored securely with restricted access. c. Despite our efforts, no system is completely secure. You assume the risk of data breaches.
+
 6.  Your Rights a. You may request access, correction, or deletion of your personal information by contacting us. b. We will respond within 30 days, subject to legal obligations. c. You may opt out of cookies via browser settings, but this may limit functionality.
+
 7.  Third-Party Links Our websites may link to external sites. We are not responsible for their privacy practices.
+
 8.  Children’s Privacy Our services are not directed to individuals under 18. We do not knowingly collect data from minors.
+
 9.  Changes to This Policy We may update this policy periodically. Changes will be posted on our websites with the updated effective date.
+
 10.  Contact Us For privacy inquiries, use the Contact Form on our websites or write to: info@cryptoetfindex.com
+
 11.  Disclaimer Crypto ETF Index is a technology research provider, not a broker-dealer or offering company. This policy complies with U.S. laws, including GDPR principles for international users where applicable.
