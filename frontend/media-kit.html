@@ -1,111 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index - Media Kit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-        }
-        [data-theme="normal"] {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 235, 235, 0.2);
-        }
-        [data-theme="light"] {
-            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
-            --text-color: #333333;
-            --card-bg: rgba(245, 245, 245, 0.9);
-            --accent-color: #80e8f0;
-            --shadow-color: rgba(128, 232, 240, 0.2);
-        }
-        [data-theme="dark"] {
-            --background: linear-gradient(135deg, #0a121232, #15283a);
-            --text-color: #d3dad3;
-            --card-bg: rgba(21, 40, 58, 0.9);
-            --accent-color: #ffbb00;
-            --shadow-color: rgba(255, 187, 255, 0.2);
-        }
-        body {
-            background: var(--background);
-            color: var(--text-color);
-            font-family: 'Orbitron', sans-serif;
-            min-height: 100vh;
-            margin: 0;
-            padding: 2rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
-        }
-        a {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-        pre {
-            color: var(--text-color);
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 1rem;
-            max-height: 600px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <h1 class="text-2xl font-semibold mb-4">Media Kit</h1>
-            <div id="policy-content">
-                <pre>Loading...</pre>
-            </div>
-            <p class="text-sm mt-4"><a href="/index.html">Back to Home</a></p>
-        </div>
-    </div>
-    <script>
-        // Apply theme from localStorage
-        function applyTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-        }
+Crypto ETF Index Media Kit
 
-        // Load theme on page load
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'normal';
-            applyTheme(savedTheme);
-        });
+Effective Date: July 15, 2025
 
-        // Fetch and display .txt content
-        fetch('/frontend/media-kit.txt')
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to load Media Kit');
-                return response.text();
-            })
-            .then(text => {
-                document.getElementById('policy-content').innerHTML = `<pre>${text}</pre>`;
-            })
-            .catch(error => {
-                document.getElementById('policy-content').innerHTML = `
-                    <p class="text-sm mb-4">Unable to load Media Kit. Contact <a href="mailto:info@cryptoetfindex.com">info@cryptoetfindex.com</a>.</p>
-                `;
-            });
-    </script>
-</body>
-</html>
+1.  Introduction Welcome to the Crypto ETF Index Media Kit. This resource provides journalists, bloggers, and media professionals with essential information about our company, including our AI research focus, branding guidelines, and contact details. For inquiries, email info@cryptoetfindex.com.
+
+2.  Company Overview Crypto ETF Index is a Texas-based AI research company specializing in machine learning and blockchain as a network service (BaaNS). We are advancing innovative technologies through our CETFi Chain, with models trained on billions of data points to explore high-performance, secure blockchain solutions. Our pivot emphasizes cutting-edge AI developments for decentralized systems.
+Websites: cryptoetfindex.com | cetfichain.com
+
+3.  Key Facts
+•  Founded: Year - May 2025
+•  Headquarters: Texas, USA
+•  Core Focus: Machine learning models for blockchain optimization, including experiments achieving 100,000 TPS in controlled environments.
+•  Mission: To pioneer AI-driven blockchain research, prioritizing safety, scalability, and compliance.
+•  Team: Secuirty Protocol & Full Stack Computer Engineer Specialists focused in AI, machine learning, and blockchain technology.
+•  Recent Milestones: Strategic pivot to AI research; ongoing safety testing for novel discoveries.
+
+4.  Branding Guidelines a. Logo: Our logo is available at cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png. Use it without alteration. Preferred formats: PNG for digital, SVG for scalable use. b. Color Palette:
+	•  Primary: #00ddeb (Accent Cyan)
+	•  Background: #0d1b2a (Dark Navy)
+	•  Text: #e0e1dd (Light Gray) c. Typography: Use Orbitron font for headlines; sans-serif for body text. d. Usage: Do not distort, recolor, or modify the logo. Always attribute to Crypto ETF Index.
+
+5.  Press Releases and News
+•  Latest Update: As of July 15, 2025, we are reorganizing to enhance our machine learning capabilities. A new white paper is in development following safety testing.
+•  For past releases or quotes, contact info@cryptoetfindex.com.
+•  Media Coverage: [If any, list links; otherwise, note: Check our websites for updates.]
+
+6.  Media Assets
+•  High-Res Images: Available upon request.
+•  Videos: Demo clips of AI models (request via email).
+•  Fact Sheet: Download from cryptoetfindex.com/media-kit/fact-sheet.pdf (placeholder; will be implementing link to pdf format in future as needed).
+
+7.  Press Contact
+•  Email: info@cryptoetfindex.com
+•  For interviews or quotes, include your outlet, deadline, and topic in your inquiry.
+
+8.  Disclaimer Crypto ETF Index is a research-focused entity, not a financial services provider. Information in this kit is for media use only and does not constitute investment advice. All research is experimental; no guarantees are made. We comply with U.S. laws.
+For updates, visit cryptoetfindex.com or cetfichain.com. Thank you for your interest!
