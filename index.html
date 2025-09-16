@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Index - AI-Driven Blockchain Research</title>
+    <meta name="description" content="Crypto ETF Index is advancing AI and machine learning research for CETFi Chain, focusing on innovative blockchain solutions. Explore our pivot to cutting-edge technology development.">
+    <meta name="keywords" content="Crypto ETF Index, CETFi Chain, AI blockchain, machine learning models, decentralized AI, tokenized assets, blockchain research, KYC-compliant AI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Index - Pioneering AI in Blockchain">
+    <meta property="og:description" content="Advancing machine learning models for CETFi Chain to enhance decentralized technologies. Focusing on research and safety testing for groundbreaking discoveries.">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Crypto ETF Index - AI Blockchain Research">
+    <meta name="twitter:description" content="Exploring innovative AI models for CETFi Chain, with a focus on secure and scalable blockchain advancements.">
+    <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+        }
+        [data-theme="normal"] {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+        }
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --select-bg: rgba(0, 0, 0, 0.1);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 0.2);
+            --button-bg: #80e8f0;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header, .container {
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        .policy-btn {
+            background: var(--button-bg);
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .policy-btn:hover {
+            background: #00b7c3;
+        }
+        [data-theme="light"] .policy-btn:hover {
+            background: #66b3cc;
+        }
+        [data-theme="dark"] .policy-btn:hover {
+            background: #cc8800;
+        }
+        .theme-select {
+            background: var(--select-bg);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            border: 1px solid var(--accent-color);
+        }
+        header {
+            padding-top: 0.5rem;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .logo-img {
+            width: 90vw;
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 221, 235, 0.8))
+                    drop-shadow(0 0 20px rgba(0, 221, 235, 0.6))
+                    drop-shadow(0 0 30px rgba(0, 221, 235, 0.4));
+        }
+        @media (max-width: 640px) {
+            .logo-img {
+                width: 90vw;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .logo-img {
+                width: 80vw;
+            }
+        }
+        @media (min-width: 1025px) {
+            .logo-img {
+                max-width: 600px;
+            }
+        }
+        .contact-section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .contact-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .contact-section p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        .contact-section a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+        .node-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .node-section p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-content pre {
+            color: var(--text-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--button-bg);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .close-btn:hover {
+            background: #00b7c3;
+        }
+        [data-theme="light"] .close-btn:hover {
+            background: #66b3cc;
+        }
+        [data-theme="dark"] .close-btn:hover {
+            background: #cc8800;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Crypto ETF Index",
+        "url": "https://crypto-etf-frontend.pages.dev",
+        "logo": "https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png",
+        "description": "Advancing AI and machine learning research for CETFi Chain, focusing on innovative blockchain solutions. Pivoting to cutting-edge technology development.",
+        "sameAs": [
+            "https://github.com/your-repo/cetfi-chain-contracts",
+            "mailto:info@cryptoetfindex.com"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@cryptoetfindex.com",
+            "contactType": "customer support"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://crypto-etf-frontend.pages.dev",
+        "name": "Crypto ETF Index",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://crypto-etf-frontend.pages.dev/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": "ResearchProject",
+            "name": "CETFi Chain Machine Learning Research",
+            "description": "Exploring advanced machine learning models to enhance blockchain technologies in a compliant and secure manner.",
+            "url": "https://crypto-etf-frontend.pages.dev#research-focus"
+        }
+    ]
+    </script>
+</head>
+<body>
+    <div id="particles"></div>
+    <header class="bg-[var(--header-bg)] text-center">
+        <h1 class="sr-only">Crypto ETF Index</h1>
+        <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo - AI-Driven Blockchain Research Platform" class="logo-img">
+        <div class="auth-controls mt-2 flex flex-col items-center gap-2">
+            <select id="theme-select" class="theme-select" aria-label="Select theme for Crypto ETF Index">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </header>
+    <div class="container max-w-1400 mx-auto p-4">
+        <div class="card mb-4 text-center bg-red-900/50 border border-red-500">
+            <h2 class="text-xl font-semibold mb-4 text-red-300">Important Update: Strategic Pivot and Reorganization</h2>
+            <p class="text-sm mb-4">As we pivot our focus to advancing machine learning research and innovative developments within the CETFi ecosystem, updates will be posted regularly. We are prioritizing research improvements to our machine learning capabilities before any public release. During recent controlled environment experiments, we achieved a unique discovery with 100,000 TPS. We are committed to continued safety testing prior to releasing a new white paper. Thank you for your patience as we reorganize to deliver novel advancements in blockchain technology.</p>
+        </div>
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">CETFi Chain - AI and Machine Learning Research</h2>
+            <p class="text-sm mb-4">CETFi Chain represents a pioneering approach to blockchain technology, leveraging advanced machine learning models to explore new frontiers in decentralized systems. Our research emphasizes secure, compliant, and scalable solutions, with ongoing experiments demonstrating promising results in performance and efficiency. We are dedicated to developing novel methodologies that address key challenges in the space, ensuring robust and innovative outcomes for future applications.</p>
+        </div>
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">Retail-Focused Developments</h2>
+            <div class="node-section">
+                <h3>Advancing Retail User Experiences</h3>
+                <p>Our research explores AI-driven enhancements for retail participants, including optimized interfaces and predictive analytics to support informed decision-making in decentralized environments. We are investigating models that adapt to user behaviors while maintaining strict compliance standards.</p>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">Vendor and Institutional Developments</h2>
+            <div class="node-section">
+                <h3>Empowering Institutional Integration</h3>
+                <p>We are researching machine learning applications for institutional vendors, focusing on liquidity management, risk assessment, and strategic portfolio optimization. These efforts aim to create seamless, compliant frameworks that leverage AI for enhanced operational efficiency.</p>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <h2 class="text-xl font-semibold mb-4">Oracle and Data Developments</h2>
+            <div class="node-section">
+                <h3>Innovating Data Oracle Systems</h3>
+                <p>Our ongoing research into oracle technologies incorporates AI models for secure data ingestion and verification, ensuring accuracy and compliance in tokenized asset ecosystems. We are exploring novel ways to handle financial reports and external data feeds through intelligent, adaptive systems.</p>
+            </div>
+        </div>
+        <div class="contact-section">
+            <h2>Contact Crypto ETF Index</h2>
+            <p>Join the future of AI-enhanced blockchain research. Email <a href="mailto:info@cryptoetfindex.com">info@cryptoetfindex.com</a> for inquiries about CETFi Chain developments or partnerships.</p>
+        </div>
+        <div class="policy-buttons flex gap-4 justify-center flex-wrap mt-4">
+            <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
+            <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
+            <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
+            <button class="policy-btn" data-modal="investor-inquiry">Investor Inquiry</button>
+            <button class="policy-btn" data-modal="media-kit">Media Kit</button>
+            <button class="policy-btn" data-modal="whitepaper">Whitepaper</button>
+            <button class="policy-btn" data-modal="entanglement-theory">Entanglement Perception Theory</button>
+        </div>
+        <p class="copyright text-center text-sm mt-4">Copyright © Crypto ETF Index, July 2025</p>
+        <p class="text-center text-sm mt-2">All designs and functionality are protected by copyright. Unauthorized use is prohibited.</p>
+        <p class="text-center text-xs mt-2">Crypto ETF Index is a technology provider, not a broker-dealer. All investments carry risks. Consult a financial advisor.</p>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn">Close</button>
+            <h2 id="modal-title" class="text-xl font-semibold mb-4"></h2>
+            <div id="modal-content" class="text-sm">
+                <pre>Loading...</pre>
+            </div>
+        </div>
+    </div>
+    <script>
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-select').value = theme;
+            particlesJS('particles', {
+                particles: {
+                    number: { value: theme === 'light' ? 40 : 80, density: { enable: true, value_area: 800 } },
+                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                }
+            });
+        }
+
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+            document.getElementById('theme-select').addEventListener('change', (e) => {
+                applyTheme(e.target.value);
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.querySelector('.close-btn');
+            const policyButtons = document.querySelectorAll('.policy-btn');
+
+            const modalData = {
+                'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
+                'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
+                'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
+                'investor-inquiry': { title: 'Investor Inquiry', file: '/frontend/investor-inquiry.txt' },
+                'media-kit': { title: 'Media Kit', file: '/frontend/media-kit.txt' },
+                'whitepaper': { title: 'Whitepaper', file: '/frontend/whitepaper.txt' },
+                'entanglement-theory': { title: 'Entanglement Perception Theory', file: '/frontend/EntanglementPerceptionTheory.txt' }
+            };
+
+            policyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalKey = button.getAttribute('data-modal');
+                    const { title, file } = modalData[modalKey];
+                    modalTitle.textContent = title;
+                    modalContent.innerHTML = '<pre>Loading...</pre>';
+
+                    fetch(file)
+                        .then(response => {
+                            if (!response.ok) throw new Error(`Failed to load ${title}`);
+                            return response.text();
+                        })
+                        .then(text => {
+                            modalContent.innerHTML = `<pre>${text}</pre>`;
+                            modal.style.display = 'flex';
+                        })
+                        .catch(error => {
+                            modalContent.innerHTML = `
+                                <p class="text-sm mb-4">Unable to load ${title}. Contact <a href="mailto:info@cryptoetfindex.com">info@cryptoetfindex.com</a>.</p>
+                            `;
+                            modal.style.display = 'flex';
+                        });
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
