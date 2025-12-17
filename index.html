@@ -125,6 +125,20 @@
             background: rgba(0, 221, 235, 0.1);
             color: var(--accent-color);
         }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .news-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            transition: transform 0.3s ease;
+        }
+        .news-card:hover { transform: translateY(-5px); }
+        .news-card .date { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
         .disclaimer {
             font-size: 0.8rem;
             opacity: 0.8;
@@ -258,6 +272,15 @@
             </ul>
         </div>
 
+        <!-- Latest Articles Card -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-6 text-center">Latest Articles & Analysis</h2>
+            <div id="home-news-grid" class="news-grid">
+                <!-- Auto-generated 4 latest + Older Articles card -->
+                <div class="text-center text-lg opacity-70">Loading latest articles...</div>
+            </div>
+        </div>
+
         <p class="disclaimer text-center">
             Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
         </p>
@@ -285,6 +308,61 @@
     </div>
 
     <script>
+        // Same article list as in news.html
+        const NEWS_ARTICLES = [
+            { file: "2025-crypto-etf-deep-dive.html",           date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive: Milestones, Trends, and Outlook", desc: "Comprehensive year-in-review of spot crypto ETFs" },
+            { file: "xrp-etf-1b-milestone.html",                date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone with Zero Outflow Days", desc: "Fastest-growing category in crypto ETFs" },
+            { file: "bitcoin-etf-outflows-dec2025.html",        date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow Amid Market Correction", desc: "Profit-taking drives significant outflows" },
+            { file: "ethereum-etf-inflows-dec2025.html",        date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows in Early December", desc: "Positive rebound contrasts Bitcoin trends" },
+            { file: "sec-solana-etf-delay.html",                date: "2025-12-10", title: "SEC Delays Decision on Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
+            { file: "weekly-inflow-report-dec8.html",           date: "2025-12-08", title: "Weekly Crypto ETF Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate flows" }
+        ];
+
+        function formatDate(dateStr) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString(undefined, options);
+        }
+
+        function loadHomeNews() {
+            const grid = document.getElementById('home-news-grid');
+            grid.innerHTML = '';
+
+            // Sort newest first
+            const sorted = [...NEWS_ARTICLES].sort((a, b) => b.date.localeCompare(a.date));
+
+            // Take latest 4
+            const latest4 = sorted.slice(0, 4);
+
+            latest4.forEach(art => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div class="date">${formatDate(art.date)}</div>
+                    <h3 class="text-xl font-bold mb-2">
+                        <a href="/frontend/news/${art.file}" class="text-var(--accent-color) hover:underline">${art.title}</a>
+                    </h3>
+                    <p class="text-lg">${art.desc}</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Always add "Older Articles" card as the last one
+            const archiveCard = document.createElement('div');
+            archiveCard.className = 'news-card text-center';
+            archiveCard.innerHTML = `
+                <div class="date">Archive</div>
+                <h3 class="text-2xl font-bold mb-4">Older Articles</h3>
+                <p class="text-lg mb-6">View all past in-depth analysis and reports</p>
+                <a href="/frontend/news.html" class="policy-btn inline-block">Browse All News →</a>
+            `;
+            grid.appendChild(archiveCard);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadHomeNews);
+    </script>
+
+    <!-- Your existing theme/particles/modal script -->
+    <script>
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
@@ -302,7 +380,6 @@
             applyTheme(savedTheme);
             document.getElementById('theme-select').addEventListener('change', (e) => applyTheme(e.target.value));
 
-            // Modal functionality
             const modal = document.getElementById('modal');
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
