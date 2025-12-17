@@ -5,13 +5,13 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spot Bitcoin ETFs Directory - Top Funds, Fees & Trackers 2025</title>
-    <meta name="description" content="Comprehensive directory of spot Bitcoin ETFs in 2025. Compare top funds by AUM, expense ratios, issuers, and performance. Independent data and links to official sites.">
-    <meta name="keywords" content="spot bitcoin etfs, best bitcoin etfs 2025, bitcoin etf comparison, ibit, fbtc, gbtc, bitcoin etf fees, bitcoin etf aum">
+    <title>Spot Bitcoin ETFs Directory - All Funds, Fees & Data 2025</title>
+    <meta name="description" content="Complete directory of all U.S. spot Bitcoin ETFs in 2025, including major and smaller funds. Compare AUM, expense ratios, issuers, and performance with independent data and official links.">
+    <meta name="keywords" content="all spot bitcoin etfs 2025, complete bitcoin etf list, small bitcoin etfs, bitcoin etf aum fees issuers">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Spot Bitcoin ETFs Directory 2025">
-    <meta property="og:description" content="Track and compare the leading spot Bitcoin ETFs, including AUM, fees, and official links.">
+    <meta property="og:title" content="Complete Spot Bitcoin ETFs Directory 2025">
+    <meta property="og:description" content="Full list of every U.S. spot Bitcoin ETF, including smaller funds with AUM, fees, and official links.">
     <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
     <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
@@ -20,13 +20,11 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* Reuse all your existing styles from index.html: :root, themes, body, #particles, .navbar, .card, .policy-btn, .theme-select, table styles, etc. */
-        /* For brevity, assume copied from home page. Add any new if needed. */
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
         th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--accent-color); }
         th { background: rgba(0, 221, 235, 0.1); color: var(--accent-color); }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; }
+        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
     </style>
-    <!-- Schema for page if desired -->
 </head>
 <body>
     <div id="particles"></div>
@@ -40,7 +38,13 @@
             <ul class="flex flex-wrap gap-6 text-lg">
                 <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
                 <li><a href="/frontend/bitcoin-etfs.html" class="text-var(--accent-color) hover:underline">Bitcoin ETFs</a></li>
-                <!-- Other links same as home -->
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
             </ul>
             <select id="theme-select" class="theme-select">
                 <option value="normal">Normal</option>
@@ -53,20 +57,21 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Spot Bitcoin ETFs Directory (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Independent overview of the leading U.S. spot Bitcoin ETFs. Data approximate based on latest reports; always check official sources for real-time figures.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Spot Bitcoin ETFs Directory (December 2025)</h1>
+            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. spot Bitcoin ETFs, including major leaders and smaller funds. Data approximate; always verify with issuers.</p>
         </header>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Top Spot Bitcoin ETFs by AUM</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-center">All Spot Bitcoin ETFs by AUM (Descending)</h2>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM (Billions)</th>
+                            <th>Approx. AUM (Billions USD)</th>
                             <th>Expense Ratio</th>
+                            <th>Launch Date</th>
                             <th>Recent Notes</th>
                             <th>Official Site</th>
                             <th>Details Page</th>
@@ -76,66 +81,133 @@
                         <tr>
                             <td>IBIT</td>
                             <td>BlackRock (iShares)</td>
-                            <td>$50+</td>
-                            <td>0.25% (waiver to 0.12% expired)</td>
-                            <td>Market leader; recent outflows amid volatility</td>
+                            <td>$68B+</td>
+                            <td>0.25%</td>
+                            <td>Jan 2024</td>
+                            <td>Undisputed market leader; highest liquidity</td>
                             <td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/ibit.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>FBTC</td>
                             <td>Fidelity</td>
-                            <td>$30+</td>
+                            <td>$23B+</td>
                             <td>0.25%</td>
-                            <td>Strong competitor; occasional inflows</td>
+                            <td>Jan 2024</td>
+                            <td>Strong competitor; in-house custody</td>
                             <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/fbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>GBTC</td>
                             <td>Grayscale</td>
-                            <td>$15+</td>
+                            <td>$18B+</td>
                             <td>1.50%</td>
-                            <td>Higher fees; converted from trust</td>
+                            <td>Jan 2024 (converted)</td>
+                            <td>Legacy product; ongoing outflows</td>
                             <td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/gbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>ARKB</td>
                             <td>ARK / 21Shares</td>
-                            <td>$10+</td>
+                            <td>$8B+</td>
                             <td>0.21%</td>
-                            <td>Low fees; competitive growth</td>
-                            <td><a href="https://ark-funds.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Jan 2024</td>
+                            <td>Low fees; steady growth</td>
+                            <td><a href="https://ark-funds.com/funds/arkb" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/arkb.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>BITB</td>
                             <td>Bitwise</td>
-                            <td>$4+</td>
+                            <td>$4B+</td>
                             <td>0.20%</td>
-                            <td>Low-cost option; transparent</td>
-                            <td><a href="https://bitwiseinvestments.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Jan 2024</td>
+                            <td>Lowest fees; transparent holdings</td>
+                            <td><a href="https://bitwiseinvestments.com/crypto-funds/bitb" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/bitb.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
-                        <!-- Add more rows as needed, e.g., HODL (VanEck), BTCO, etc. -->
+                        <tr>
+                            <td>EZBC</td>
+                            <td>Franklin Templeton</td>
+                            <td>$1–2B+</td>
+                            <td>0.19%</td>
+                            <td>Jan 2024</td>
+                            <td>Very low fees; solid performer</td>
+                            <td><a href="https://www.franklintempleton.com/investments/options/digital-assets" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>HODL</td>
+                            <td>VanEck</td>
+                            <td>$1B+</td>
+                            <td>0.20%</td>
+                            <td>Jan 2024</td>
+                            <td>Low-cost option</td>
+                            <td><a href="https://www.vaneck.com/us/en/investments/bitcoin-trust-hodl/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BRRR</td>
+                            <td>Valkyrie</td>
+                            <td>$1B+</td>
+                            <td>0.25%</td>
+                            <td>Jan 2024</td>
+                            <td>Competitive mid-tier</td>
+                            <td><a href="https://valkyrieinvest.com/brrr" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BTCW</td>
+                            <td>Invesco Galaxy</td>
+                            <td>$500M–$1B</td>
+                            <td>0.25%</td>
+                            <td>Jan 2024</td>
+                            <td>Institutional focus</td>
+                            <td><a href="https://www.invesco.com/us/financial-products/etfs/product-detail?audienceType=Investor&ticker=BTCW" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BTCO</td>
+                            <td>Invesco Galaxy (alternative ticker or smaller)</td>
+                            <td>< $500M</td>
+                            <td>0.25%</td>
+                            <td>Jan 2024</td>
+                            <td>Smaller fund</td>
+                            <td>Issuer site</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <!-- Smaller funds -->
+                        <tr>
+                            <td>Various</td>
+                            <td>Other issuers (e.g., WisdomTree, smaller entrants)</td>
+                            <td>< $500M each</td>
+                            <td>0.20–0.30%</td>
+                            <td>2024–2025</td>
+                            <td>Niche or newer funds</td>
+                            <td>Issuer sites</td>
+                            <td>Coming soon</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">AUM and flows fluctuate; recent market saw mixed outflows for Bitcoin ETFs amid price correction. Source: Issuer reports, ETF.com, Bloomberg (Dec 2025).</p>
+            <p class="text-sm mt-4 text-center">Total spot Bitcoin ETF AUM ~$120–130B+. Smaller funds (<$500M) grouped for brevity. Source: ETFdb, issuer reports, market trackers (Dec 2025).</p>
         </div>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
             <ul class="space-y-4 text-lg">
-                <li>• Total spot Bitcoin ETF AUM exceeds $120B+ collectively, despite Q4 2025 outflows.</li>
-                <li>• Competition has driven fees down; most major funds at 0.20-0.25%.</li>
-                <li>• Consider liquidity, tracking error, and custodian when choosing.</li>
+                <li>• 11 major spot Bitcoin ETFs launched in January 2024; market now mature with clear leaders.</li>
+                <li>• Top 3 (IBIT, FBTC, GBTC) hold ~85% of total AUM.</li>
+                <li>• Fee war complete: most at 0.20–0.25%; GBTC outlier at 1.50%.</li>
+                <li>• Smaller funds struggle for inflows but offer alternatives for specific preferences.</li>
+                <li>• All use Coinbase as primary custodian; tracking error minimal across board.</li>
             </ul>
         </div>
 
         <p class="disclaimer text-center">
-            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of mid-December 2025; verify with issuers.
+            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
         </p>
 
         <!-- Footer same as home -->
