@@ -22,108 +22,76 @@
     <meta name="twitter:description" content="Track and compare top crypto ETFs with real data and guides.">
     <meta name="twitter:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <link rel="canonical" href="https://crypto-etf-frontend.pages.dev">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card: #1e293b;
+            --accent: #00ddeb;
+            --border: #334155;
         }
-        [data-theme="normal"] { /* same as root */ }
         [data-theme="light"] {
-            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
-            --text-color: #333333;
-            --card-bg: rgba(245, 245, 245, 0.9);
-            --select-bg: rgba(0, 0, 0, 0.1);
-            --accent-color: #80e8f0;
-            --shadow-color: rgba(128, 232, 240, 0.2);
-            --button-bg: #80e8f0;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
         [data-theme="dark"] {
-            --background: linear-gradient(135deg, #0a121e, #15283a);
-            --text-color: #d3d3d3;
-            --card-bg: rgba(21, 40, 58, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #ffbb00;
-            --shadow-color: rgba(255, 187, 0, 0.2);
-            --button-bg: #ffbb00;
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
         }
         body {
-            background: var(--background);
-            color: var(--text-color);
-            font-family: 'Orbitron', sans-serif;
-            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
             margin: 0;
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 1rem;
-        }
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            transition: background 0.3s ease;
         }
         .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px var(--shadow-color);
         }
         .card {
-            background: var(--card-bg);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
         }
-        .policy-btn {
-            background: var(--button-bg);
-            color: #000000;
+        .btn {
+            background: var(--accent);
+            color: #000;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-size: 1rem;
+            font-weight: 600;
             text-decoration: none;
             display: inline-block;
-            text-align: center;
+            transition: all 0.2s;
         }
-        .policy-btn:hover {
-            background: #00b7c3;
-        }
-        [data-theme="light"] .policy-btn:hover { background: #66b3cc; }
-        [data-theme="dark"] .policy-btn:hover { background: #cc8800; }
-        .theme-select {
-            background: var(--select-bg);
-            color: var(--text-color);
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent-color);
-        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
+            margin: 1rem 0;
         }
         th, td {
             padding: 0.75rem;
             text-align: left;
-            border-bottom: 1px solid var(--accent-color);
+            border-bottom: 1px solid var(--border);
         }
         th {
-            background: rgba(0, 221, 235, 0.1);
-            color: var(--accent-color);
+            background: rgba(0, 221, 235, 0.05);
+            color: var(--accent);
+            font-weight: 600;
         }
         .news-grid {
             display: grid;
@@ -131,56 +99,40 @@
             gap: 1.5rem;
         }
         .news-card {
-            background: var(--card-bg);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
-            transition: transform 0.3s ease;
+            transition: transform 0.2s;
         }
-        .news-card:hover { transform: translateY(-5px); }
-        .news-card .date { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
+        .news-card:hover { transform: translateY(-4px); }
         .disclaimer {
-            font-size: 0.8rem;
+            font-size: 0.875rem;
             opacity: 0.8;
             text-align: center;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
     </style>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Crypto ETF Hub",
-        "url": "https://crypto-etf-frontend.pages.dev",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://crypto-etf-frontend.pages.dev/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
 </head>
 <body>
-    <div id="particles"></div>
-
-    <!-- Sticky Navbar -->
+    <!-- Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="text-var(--accent-color) hover:underline">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/" class="text-var(--accent) font-semibold hover:underline">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent)">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent)">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent)">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent)">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-var(--accent)">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-var(--accent)">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-var(--accent)">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-var(--accent)">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select" aria-label="Select theme">
+            <select id="theme-select" class="bg-var(--card) border border-var(--border) rounded px-3 py-2 text-sm">
                 <option value="normal">Normal</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
@@ -189,12 +141,13 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
+    <div class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Independent overview of spot crypto ETFs. Track performance, compare funds, and stay informed.</p>
+            <p class="text-xl max-w-4xl mx-auto opacity-90">Independent overview of spot crypto ETFs. Track performance, compare funds, and stay informed.</p>
         </header>
 
+        <!-- Top ETFs Table -->
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-center">Top Spot Crypto ETFs by AUM</h2>
             <div class="overflow-x-auto">
@@ -203,215 +156,141 @@
                         <tr>
                             <th>Ticker</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM (Billions)</th>
+                            <th>AUM (Billions)</th>
                             <th>Expense Ratio</th>
-                            <th>Recent Notes</th>
-                            <th>Official Site</th>
-                            <th>Details Page</th>
+                            <th>Notes</th>
+                            <th>Site</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>IBIT</td>
-                            <td>BlackRock (iShares)</td>
-                            <td>$68+</td>
-                            <td>0.25%</td>
-                            <td>Market leader; strong liquidity</td>
-                            <td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/ibit.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td>FBTC</td>
-                            <td>Fidelity</td>
-                            <td>$23+</td>
-                            <td>0.25%</td>
-                            <td>Strong competitor</td>
-                            <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/fbtc.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td>GBTC</td>
-                            <td>Grayscale</td>
-                            <td>$18+</td>
-                            <td>1.50%</td>
-                            <td>Higher fees; legacy product</td>
-                            <td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/gbtc.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td>ETHA</td>
-                            <td>BlackRock (iShares)</td>
-                            <td>$16+</td>
-                            <td>0.25%</td>
-                            <td>Ethereum leader; recent inflows</td>
-                            <td><a href="https://www.blackrock.com/us/individual/products/335311/ishares-ethereum-trust-etf" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/etha.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td>FETH</td>
-                            <td>Fidelity</td>
-                            <td>$8+</td>
-                            <td>0.25%</td>
-                            <td>Strong Ethereum performer</td>
-                            <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/feth.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
+                        <tr><td>IBIT</td><td>BlackRock</td><td>$68+</td><td>0.25%</td><td>Market leader</td><td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/ibit.html" class="text-var(--accent)">→</a></td></tr>
+                        <tr><td>FBTC</td><td>Fidelity</td><td>$23+</td><td>0.25%</td><td>Strong volume</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/fbtc.html" class="text-var(--accent)">→</a></td></tr>
+                        <tr><td>GBTC</td><td>Grayscale</td><td>$18+</td><td>1.50%</td><td>Higher fees</td><td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/gbtc.html" class="text-var(--accent)">→</a></td></tr>
+                        <tr><td>ETHA</td><td>BlackRock</td><td>$16+</td><td>0.25%</td><td>Ethereum leader</td><td><a href="https://www.blackrock.com/us/individual/products/335311/ishares-ethereum-trust-etf" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/etha.html" class="text-var(--accent)">→</a></td></tr>
+                        <tr><td>FETH</td><td>Fidelity</td><td>$8+</td><td>0.25%</td><td>Strong inflows</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/feth.html" class="text-var(--accent)">→</a></td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">AUM and flows fluctuate daily. Source: Issuer reports, market trackers (Dec 17, 2025).</p>
+            <p class="text-sm text-center mt-4 opacity-70">Data approximate • Source: issuers & market trackers • Dec 17, 2025</p>
         </div>
 
+        <!-- Key Insights -->
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
-            <ul class="space-y-4 text-lg">
-                <li>• Total spot Bitcoin ETF AUM exceeds $120B+; Ethereum around $30B+.</li>
-                <li>• Emerging categories (XRP, Solana) showing fastest growth and strongest inflows.</li>
-                <li>• Fee competition intense – most leaders at 0.20-0.25%.</li>
-                <li>• Consider liquidity, tracking accuracy, and custodian when choosing.</li>
+            <ul class="space-y-3 text-lg">
+                <li>• Total spot Bitcoin ETF AUM exceeds $120B+; Ethereum around $30B+</li>
+                <li>• Emerging categories (XRP, Solana) showing fastest growth and strongest inflows</li>
+                <li>• Fee competition intense – most leaders at 0.20–0.25%</li>
+                <li>• Consider liquidity, tracking accuracy, and custodian when choosing</li>
             </ul>
         </div>
 
-        <!-- Latest Articles Card -->
+        <!-- Latest Articles -->
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-6 text-center">Latest Articles & Analysis</h2>
             <div id="home-news-grid" class="news-grid">
-                <!-- Auto-generated 4 latest + Older Articles card -->
-                <div class="text-center text-lg opacity-70">Loading latest articles...</div>
+                <div class="text-center opacity-70">Loading latest articles...</div>
             </div>
         </div>
 
-        <p class="disclaimer text-center">
+        <p class="disclaimer">
             Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 pb-8">
-            <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
-                <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
-                <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
-                <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
-                <button class="policy-btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
-                <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
+        <footer class="text-center mt-12 pb-8 border-t border-var(--border) pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <button class="btn" data-modal="privacy-policy">Privacy Policy</button>
+                <button class="btn" data-modal="terms-of-service">Terms of Service</button>
+                <button class="btn" data-modal="risk-policy">Risk Policy</button>
+                <button class="btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
             </div>
-            <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </div>
 
-    <!-- Modal Structure -->
-    <div id="modal" class="modal hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-1000">
-        <div class="modal-content bg-var(--card-bg) p-8 rounded-15 shadow-2xl max-w-3xl w-11/12 max-h-90vh overflow-y-auto relative">
-            <button class="close-btn absolute top-4 right-4 policy-btn">Close</button>
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+        <div class="bg-var(--card) border border-var(--border) rounded-xl shadow-2xl max-w-3xl w-full max-h-90vh overflow-y-auto p-8 relative">
+            <button class="close-btn absolute top-4 right-4 btn">Close</button>
             <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
             <div id="modal-content" class="text-sm"></div>
         </div>
     </div>
 
     <script>
-        // Same article list as in news.html
+        // Articles (same list as news.html)
         const NEWS_ARTICLES = [
-            { file: "2025-crypto-etf-deep-dive.html",           date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive: Milestones, Trends, and Outlook", desc: "Comprehensive year-in-review of spot crypto ETFs" },
-            { file: "xrp-etf-1b-milestone.html",                date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone with Zero Outflow Days", desc: "Fastest-growing category in crypto ETFs" },
-            { file: "bitcoin-etf-outflows-dec2025.html",        date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow Amid Market Correction", desc: "Profit-taking drives significant outflows" },
-            { file: "ethereum-etf-inflows-dec2025.html",        date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows in Early December", desc: "Positive rebound contrasts Bitcoin trends" },
-            { file: "sec-solana-etf-delay.html",                date: "2025-12-10", title: "SEC Delays Decision on Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
-            { file: "weekly-inflow-report-dec8.html",           date: "2025-12-08", title: "Weekly Crypto ETF Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate flows" }
+            { file: "2025-crypto-etf-deep-dive.html", date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive", desc: "Year in review: milestones, flows, regulation & outlook" },
+            { file: "xrp-etf-1b-milestone.html", date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone", desc: "Zero outflow days since launch" },
+            { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow", desc: "Profit-taking amid Q4 correction" },
+            { file: "ethereum-etf-inflows-dec2025.html", date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows", desc: "Positive rebound contrasts Bitcoin trends" },
+            { file: "sec-solana-etf-delay.html", date: "2025-12-10", title: "SEC Delays Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
+            { file: "weekly-inflow-report-dec8.html", date: "2025-12-08", title: "Weekly Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate" }
         ];
 
-        function formatDate(dateStr) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateStr).toLocaleDateString(undefined, options);
+        function formatDate(d) {
+            return new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         }
 
         function loadHomeNews() {
             const grid = document.getElementById('home-news-grid');
             grid.innerHTML = '';
-
-            // Sort newest first
-            const sorted = [...NEWS_ARTICLES].sort((a, b) => b.date.localeCompare(a.date));
-
-            // Take latest 4
-            const latest4 = sorted.slice(0, 4);
-
-            latest4.forEach(art => {
+            const latest = NEWS_ARTICLES.sort((a,b) => b.date.localeCompare(a.date)).slice(0,4);
+            latest.forEach(a => {
                 const card = document.createElement('div');
                 card.className = 'news-card';
                 card.innerHTML = `
-                    <div class="date">${formatDate(art.date)}</div>
-                    <h3 class="text-xl font-bold mb-2">
-                        <a href="/frontend/news/${art.file}" class="text-var(--accent-color) hover:underline">${art.title}</a>
-                    </h3>
-                    <p class="text-lg">${art.desc}</p>
+                    <div class="text-sm opacity-70 mb-2">${formatDate(a.date)}</div>
+                    <h3 class="text-xl font-bold mb-2"><a href="/frontend/news/${a.file}" class="text-var(--accent) hover:underline">${a.title}</a></h3>
+                    <p>${a.desc}</p>
                 `;
                 grid.appendChild(card);
             });
-
-            // Always add "Older Articles" card as the last one
-            const archiveCard = document.createElement('div');
-            archiveCard.className = 'news-card text-center';
-            archiveCard.innerHTML = `
-                <div class="date">Archive</div>
-                <h3 class="text-2xl font-bold mb-4">Older Articles</h3>
-                <p class="text-lg mb-6">View all past in-depth analysis and reports</p>
-                <a href="/frontend/news.html" class="policy-btn inline-block">Browse All News →</a>
-            `;
-            grid.appendChild(archiveCard);
+            const archive = document.createElement('div');
+            archive.className = 'news-card text-center';
+            archive.innerHTML = `<h3 class="text-2xl font-bold mb-4">Older Articles</h3><p class="mb-6">View all past analysis</p><a href="/frontend/news.html" class="btn inline-block">Browse All News →</a>`;
+            grid.appendChild(archive);
         }
-
         document.addEventListener('DOMContentLoaded', loadHomeNews);
-    </script>
 
-    <!-- Your existing theme/particles/modal script -->
-    <script>
-        function applyTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            document.getElementById('theme-select').value = theme;
-            particlesJS('particles', {
-                particles: {
-                    number: { value: theme === 'light' ? 40 : 80 },
-                    color: { value: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' },
-                    line_linked: { color: theme === 'dark' ? '#ffbb00' : theme === 'light' ? '#80e8f0' : '#00d4ff' }
-                }
-            });
+        // Theme switcher (no particles)
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
         }
         window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'normal';
-            applyTheme(savedTheme);
-            document.getElementById('theme-select').addEventListener('change', (e) => applyTheme(e.target.value));
-
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const closeBtn = document.querySelector('.close-btn');
-            const policyButtons = document.querySelectorAll('.policy-btn[data-modal]');
-
-            const modalData = {
-                'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
-                'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
-                'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
-                'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
-            };
-
-            policyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modalKey = button.getAttribute('data-modal');
-                    if (modalData[modalKey]) {
-                        const { title, file } = modalData[modalKey];
-                        modalTitle.textContent = title;
-                        modalContent.innerHTML = '<pre>Loading...</pre>';
-                        fetch(file)
-                            .then(r => r.ok ? r.text() : Promise.reject())
-                            .then(text => modalContent.innerHTML = `<pre>${text}</pre>`)
-                            .catch(() => modalContent.innerHTML = '<p>Unable to load content.</p>');
-                        modal.classList.remove('hidden');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+            const saved = localStorage.getItem('theme') || 'normal';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
         });
+
+        // Modal system (unchanged)
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeBtn = document.querySelector('.close-btn');
+        const policyButtons = document.querySelectorAll('.btn[data-modal]');
+        const modalData = {
+            'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
+            'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
+            'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
+            'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
+        };
+        policyButtons.forEach(b => b.addEventListener('click', () => {
+            const key = b.getAttribute('data-modal');
+            if (modalData[key]) {
+                modalTitle.textContent = modalData[key].title;
+                modalContent.innerHTML = '<p>Loading...</p>';
+                fetch(modalData[key].file).then(r => r.text()).then(t => modalContent.innerHTML = `<pre>${t}</pre>`);
+                modal.classList.remove('hidden');
+            }
+        }));
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
     </script>
 </body>
 </html>
