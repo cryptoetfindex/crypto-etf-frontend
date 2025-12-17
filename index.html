@@ -111,15 +111,6 @@
             border-radius: 8px;
             border: 1px solid var(--accent-color);
         }
-        .logo-img {
-            width: 90vw;
-            max-width: 500px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(0, 221, 235, 0.8));
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -133,10 +124,6 @@
         th {
             background: rgba(0, 221, 235, 0.1);
             color: var(--accent-color);
-        }
-        .news-card {
-            background: rgba(255, 0, 0, 0.1);
-            border-left: 4px solid #ff4444;
         }
         .disclaimer {
             font-size: 0.8rem;
@@ -164,120 +151,116 @@
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
             </a>
-            <div class="flex flex-wrap items-center gap-4">
-                <ul class="flex flex-wrap gap-6 text-lg">
-                    <li><a href="/" class="text-var(--accent-color) hover:underline">Home</a></li>
-                    <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                    <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                    <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                    <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                    <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                    <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                    <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                    <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
-                </ul>
-                <select id="theme-select" class="theme-select" aria-label="Select theme">
-                    <option value="normal">Normal</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </select>
-            </div>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/" class="text-var(--accent-color) hover:underline">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+            </ul>
+            <select id="theme-select" class="theme-select" aria-label="Select theme">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="text-center py-12 px-4">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4">Crypto ETF Index: Trackers, Comparisons & Guides for 2025</h1>
-        <p class="text-xl max-w-4xl mx-auto">Independent resource for the latest on spot crypto ETFs. Compare fees, AUM, performance, and stay updated with news & educational content.</p>
-    </header>
-
+    <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
-        <!-- Featured Top ETFs Table -->
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index (December 2025)</h1>
+            <p class="text-xl max-w-4xl mx-auto">Independent overview of spot crypto ETFs. Track performance, compare funds, and stay informed.</p>
+        </header>
+
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Top Spot Crypto ETFs (as of December 2025)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-center">Top Spot Crypto ETFs by AUM</h2>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
-                            <th>Category</th>
                             <th>Ticker</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM</th>
+                            <th>Approx. AUM (Billions)</th>
                             <th>Expense Ratio</th>
+                            <th>Recent Notes</th>
                             <th>Official Site</th>
+                            <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Bitcoin</td>
                             <td>IBIT</td>
-                            <td>BlackRock</td>
-                            <td>$50B+</td>
+                            <td>BlackRock (iShares)</td>
+                            <td>$68+</td>
                             <td>0.25%</td>
+                            <td>Market leader; strong liquidity</td>
                             <td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td><a href="/frontend/ibit.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Bitcoin</td>
                             <td>FBTC</td>
                             <td>Fidelity</td>
-                            <td>$30B+</td>
+                            <td>$23+</td>
                             <td>0.25%</td>
+                            <td>Strong competitor</td>
                             <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td><a href="/frontend/fbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Bitcoin</td>
                             <td>GBTC</td>
                             <td>Grayscale</td>
-                            <td>$15B+</td>
+                            <td>$18+</td>
                             <td>1.50%</td>
+                            <td>Higher fees; legacy product</td>
                             <td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td><a href="/frontend/gbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Ethereum</td>
                             <td>ETHA</td>
-                            <td>BlackRock</td>
-                            <td>$12B+</td>
+                            <td>BlackRock (iShares)</td>
+                            <td>$16+</td>
                             <td>0.25%</td>
+                            <td>Ethereum leader; recent inflows</td>
                             <td><a href="https://www.blackrock.com/us/individual/products/335311/ishares-ethereum-trust-etf" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td><a href="/frontend/etha.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Ethereum</td>
                             <td>FETH</td>
                             <td>Fidelity</td>
-                            <td>$8B+</td>
+                            <td>$8+</td>
                             <td>0.25%</td>
+                            <td>Strong Ethereum performer</td>
                             <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td><a href="/frontend/feth.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Data approximate; source: ETF issuers & market reports. Always verify latest figures.</p>
+            <p class="text-sm mt-4 text-center">AUM and flows fluctuate daily. Source: Issuer reports, market trackers (Dec 17, 2025).</p>
         </div>
 
-        <!-- Latest News Teasers -->
-        <div class="card mb-8 news-card">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Latest Crypto ETF News (December 2025)</h2>
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
             <ul class="space-y-4 text-lg">
-                <li>• <strong>XRP ETFs Hit $1B+ Milestone:</strong> Spot XRP ETFs have surpassed $1 billion in assets with consistent inflows since mid-November launch, outperforming Bitcoin & Ethereum funds amid market volatility. <a href="/frontend/news.html" class="text-var(--accent-color) underline">Read more →</a></li>
-                <li>• Bitcoin & Ethereum ETFs See Mixed Flows: Recent outflows for BTC/ETH products while emerging alternatives gain traction.</li>
-                <li>• Stay updated for full analysis and weekly inflow trackers.</li>
+                <li>• Total spot Bitcoin ETF AUM exceeds $120B+; Ethereum around $30B+.</li>
+                <li>• Emerging categories (XRP, Solana) showing fastest growth and strongest inflows.</li>
+                <li>• Fee competition intense – most leaders at 0.20-0.25%.</li>
+                <li>• Consider liquidity, tracking accuracy, and custodian when choosing.</li>
             </ul>
         </div>
 
-        <!-- Newsletter Placeholder -->
-        <div class="card mb-8 text-center">
-            <h2 class="text-2xl font-semibold mb-4">Stay Updated</h2>
-            <p class="mb-4">Subscribe for weekly crypto ETF insights, flow reports, and guides.</p>
-            <form class="max-w-md mx-auto">
-                <input type="email" placeholder="Enter your email" class="w-full p-3 rounded mb-4 bg-var(--select-bg) border border-var(--accent-color)" required>
-                <button type="submit" class="policy-btn">Subscribe</button>
-            </form>
-            <p class="text-sm mt-4">We respect your privacy. Unsubscribe anytime.</p>
-        </div>
+        <p class="disclaimer text-center">
+            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
+        </p>
 
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8">
@@ -289,9 +272,6 @@
                 <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
             </div>
             <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
-            <p class="disclaimer mt-4">
-                This site provides informational content only and is not financial advice. Crypto investments involve high risk; consult a professional advisor. Links to external sites may be affiliate links.
-            </p>
         </footer>
     </div>
 
