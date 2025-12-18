@@ -123,10 +123,11 @@
         }
         .ticker-content {
             display: inline-block;
-            animation: ticker 120s linear infinite;
+            padding-left: 100%; /* Start off-screen */
+            animation: ticker 90s linear infinite;
         }
         @keyframes ticker {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
         .ticker-item {
@@ -149,10 +150,10 @@
     </style>
 </head>
 <body>
-    <!-- Ticker Bar -->
+    <!-- Three Separate Ticker Rows -->
+    <!-- Bitcoin Ticker -->
     <div class="ticker-bar">
-        <div class="ticker-content">
-            <!-- Bitcoin Ticker -->
+        <div class="ticker-content" id="bitcoin-ticker">
             <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
             <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $68.5B</span>
             <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $23.4B</span>
@@ -164,8 +165,12 @@
             <span class="ticker-item">8. <a href="/frontend/ezbc.html">EZBC</a> (Franklin) – $4.8B</span>
             <span class="ticker-item">9. <a href="/frontend/brrr.html">BRRR</a> (Valkyrie) – $3.9B</span>
             <span class="ticker-item">10. <a href="/frontend/btcw.html">BTCW</a> (WisdomTree) – $3.2B</span>
+        </div>
+    </div>
 
-            <!-- Ethereum Ticker -->
+    <!-- Ethereum Ticker -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="ethereum-ticker">
             <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM (Dec 18, 2025):</span>
             <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $16.8B</span>
             <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $8.2B</span>
@@ -173,21 +178,19 @@
             <span class="ticker-item">4. <a href="/frontend/ethw.html">ETHW</a> (Bitwise) – $3.1B</span>
             <span class="ticker-item">5. <a href="/frontend/ezeth.html">EZETH</a> (Franklin) – $2.4B</span>
             <span class="ticker-item">6. <a href="/frontend/ceth.html">CETH</a> (21Shares) – $1.9B</span>
+        </div>
+    </div>
 
-            <!-- Other / Emerging Ticker -->
+    <!-- Emerging/Thematic Ticker -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="emerging-ticker">
             <span class="ticker-item ticker-section">Top Emerging & Thematic ETFs by AUM (Dec 18, 2025):</span>
             <span class="ticker-item">1. XRP Combined – $2.1B+</span>
             <span class="ticker-item">2. SOL Combined – $1.4B</span>
-            <span class="ticker-item">3. <a href="/frontend/wgmi.html">WGMI</a> (CoinShares Mining) – $300M</span>
-            <span class="ticker-item">4. <a href="/frontend/bitq.html">BITQ</a> (Bitwise Innovators) – $360M</span>
+            <span class="ticker-item">3. <a href="/frontend/bitq.html">BITQ</a> (Bitwise Innovators) – $360M</span>
+            <span class="ticker-item">4. <a href="/frontend/wgmi.html">WGMI</a> (CoinShares Mining) – $300M</span>
             <span class="ticker-item">5. <a href="/frontend/stce.html">STCE</a> (Schwab Thematic) – $300M</span>
             <span class="ticker-item">6. <a href="/frontend/mnrs.html">MNRS</a> (Grayscale Miners) – $150M</span>
-
-            <!-- Repeat for smooth loop -->
-            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
-            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $68.5B</span>
-            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $23.4B</span>
-            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $18.2B</span>
         </div>
     </div>
 
@@ -297,6 +300,19 @@
     </div>
 
     <script>
+        // Duplicate content inside each ticker for seamless loop
+        document.addEventListener('DOMContentLoaded', () => {
+            const duplicateContent = (id) => {
+                const ticker = document.getElementById(id);
+                if (ticker) {
+                    ticker.innerHTML += ticker.innerHTML; // Duplicate for seamless scrolling
+                }
+            };
+            duplicateContent('bitcoin-ticker');
+            duplicateContent('ethereum-ticker');
+            duplicateContent('emerging-ticker');
+        });
+
         // Latest Articles
         const NEWS_ARTICLES = [
             { file: "bitcoin-etf-weekly-dec18-2025.html", date: "2025-12-18", title: "Bitcoin ETFs Weekly Review: Strong Rebound Inflows (Dec 11–18)", desc: "Record single-day inflows on Dec 17; FBTC leads" },
