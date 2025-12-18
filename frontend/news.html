@@ -124,23 +124,22 @@
 </head>
 <body>
     <div id="particles"></div>
-
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="text-var(--accent-color) hover:underline">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/" class="hover:text-[var(--accent-color)]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent-color)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent-color)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent-color)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent-color)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent-color)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="text-[var(--accent-color)] hover:underline">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-[var(--accent-color)]">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent-color)]">About</a></li>
             </ul>
             <select id="theme-select" class="theme-select">
                 <option value="normal">Normal</option>
@@ -149,14 +148,12 @@
             </select>
         </div>
     </nav>
-
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF News & Insights</h1>
-            <p class="text-xl max-w-4xl mx-auto">Latest spot crypto ETF developments, weekly inflow reports, regulatory updates, and market analysis – updated December 17, 2025.</p>
+            <p class="text-xl max-w-4xl mx-auto">Latest spot crypto ETF developments, weekly inflow reports, regulatory updates, and market analysis – updated December 18, 2025.</p>
         </header>
-
         <div class="card mb-12">
             <h2 class="text-2xl font-semibold mb-6 text-center">Latest News & Insights</h2>
             <div id="auto-news-grid" class="news-grid">
@@ -164,20 +161,17 @@
                 <div class="text-center text-lg opacity-70">Loading latest articles...</div>
             </div>
         </div>
-
         <div class="card mt-12 text-center">
             <h2 class="text-2xl font-semibold mb-4">Stay Updated</h2>
             <p class="mb-4">Get weekly inflow reports and breaking news delivered to your inbox.</p>
             <form class="max-w-md mx-auto">
-                <input type="email" placeholder="Your email" class="w-full p-3 rounded mb-4 bg-var(--select-bg) border border-var(--accent-color)" required>
+                <input type="email" placeholder="Your email" class="w-full p-3 rounded mb-4 bg-[var(--select-bg)] border border-[var(--accent-color)]" required>
                 <button type="submit" class="policy-btn">Subscribe to Newsletter</button>
             </form>
         </div>
-
         <p class="disclaimer">
             News and analysis are for informational purposes only. Not financial advice.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8">
             <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
@@ -190,56 +184,49 @@
             <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </div>
-
-    <!-- Modal Structure (keep your existing) -->
+    <!-- Modal Structure -->
     <div id="modal" class="modal hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-1000">
-        <div class="modal-content bg-var(--card-bg) p-8 rounded-15 shadow-2xl max-w-3xl w-11/12 max-h-90vh overflow-y-auto relative">
+        <div class="modal-content bg-[var(--card-bg)] p-8 rounded-15 shadow-2xl max-w-3xl w-11/12 max-h-90vh overflow-y-auto relative">
             <button class="close-btn absolute top-4 right-4 policy-btn">Close</button>
             <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
             <div id="modal-content" class="text-sm"></div>
         </div>
     </div>
-
     <script>
         // Articles list – add new ones here (date in YYYY-MM-DD format)
         const NEWS_ARTICLES = [
-            { file: "2025-crypto-etf-deep-dive.html",           date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive: Milestones, Trends, and Outlook", desc: "Comprehensive year-in-review of spot crypto ETFs" },
-            { file: "xrp-etf-1b-milestone.html",                date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone with Zero Outflow Days", desc: "Fastest-growing category in crypto ETFs" },
-            { file: "bitcoin-etf-outflows-dec2025.html",        date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow Amid Market Correction", desc: "Profit-taking drives significant outflows" },
-            { file: "ethereum-etf-inflows-dec2025.html",        date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows in Early December", desc: "Positive rebound contrasts Bitcoin trends" },
-            { file: "sec-solana-etf-delay.html",                date: "2025-12-10", title: "SEC Delays Decision on Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
-            { file: "weekly-inflow-report-dec8.html",           date: "2025-12-08", title: "Weekly Crypto ETF Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate flows" }
+            { file: "bitcoin-etf-weekly-dec18-2025.html", date: "2025-12-18", title: "Bitcoin ETFs Weekly Review: Strong Rebound Inflows Amid Year-End Volatility (December 11–18, 2025)", desc: "Comprehensive weekly analysis of spot Bitcoin ETF flows, top performers, and market outlook" },
+            { file: "2025-crypto-etf-deep-dive.html", date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive: Milestones, Trends, and Outlook", desc: "Comprehensive year-in-review of spot crypto ETFs" },
+            { file: "xrp-etf-1b-milestone.html", date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone with Zero Outflow Days", desc: "Fastest-growing category in crypto ETFs" },
+            { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow Amid Market Correction", desc: "Profit-taking drives significant outflows" },
+            { file: "ethereum-etf-inflows-dec2025.html", date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows in Early December", desc: "Positive rebound contrasts Bitcoin trends" },
+            { file: "sec-solana-etf-delay.html", date: "2025-12-10", title: "SEC Delays Decision on Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
+            { file: "weekly-inflow-report-dec8.html", date: "2025-12-08", title: "Weekly Crypto ETF Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate flows" }
             // Add future articles here – they will auto-appear sorted by date
         ];
-
         function formatDate(dateStr) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Date(dateStr).toLocaleDateString(undefined, options);
         }
-
         function loadNews() {
             const grid = document.getElementById('auto-news-grid');
             grid.innerHTML = ''; // Clear loading message
-
             // Sort newest first
             const sorted = NEWS_ARTICLES.sort((a, b) => b.date.localeCompare(a.date));
-
             // Take latest 19
             const latest = sorted.slice(0, 19);
-
             latest.forEach(art => {
                 const card = document.createElement('div');
                 card.className = 'news-card';
                 card.innerHTML = `
                     <div class="date">${formatDate(art.date)}</div>
                     <h3 class="text-xl font-bold mb-2">
-                        <a href="/frontend/news/${art.file}" class="text-var(--accent-color) hover:underline">${art.title}</a>
+                        <a href="/frontend/news/${art.file}" class="text-[var(--accent-color)] hover:underline">${art.title}</a>
                     </h3>
                     <p class="text-lg">${art.desc}</p>
                 `;
                 grid.appendChild(card);
             });
-
             // Always add Archive card as last item
             const archiveCard = document.createElement('div');
             archiveCard.className = 'news-card text-center';
@@ -251,14 +238,71 @@
             `;
             grid.appendChild(archiveCard);
         }
-
         document.addEventListener('DOMContentLoaded', loadNews);
     </script>
-
-    <!-- Your existing theme, particles, and modal script here -->
+    <!-- Theme, Particles, and Modal Script -->
     <script>
-        // Paste your full theme/particles/modal script from index.html here
-        // (the one with applyTheme, particlesJS, and modal functionality)
+        particlesJS("particles", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ddeb" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00ddeb", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "resize": true }
+            },
+            "retina_detect": true
+        });
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (document.getElementById('theme-select')) {
+                document.getElementById('theme-select').value = theme;
+            }
+        }
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'normal';
+            applyTheme(savedTheme);
+            const themeSelect = document.getElementById('theme-select');
+            if (themeSelect) {
+                themeSelect.addEventListener('change', (e) => applyTheme(e.target.value));
+            }
+            // Modal functionality
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.querySelector('.close-btn');
+            const policyButtons = document.querySelectorAll('.policy-btn[data-modal]');
+            const modalData = {
+                'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
+                'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
+                'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
+                'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
+            };
+            policyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalKey = button.getAttribute('data-modal');
+                    if (modalData[modalKey]) {
+                        const { title, file } = modalData[modalKey];
+                        modalTitle.textContent = title;
+                        modalContent.innerHTML = '<pre>Loading...</pre>';
+                        fetch(file)
+                            .then(r => r.ok ? r.text() : Promise.reject())
+                            .then(text => modalContent.innerHTML = `<pre>${text}</pre>`)
+                            .catch(() => modalContent.innerHTML = '<p>Unable to load content.</p>');
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+            if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+        });
     </script>
 </body>
 </html>
