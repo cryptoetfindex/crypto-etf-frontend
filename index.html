@@ -123,10 +123,10 @@
         }
         .ticker-content {
             display: inline-block;
-            animation: ticker 60s linear infinite;
+            animation: ticker 120s linear infinite;
         }
         @keyframes ticker {
-            0%   { transform: translateX(100%); }
+            0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
         .ticker-item {
@@ -137,13 +137,17 @@
             color: var(--accent);
             font-weight: bold;
         }
+        .ticker-section {
+            margin-bottom: 0.25rem;
+        }
     </style>
 </head>
 <body>
     <!-- Ticker Bar -->
     <div class="ticker-bar">
         <div class="ticker-content">
-            <span class="ticker-item">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
+            <!-- Bitcoin Ticker -->
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
             <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
             <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
             <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
@@ -154,13 +158,30 @@
             <span class="ticker-item">8. <span>EZBC</span> (Franklin) – $4.8B</span>
             <span class="ticker-item">9. <span>BRRR</span> (Valkyrie) – $3.9B</span>
             <span class="ticker-item">10. <span>BTCW</span> (WisdomTree) – $3.2B</span>
-            <!-- Repeat to avoid gap -->
-            <span class="ticker-item">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
+
+            <!-- Ethereum Ticker -->
+            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM (Dec 18, 2025):</span>
+            <span class="ticker-item">1. <span>ETHA</span> (BlackRock) – $16.8B</span>
+            <span class="ticker-item">2. <span>FETH</span> (Fidelity) – $8.2B</span>
+            <span class="ticker-item">3. <span>ETHE</span> (Grayscale) – $6.5B</span>
+            <span class="ticker-item">4. <span>ETHW</span> (Bitwise) – $3.1B</span>
+            <span class="ticker-item">5. <span>EZETH</span> (Franklin) – $2.4B</span>
+            <span class="ticker-item">6. <span>CETH</span> (21Shares) – $1.9B</span>
+
+            <!-- Other / Emerging Ticker -->
+            <span class="ticker-item ticker-section">Top Emerging & Thematic ETFs by AUM (Dec 18, 2025):</span>
+            <span class="ticker-item">1. <span>XRP Combined</span> – $2.1B+</span>
+            <span class="ticker-item">2. <span>SOL Combined</span> – $1.4B</span>
+            <span class="ticker-item">3. <span>WGMI</span> (CoinShares Mining) – $300M</span>
+            <span class="ticker-item">4. <span>BITQ</span> (Bitwise Innovators) – $360M</span>
+            <span class="ticker-item">5. <span>STCE</span> (Schwab Thematic) – $300M</span>
+            <span class="ticker-item">6. <span>MNRS</span> (Grayscale Miners) – $150M</span>
+
+            <!-- Repeat for smooth loop -->
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
             <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
             <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
             <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
-            <span class="ticker-item">4. <span>ARKB</span> (ARK/21Shares) – $8.7B</span>
-            <span class="ticker-item">5. <span>BITB</span> (Bitwise) – $7.9B</span>
         </div>
     </div>
 
@@ -270,7 +291,7 @@
     </div>
 
     <script>
-        // Latest Articles (same as news.html)
+        // Latest Articles
         const NEWS_ARTICLES = [
             { file: "bitcoin-etf-weekly-dec18-2025.html", date: "2025-12-18", title: "Bitcoin ETFs Weekly Review: Strong Rebound Inflows (Dec 11–18)", desc: "Record single-day inflows on Dec 17; FBTC leads" },
             { file: "2025-crypto-etf-deep-dive.html", date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive", desc: "Year in review: milestones, flows, regulation & outlook" },
