@@ -12,7 +12,7 @@
     <meta name="author" content="Crypto ETF Index">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Index - Trackers, Comparisons & Guides for 2025">
+    <meta property="og:title" content="Crypto ETF Index - Best Crypto ETFs 2025">
     <meta property="og:description" content="Independent reviews, comparisons, and trackers for the best crypto ETFs including Bitcoin and Ethereum funds.">
     <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://crypto-etf-frontend.pages.dev">
@@ -112,14 +112,63 @@
             text-align: center;
             margin: 2rem 0;
         }
+        .ticker-bar {
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 60s linear infinite;
+        }
+        @keyframes ticker {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .ticker-item {
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        .ticker-item span {
+            color: var(--accent);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <!-- Ticker Bar -->
+    <div class="ticker-bar">
+        <div class="ticker-content">
+            <span class="ticker-item">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
+            <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
+            <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
+            <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
+            <span class="ticker-item">4. <span>ARKB</span> (ARK/21Shares) – $8.7B</span>
+            <span class="ticker-item">5. <span>BITB</span> (Bitwise) – $7.9B</span>
+            <span class="ticker-item">6. <span>HODL</span> (VanEck) – $6.3B</span>
+            <span class="ticker-item">7. <span>BTCO</span> (Invesco) – $5.1B</span>
+            <span class="ticker-item">8. <span>EZBC</span> (Franklin) – $4.8B</span>
+            <span class="ticker-item">9. <span>BRRR</span> (Valkyrie) – $3.9B</span>
+            <span class="ticker-item">10. <span>BTCW</span> (WisdomTree) – $3.2B</span>
+            <!-- Repeat to avoid gap -->
+            <span class="ticker-item">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
+            <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
+            <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
+            <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
+            <span class="ticker-item">4. <span>ARKB</span> (ARK/21Shares) – $8.7B</span>
+            <span class="ticker-item">5. <span>BITB</span> (Bitwise) – $7.9B</span>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
                 <li><a href="/" class="text-var(--accent) font-semibold hover:underline">Home</a></li>
@@ -172,7 +221,7 @@
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm text-center mt-4 opacity-70">Data approximate • Source: issuers & market trackers • Dec 17, 2025</p>
+            <p class="text-sm text-center mt-4 opacity-70">Data approximate • Source: issuers & market trackers • Dec 18, 2025</p>
         </div>
 
         <!-- Key Insights -->
@@ -195,7 +244,7 @@
         </div>
 
         <p class="disclaimer">
-            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
+            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 18, 2025; verify with issuers.
         </p>
 
         <!-- Footer -->
@@ -221,14 +270,12 @@
     </div>
 
     <script>
-        // Articles (same list as news.html)
+        // Latest Articles (same as news.html)
         const NEWS_ARTICLES = [
+            { file: "bitcoin-etf-weekly-dec18-2025.html", date: "2025-12-18", title: "Bitcoin ETFs Weekly Review: Strong Rebound Inflows (Dec 11–18)", desc: "Record single-day inflows on Dec 17; FBTC leads" },
             { file: "2025-crypto-etf-deep-dive.html", date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive", desc: "Year in review: milestones, flows, regulation & outlook" },
             { file: "xrp-etf-1b-milestone.html", date: "2025-12-16", title: "XRP ETFs Surpass $1 Billion AUM Milestone", desc: "Zero outflow days since launch" },
-            { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow", desc: "Profit-taking amid Q4 correction" },
-            { file: "ethereum-etf-inflows-dec2025.html", date: "2025-12-13", title: "Ethereum ETFs Record $143M Inflows", desc: "Positive rebound contrasts Bitcoin trends" },
-            { file: "sec-solana-etf-delay.html", date: "2025-12-10", title: "SEC Delays Solana ETF Options Trading", desc: "Regulatory caution continues for altcoins" },
-            { file: "weekly-inflow-report-dec8.html", date: "2025-12-08", title: "Weekly Inflow Report – Week Ending Dec 8", desc: "Emerging categories dominate" }
+            { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow", desc: "Profit-taking amid Q4 correction" }
         ];
 
         function formatDate(d) {
@@ -254,21 +301,23 @@
             archive.innerHTML = `<h3 class="text-2xl font-bold mb-4">Older Articles</h3><p class="mb-6">View all past analysis</p><a href="/frontend/news.html" class="btn inline-block">Browse All News →</a>`;
             grid.appendChild(archive);
         }
+
         document.addEventListener('DOMContentLoaded', loadHomeNews);
 
-        // Theme switcher (no particles)
+        // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
         }
+
         window.addEventListener('load', () => {
             const saved = localStorage.getItem('theme') || 'normal';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
         });
 
-        // Modal system (unchanged)
+        // Modal system
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
         const modalContent = document.getElementById('modal-content');
@@ -280,6 +329,7 @@
             'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
             'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
         };
+
         policyButtons.forEach(b => b.addEventListener('click', () => {
             const key = b.getAttribute('data-modal');
             if (modalData[key]) {
@@ -289,6 +339,7 @@
                 modal.classList.remove('hidden');
             }
         }));
+
         closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
         modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
     </script>
