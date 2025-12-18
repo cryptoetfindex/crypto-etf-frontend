@@ -82,6 +82,12 @@
             text-align: center;
             margin-top: 2rem;
         }
+        a {
+            color: var(--accent-color);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -89,18 +95,18 @@
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
             <select id="theme-select" class="theme-select" aria-label="Select theme">
                 <option value="normal">Normal</option>
@@ -109,14 +115,12 @@
             </select>
         </div>
     </nav>
-
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Site Map (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Complete index of all pages on Crypto ETF Index – directories, reviews, comparisons, guides, tools, and news.</p>
+            <p class="text-xl max-w-4xl mx-auto">Complete index of all pages on Crypto ETF Index – directories, individual reviews, comparisons, guides, tools, and news. Updated December 18, 2025.</p>
         </header>
-
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-center">All Pages by Category</h2>
             <div class="overflow-x-auto">
@@ -130,60 +134,71 @@
                     </thead>
                     <tbody>
                         <!-- Main Pages -->
-                        <tr><td>Main</td><td><a href="/" class="text-var(--accent-color)">Home</a></td><td>Overview, top ETFs, key insights, latest articles</td></tr>
-                        <tr><td>Main</td><td><a href="/frontend/about.html" class="text-var(--accent-color)">About</a></td><td>Mission, independence, editorial standards</td></tr>
-
+                        <tr><td>Main</td><td><a href="/">Home</a></td><td>Overview, top ETFs table, key insights, latest articles</td></tr>
+                        <tr><td>Main</td><td><a href="/frontend/about.html">About</a></td><td>Mission, independence, editorial standards</td></tr>
                         <!-- Directories -->
-                        <tr><td>Directories</td><td><a href="/frontend/bitcoin-etfs.html" class="text-var(--accent-color)">Bitcoin ETFs</a></td><td>Complete list of all spot Bitcoin ETFs</td></tr>
-                        <tr><td>Directories</td><td><a href="/frontend/ethereum-etfs.html" class="text-var(--accent-color)">Ethereum ETFs</a></td><td>Complete list of all spot Ethereum ETFs</td></tr>
-                        <tr><td>Directories</td><td><a href="/frontend/other-crypto-etfs.html" class="text-var(--accent-color)">Emerging & Other ETFs</a></td><td>XRP, Solana, multi-asset funds</td></tr>
-
-                        <!-- Individual Reviews -->
-                        <tr><td>Reviews</td><td><a href="/frontend/ibit.html" class="text-var(--accent-color)">IBIT</a></td><td>BlackRock Bitcoin ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/fbtc.html" class="text-var(--accent-color)">FBTC</a></td><td>Fidelity Bitcoin ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/gbtc.html" class="text-var(--accent-color)">GBTC</a></td><td>Grayscale Bitcoin ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/arkb.html" class="text-var(--accent-color)">ARKB</a></td><td>ARK 21Shares Bitcoin ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/bitb.html" class="text-var(--accent-color)">BITB</a></td><td>Bitwise Bitcoin ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/etha.html" class="text-var(--accent-color)">ETHA</a></td><td>BlackRock Ethereum ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/feth.html" class="text-var(--accent-color)">FETH</a></td><td>Fidelity Ethereum ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/ethe.html" class="text-var(--accent-color)">ETHE</a></td><td>Grayscale Ethereum ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/eth-mini.html" class="text-var(--accent-color)">ETH Mini</a></td><td>Grayscale Ethereum Mini Trust</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/xrpc.html" class="text-var(--accent-color)">XRPC</a></td><td>Canary Capital XRP ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/gxrp.html" class="text-var(--accent-color)">GXRP</a></td><td>Grayscale XRP ETF</td></tr>
-                        <tr><td>Reviews</td><td><a href="/frontend/bitwise-xrp.html" class="text-var(--accent-color)">Bitwise XRP</a></td><td>Bitwise XRP ETF</td></tr>
-
+                        <tr><td>Directories</td><td><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs Directory</a></td><td>Complete categorized list of all Bitcoin-related ETPs</td></tr>
+                        <tr><td>Directories</td><td><a href="/frontend/ethereum-etfs.html">Ethereum ETFs Directory</a></td><td>Complete list of spot Ethereum ETFs</td></tr>
+                        <tr><td>Directories</td><td><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs Directory</a></td><td>Thematic, leveraged, strategy, and emerging altcoin funds</td></tr>
+                        <!-- Bitcoin Spot Reviews -->
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/ibit.html">IBIT</a></td><td>BlackRock iShares Bitcoin Trust</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/fbtc.html">FBTC</a></td><td>Fidelity Wise Origin Bitcoin Fund</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/gbtc.html">GBTC</a></td><td>Grayscale Bitcoin Trust</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/btc-mini.html">BTC Mini</a></td><td>Grayscale Bitcoin Mini Trust</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/bitb.html">BITB</a></td><td>Bitwise Bitcoin ETF</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/arkb.html">ARKB</a></td><td>ARK 21Shares Bitcoin ETF</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/hodl.html">HODL</a></td><td>VanEck Bitcoin Trust</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/btco.html">BTCO</a></td><td>Invesco Galaxy Bitcoin ETF</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/ezbc.html">EZBC</a></td><td>Franklin Bitcoin ETF</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/brrr.html">BRRR</a></td><td>Valkyrie Bitcoin Fund</td></tr>
+                        <tr><td>Bitcoin Spot</td><td><a href="/frontend/btcw.html">BTCW</a></td><td>WisdomTree Bitcoin Fund</td></tr>
+                        <!-- Bitcoin Leveraged/Inverse -->
+                        <tr><td>Bitcoin Leveraged</td><td><a href="/frontend/bito.html">BITO</a></td><td>ProShares Bitcoin Strategy (futures)</td></tr>
+                        <tr><td>Bitcoin Leveraged</td><td><a href="/frontend/bitx.html">BITX</a></td><td>Volatility Shares 2x Bitcoin ETF</td></tr>
+                        <tr><td>Bitcoin Leveraged</td><td><a href="/frontend/bitu.html">BITU</a></td><td>ProShares Ultra Bitcoin ETF (2x)</td></tr>
+                        <tr><td>Bitcoin Leveraged</td><td><a href="/frontend/biti.html">BITI</a></td><td>ProShares Short Bitcoin ETF (-1x)</td></tr>
+                        <tr><td>Bitcoin Leveraged</td><td><a href="/frontend/sbit.html">SBIT</a></td><td>ProShares UltraShort Bitcoin ETF (-2x)</td></tr>
+                        <!-- Bitcoin Strategy/Thematic -->
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/btci.html">BTCI</a></td><td>NEOS Bitcoin High Income ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bity.html">BITY</a></td><td>YieldMax Bitcoin Option Income</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bitc.html">BITC</a></td><td>Bitwise Bitcoin Strategy Optimum Roll ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/defi.html">DEFI</a></td><td>Hashdex Bitcoin Futures ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bagy.html">BAGY</a></td><td>YieldMax Bitcoin Option Strategy</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/arkw.html">ARKW</a></td><td>ARK Next Generation Internet ETF (indirect BTC)</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bitq.html">BITQ</a></td><td>Bitwise Crypto Industry Innovators ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/mstx.html">MSTX</a></td><td>Defiance Daily Target 2X Long MSTR ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/stce.html">STCE</a></td><td>Schwab Crypto Thematic ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/wgmi.html">WGMI</a></td><td>CoinShares Bitcoin Mining ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/spbc.html">SPBC</a></td><td>Simplify US Equity PLUS Bitcoin Strategy ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bits.html">BITS</a></td><td>Global X Blockchain & Bitcoin Strategy ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/mnrs.html">MNRS</a></td><td>Grayscale Bitcoin Miners ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/sato.html">SATO</a></td><td>Invesco Alerian Galaxy Crypto Economy ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/blkc.html">BLKC</a></td><td>Invesco Alerian Galaxy Blockchain Users ETF</td></tr>
+                        <tr><td>Bitcoin Thematic</td><td><a href="/frontend/bcor.html">BCOR</a></td><td>Grayscale Bitcoin Adopters ETF</td></tr>
                         <!-- Comparisons -->
-                        <tr><td>Comparisons</td><td><a href="/frontend/comparisons.html" class="text-var(--accent-color)">Comparisons Hub</a></td><td>All comparison pages</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/bitcoin-etf-comparison.html" class="text-var(--accent-color)">Bitcoin Comparison</a></td><td>Top Bitcoin ETFs head-to-head</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/ethereum-etf-comparison.html" class="text-var(--accent-color)">Ethereum Comparison</a></td><td>Top Ethereum ETFs head-to-head</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/emerging-etf-comparison.html" class="text-var(--accent-color)">Emerging Comparison</a></td><td>XRP, Solana, multi-asset</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/lowest-fee-etfs.html" class="text-var(--accent-color)">Lowest Fee Ranking</a></td><td>Cheapest crypto ETFs</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/top-inflow-etfs.html" class="text-var(--accent-color)">Top Inflow ETFs</a></td><td>Strongest investor demand</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/bitcoin-vs-ethereum-etfs.html" class="text-var(--accent-color)">BTC vs ETH ETFs</a></td><td>Category showdown</td></tr>
-                        <tr><td>Comparisons</td><td><a href="/frontend/spot-vs-futures-etfs.html" class="text-var(--accent-color)">Spot vs Futures</a></td><td>Key differences</td></tr>
-
+                        <tr><td>Comparisons</td><td><a href="/frontend/comparisons.html">Comparisons Hub</a></td><td>All comparison pages</td></tr>
+                        <tr><td>Comparisons</td><td><a href="/frontend/bitcoin-etf-comparison.html">Bitcoin Comparison</a></td><td>Top spot Bitcoin ETFs head-to-head</td></tr>
+                        <tr><td>Comparisons</td><td><a href="/frontend/ethereum-etf-comparison.html">Ethereum Comparison</a></td><td>Top Ethereum ETFs head-to-head</td></tr>
+                        <tr><td>Comparisons</td><td><a href="/frontend/thematic-etf-comparison.html">Thematic & Strategy Comparison</a></td><td>Mining, leveraged, hybrid funds</td></tr>
                         <!-- Guides -->
-                        <tr><td>Guides</td><td><a href="/frontend/guides.html" class="text-var(--accent-color)">Guides Hub</a></td><td>All educational guides</td></tr>
-                        <tr><td>Guides</td><td><a href="/frontend/how-to-buy-crypto-etfs.html" class="text-var(--accent-color)">How to Buy</a></td><td>Step-by-step buying guide</td></tr>
-                        <tr><td>Guides</td><td><a href="/frontend/crypto-etf-taxes.html" class="text-var(--accent-color)">Taxes 2025</a></td><td>Capital gains, account types</td></tr>
-                        <tr><td>Guides</td><td><a href="/frontend/crypto-etf-risks.html" class="text-var(--accent-color)">Risks</a></td><td>Volatility, regulation, custody</td></tr>
-                        <tr><td>Guides</td><td><a href="/frontend/bitcoin-etf-beginner-guide.html" class="text-var(--accent-color)">Beginner Bitcoin Guide</a></td><td>Everything new investors need</td></tr>
-                        <tr><td>Guides</td><td><a href="/frontend/crypto-etf-portfolio.html" class="text-var(--accent-color)">Portfolio Allocation</a></td><td>Suggested percentages & strategies</td></tr>
-
+                        <tr><td>Guides</td><td><a href="/frontend/guides.html">Guides Hub</a></td><td>All educational guides</td></tr>
+                        <tr><td>Guides</td><td><a href="/frontend/how-to-buy-crypto-etfs.html">How to Buy</a></td><td>Step-by-step buying guide</td></tr>
+                        <tr><td>Guides</td><td><a href="/frontend/crypto-etf-taxes.html">Taxes 2025</a></td><td>Capital gains, account types</td></tr>
+                        <tr><td>Guides</td><td><a href="/frontend/crypto-etf-risks.html">Risks</a></td><td>Volatility, regulation, custody</td></tr>
                         <!-- Tools & News -->
-                        <tr><td>Tools</td><td><a href="/frontend/tools.html" class="text-var(--accent-color)">Tools & Trackers</a></td><td>ROI calculator, inflow trackers</td></tr>
-                        <tr><td>News</td><td><a href="/frontend/news.html" class="text-var(--accent-color)">Latest News</a></td><td>Current articles & weekly reports</td></tr>
-                        <tr><td>News</td><td><a href="/frontend/news/archive.html" class="text-var(--accent-color)">News Archive</a></td><td>All past articles</td></tr>
+                        <tr><td>Tools</td><td><a href="/frontend/tools.html">Tools & Trackers</a></td><td>ROI calculator, inflow trackers, comparison tools</td></tr>
+                        <tr><td>News</td><td><a href="/frontend/news.html">Latest News</a></td><td>Current articles & weekly reports</td></tr>
+                        <tr><td>News</td><td><a href="/frontend/news/archive.html">News Archive</a></td><td>All past articles</td></tr>
+                        <!-- Other -->
+                        <tr><td>Other</td><td><a href="/frontend/sitemap.html">Site Map</a></td><td>This page – full site index</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Total pages: 35+ • Last updated: December 17, 2025</p>
+            <p class="text-sm mt-4 text-center">Total pages: 70+ • Last updated: December 18, 2025</p>
         </div>
-
         <p class="disclaimer text-center">
-            This sitemap shows the full depth of original content on Crypto ETF Index – an independent resource for spot crypto ETF investors.
+            This sitemap shows the full depth of original content on Crypto ETF Index – an independent resource for spot and thematic crypto ETF investors.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -195,8 +210,7 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </div>
-
-    <!-- Theme & Modal Script (copy from your index.html) -->
+    <!-- Theme & Modal Script -->
     <script>
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
@@ -207,35 +221,37 @@
             const savedTheme = localStorage.getItem('theme') || 'normal';
             applyTheme(savedTheme);
             document.getElementById('theme-select').addEventListener('change', (e) => applyTheme(e.target.value));
-            // Modal code (same as index.html)
+            // Modal code (if modal HTML exists in shared template)
             const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const closeBtn = document.querySelector('.close-btn');
-            const policyButtons = document.querySelectorAll('.policy-btn[data-modal]');
-            const modalData = {
-                'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
-                'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
-                'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
-                'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
-            };
-            policyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modalKey = button.getAttribute('data-modal');
-                    if (modalData[modalKey]) {
-                        const { title, file } = modalData[modalKey];
-                        modalTitle.textContent = title;
-                        modalContent.innerHTML = '<pre>Loading...</pre>';
-                        fetch(file)
-                            .then(r => r.ok ? r.text() : Promise.reject())
-                            .then(text => modalContent.innerHTML = `<pre>${text}</pre>`)
-                            .catch(() => modalContent.innerHTML = '<p>Unable to load content.</p>');
-                        modal.classList.remove('hidden');
-                    }
+            if (modal) {
+                const modalTitle = document.getElementById('modal-title');
+                const modalContent = document.getElementById('modal-content');
+                const closeBtn = document.querySelector('.close-btn');
+                const policyButtons = document.querySelectorAll('.policy-btn[data-modal]');
+                const modalData = {
+                    'privacy-policy': { title: 'Privacy Policy', file: '/frontend/privacy-policy.txt' },
+                    'terms-of-service': { title: 'Terms of Service', file: '/frontend/terms-of-service.txt' },
+                    'risk-policy': { title: 'Risk Policy', file: '/frontend/risk-policy.txt' },
+                    'affiliate-disclosure': { title: 'Affiliate Disclosure', file: '/frontend/affiliate-disclosure.txt' }
+                };
+                policyButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const modalKey = button.getAttribute('data-modal');
+                        if (modalData[modalKey]) {
+                            const { title, file } = modalData[modalKey];
+                            modalTitle.textContent = title;
+                            modalContent.innerHTML = '<pre>Loading...</pre>';
+                            fetch(file)
+                                .then(r => r.ok ? r.text() : Promise.reject())
+                                .then(text => modalContent.innerHTML = `<pre>${text}</pre>`)
+                                .catch(() => modalContent.innerHTML = '<p>Unable to load content.</p>');
+                            modal.classList.remove('hidden');
+                        }
+                    });
                 });
-            });
-            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+                closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+            }
         });
     </script>
 </body>
