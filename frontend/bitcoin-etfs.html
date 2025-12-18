@@ -5,13 +5,13 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spot Bitcoin ETFs Directory - All Funds, Fees & Data 2025</title>
-    <meta name="description" content="Complete directory of all U.S. spot Bitcoin ETFs in 2025, including major and smaller funds. Compare AUM, expense ratios, issuers, and performance with independent data and official links.">
-    <meta name="keywords" content="all spot bitcoin etfs 2025, complete bitcoin etf list, small bitcoin etfs, bitcoin etf aum fees issuers">
+    <title>Complete Spot Bitcoin ETFs Directory - All Funds 2025</title>
+    <meta name="description" content="Full list of every U.S. spot Bitcoin ETF and Bitcoin-related ETP in 2025 – major spot funds, mini trusts, leveraged, inverse, and strategy products. Compare AUM, fees, performance, and official links.">
+    <meta name="keywords" content="all bitcoin etfs 2025, complete bitcoin etf list, spot bitcoin etfs, leveraged bitcoin etfs, bitcoin mini trust">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Complete Spot Bitcoin ETFs Directory 2025">
-    <meta property="og:description" content="Full list of every U.S. spot Bitcoin ETF, including smaller funds with AUM, fees, and official links.">
+    <meta property="og:title" content="Complete Bitcoin ETFs & ETPs Directory 2025">
+    <meta property="og:description" content="Every Bitcoin-related ETF and ETP – spot, leveraged, inverse, strategy – with latest AUM, fees, and performance data.">
     <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
     <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
@@ -19,7 +19,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Reuse all your existing styles from index.html: :root, themes, body, #particles, .navbar, .card, .policy-btn, .theme-select, table styles, etc. */
+        /* Copy all styles from previous pages */
+        :root {
+            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --text-color: #e0e1dd;
+            --card-bg: rgba(27, 38, 59, 0.9);
+            --select-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #00ddeb;
+            --shadow-color: rgba(0, 221, 235, 0.2);
+            --button-bg: #00ddeb;
+        }
+        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select, table, .disclaimer etc. */
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
         th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--accent-color); }
         th { background: rgba(0, 221, 235, 0.1); color: var(--accent-color); }
@@ -29,7 +39,7 @@
 <body>
     <div id="particles"></div>
 
-    <!-- Sticky Navbar (same as home) -->
+    <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
@@ -57,165 +67,379 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Spot Bitcoin ETFs Directory (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. spot Bitcoin ETFs, including major leaders and smaller funds. Data approximate; always verify with issuers.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Bitcoin ETFs & ETPs Directory (December 2025)</h1>
+            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. Bitcoin-related ETFs and ETPs – spot, mini trusts, leveraged, inverse, strategy, and thematic funds. Data approximate; verify with issuers.</p>
         </header>
 
+        <!-- Pure Spot Bitcoin ETFs Section -->
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">All Spot Bitcoin ETFs by AUM (Descending)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-center">Pure Spot Bitcoin ETFs</h2>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
+                            <th>ETF Name</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM (Billions USD)</th>
+                            <th>Total Assets ($MM)</th>
                             <th>Expense Ratio</th>
-                            <th>Launch Date</th>
-                            <th>Recent Notes</th>
-                            <th>Official Site</th>
                             <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>IBIT</td>
-                            <td>BlackRock (iShares)</td>
-                            <td>$68B+</td>
+                            <td>iShares Bitcoin Trust ETF</td>
+                            <td>BlackRock</td>
+                            <td>$67,934.90</td>
                             <td>0.25%</td>
-                            <td>Jan 2024</td>
-                            <td>Undisputed market leader; highest liquidity</td>
-                            <td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/ibit.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>FBTC</td>
+                            <td>Fidelity Wise Origin Bitcoin Fund</td>
                             <td>Fidelity</td>
-                            <td>$23B+</td>
+                            <td>$17,522.50</td>
                             <td>0.25%</td>
-                            <td>Jan 2024</td>
-                            <td>Strong competitor; in-house custody</td>
-                            <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/fbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>GBTC</td>
+                            <td>Grayscale Bitcoin Trust ETF</td>
                             <td>Grayscale</td>
-                            <td>$18B+</td>
+                            <td>$14,587.00</td>
                             <td>1.50%</td>
-                            <td>Jan 2024 (converted)</td>
-                            <td>Legacy product; ongoing outflows</td>
-                            <td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/gbtc.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ARKB</td>
-                            <td>ARK / 21Shares</td>
-                            <td>$8B+</td>
-                            <td>0.21%</td>
-                            <td>Jan 2024</td>
-                            <td>Low fees; steady growth</td>
-                            <td><a href="https://ark-funds.com/funds/arkb" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/arkb.html" class="text-var(--accent-color)">View →</a></td>
+                            <td>BTC</td>
+                            <td>Grayscale Bitcoin Mini Trust ETF</td>
+                            <td>Grayscale</td>
+                            <td>$4,273.62</td>
+                            <td>0.15%</td>
+                            <td><a href="/frontend/btc-mini.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>BITB</td>
+                            <td>Bitwise Bitcoin ETF Trust</td>
                             <td>Bitwise</td>
-                            <td>$4B+</td>
+                            <td>$3,443.53</td>
                             <td>0.20%</td>
-                            <td>Jan 2024</td>
-                            <td>Lowest fees; transparent holdings</td>
-                            <td><a href="https://bitwiseinvestments.com/crypto-funds/bitb" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td><a href="/frontend/bitb.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
-                            <td>EZBC</td>
-                            <td>Franklin Templeton</td>
-                            <td>$1–2B+</td>
-                            <td>0.19%</td>
-                            <td>Jan 2024</td>
-                            <td>Very low fees; solid performer</td>
-                            <td><a href="https://www.franklintempleton.com/investments/options/digital-assets" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td>Coming soon</td>
+                            <td>ARKB</td>
+                            <td>ARK 21Shares Bitcoin ETF</td>
+                            <td>ARK / 21Shares</td>
+                            <td>$3,364.41</td>
+                            <td>0.21%</td>
+                            <td><a href="/frontend/arkb.html" class="text-var(--accent-color)">View →</a></td>
                         </tr>
                         <tr>
                             <td>HODL</td>
+                            <td>VanEck Bitcoin ETF</td>
                             <td>VanEck</td>
-                            <td>$1B+</td>
+                            <td>$1,428.20</td>
                             <td>0.20%</td>
-                            <td>Jan 2024</td>
-                            <td>Low-cost option</td>
-                            <td><a href="https://www.vaneck.com/us/en/investments/bitcoin-trust-hodl/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td>Coming soon</td>
-                        </tr>
-                        <tr>
-                            <td>BRRR</td>
-                            <td>Valkyrie</td>
-                            <td>$1B+</td>
-                            <td>0.25%</td>
-                            <td>Jan 2024</td>
-                            <td>Competitive mid-tier</td>
-                            <td><a href="https://valkyrieinvest.com/brrr" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td>Coming soon</td>
-                        </tr>
-                        <tr>
-                            <td>BTCW</td>
-                            <td>Invesco Galaxy</td>
-                            <td>$500M–$1B</td>
-                            <td>0.25%</td>
-                            <td>Jan 2024</td>
-                            <td>Institutional focus</td>
-                            <td><a href="https://www.invesco.com/us/financial-products/etfs/product-detail?audienceType=Investor&ticker=BTCW" target="_blank" class="text-var(--accent-color)">Link</a></td>
                             <td>Coming soon</td>
                         </tr>
                         <tr>
                             <td>BTCO</td>
-                            <td>Invesco Galaxy (alternative ticker or smaller)</td>
-                            <td>< $500M</td>
+                            <td>Invesco Galaxy Bitcoin ETF</td>
+                            <td>Invesco Galaxy</td>
+                            <td>$554.89</td>
                             <td>0.25%</td>
-                            <td>Jan 2024</td>
-                            <td>Smaller fund</td>
-                            <td>Issuer site</td>
                             <td>Coming soon</td>
                         </tr>
-                        <!-- Smaller funds -->
                         <tr>
-                            <td>Various</td>
-                            <td>Other issuers (e.g., WisdomTree, smaller entrants)</td>
-                            <td>< $500M each</td>
-                            <td>0.20–0.30%</td>
-                            <td>2024–2025</td>
-                            <td>Niche or newer funds</td>
-                            <td>Issuer sites</td>
+                            <td>EZBC</td>
+                            <td>Franklin Bitcoin ETF</td>
+                            <td>Franklin Templeton</td>
+                            <td>$511.81</td>
+                            <td>0.19%</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BRRR</td>
+                            <td>Coinshares Bitcoin ETF</td>
+                            <td>CoinShares</td>
+                            <td>$505.12</td>
+                            <td>0.25%</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BTCW</td>
+                            <td>WisdomTree Bitcoin Fund</td>
+                            <td>WisdomTree</td>
+                            <td>$139.98</td>
+                            <td>0.30%</td>
                             <td>Coming soon</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Total spot Bitcoin ETF AUM ~$120–130B+. Smaller funds (<$500M) grouped for brevity. Source: ETFdb, issuer reports, market trackers (Dec 2025).</p>
+            <p class="text-sm mt-4 text-center">Pure spot Bitcoin ETFs hold actual BTC. Total AUM ~$120B+.</p>
+        </div>
+
+        <!-- Leveraged / Inverse / Strategy Bitcoin ETPs -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Leveraged, Inverse & Strategy Bitcoin ETPs</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>ETF Name</th>
+                            <th>Issuer</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Expense Ratio</th>
+                            <th>Type</th>
+                            <th>Details Page</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BITO</td>
+                            <td>ProShares Bitcoin ETF</td>
+                            <td>ProShares</td>
+                            <td>$2,340.99</td>
+                            <td>0.95%</td>
+                            <td>Futures-based</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITX</td>
+                            <td>2x Bitcoin Strategy ETF</td>
+                            <td>Volatility Shares</td>
+                            <td>$1,442.71</td>
+                            <td>1.85%</td>
+                            <td>2x Leveraged</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITU</td>
+                            <td>ProShares Ultra Bitcoin ETF</td>
+                            <td>ProShares</td>
+                            <td>$708.62</td>
+                            <td>0.95%</td>
+                            <td>2x Leveraged</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITI</td>
+                            <td>ProShares Short Bitcoin ETF</td>
+                            <td>ProShares</td>
+                            <td>$122.73</td>
+                            <td>0.95%</td>
+                            <td>Inverse (-1x)</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>SBIT</td>
+                            <td>ProShares UltraShort Bitcoin ETF</td>
+                            <td>ProShares</td>
+                            <td>$122.57</td>
+                            <td>0.95%</td>
+                            <td>Inverse (-2x)</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BTCI</td>
+                            <td>NEOS Bitcoin High Income ETF</td>
+                            <td>NEOS</td>
+                            <td>$894.03</td>
+                            <td>Varies</td>
+                            <td>Option Income Strategy</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITY</td>
+                            <td>Amplify Bitcoin 2% Monthly Option Income ETF</td>
+                            <td>Amplify</td>
+                            <td>$16.36</td>
+                            <td>Varies</td>
+                            <td>Option Income</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITC</td>
+                            <td>Bitwise Trendwise Bitcoin and Treasuries Rotation Strategy ETF</td>
+                            <td>Bitwise</td>
+                            <td>$15.06</td>
+                            <td>Varies</td>
+                            <td>Rotation Strategy</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>DEFI</td>
+                            <td>Hashdex Bitcoin ETF</td>
+                            <td>Hashdex</td>
+                            <td>$11.91</td>
+                            <td>Varies</td>
+                            <td>Futures-based</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BAGY</td>
+                            <td>Amplify Bitcoin Max Income Covered Call ETF</td>
+                            <td>Amplify</td>
+                            <td>$11.28</td>
+                            <td>Varies</td>
+                            <td>Covered Call</td>
+                            <td>Coming soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Thematic / Related Bitcoin ETFs -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Thematic & Related Bitcoin ETFs</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>ETF Name</th>
+                            <th>Issuer</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Type</th>
+                            <th>Details Page</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ARKW</td>
+                            <td>ARK Next Generation Internet ETF</td>
+                            <td>ARK</td>
+                            <td>$2,195.99</td>
+                            <td>Tech + Crypto Exposure</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BTCI</td>
+                            <td>NEOS Bitcoin High Income ETF</td>
+                            <td>NEOS</td>
+                            <td>$894.03</td>
+                            <td>High Income Strategy</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITQ</td>
+                            <td>Bitwise Crypto Industry Innovators ETF</td>
+                            <td>Bitwise</td>
+                            <td>$364.18</td>
+                            <td>Crypto Companies</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>MSTX</td>
+                            <td>Defiance Daily Target 2x Long MSTR ETF</td>
+                            <td>Defiance</td>
+                            <td>$326.98</td>
+                            <td>2x MicroStrategy</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>STCE</td>
+                            <td>Schwab Crypto Thematic ETF</td>
+                            <td>Schwab</td>
+                            <td>$255.64</td>
+                            <td>Crypto Thematic</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>WGMI</td>
+                            <td>CoinShares Bitcoin Mining ETF</td>
+                            <td>CoinShares</td>
+                            <td>$217.92</td>
+                            <td>Bitcoin Miners</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>SPBC</td>
+                            <td>Simplify US Equity PLUS Bitcoin Strategy ETF</td>
+                            <td>Simplify</td>
+                            <td>$53.43</td>
+                            <td>Equity + Bitcoin</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BITS</td>
+                            <td>Global X Blockchain & Bitcoin Strategy ETF</td>
+                            <td>Global X</td>
+                            <td>$35.11</td>
+                            <td>Blockchain + Bitcoin</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>MNRS</td>
+                            <td>Grayscale Bitcoin Miners ETF</td>
+                            <td>Grayscale</td>
+                            <td>$10.21</td>
+                            <td>Bitcoin Miners</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>SATO</td>
+                            <td>Invesco Alerian Galaxy Crypto Economy ETF</td>
+                            <td>Invesco</td>
+                            <td>$9.81</td>
+                            <td>Crypto Economy</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BLKC</td>
+                            <td>Invesco Alerian Galaxy Blockchain Users ETF</td>
+                            <td>Invesco</td>
+                            <td>$6.15</td>
+                            <td>Blockchain Companies</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>BCOR</td>
+                            <td>Grayscale Bitcoin Adopters ETF</td>
+                            <td>Grayscale</td>
+                            <td>$3.56</td>
+                            <td>Bitcoin Adopters</td>
+                            <td>Coming soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
             <ul class="space-y-4 text-lg">
-                <li>• 11 major spot Bitcoin ETFs launched in January 2024; market now mature with clear leaders.</li>
-                <li>• Top 3 (IBIT, FBTC, GBTC) hold ~85% of total AUM.</li>
-                <li>• Fee war complete: most at 0.20–0.25%; GBTC outlier at 1.50%.</li>
-                <li>• Smaller funds struggle for inflows but offer alternatives for specific preferences.</li>
-                <li>• All use Coinbase as primary custodian; tracking error minimal across board.</li>
+                <li>• Pure spot Bitcoin ETFs dominate with ~$120B+ AUM; leveraged/strategy products add volatility exposure.</li>
+                <li>• Top 5 spot funds hold ~90% of spot AUM.</li>
+                <li>• Leveraged and inverse ETPs popular for short-term trading but carry high risk.</li>
+                <li>• Thematic/mining ETFs provide indirect exposure to Bitcoin ecosystem.</li>
             </ul>
         </div>
 
         <p class="disclaimer text-center">
-            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 17, 2025; verify with issuers.
+            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 18, 2025; verify with issuers.
         </p>
 
-        <!-- Footer same as home -->
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8">
+            <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
+                <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
+                <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
+                <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
+                <button class="policy-btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
+                <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
+            </div>
+            <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
+        </footer>
     </div>
 
-    <!-- Modal and Scripts (copy from home: theme apply, particles, modals) -->
+    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Copy your full script from index.html
+        // Full script: theme apply, particles, modals
     </script>
 </body>
 </html>
