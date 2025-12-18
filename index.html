@@ -133,12 +133,18 @@
             display: inline-block;
             margin-right: 3rem;
         }
-        .ticker-item span {
-            color: var(--accent);
+        .ticker-item a {
+            color: #00ffea;
+            text-decoration: underline;
             font-weight: bold;
         }
+        .ticker-item a:hover {
+            opacity: 0.8;
+        }
         .ticker-section {
-            margin-bottom: 0.25rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 4rem;
         }
     </style>
 </head>
@@ -148,40 +154,40 @@
         <div class="ticker-content">
             <!-- Bitcoin Ticker -->
             <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
-            <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
-            <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
-            <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
-            <span class="ticker-item">4. <span>ARKB</span> (ARK/21Shares) – $8.7B</span>
-            <span class="ticker-item">5. <span>BITB</span> (Bitwise) – $7.9B</span>
-            <span class="ticker-item">6. <span>HODL</span> (VanEck) – $6.3B</span>
-            <span class="ticker-item">7. <span>BTCO</span> (Invesco) – $5.1B</span>
-            <span class="ticker-item">8. <span>EZBC</span> (Franklin) – $4.8B</span>
-            <span class="ticker-item">9. <span>BRRR</span> (Valkyrie) – $3.9B</span>
-            <span class="ticker-item">10. <span>BTCW</span> (WisdomTree) – $3.2B</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $68.5B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $23.4B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $18.2B</span>
+            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $8.7B</span>
+            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $7.9B</span>
+            <span class="ticker-item">6. <a href="/frontend/hodl.html">HODL</a> (VanEck) – $6.3B</span>
+            <span class="ticker-item">7. <a href="/frontend/btco.html">BTCO</a> (Invesco) – $5.1B</span>
+            <span class="ticker-item">8. <a href="/frontend/ezbc.html">EZBC</a> (Franklin) – $4.8B</span>
+            <span class="ticker-item">9. <a href="/frontend/brrr.html">BRRR</a> (Valkyrie) – $3.9B</span>
+            <span class="ticker-item">10. <a href="/frontend/btcw.html">BTCW</a> (WisdomTree) – $3.2B</span>
 
             <!-- Ethereum Ticker -->
             <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM (Dec 18, 2025):</span>
-            <span class="ticker-item">1. <span>ETHA</span> (BlackRock) – $16.8B</span>
-            <span class="ticker-item">2. <span>FETH</span> (Fidelity) – $8.2B</span>
-            <span class="ticker-item">3. <span>ETHE</span> (Grayscale) – $6.5B</span>
-            <span class="ticker-item">4. <span>ETHW</span> (Bitwise) – $3.1B</span>
-            <span class="ticker-item">5. <span>EZETH</span> (Franklin) – $2.4B</span>
-            <span class="ticker-item">6. <span>CETH</span> (21Shares) – $1.9B</span>
+            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $16.8B</span>
+            <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $8.2B</span>
+            <span class="ticker-item">3. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $6.5B</span>
+            <span class="ticker-item">4. <a href="/frontend/ethw.html">ETHW</a> (Bitwise) – $3.1B</span>
+            <span class="ticker-item">5. <a href="/frontend/ezeth.html">EZETH</a> (Franklin) – $2.4B</span>
+            <span class="ticker-item">6. <a href="/frontend/ceth.html">CETH</a> (21Shares) – $1.9B</span>
 
             <!-- Other / Emerging Ticker -->
             <span class="ticker-item ticker-section">Top Emerging & Thematic ETFs by AUM (Dec 18, 2025):</span>
-            <span class="ticker-item">1. <span>XRP Combined</span> – $2.1B+</span>
-            <span class="ticker-item">2. <span>SOL Combined</span> – $1.4B</span>
-            <span class="ticker-item">3. <span>WGMI</span> (CoinShares Mining) – $300M</span>
-            <span class="ticker-item">4. <span>BITQ</span> (Bitwise Innovators) – $360M</span>
-            <span class="ticker-item">5. <span>STCE</span> (Schwab Thematic) – $300M</span>
-            <span class="ticker-item">6. <span>MNRS</span> (Grayscale Miners) – $150M</span>
+            <span class="ticker-item">1. XRP Combined – $2.1B+</span>
+            <span class="ticker-item">2. SOL Combined – $1.4B</span>
+            <span class="ticker-item">3. <a href="/frontend/wgmi.html">WGMI</a> (CoinShares Mining) – $300M</span>
+            <span class="ticker-item">4. <a href="/frontend/bitq.html">BITQ</a> (Bitwise Innovators) – $360M</span>
+            <span class="ticker-item">5. <a href="/frontend/stce.html">STCE</a> (Schwab Thematic) – $300M</span>
+            <span class="ticker-item">6. <a href="/frontend/mnrs.html">MNRS</a> (Grayscale Miners) – $150M</span>
 
             <!-- Repeat for smooth loop -->
             <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Dec 18, 2025):</span>
-            <span class="ticker-item">1. <span>IBIT</span> (BlackRock) – $68.5B</span>
-            <span class="ticker-item">2. <span>FBTC</span> (Fidelity) – $23.4B</span>
-            <span class="ticker-item">3. <span>GBTC</span> (Grayscale) – $18.2B</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $68.5B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $23.4B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $18.2B</span>
         </div>
     </div>
 
@@ -192,17 +198,17 @@
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="text-var(--accent) font-semibold hover:underline">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent)">About</a></li>
+                <li><a href="/" class="text-[var(--accent)] font-semibold hover:underline">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-[var(--accent)]">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
             </ul>
-            <select id="theme-select" class="bg-var(--card) border border-var(--border) rounded px-3 py-2 text-sm">
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="normal">Normal</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
@@ -234,11 +240,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>IBIT</td><td>BlackRock</td><td>$68+</td><td>0.25%</td><td>Market leader</td><td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/ibit.html" class="text-var(--accent)">→</a></td></tr>
-                        <tr><td>FBTC</td><td>Fidelity</td><td>$23+</td><td>0.25%</td><td>Strong volume</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/fbtc.html" class="text-var(--accent)">→</a></td></tr>
-                        <tr><td>GBTC</td><td>Grayscale</td><td>$18+</td><td>1.50%</td><td>Higher fees</td><td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/gbtc.html" class="text-var(--accent)">→</a></td></tr>
-                        <tr><td>ETHA</td><td>BlackRock</td><td>$16+</td><td>0.25%</td><td>Ethereum leader</td><td><a href="https://www.blackrock.com/us/individual/products/335311/ishares-ethereum-trust-etf" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/etha.html" class="text-var(--accent)">→</a></td></tr>
-                        <tr><td>FETH</td><td>Fidelity</td><td>$8+</td><td>0.25%</td><td>Strong inflows</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent)">Link</a></td><td><a href="/frontend/feth.html" class="text-var(--accent)">→</a></td></tr>
+                        <tr><td>IBIT</td><td>BlackRock</td><td>$68+</td><td>0.25%</td><td>Market leader</td><td><a href="https://www.blackrock.com/us/individual/products/333011/ishares-bitcoin-trust" target="_blank" class="text-[var(--accent)]">Link</a></td><td><a href="/frontend/ibit.html" class="text-[var(--accent)]">→</a></td></tr>
+                        <tr><td>FBTC</td><td>Fidelity</td><td>$23+</td><td>0.25%</td><td>Strong volume</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-[var(--accent)]">Link</a></td><td><a href="/frontend/fbtc.html" class="text-[var(--accent)]">→</a></td></tr>
+                        <tr><td>GBTC</td><td>Grayscale</td><td>$18+</td><td>1.50%</td><td>Higher fees</td><td><a href="https://grayscale.com/products/grayscale-bitcoin-trust/" target="_blank" class="text-[var(--accent)]">Link</a></td><td><a href="/frontend/gbtc.html" class="text-[var(--accent)]">→</a></td></tr>
+                        <tr><td>ETHA</td><td>BlackRock</td><td>$16+</td><td>0.25%</td><td>Ethereum leader</td><td><a href="https://www.blackrock.com/us/individual/products/335311/ishares-ethereum-trust-etf" target="_blank" class="text-[var(--accent)]">Link</a></td><td><a href="/frontend/etha.html" class="text-[var(--accent)]">→</a></td></tr>
+                        <tr><td>FETH</td><td>Fidelity</td><td>$8+</td><td>0.25%</td><td>Strong inflows</td><td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-[var(--accent)]">Link</a></td><td><a href="/frontend/feth.html" class="text-[var(--accent)]">→</a></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -269,7 +275,7 @@
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 pb-8 border-t border-var(--border) pt-8">
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
                 <button class="btn" data-modal="privacy-policy">Privacy Policy</button>
                 <button class="btn" data-modal="terms-of-service">Terms of Service</button>
@@ -283,7 +289,7 @@
 
     <!-- Modal -->
     <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-        <div class="bg-var(--card) border border-var(--border) rounded-xl shadow-2xl max-w-3xl w-full max-h-90vh overflow-y-auto p-8 relative">
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl shadow-2xl max-w-3xl w-full max-h-90vh overflow-y-auto p-8 relative">
             <button class="close-btn absolute top-4 right-4 btn">Close</button>
             <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
             <div id="modal-content" class="text-sm"></div>
@@ -312,7 +318,7 @@
                 card.className = 'news-card';
                 card.innerHTML = `
                     <div class="text-sm opacity-70 mb-2">${formatDate(a.date)}</div>
-                    <h3 class="text-xl font-bold mb-2"><a href="/frontend/news/${a.file}" class="text-var(--accent) hover:underline">${a.title}</a></h3>
+                    <h3 class="text-xl font-bold mb-2"><a href="/frontend/news/${a.file}" class="text-[var(--accent)] hover:underline">${a.title}</a></h3>
                     <p>${a.desc}</p>
                 `;
                 grid.appendChild(card);
