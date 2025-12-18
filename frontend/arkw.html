@@ -17,7 +17,6 @@
     <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/arkw.html">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --background: linear-gradient(135deg, #0d1b2a, #1b263b);
@@ -41,7 +40,6 @@
             --accent-color: #00ffea;
         }
         body { background: var(--background); color: var(--text-color); font-family: 'Orbitron', sans-serif; min-height: 100vh; margin: 0; }
-        #particles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
         .navbar { background: rgba(27, 38, 59, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
         .card { background: var(--card-bg); padding: 2rem; border-radius: 1rem; box-shadow: 0 0 20px var(--shadow-color); }
         .theme-select { background: var(--select-bg); color: var(--text-color); border: 1px solid var(--accent-color); padding: 0.5rem; border-radius: 0.5rem; }
@@ -55,7 +53,7 @@
     </style>
 </head>
 <body>
-    <div id="particles"></div>
+    <!-- Removed <div id="particles"></div> and particles.js script call to eliminate the moving background -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
@@ -131,10 +129,10 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Recent Performance & Flows</h2>
             <ul class="space-y-4 text-lg">
-                <li>• Strong YTD performance in 2025 (~61% as of Q3), driven by tech/AI momentum and Bitcoin exposure.</li>
-                <li>• Recent flows: Mixed, with some outflows amid late-2025 market volatility, but ongoing active additions to ARKB positions.</li>
-                <li>• High volatility typical of ARK's disruptive innovation focus.</li>
-                <li>• Benefits from active management and recent rebalancing toward crypto-related holdings.</li>
+                <li>• Strong performance in 2025, with YTD returns reflecting growth in tech/AI and crypto sectors.</li>
+                <li>• Recent flows: Mixed in late 2025, with some outflows amid market volatility but ongoing rebalancing toward crypto holdings like ARKB.</li>
+                <li>• High volatility aligned with ARK's focus on disruptive innovation.</li>
+                <li>• Benefits from active management in dynamic themes including cloud, AI, and blockchain.</li>
             </ul>
             <p class="text-sm mt-4">Data approximate; sources include ARK reports, ETF.com, and market trackers (as of December 18, 2025).</p>
         </div>
@@ -172,29 +170,10 @@
 
         <footer class="text-center mt-12">
             <p>© 2025 Crypto ETF Index. All rights reserved.</p>
-            <!-- Add policy buttons and full disclaimer here if needed -->
         </footer>
     </div>
 
     <script>
-        particlesJS("particles", {
-            /* Your existing particles.js config from other pages */
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00ddeb" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00ddeb", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "resize": true }
-            },
-            "retina_detect": true
-        });
-
         const themeSelect = document.getElementById('theme-select');
         if (themeSelect) {
             themeSelect.addEventListener('change', (e) => {
@@ -206,7 +185,7 @@
                 }
             });
         }
-        // Add any modal or additional scripts here
+        // Add any modal or additional scripts here if needed from other pages
     </script>
 </body>
 </html>
