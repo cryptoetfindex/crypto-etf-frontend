@@ -17,16 +17,17 @@
     <link rel="canonical" href="https://cryptoetfindex.com/frontend/news/crypto-etf-lookahead-dec2025.html">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
     <style>
         :root {
             --background: linear-gradient(135deg, #0d1b2a, #1b263b);
             --text-color: #e0e1dd;
             --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
             --accent-color: #00ddeb;
             --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
         }
         [data-theme="light"] {
             --background: #f0f4f8;
@@ -41,7 +42,6 @@
             --accent-color: #00ffea;
         }
         body { background: var(--background); color: var(--text-color); font-family: 'Orbitron', sans-serif; }
-        #particles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
         .navbar { background: rgba(27, 38, 59, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
         .card { background: var(--card-bg); padding: 2rem; border-radius: 1rem; box-shadow: 0 0 20px var(--shadow-color); }
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
@@ -51,11 +51,11 @@
         .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
         a { color: var(--accent-color); }
         a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; box-shadow: 0 0 20px var(--shadow-color); display: block; }
+        .chart-container { position: relative; height: 450px; margin: 2rem 0; background: rgba(0,0,0,0.1); border-radius: 1rem; padding: 1rem; }
     </style>
 </head>
 <body>
-    <div id="particles"></div>
+    <!-- Removed particles.js div and script call for moving background -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
@@ -110,9 +110,13 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Q4 Pricing Trends: Candlestick Analysis</h2>
             <p class="text-lg mb-4">Bitcoin and Ethereum experienced classic Q4 volatility – early rallies followed by corrections.</p>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="Bitcoin Q4 2025 Simplified Candlestick Chart" /> <!-- Placeholder for generated image -->
+            <div class="chart-container">
+                <canvas id="btcCandlestick"></canvas>
+            </div>
             <p class="text-lg mt-4">Bitcoin peaked above $93,000 before pulling back, with ETF inflows providing support at $85-87K levels.</p>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="Ethereum Q4 2025 Simplified Candlestick Chart" /> <!-- Placeholder for generated image -->
+            <div class="chart-container">
+                <canvas id="ethCandlestick"></canvas>
+            </div>
             <p class="text-lg mt-4">Ethereum mirrored BTC but showed stronger relative rebound in late Q4, driven by ETF inflows.</p>
         </div>
 
@@ -132,7 +136,9 @@
                     </tbody>
                 </table>
             </div>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="Pie Chart: Bitcoin ETF AUM Distribution" /> <!-- Placeholder for generated image -->
+            <div class="chart-container">
+                <canvas id="btcPie"></canvas>
+            </div>
         </div>
 
         <div class="card mb-8">
@@ -151,7 +157,9 @@
                     </tbody>
                 </table>
             </div>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="Pie Chart: Ethereum ETF AUM Distribution" /> <!-- Placeholder for generated image -->
+            <div class="chart-container">
+                <canvas id="ethPie"></canvas>
+            </div>
         </div>
 
         <div class="card mb-8">
@@ -170,7 +178,9 @@
                     </tbody>
                 </table>
             </div>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="Pie Chart: Thematic Crypto ETF AUM Distribution" /> <!-- Placeholder for generated image -->
+            <div class="chart-container">
+                <canvas id="thematicPie"></canvas>
+            </div>
         </div>
 
         <div class="card mb-8">
@@ -224,21 +234,104 @@
     </div>
 
     <script>
-        particlesJS("particles", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00ddeb" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00ddeb", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+        // Bitcoin Candlestick Chart (Simplified Q4 2025)
+        const btcCtx = document.getElementById('btcCandlestick').getContext('2d');
+        new Chart(btcCtx, {
+            type: 'candlestick',
+            data: {
+                datasets: [{
+                    label: 'Bitcoin Q4 2025 (Simplified)',
+                    data: [
+                        { x: '2025-10-01', o: 62000, h: 75000, l: 61000, c: 73000 },
+                        { x: '2025-11-01', o: 73000, h: 93000, l: 72000, c: 91000 },
+                        { x: '2025-12-01', o: 91000, h: 95000, l: 85000, c: 87000 },
+                        { x: '2025-12-21', o: 87000, h: 89000, l: 86000, c: 87500 }
+                    ],
+                    color: {
+                        up: '#00ff88',
+                        down: '#ff4444',
+                        unchanged: '#999'
+                    }
+                }]
             },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "resize": true }
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { type: 'time', time: { unit: 'month' } }
+                }
+            }
+        });
+
+        // Ethereum Candlestick Chart
+        const ethCtx = document.getElementById('ethCandlestick').getContext('2d');
+        new Chart(ethCtx, {
+            type: 'candlestick',
+            data: {
+                datasets: [{
+                    label: 'Ethereum Q4 2025 (Simplified)',
+                    data: [
+                        { x: '2025-10-01', o: 3200, h: 3800, l: 3100, c: 3600 },
+                        { x: '2025-11-01', o: 3600, h: 4200, l: 3500, c: 4000 },
+                        { x: '2025-12-01', o: 4000, h: 4100, l: 3700, c: 3850 },
+                        { x: '2025-12-21', o: 3850, h: 3950, l: 3800, c: 3900 }
+                    ],
+                    color: {
+                        up: '#00ff88',
+                        down: '#ff4444',
+                        unchanged: '#999'
+                    }
+                }]
             },
-            "retina_detect": true
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { type: 'time', time: { unit: 'month' } }
+                }
+            }
+        });
+
+        // Bitcoin AUM Pie Chart
+        const btcPieCtx = document.getElementById('btcPie').getContext('2d');
+        new Chart(btcPieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['IBIT', 'FBTC', 'GBTC', 'ARKB', 'BITB', 'Others'],
+                datasets: [{
+                    data: [68.5, 23.4, 18.2, 8.7, 7.9, 13.3],
+                    backgroundColor: ['#00ddeb', '#00ffea', '#ffbb00', '#f59e0b', '#0ea5e9', '#334155']
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Ethereum AUM Pie Chart
+        const ethPieCtx = document.getElementById('ethPie').getContext('2d');
+        new Chart(ethPieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['ETHA', 'FETH', 'ETHE', 'ETH Mini', 'ETHW', 'Others'],
+                datasets: [{
+                    data: [16.8, 8.2, 6.5, 2.0, 0.34, 6.16],
+                    backgroundColor: ['#00ddeb', '#00ffea', '#ffbb00', '#f59e0b', '#0ea5e9', '#334155']
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Thematic AUM Pie Chart
+        const thematicPieCtx = document.getElementById('thematicPie').getContext('2d');
+        new Chart(thematicPieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['BITQ', 'WGMI', 'STCE', 'MSTX', 'MNRS', 'Others'],
+                datasets: [{
+                    data: [360, 300, 300, 327, 150, 563],
+                    backgroundColor: ['#00ddeb', '#00ffea', '#ffbb00', '#f59e0b', '#0ea5e9', '#334155']
+                }]
+            },
+            options: { responsive: true }
         });
 
         const themeSelect = document.getElementById('theme-select');
