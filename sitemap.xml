@@ -3,13 +3,13 @@
     <!-- Main Pages -->
     <url>
         <loc>https://cryptoetfindex.com/</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/about.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -17,19 +17,19 @@
     <!-- Directories -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitcoin-etfs.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/ethereum-etfs.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/other-crypto-etfs.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -37,67 +37,67 @@
     <!-- Bitcoin Spot ETFs -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/ibit.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/fbtc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/gbtc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/btc-mini.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitb.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/arkb.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/hodl.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/btco.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/ezbc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/brrr.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/btcw.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -105,31 +105,31 @@
     <!-- Bitcoin Leveraged/Inverse -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/bito.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitx.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitu.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/biti.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/sbit.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -137,123 +137,215 @@
     <!-- Bitcoin Thematic/Strategy -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/btci.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bity.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/defi.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bagy.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/arkw.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitq.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/mstx.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/stce.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/wgmi.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/spbc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bits.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/mnrs.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/sato.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/blkc.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bcor.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+    </url>
+
+    <!-- Ethereum ETFs -->
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/ethu.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/bitw.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/ethw.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/etht.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/ethv.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/nciq.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/ethd.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/eeth.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/qeth.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/beth.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/seth.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/btfc.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/bete.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/aeth.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/btop.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
 
     <!-- Comparisons -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/comparisons.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/bitcoin-etf-comparison.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/ethereum-etf-comparison.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/thematic-etf-comparison.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -261,25 +353,25 @@
     <!-- Guides -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/guides.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/how-to-buy-crypto-etfs.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/crypto-etf-taxes.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/crypto-etf-risks.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -287,36 +379,77 @@
     <!-- Tools & News -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/tools.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/news.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://cryptoetfindex.com/frontend/news/archive.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- News Articles -->
     <url>
+        <loc>https://cryptoetfindex.com/frontend/news/crypto-etf-lookahead-dec2025.html</loc>
+        <lastmod>2025-12-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://cryptoetfindex.com/frontend/news/bitcoin-etf-weekly-dec18-2025.html</loc>
         <lastmod>2025-12-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    <!-- Add more news articles as they are created -->
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/2025-crypto-etf-deep-dive.html</loc>
+        <lastmod>2025-12-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/xrp-etf-1b-milestone.html</loc>
+        <lastmod>2025-12-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/bitcoin-etf-outflows-dec2025.html</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/ethereum-etf-inflows-dec2025.html</loc>
+        <lastmod>2025-12-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/sec-solana-etf-delay.html</loc>
+        <lastmod>2025-12-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://cryptoetfindex.com/frontend/news/weekly-inflow-report-dec8.html</loc>
+        <lastmod>2025-12-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 
     <!-- Sitemap Page -->
     <url>
         <loc>https://cryptoetfindex.com/frontend/sitemap.html</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2025-12-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
