@@ -1,3 +1,129 @@
 User-agent: *
 Allow: /
-Sitemap: https://crypto-etf-frontend.pages.dev/frontend/sitemap.xml
+
+# Major AI training crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GrokBot
+Disallow: /
+
+User-agent: Grok
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+# Additional AI crawlers and scrapers
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: xAI-Grok
+Disallow: /
+
+User-agent: xAI-GrokBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: CohereBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: OpenAI
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: DeepL-Bot
+Disallow: /
+
+User-agent: FirecrawlAgent
+Disallow: /
+
+User-agent: Firecrawl
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+User-agent: MistralBot
+Disallow: /
+
+User-agent: Mistral
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: QwenBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: TimpanoBot
+Disallow: /
+
+User-agent: WebScrapingBot
+Disallow: /
+
+User-agent: WebzBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: ZoomBot
+Disallow: /
+
+Sitemap: https://cryptoetfindex.com/sitemap.xml
