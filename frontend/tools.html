@@ -1,35 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Tools & Trackers 2025</title>
-    <meta name="description" content="Free interactive tools to monitor prices, inflows/outflows, performance, and screen crypto ETFs in real-time. Includes a fully working ROI calculator.">
-    <meta name="keywords" content="crypto etf tools, bitcoin etf tracker, etf inflows 2025, crypto etf screener, bitcoin etf price chart, roi calculator">
+    <title>Crypto ETF Tools & Calculators 2025 - Trackers, ROI, Inflows & More</title>
+    <meta name="description" content="Free interactive crypto ETF tools: ROI calculator, inflow/outflow tracker, performance charts, ETF screener, portfolio simulator and more. Updated December 26, 2025.">
+    <meta name="keywords" content="crypto etf tools, bitcoin etf calculator, ethereum etf roi, etf inflows tracker, crypto etf screener, portfolio simulator, expense ratio comparison">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Tools & Trackers 2025">
-    <meta property="og:description" content="Interactive tools to track prices, flows, performance, and compare crypto ETFs in real-time.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/tools.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/tools.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Tools & Calculators 2025">
+    <meta property="og:description" content="Comprehensive suite of free tools to track, compare, and analyze Bitcoin, Ethereum, and thematic crypto ETFs in real-time.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/tools.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/tools.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card: #1e293b;
+            --accent: #00ddeb;
+            --border: #334155;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select etc. */
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .tool-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -37,70 +82,51 @@
             margin-top: 2rem;
         }
         .tool-card {
-            background: var(--card-bg);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
             text-align: center;
+            transition: transform 0.2s;
         }
+        .tool-card:hover { transform: translateY(-4px); }
         .tool-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-        iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 15px;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
         }
         .coming-soon {
             opacity: 0.6;
             font-style: italic;
+            font-size: 0.9rem;
         }
-        .calculator-form {
-            max-width: 400px;
-            margin: 0 auto;
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
         }
-        .calculator-input {
-            background: var(--select-bg);
-            border: 1px solid var(--accent-color);
-            color: var(--text-color);
-            padding: 0.75rem;
-            border-radius: 8px;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-        .calculator-result {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 1rem;
-            color: var(--accent-color);
-        }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
     </style>
 </head>
 <body>
-    <div id="particles"></div>
-
-    <!-- Sticky Navbar -->
+    <!-- Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-var(--accent-color) hover:underline">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/" class="hover:text-[var(--accent)]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] font-semibold">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="normal">Normal</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
@@ -109,138 +135,110 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Tools & Trackers 2025</h1>
-            <p class="text-xl max-w-4xl mx-auto">Free interactive tools to monitor prices, inflows/outflows, performance, and screen crypto ETFs in real-time.</p>
+    <main class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Tools & Calculators (December 2025)</h1>
+            <p class="text-xl max-w-4xl mx-auto opacity-90">Comprehensive free tools to track, analyze, and compare Bitcoin, Ethereum, and thematic crypto ETFs in real-time.</p>
         </header>
 
         <div class="tool-grid">
-            <!-- Real-Time Prices -->
-            <div class="tool-card coming-soon">
-                <h3>Real-Time Crypto Prices</h3>
-                <p class="mb-4">Live Bitcoin, Ethereum, XRP, and Solana prices powering the ETFs.</p>
-                <p>Coming Soon – Advanced price tracker with alerts</p>
-            </div>
-
-            <!-- ETF Inflow Tracker -->
-            <div class="tool-card coming-soon">
-                <h3>ETF Inflow/Outflow Tracker</h3>
-                <p class="mb-4">Daily and weekly flows for all spot crypto ETFs.</p>
-                <p>Coming Soon – Full historical flow database</p>
-            </div>
-
-            <!-- Performance Charts -->
-            <div class="tool-card coming-soon">
-                <h3>Performance Charts</h3>
-                <p class="mb-4">Compare YTD, 1Y, and since-inception returns across all funds.</p>
-                <p>Coming Soon – Interactive charting tool</p>
-            </div>
-
-            <!-- Working ROI Calculator -->
+            <!-- 1. ROI Calculator -->
             <div class="tool-card">
                 <h3>ROI Calculator</h3>
-                <p class="mb-4">Calculate hypothetical returns based on investment amount, timeframe, and historical ETF performance.</p>
-                <div class="calculator-form">
-                    <input type="number" id="investment" class="calculator-input" placeholder="Investment Amount ($)" value="10000">
-                    <select id="etf-select" class="calculator-input">
-                        <option value="IBIT">IBIT (Bitcoin - BlackRock)</option>
-                        <option value="FBTC">FBTC (Bitcoin - Fidelity)</option>
-                        <option value="ETHA">ETHA (Ethereum - BlackRock)</option>
-                        <option value="FETH">FETH (Ethereum - Fidelity)</option>
-                        <option value="average-btc">Average Bitcoin ETF</option>
-                        <option value="average-eth">Average Ethereum ETF</option>
-                    </select>
-                    <select id="timeframe" class="calculator-input">
-                        <option value="ytd">YTD 2025</option>
-                        <option value="1y">1 Year (2025)</option>
-                        <option value="since-inception">Since Inception</option>
-                    </select>
-                    <button onclick="calculateROI()" class="policy-btn w-full">Calculate ROI</button>
-                    <div id="result" class="calculator-result mt-4"></div>
-                </div>
+                <p class="mb-4">Calculate hypothetical returns using historical performance for all major crypto ETFs.</p>
+                <a href="/frontend/roi-calculator.html" class="btn">Open ROI Calculator →</a>
             </div>
 
-            <!-- ETF Screener -->
-            <div class="tool-card coming-soon">
+            <!-- 2. Inflow/Outflow Tracker -->
+            <div class="tool-card">
+                <h3>Daily Inflow/Outflow Tracker</h3>
+                <p class="mb-4">Real-time daily and weekly flows across all spot and thematic crypto ETFs.</p>
+                <a href="/frontend/inflow-tracker.html" class="btn">Open Tracker →</a>
+                <p class="coming-soon mt-2">Full version launching soon</p>
+            </div>
+
+            <!-- 3. Performance Comparator -->
+            <div class="tool-card">
+                <h3>Performance Comparator</h3>
+                <p class="mb-4">Side-by-side returns (YTD, 1Y, since inception) with interactive charts.</p>
+                <a href="/frontend/performance-comparator.html" class="btn">Compare Performance →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
+            </div>
+
+            <!-- 4. ETF Screener -->
+            <div class="tool-card">
                 <h3>Advanced ETF Screener</h3>
-                <p class="mb-4">Filter all crypto ETFs by AUM, fees, issuer, inflows, and performance.</p>
-                <p>Coming Soon – Full custom screener</p>
+                <p class="mb-4">Filter by AUM, expense ratio, issuer, inflows, asset type, and more.</p>
+                <a href="/frontend/etf-screener.html" class="btn">Open Screener →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
             </div>
 
-            <!-- More Tools Placeholder -->
-            <div class="tool-card coming-soon">
+            <!-- 5. Portfolio Simulator -->
+            <div class="tool-card">
                 <h3>Portfolio Simulator</h3>
-                <p class="mb-4">Build and test crypto ETF portfolios with rebalancing and risk analysis.</p>
-                <p>Coming Soon</p>
+                <p class="mb-4">Build and backtest custom crypto ETF portfolios with rebalancing.</p>
+                <a href="/frontend/portfolio-simulator.html" class="btn">Simulate Portfolio →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
+            </div>
+
+            <!-- 6. Expense Ratio & Fee Comparator -->
+            <div class="tool-card">
+                <h3>Fee Comparator</h3>
+                <p class="mb-4">Compare expense ratios, waivers, and total cost of ownership across all funds.</p>
+                <a href="/frontend/fee-comparator.html" class="btn">Compare Fees →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
+            </div>
+
+            <!-- 7. Real-Time Price Ticker -->
+            <div class="tool-card">
+                <h3>Real-Time Underlying Prices</h3>
+                <p class="mb-4">Live BTC, ETH, and altcoin prices impacting ETF NAVs.</p>
+                <a href="/frontend/price-ticker.html" class="btn">View Prices →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
+            </div>
+
+            <!-- 8. Tax Efficiency Estimator -->
+            <div class="tool-card">
+                <h3>Tax Efficiency Estimator</h3>
+                <p class="mb-4">Estimate capital gains impact and tax implications for different holding periods.</p>
+                <a href="/frontend/tax-estimator.html" class="btn">Estimate Taxes →</a>
+                <p class="coming-soon mt-2">Coming soon</p>
             </div>
         </div>
 
         <div class="card mt-12 text-center">
-            <p class="text-lg">The ROI Calculator is fully functional. Other tools are in development and will launch soon.</p>
-            <p class="text-sm mt-2 opacity-70">Data for calculator based on approximate historical performance (Dec 2025). Not financial advice.</p>
+            <p class="text-lg">The ROI Calculator is fully available now. All other tools are in active development and will launch progressively in 2026.</p>
         </div>
 
         <p class="disclaimer">
-            These tools provide third-party data and are for educational use. Not financial advice. Verify data independently.
+            Not financial advice. All tools use historical and third-party data for educational purposes only. Crypto investments are volatile and carry risk of loss. Data approximate as of December 26, 2025; verify with issuers.
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 pb-8">
-            <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
-                <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
-                <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
-                <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
-                <button class="policy-btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
-                <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
             </div>
-            <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
-    </div>
-
-    <!-- Modal Structure -->
-    <div id="modal" class="modal hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-1000">
-        <div class="modal-content bg-var(--card-bg) p-8 rounded-15 shadow-2xl max-w-3xl w-11/12 max-h-90vh overflow-y-auto relative">
-            <button class="close-btn absolute top-4 right-4 policy-btn">Close</button>
-            <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
-            <div id="modal-content" class="text-sm"></div>
-        </div>
-    </div>
+    </main>
 
     <script>
-        // Approximate historical returns (Dec 2025 data - for demo only)
-        const RETURNS = {
-            'IBIT': { ytd: 21.5, '1y': 79.5, 'since-inception': 159.5 },
-            'FBTC': { ytd: 22.0, '1y': 79.0, 'since-inception': 160.0 },
-            'ETHA': { ytd: 18.0, '1y': 65.0, 'since-inception': 120.0 },
-            'FETH': { ytd: 18.5, '1y': 64.5, 'since-inception': 119.0 },
-            'average-btc': { ytd: 21.0, '1y': 78.0, 'since-inception': 158.0 },
-            'average-eth': { ytd: 18.0, '1y': 63.0, 'since-inception': 118.0 }
-        };
-
-        function calculateROI() {
-            const investment = parseFloat(document.getElementById('investment').value) || 0;
-            const etf = document.getElementById('etf-select').value;
-            const timeframe = document.getElementById('timeframe').value;
-
-            if (investment <= 0) {
-                document.getElementById('result').innerHTML = '<span class="text-red-400">Please enter a valid amount</span>';
-                return;
-            }
-
-            const returnPct = RETURNS[etf][timeframe] || 0;
-            const finalValue = investment * (1 + returnPct / 100);
-            const profit = finalValue - investment;
-
-            document.getElementById('result').innerHTML = `
-                Final Value: <span class="text-green-400">$${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span><br>
-                Profit: <span class="${profit >= 0 ? 'text-green-400' : 'text-red-400'}">$${profit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> (${returnPct > 0 ? '+' : ''}${returnPct}%)
-                <br><small>Hypothetical based on historical performance. Not guaranteed.</small>
-            `;
+        // Theme switcher
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
         }
-
-        // Theme, particles, modal script (copy your full existing one here)
-        // ... (keep your theme/particles/modal code unchanged)
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'normal';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
     </script>
 </body>
 </html>
