@@ -579,6 +579,7 @@
         function estimateTax() {
             const selected = [];
             let totalShares = 0;
+
             document.querySelectorAll('#etf-table input[type="checkbox"]:checked').forEach(cb => {
                 const key = cb.value;
                 const sharesInput = document.getElementById('shares-' + key);
@@ -612,9 +613,11 @@
                 const label = document.querySelector(`#etf-table label[for="etf-${item.key}"]`).textContent.trim();
                 return `${label} (${item.shares} shares)`;
             }).join('<br>');
+
             const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
 
             let resultHTML = '';
+
             if (accountType === 'roth') {
                 resultHTML = `
                     <strong>Roth IRA / Roth 401(k) Selected</strong><br>
@@ -630,6 +633,7 @@
                     Estimated future value (pre-tax): $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
                 `;
             } else {
+                // Taxable account
                 if (profit <= 0) {
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
@@ -668,7 +672,7 @@
             document.getElementById('result').classList.remove('hidden');
         }
 
-        // Recalculate instantly on any change
+        // Attach listeners to all interactive elements
         document.querySelectorAll('#etf-table input, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', estimateTax);
             el.addEventListener('change', estimateTax);
@@ -676,7 +680,7 @@
 
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
 
-        // Initial calculation on load
+        // Run once on page load
         window.addEventListener('load', estimateTax);
 
         // Theme switcher
