@@ -236,6 +236,17 @@
                 </div>
 
                 <div class="input-group">
+                    <label for="cost-basis">Cost Basis Method</label>
+                    <select id="cost-basis">
+                        <option value="" disabled selected>Select cost basis method...</option>
+                        <option value="fifo">FIFO (First In, First Out - Default)</option>
+                        <option value="lifo">LIFO (Last In, First Out)</option>
+                        <option value="hifo">HIFO (Highest In, First Out - Minimizes gains)</option>
+                        <option value="specific">Specific ID (Choose highest basis lots)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
                     <label for="federal-bracket">Federal Tax Bracket (% for Short-Term)</label>
                     <select id="federal-bracket">
                         <option value="" disabled selected>Select federal bracket...</option>
@@ -473,10 +484,11 @@
         function checkFormComplete() {
             const investment = document.getElementById('investment').value.trim() !== '';
             const etf = document.getElementById('etf-select').value !== '';
+            const costBasis = document.getElementById('cost-basis').value !== '';
             const federal = document.getElementById('federal-bracket').value !== '';
             const state = document.getElementById('state-select').value !== '';
             const niit = document.getElementById('niit').value !== '';
-            const complete = investment && etf && federal && state && niit;
+            const complete = investment && etf && costBasis && federal && state && niit;
             document.getElementById('calculate-btn').disabled = !complete;
         }
 
@@ -485,6 +497,7 @@
 
             const investment = parseFloat(document.getElementById('investment').value) || 0;
             const etfKey = document.getElementById('etf-select').value;
+            const costBasisMethod = document.getElementById('cost-basis').value;
             const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 0;
             const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
             const applyNiit = document.getElementById('niit').value === 'yes';
@@ -498,6 +511,7 @@
             if (profit <= 0) {
                 resultHTML = `
                     <strong>${document.querySelector('#etf-select option[value="' + etfKey + '"]').textContent.trim()}</strong><br>
+                    Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                     Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
                     No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
                 `;
@@ -511,9 +525,11 @@
 
                 const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`).textContent.trim();
                 const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+                const costBasisLabel = document.querySelector(`#cost-basis option[value="${costBasisMethod}"]`).textContent;
 
                 resultHTML = `
                     <strong>${etfName}</strong><br>
+                    Cost Basis Method: ${costBasisLabel}<br>
                     NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                     State: ${stateName}<br><br>
                     Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
@@ -530,7 +546,7 @@
         }
 
         // Event listeners
-        document.querySelectorAll('#investment, #etf-select, #federal-bracket, #state-select, #niit').forEach(el => {
+        document.querySelectorAll('#investment, #etf-select, #cost-basis, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', checkFormComplete);
             el.addEventListener('change', checkFormComplete);
         });
