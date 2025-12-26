@@ -318,6 +318,11 @@
                 </div>
 
                 <div class="input-group">
+                    <label for="wash-sale">Simulate Wash Sale Disallowance (demonstration, crypto exempt)</label>
+                    <input type="checkbox" id="wash-sale">
+                </div>
+
+                <div class="input-group">
                     <label for="account-type">Account Type</label>
                     <select id="account-type">
                         <option value="taxable">Taxable Brokerage Account</option>
@@ -410,21 +415,19 @@
                 <li>Losses offset gains; excess up to $3,000/year vs. ordinary income; carry forward indefinitely.</li>
                 <li>Cost basis methods: FIFO (default), LIFO, HIFO, or specific ID for optimization.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">2. Crypto-Specific Rules</h3>
             <ul class="space-y-2">
                 <li><strong>Spot Crypto ETFs</strong>: Treated as property. Gains/losses only on sale. No wash sale rule (can harvest losses and rebuy immediately).</li>
                 <li><strong>Futures-Based ETFs</strong>: Section 1256 — 60% long-term / 40% short-term treatment; marked-to-market annually.</li>
                 <li><strong>Leveraged/Thematic ETFs</strong>: Often use derivatives → potential K-1 forms, straddle rules, constructive sale rules, and mark-to-market treatment. May generate unrelated business taxable income (UBTI) in retirement accounts.</li>
                 <li>2025 Reporting: Brokers issue 1099-DA for gross proceeds (basis reporting starts 2026).</li>
+                <li><strong>2025 Crypto Tax Changes</strong>: Brokers must report gross proceeds for digital asset sales on Form 1099-DA. Cost basis reporting begins in 2026.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">3. Net Investment Income Tax (NIIT)</h3>
             <ul class="space-y-2">
                 <li>3.8% surtax on investment income (including ETF gains) if MAGI > $200k single / $250k married filing jointly.</li>
                 <li>Applies to both short and long-term gains. Not deductible for AMT.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">4. State Capital Gains Taxes (2025 Approximate Top Rates)</h3>
             <ul class="space-y-2">
                 <li><strong>0%</strong>: AK, FL, NV, NH, SD, TN, TX, WY (WA has 7% on gains >$250k)</li>
@@ -432,14 +435,12 @@
                 <li><strong>Moderate</strong>: MA (5.5% + 4% surtax >$1M), IL (4.95%), NC (4.75%), etc.</li>
                 <li>Most states tax gains as ordinary income; few conform to federal LTCG rates.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">5. Tax-Loss Harvesting & Offsetting</h3>
             <ul class="space-y-2">
                 <li>No wash sale rule for spot crypto ETFs — harvest losses freely.</li>
                 <li>Offset STCG first (higher rates), then LTCG.</li>
                 <li>Carry forward unlimited losses.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">6. Tax-Advantaged Accounts</h3>
             <ul class="space-y-2">
                 <li><strong>Roth IRA/401(k)</strong>: Tax-free growth and qualified withdrawals. No taxes on gains or dividends.</li>
@@ -447,7 +448,6 @@
                 <li><strong>Leveraged ETFs in IRAs</strong>: May generate UBTI (unrelated business taxable income), triggering taxes even inside retirement accounts.</li>
                 <li><strong>Opportunity Zones</strong>: Defer gains by rolling into OZ funds.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">7. Advanced Considerations</h3>
             <ul class="space-y-2">
                 <li><strong>Basis Step-Up</strong>: Heirs receive stepped-up basis at death.</li>
@@ -456,7 +456,6 @@
                 <li><strong>Foreign Investors</strong>: 30% withholding on dividends; FATCA reporting.</li>
                 <li><strong>AMT & Phase-Outs</strong>: High earners may lose LTCG benefits.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">8. Tax Optimization Strategies</h3>
             <ul class="space-y-2">
                 <li>Hold >1 year for LTCG rates.</li>
@@ -540,12 +539,10 @@
             </ul>
             <p class="mt-4 text-sm opacity-80">Note: While crypto itself has no wash sale rule, mixing with stocks/ETFs in the same account may trigger it. These tools help simulate and optimize.</p>
         </section>
-
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool and guide are for educational purposes only and do not constitute tax, financial, investment, or legal advice. Tax laws are highly complex and vary by individual circumstances, jurisdiction, income, filing status, and evolving IRS/state regulations. Calculations are simplified approximations and do not account for alternative minimum tax (AMT), phase-outs, deductions, credits, local taxes, Medicare surtax, wash sale rules (where applicable), straddle rules, constructive sales, foreign reporting (FBAR/8938), or specific ETF structures (e.g., futures K-1s). Real-time data from Yahoo Finance may be delayed or inaccurate. Crypto ETFs may have unique treatments. We are not tax professionals. Always consult a qualified CPA, tax attorney, or financial advisor for personalized advice. We disclaim all liability for any decisions or outcomes resulting from use of this tool. Data as of December 26, 2025; subject to change.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -558,7 +555,6 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </main>
-
     <script>
         const HISTORICAL_RETURNS = {
             'IBIT': 148.5,
@@ -579,7 +575,6 @@
             'STCE': 68.0,
             'MNRS': 52.0
         };
-
         // Show/hide shares input when checkbox changes
         document.querySelectorAll('#etf-table input[type="checkbox"]').forEach(cb => {
             cb.addEventListener('change', function() {
@@ -589,11 +584,9 @@
                 estimateTax();
             });
         });
-
         function estimateTax() {
             const selected = [];
             let totalShares = 0;
-
             document.querySelectorAll('#etf-table input[type="checkbox"]:checked').forEach(cb => {
                 const key = cb.value;
                 const sharesInput = document.getElementById('shares-' + key);
@@ -603,71 +596,60 @@
                     totalShares += shares;
                 }
             });
-
-            if (selected.length === 0 || totalShares === 0) {
-                document.getElementById('result-content').innerHTML = '<p>Please select at least one ETF and enter a positive number of shares.</p>';
+            if (selected.length === 0) {
+                document.getElementById('result-content').innerHTML = '<p>Please select and enter shares for at least one ETF.</p>';
                 document.getElementById('result').classList.remove('hidden');
                 return;
             }
-
-            // Weighted average return based on shares
             const weightedReturn = selected.reduce((sum, item) => sum + (item.returnPct * item.shares), 0) / totalShares;
-
-            // More accurate: use placeholder average cost basis of $100 per share (can be improved later)
-            const totalCostBasis = selected.reduce((sum, item) => sum + (item.shares * 100), 0);
-            const currentValue = totalCostBasis * (1 + weightedReturn / 100);
-            const realizedGain = currentValue - totalCostBasis;
-
+            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder cost basis
+            const finalValue = totalInvestment * (1 + weightedReturn / 100);
+            const profit = finalValue - totalInvestment;
             const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
             const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 22;
             const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
             const applyNiit = document.getElementById('niit').value === 'yes';
             const accountType = document.getElementById('account-type').value;
-
             const isLongTerm = holdingPeriod === 'long';
             const selectedNames = selected.map(item => {
                 const label = document.querySelector(`#etf-table label[for="etf-${item.key}"]`).textContent.trim();
-                return `${label} (${item.shares.toFixed(2)} shares)`;
+                return `${label} (${item.shares} shares)`;
             }).join('<br>');
-
             const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
-
             let resultHTML = '';
-
             if (accountType === 'roth') {
                 resultHTML = `
                     <strong>Roth IRA / Roth 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     <strong>All growth and qualified withdrawals are completely tax-free.</strong><br>
-                    Estimated portfolio value: $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
+                    Estimated portfolio value: $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
                 `;
             } else if (accountType === 'traditional') {
                 resultHTML = `
                     <strong>Traditional IRA / 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     Growth is tax-deferred. Taxes due on withdrawal at ordinary income rates.<br>
-                    Estimated future value (pre-tax): $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                    Estimated future value (pre-tax): $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
                 `;
             } else {
                 // Taxable account
-                if (realizedGain <= 0) {
+                if (profit <= 0) {
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
-                        Realized Gain/Loss: <span class="profit-negative">$${Math.abs(realizedGain).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)</span><br><br>
+                        Realized Gain/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)</span><br><br>
                         No capital gains tax due. You may deduct up to $3,000 of losses against ordinary income.
                     `;
                 } else {
                     const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
-                    const federalTax = realizedGain * (federalTaxRate / 100);
-                    const niitTax = applyNiit ? realizedGain * 0.038 : 0;
-                    const stateTax = realizedGain * (stateRate / 100);
+                    const federalTax = profit * (federalTaxRate / 100);
+                    const niitTax = applyNiit ? profit * 0.038 : 0;
+                    const stateTax = profit * (stateRate / 100);
                     const totalTax = federalTax + niitTax + stateTax;
-                    const afterTaxValue = currentValue - totalTax;
-
+                    const afterTaxValue = finalValue - totalTax;
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
@@ -675,7 +657,7 @@
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                         NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                         State: ${stateName}<br><br>
-                        Pre-Tax Gain: $${realizedGain.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)<br><br>
+                        Pre-Tax Gain: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)<br><br>
                         Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
@@ -684,22 +666,17 @@
                     `;
                 }
             }
-
             document.getElementById('result-content').innerHTML = resultHTML;
             document.getElementById('result').classList.remove('hidden');
         }
-
         // Attach listeners to all interactive elements
         document.querySelectorAll('#etf-table input, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', estimateTax);
             el.addEventListener('change', estimateTax);
         });
-
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
-
         // Run once on page load
         window.addEventListener('load', estimateTax);
-
         // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
