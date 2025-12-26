@@ -488,8 +488,10 @@
             const federal = document.getElementById('federal-bracket').value !== '';
             const state = document.getElementById('state-select').value !== '';
             const niit = document.getElementById('niit').value !== '';
+
             const complete = investment && etf && costBasis && federal && state && niit;
-            document.getElementById('calculate-btn').disabled = !complete;
+            const btn = document.getElementById('calculate-btn');
+            btn.disabled = !complete;
         }
 
         function estimateTax() {
@@ -509,8 +511,9 @@
 
             let resultHTML = '';
             if (profit <= 0) {
+                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`).textContent.trim();
                 resultHTML = `
-                    <strong>${document.querySelector('#etf-select option[value="' + etfKey + '"]').textContent.trim()}</strong><br>
+                    <strong>${etfName}</strong><br>
                     Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                     Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
                     No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
@@ -545,15 +548,19 @@
             document.getElementById('result').classList.remove('hidden');
         }
 
-        // Event listeners
+        // Attach event listeners to all relevant inputs/selects
         document.querySelectorAll('#investment, #etf-select, #cost-basis, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', checkFormComplete);
             el.addEventListener('change', checkFormComplete);
         });
 
+        // Click listener for calculate button
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
 
-        window.addEventListener('load', checkFormComplete);
+        // Initial check on load
+        window.addEventListener('load', () => {
+            checkFormComplete();
+        });
 
         // Theme switcher
         function applyTheme(t) {
