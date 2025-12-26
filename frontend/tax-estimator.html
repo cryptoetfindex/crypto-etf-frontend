@@ -204,7 +204,7 @@
                     <label for="mode-select">Calculation Mode</label>
                     <select id="mode-select">
                         <option value="" disabled selected>Select calculation mode...</option>
-                        <option value="historical">Historical Data (Fast - Recommended)</option>
+                        <option value="historical" selected>Historical Data (Fast - Recommended)</option>
                         <option value="live">Live API (Real-Time - May be slower)</option>
                     </select>
                 </div>
@@ -522,8 +522,10 @@
                 returnPct = HISTORICAL_RETURNS[etfKey]?.since-inception || 0;
                 performCalculation(returnPct);
             } else {
-                // Live mode - fetch prices sequentially to reduce parallel load
-                fetchLivePricesAndCalculate(etfKey, purchaseDateStr, sellDateStr).then(performCalculation);
+                // Live mode is intentionally slower - use Historical for instant results
+                alert("Live mode is currently disabled for performance. Please use Historical Data (Fast - Recommended) for instant results.");
+                document.getElementById('loading').classList.add('hidden');
+                return;
             }
 
             function performCalculation(returnPct) {
@@ -567,52 +569,6 @@
 
                 document.getElementById('result-content').innerHTML = resultHTML;
                 document.getElementById('result').classList.remove('hidden');
-            }
-
-            async function fetchLivePricesAndCalculate(etfKey, purchaseDateStr, sellDateStr) {
-                let symbols = Array.isArray(ETF_SYMBOLS[etfKey]) ? ETF_SYMBOLS[etfKey] : [ETF_SYMBOLS[etfKey]];
-                let purchasePrices = [];
-                let sellPrices = [];
-
-                for (let sym of symbols) {
-                    // Current price (sell date = today or specified)
-                    const current = await fetchPrice(sym);
-                    if (current) sellPrices.push(current);
-
-                    // Purchase price
-                    const pTimestamp = Math.floor(new Date(purchaseDateStr).getTime() / 1000);
-                    const pHistProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${pTimestamp}&period2=${pTimestamp + 86400}&interval=1d`);
-                    try {
-                        const presp = await fetch(pHistProxy);
-                        const pdata = await presp.json();
-                        const pparsed = JSON.parse(pdata.contents);
-                        const price = pparsed.chart.result[0]?.meta?.regularMarketPrice || current || 0;
-                        purchasePrices.push(price);
-                    } catch (e) {
-                        purchasePrices.push(current || 0);
-                    }
-
-                    // Small delay to be kind to API
-                    await new Promise(r => setTimeout(r, 200));
-                }
-
-                const avgPurchase = purchasePrices.reduce((a, b) => a + b, 0) / purchasePrices.length || 1;
-                const avgSell = sellPrices.reduce((a, b) => a + b, 0) / sellPrices.length || avgPurchase;
-                return ((avgSell - avgPurchase) / avgPurchase) * 100;
-            }
-        }
-
-        async function fetchPrice(symbol) {
-            const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?range=1d&interval=1d');
-            try {
-                const resp = await fetch(proxy);
-                if (!resp.ok) return null;
-                const data = await resp.json();
-                const parsed = JSON.parse(data.contents);
-                return parsed.chart.result[0]?.meta?.regularMarketPrice || null;
-            } catch (e) {
-                console.error('Fetch error:', e);
-                return null;
             }
         }
 
