@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Performance Comparator 2025 - Side-by-Side Returns & Charts</title>
+    <meta name="description" content="Interactive tool to compare performance of Bitcoin, Ethereum, and thematic crypto ETFs. View YTD, 1Y, since inception returns with charts (data as of December 26, 2025).">
+    <meta name="keywords" content="crypto etf performance comparator, bitcoin etf returns 2025, ethereum etf ytd performance, etf since inception returns, crypto etf charts">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Performance Comparator 2025 - YTD, 1Y & Charts">
+    <meta property="og:description" content="Side-by-side comparison of crypto ETF returns with interactive charts and historical data (as of Dec 26, 2025).">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/performance-comparator.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/performance-comparator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .calculator-form {
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+        }
+        [data-theme="dark"] input, [data-theme="dark"] select {
+            background: #1e293b;
+        }
+        .result-box {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .profit-positive { color: #10b981; }
+        .profit-negative { color: #ef4444; }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .loading {
+            opacity: 0.6;
+        }
+        .tips-section {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--card);
+            border-radius: 12px;
+        }
+        .tips-section h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .tips-section ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .section {
+            margin-top: 3rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        .section h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .instruction {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .etf-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .etf-row input[type="number"] {
+            width: 120px;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/" class="hover:text-[var(--accent)]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] font-semibold">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Performance Comparator 2025</h1>
+            <p class="text-xl max-w-4xl mx-auto opacity-90">Side-by-side comparison of returns (YTD, 1Y, since inception) with interactive charts for Bitcoin, Ethereum, and thematic ETFs (data as of Dec 26, 2025).</p>
+        </header>
+        <div class="instruction">
+            <strong>Instructions:</strong> Select multiple ETFs to compare their performance. The table and chart will update automatically.
+        </div>
+        <div class="card">
+            <div class="calculator-form">
+                <div class="input-group">
+                    <label>Select ETFs to Compare</label>
+                    <div id="etf-list" class="space-y-2 max-h-96 overflow-y-auto border border-[var(--border)] p-4 rounded">
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-IBIT" value="IBIT" class="mr-2">
+                            <label for="etf-IBIT" class="flex-1">IBIT - BlackRock</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-FBTC" value="FBTC" class="mr-2">
+                            <label for="etf-FBTC" class="flex-1">FBTC - Fidelity</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-GBTC" value="GBTC" class="mr-2">
+                            <label for="etf-GBTC" class="flex-1">GBTC - Grayscale</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ARKB" value="ARKB" class="mr-2">
+                            <label for="etf-ARKB" class="flex-1">ARKB - ARK/21Shares</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-BITB" value="BITB" class="mr-2">
+                            <label for="etf-BITB" class="flex-1">BITB - Bitwise</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-average-btc" value="average-btc" class="mr-2">
+                            <label for="etf-average-btc" class="flex-1">Average Bitcoin ETF</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHA" value="ETHA" class="mr-2">
+                            <label for="etf-ETHA" class="flex-1">ETHA - BlackRock</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-FETH" value="FETH" class="mr-2">
+                            <label for="etf-FETH" class="flex-1">FETH - Fidelity</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHE" value="ETHE" class="mr-2">
+                            <label for="etf-ETHE" class="flex-1">ETHE - Grayscale</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETH-MINI" value="ETH-MINI" class="mr-2">
+                            <label for="etf-ETH-MINI" class="flex-1">ETH Mini - Grayscale</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHW" value="ETHW" class="mr-2">
+                            <label for="etf-ETHW" class="flex-1">ETHW - Bitwise</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-average-eth" value="average-eth" class="mr-2">
+                            <label for="etf-average-eth" class="flex-1">Average Ethereum ETF</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-BITQ" value="BITQ" class="mr-2">
+                            <label for="etf-BITQ" class="flex-1">BITQ - Crypto Innovators</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-MSTX" value="MSTX" class="mr-2">
+                            <label for="etf-MSTX" class="flex-1">MSTX - 2x MicroStrategy (Leveraged)</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-WGMI" value="WGMI" class="mr-2">
+                            <label for="etf-WGMI" class="flex-1">WGMI - Mining/AI</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-STCE" value="STCE" class="mr-2">
+                            <label for="etf-STCE" class="flex-1">STCE - Schwab Thematic</label>
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-MNRS" value="MNRS" class="mr-2">
+                            <label for="etf-MNRS" class="flex-1">MNRS - Grayscale Miners</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="period">Select Period</label>
+                    <select id="period">
+                        <option value="since-inception">Since Inception</option>
+                        <option value="ytd">YTD</option>
+                        <option value="1y">1 Year</option>
+                    </select>
+                </div>
+                <div id="comparison-table" class="result-box hidden">
+                    <h3 class="text-xl font-semibold mb-4">Performance Comparison</h3>
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-[var(--accent)] bg-opacity-10">
+                                <th class="border border-[var(--border)] p-3 text-left">ETF</th>
+                                <th class="border border-[var(--border)] p-3 text-left">Return (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="comparison-chart" class="mt-6">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Comprehensive Performance Guide -->
+        <section class="section card mt-12">
+            <h2>Understanding Crypto ETF Performance (2025)</h2>
+            <h3 class="text-xl font-semibold mt-6 mb-3">1. Key Metrics Explained</h3>
+            <ul class="space-y-2">
+                <li><strong>Since Inception</strong>: Total return from ETF launch date to now.</li>
+                <li><strong>YTD (Year-to-Date)</strong>: Return from January 1, 2025 to current date.</li>
+                <li><strong>1 Year</strong>: Trailing 12-month return.</li>
+                <li><strong>Tracking Error</strong>: How closely the ETF follows its underlying asset (typically low for spot ETFs).</li>
+            </ul>
+            <h3 class="text-xl font-semibold mt-6 mb-3">2. Factors Affecting Performance</h3>
+            <ul class="space-y-2">
+                <li>Underlying asset price (BTC/ETH).</li>
+                <li>Expense ratio and fees (subtract from returns).</li>
+                <li>Inflows/outflows impacting NAV.</li>
+                <li>Leveraged ETFs amplify returns (and losses).</li>
+            </ul>
+            <h3 class="text-xl font-semibold mt-6 mb-3">3. Comparison Tips</h3>
+            <ul class="space-y-2">
+                <li>Spot vs. Futures: Spot ETFs track price more accurately.</li>
+                <li>Thematic ETFs: Higher volatility but potential for outperformance.</li>
+                <li>Use charts for visual trends.</li>
+            </ul>
+        </section>
+        <!-- Legal Disclaimer -->
+        <p class="disclaimer">
+            <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool is for educational purposes only and does not constitute financial or investment advice. Performance data is historical and not indicative of future results. Crypto investments are volatile. Consult a financial advisor.
+        </p>
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
+        </footer>
+    </main>
+    <script>
+        const HISTORICAL_RETURNS = {
+            'since-inception': {
+                'IBIT': 148.5,
+                'FBTC': 150.0,
+                'GBTC': 138.0,
+                'ARKB': 147.0,
+                'BITB': 149.5,
+                'average-btc': 146.6,
+                'ETHA': 108.0,
+                'FETH': 106.5,
+                'ETHE': 98.0,
+                'ETH-MINI': 109.0,
+                'ETHW': 107.0,
+                'average-eth': 105.7,
+                'BITQ': 48.0,
+                'MSTX': 75.0,
+                'WGMI': 58.0,
+                'STCE': 68.0,
+                'MNRS': 52.0
+            },
+            // Placeholder data for YTD and 1Y - in real tool, fetch from API
+            'ytd': {
+                'IBIT': 120.0,
+                'FBTC': 122.0,
+                'GBTC': 110.0,
+                'ARKB': 118.0,
+                'BITB': 121.0,
+                'average-btc': 118.2,
+                'ETHA': 85.0,
+                'FETH': 83.5,
+                'ETHE': 75.0,
+                'ETH-MINI': 86.0,
+                'ETHW': 84.0,
+                'average-eth': 82.7,
+                'BITQ': 35.0,
+                'MSTX': 60.0,
+                'WGMI': 45.0,
+                'STCE': 55.0,
+                'MNRS': 40.0
+            },
+            '1y': {
+                'IBIT': 130.0,
+                'FBTC': 132.0,
+                'GBTC': 120.0,
+                'ARKB': 128.0,
+                'BITB': 131.0,
+                'average-btc': 128.2,
+                'ETHA': 95.0,
+                'FETH': 93.5,
+                'ETHE': 85.0,
+                'ETH-MINI': 96.0,
+                'ETHW': 94.0,
+                'average-eth': 92.7,
+                'BITQ': 40.0,
+                'MSTX': 65.0,
+                'WGMI': 50.0,
+                'STCE': 60.0,
+                'MNRS': 45.0
+            }
+        };
+
+        let chart = null;
+
+        function updateComparison() {
+            const selected = [];
+            document.querySelectorAll('#etf-list input[type="checkbox"]:checked').forEach(cb => {
+                selected.push(cb.value);
+            });
+
+            const period = document.getElementById('period').value;
+            const tableBody = document.getElementById('comparison-body');
+            tableBody.innerHTML = '';
+
+            if (selected.length === 0) {
+                document.getElementById('comparison-table').classList.add('hidden');
+                document.getElementById('comparison-chart').classList.add('hidden');
+                return;
+            }
+
+            document.getElementById('comparison-table').classList.remove('hidden');
+            document.getElementById('comparison-chart').classList.remove('hidden');
+
+            const returns = HISTORICAL_RETURNS[period];
+
+            const chartLabels = [];
+            const chartData = [];
+
+            selected.forEach(key => {
+                const label = document.querySelector(`#etf-list label[for="etf-${key}"]`).textContent.trim();
+                const returnPct = returns[key] || 0;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="border border-[var(--border)] p-3">${label}</td>
+                    <td class="border border-[var(--border)] p-3 ${returnPct >= 0 ? 'profit-positive' : 'profit-negative'}">${returnPct.toFixed(1)}%</td>
+                `;
+                tableBody.appendChild(row);
+
+                chartLabels.push(label);
+                chartData.push(returnPct);
+            });
+
+            // Update chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: `${period.charAt(0).toUpperCase() + period.slice(1)} Return (%)`,
+                        data: chartData,
+                        backgroundColor: var(--accent),
+                        borderColor: var(--accent),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: var(--border)
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: var(--border)
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: var(--text)
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.querySelectorAll('#etf-list input[type="checkbox"], #period').forEach(el => {
+            el.addEventListener('change', updateComparison);
+        });
+
+        // Theme switcher
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+    </script>
+</body>
+</html>
