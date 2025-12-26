@@ -1,26 +1,162 @@
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
-    <!-- All head content same as before -->
-    <!-- ... -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF ROI Calculator 2025 - Real-Time Returns for Bitcoin & Ethereum ETFs</title>
+    <meta name="description" content="Free real-time ROI calculator for all major crypto ETFs (IBIT, ETHA, GBTC, etc.). Uses live prices from Yahoo Finance API for accurate hypothetical returns as of December 26, 2025.">
+    <meta name="keywords" content="crypto etf roi calculator real-time, bitcoin etf live returns, ethereum etf performance, etf investment calculator api, spot bitcoin etf roi yahoo finance">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF ROI Calculator 2025 - Real-Time">
+    <meta property="og:description" content="Calculate live hypothetical returns for Bitcoin, Ethereum, and thematic crypto ETFs using real-time prices (as of Dec 26, 2025).">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/roi-calculator.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/roi-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* All styles same */
+        :root {
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card: #1e293b;
+            --accent: #00ddeb;
+            --border: #334155;
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .calculator-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+        }
+        .result-box {
+            background: rgba(0, 221, 235, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .profit-positive { color: #10b981; }
+        .profit-negative { color: #ef4444; }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .loading {
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar same -->
+    <!-- Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/" class="hover:text-[var(--accent)]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] font-semibold">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </nav>
+
     <!-- Main Content -->
     <main class="container max-w-1400 mx-auto p-6">
-        <!-- Header same -->
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF ROI Calculator (Real-Time)</h1>
+            <p class="text-xl max-w-4xl mx-auto opacity-90">Calculate hypothetical returns using live ETF prices from Yahoo Finance API (as of December 26, 2025).</p>
+        </header>
+
         <div class="card">
             <div class="calculator-form">
-                <!-- Investment input -->
                 <div class="input-group">
                     <label for="investment">Investment Amount ($)</label>
                     <input type="number" id="investment" placeholder="e.g., 10000" value="10000" min="1">
                 </div>
 
-                <!-- ETF Select -->
                 <div class="input-group">
                     <label for="etf-select">Select ETF</label>
                     <select id="etf-select">
@@ -50,16 +186,13 @@
                     </select>
                 </div>
 
-                <!-- Purchase Date -->
                 <div class="input-group">
                     <label for="purchase-date">Purchase Date</label>
                     <input type="date" id="purchase-date" value="2025-01-01">
                 </div>
 
-                <!-- Calculate Button -->
                 <button onclick="calculateROI()" class="btn w-full text-lg py-3">Calculate Live ROI</button>
 
-                <!-- Result & Loading -->
                 <div id="result" class="result-box hidden">
                     <div id="result-content"></div>
                     <p class="text-sm opacity-70 mt-4">Live data from Yahoo Finance. Hypothetical; past performance not indicative of future results.</p>
@@ -68,11 +201,25 @@
             </div>
         </div>
 
-        <!-- Disclaimer & Footer -->
+        <p class="disclaimer">
+            Not financial advice. Real-time prices via Yahoo Finance API (delayed ~15 min). Crypto investments volatile; risk of loss. Data as of December 26, 2025; verify with issuers.
+        </p>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
+        </footer>
     </main>
 
     <script>
-        // ETF symbols (same as before)
+        // ETF Yahoo Finance symbols
         const ETF_SYMBOLS = {
             'IBIT': 'IBIT',
             'FBTC': 'FBTC',
@@ -93,7 +240,6 @@
             'MNRS': 'MNRS'
         };
 
-        // fetchPrice and calculateROI functions (same as before)
         async function fetchPrice(symbol) {
             const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?range=1d&interval=1d');
             try {
@@ -131,7 +277,7 @@
                 if (current) currentPrices.push(current);
 
                 const timestamp = Math.floor(new Date(purchaseDate).getTime() / 1000);
-                const histProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${timestamp}&period2=${timestamp}&interval=1d`);
+                const histProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${timestamp}&period2=${timestamp + 86400}&interval=1d`);
                 try {
                     const hresp = await fetch(histProxy);
                     const hdata = await hresp.json();
@@ -173,7 +319,7 @@
             document.getElementById('result').classList.remove('hidden');
         }
 
-        // Theme switcher (same)
+        // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
