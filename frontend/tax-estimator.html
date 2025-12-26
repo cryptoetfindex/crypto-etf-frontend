@@ -400,7 +400,7 @@
             </div>
         </div>
 
-        <!-- Full Comprehensive Tax Implications Guide -->
+        <!-- Comprehensive Tax Implications Guide -->
         <section class="section card mt-12">
             <h2>Comprehensive Tax Implications for Crypto ETF Investments (2025)</h2>
             <h3 class="text-xl font-semibold mt-6 mb-3">1. Basic Tax Structure</h3>
@@ -566,7 +566,7 @@
             'MNRS': 52.0
         };
 
-        // Show/hide shares input
+        // Show/hide shares input when checkbox changes
         document.querySelectorAll('#etf-table input[type="checkbox"]').forEach(cb => {
             cb.addEventListener('change', function() {
                 const sharesInput = document.getElementById('shares-' + this.value);
@@ -588,27 +588,32 @@
                     totalShares += shares;
                 }
             });
+
             if (selected.length === 0) {
                 document.getElementById('result-content').innerHTML = '<p>Please select and enter shares for at least one ETF.</p>';
                 document.getElementById('result').classList.remove('hidden');
                 return;
             }
+
             const weightedReturn = selected.reduce((sum, item) => sum + (item.returnPct * item.shares), 0) / totalShares;
-            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0);
+            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder cost basis
             const finalValue = totalInvestment * (1 + weightedReturn / 100);
             const profit = finalValue - totalInvestment;
+
             const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
             const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 22;
             const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
             const applyNiit = document.getElementById('niit').value === 'yes';
             const accountType = document.getElementById('account-type').value;
+
             const isLongTerm = holdingPeriod === 'long';
             const selectedNames = selected.map(item => {
                 const label = document.querySelector(`#etf-table label[for="etf-${item.key}"]`).textContent.trim();
                 return `${label} (${item.shares} shares)`;
             }).join('<br>');
             const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+
             let resultHTML = '';
             if (accountType === 'roth') {
                 resultHTML = `
@@ -641,6 +646,7 @@
                     const stateTax = profit * (stateRate / 100);
                     const totalTax = federalTax + niitTax + stateTax;
                     const afterTaxValue = finalValue - totalTax;
+
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
@@ -657,28 +663,23 @@
                     `;
                 }
             }
+
             document.getElementById('result-content').innerHTML = resultHTML;
             document.getElementById('result').classList.remove('hidden');
         }
 
-        document.querySelectorAll('#etf-table input[type="checkbox"]').forEach(cb => {
-            cb.addEventListener('change', function() {
-                const sharesInput = document.getElementById('shares-' + this.value);
-                sharesInput.classList.toggle('hidden', !this.checked);
-                if (!this.checked) sharesInput.value = '';
-                estimateTax();
-            });
-        });
-
-        document.querySelectorAll('#investment, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit, #etf-table input').forEach(el => {
+        // Recalculate instantly on any change
+        document.querySelectorAll('#etf-table input, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', estimateTax);
             el.addEventListener('change', estimateTax);
         });
 
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
 
+        // Initial calculation on load
         window.addEventListener('load', estimateTax);
 
+        // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
