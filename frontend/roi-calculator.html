@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF ROI Calculator 2025 - Returns for Bitcoin & Ethereum ETFs</title>
+    <meta name="description" content="Free ROI calculator for all major crypto ETFs (IBIT, ETHA, GBTC, etc.). Calculate hypothetical returns based on YTD, 1-year, and since-inception performance as of December 26, 2025.">
+    <meta name="keywords" content="crypto etf roi calculator, bitcoin etf returns 2025, ethereum etf performance, etf investment calculator, spot bitcoin etf roi, blackrock etha returns">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF ROI Calculator 2025">
+    <meta property="og:description" content="Calculate hypothetical returns for Bitcoin, Ethereum, and thematic crypto ETFs using historical performance data (as of Dec 26, 2025).">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/roi-calculator.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/roi-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card: #1e293b;
+            --accent: #00ddeb;
+            --border: #334155;
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .calculator-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+        }
+        .result-box {
+            background: rgba(0, 221, 235, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .profit-positive { color: #10b981; }
+        .profit-negative { color: #ef4444; }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/" class="hover:text-[var(--accent)]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] font-semibold">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="normal">Normal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF ROI Calculator</h1>
+            <p class="text-xl max-w-4xl mx-auto opacity-90">Calculate hypothetical returns for major Bitcoin, Ethereum, and thematic ETFs based on historical performance (as of December 26, 2025).</p>
+        </header>
+
+        <div class="card">
+            <div class="calculator-form">
+                <div class="input-group">
+                    <label for="investment">Investment Amount ($)</label>
+                    <input type="number" id="investment" placeholder="e.g., 10000" value="10000" min="1">
+                </div>
+
+                <div class="input-group">
+                    <label for="etf-select">Select ETF</label>
+                    <select id="etf-select">
+                        <optgroup label="Bitcoin Spot ETFs">
+                            <option value="IBIT">IBIT - BlackRock</option>
+                            <option value="FBTC">FBTC - Fidelity</option>
+                            <option value="GBTC">GBTC - Grayscale</option>
+                            <option value="ARKB">ARKB - ARK/21Shares</option>
+                            <option value="BITB">BITB - Bitwise</option>
+                            <option value="average-btc">Average Bitcoin ETF</option>
+                        </optgroup>
+                        <optgroup label="Ethereum Spot ETFs">
+                            <option value="ETHA">ETHA - BlackRock</option>
+                            <option value="FETH">FETH - Fidelity</option>
+                            <option value="ETHE">ETHE - Grayscale</option>
+                            <option value="ETH-MINI">ETH Mini - Grayscale</option>
+                            <option value="ETHW">ETHW - Bitwise</option>
+                            <option value="average-eth">Average Ethereum ETF</option>
+                        </optgroup>
+                        <optgroup label="Thematic & Leveraged">
+                            <option value="BITQ">BITQ - Bitwise Crypto Innovators</option>
+                            <option value="MSTX">MSTX - Defiance 2x MicroStrategy</option>
+                            <option value="WGMI">WGMI - CoinShares Mining/AI</option>
+                            <option value="STCE">STCE - Schwab Thematic</option>
+                            <option value="MNRS">MNRS - Grayscale Miners</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="timeframe">Time Period</label>
+                    <select id="timeframe">
+                        <option value="ytd">Year-to-Date (2025)</option>
+                        <option value="1y">1 Year (2025)</option>
+                        <option value="since-inception">Since Inception</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateROI()" class="btn w-full text-lg py-3">Calculate Returns</button>
+
+                <div id="result" class="result-box hidden">
+                    <div id="result-content"></div>
+                    <p class="text-sm opacity-70 mt-4">Hypothetical calculation based on historical price performance. Past results do not guarantee future returns.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="disclaimer">
+            Not financial advice. This calculator uses approximate historical total returns (including price appreciation) as of December 26, 2025. Crypto investments are highly volatile and carry risk of significant loss. Always verify current data with issuers.
+        </p>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
+        </footer>
+    </main>
+
+    <script>
+        // Historical approximate returns as of December 26, 2025 (price-based total return)
+        const RETURNS = {
+            // Bitcoin Spot ETFs
+            'IBIT': { ytd: -9.2, '1y': -9.2, 'since-inception': 148.5 },
+            'FBTC': { ytd: -8.9, '1y': -8.9, 'since-inception': 150.0 },
+            'GBTC': { ytd: -10.5, '1y': -10.5, 'since-inception': 138.0 },
+            'ARKB': { ytd: -9.4, '1y': -9.4, 'since-inception': 147.0 },
+            'BITB': { ytd: -9.0, '1y': -9.0, 'since-inception': 149.5 },
+            'average-btc': { ytd: -9.4, '1y': -9.4, 'since-inception': 146.6 },
+            // Ethereum Spot ETFs
+            'ETHA': { ytd: -13.0, '1y': -13.0, 'since-inception': 108.0 },
+            'FETH': { ytd: -13.3, '1y': -13.3, 'since-inception': 106.5 },
+            'ETHE': { ytd: -14.8, '1y': -14.8, 'since-inception': 98.0 },
+            'ETH-MINI': { ytd: -13.1, '1y': -13.1, 'since-inception': 109.0 },
+            'ETHW': { ytd: -13.5, '1y': -13.5, 'since-inception': 107.0 },
+            'average-eth': { ytd: -13.5, '1y': -13.5, 'since-inception': 105.7 },
+            // Thematic & Leveraged
+            'BITQ': { ytd: -16.0, '1y': -16.0, 'since-inception': 48.0 },
+            'MSTX': { ytd: -22.0, '1y': -22.0, 'since-inception': 75.0 },
+            'WGMI': { ytd: -19.0, '1y': -19.0, 'since-inception': 58.0 },
+            'STCE': { ytd: -15.0, '1y': -15.0, 'since-inception': 68.0 },
+            'MNRS': { ytd: -17.5, '1y': -17.5, 'since-inception': 52.0 }
+        };
+
+        function calculateROI() {
+            const investment = parseFloat(document.getElementById('investment').value) || 0;
+            const etf = document.getElementById('etf-select').value;
+            const timeframe = document.getElementById('timeframe').value;
+
+            if (investment <= 0) {
+                alert('Please enter a valid investment amount.');
+                return;
+            }
+
+            const returnPct = RETURNS[etf][timeframe] || 0;
+            const finalValue = investment * (1 + returnPct / 100);
+            const profit = finalValue - investment;
+            const profitClass = profit >= 0 ? 'profit-positive' : 'profit-negative';
+
+            const timeframeLabel = {
+                'ytd': 'Year-to-Date 2025',
+                '1y': '1 Year (2025)',
+                'since-inception': 'Since Inception'
+            }[timeframe];
+
+            document.getElementById('result-content').innerHTML = `
+                <strong>${document.querySelector(`#etf-select option[value="${etf}"]`).text}</strong><br>
+                Time Period: ${timeframeLabel}<br><br>
+                Initial Investment: $${investment.toLocaleString()}<br>
+                Final Value: $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                <span class="${profitClass}">Profit/Loss: $${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} (${returnPct >= 0 ? '+' : ''}${returnPct}%)</span>
+            `;
+
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        // Theme switcher
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'normal';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+    </script>
+</body>
+</html>
