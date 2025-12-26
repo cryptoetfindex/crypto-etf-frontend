@@ -203,76 +203,94 @@
                             <tr>
                                 <th>Select</th>
                                 <th>ETF</th>
+                                <th>Expense Ratio (%)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><input type="checkbox" id="etf-IBIT" value="IBIT"></td>
                                 <td>IBIT - BlackRock</td>
+                                <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-FBTC" value="FBTC"></td>
                                 <td>FBTC - Fidelity</td>
+                                <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-GBTC" value="GBTC"></td>
                                 <td>GBTC - Grayscale</td>
+                                <td>1.50</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ARKB" value="ARKB"></td>
                                 <td>ARKB - ARK/21Shares</td>
+                                <td>0.21</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-BITB" value="BITB"></td>
                                 <td>BITB - Bitwise</td>
+                                <td>0.20</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-average-btc" value="average-btc"></td>
                                 <td>Average Bitcoin ETF</td>
+                                <td>~0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHA" value="ETHA"></td>
                                 <td>ETHA - BlackRock</td>
+                                <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-FETH" value="FETH"></td>
                                 <td>FETH - Fidelity</td>
+                                <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHE" value="ETHE"></td>
                                 <td>ETHE - Grayscale</td>
+                                <td>2.50</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETH-MINI" value="ETH-MINI"></td>
                                 <td>ETH Mini - Grayscale</td>
+                                <td>0.15</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHW" value="ETHW"></td>
                                 <td>ETHW - Bitwise</td>
+                                <td>0.20</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-average-eth" value="average-eth"></td>
                                 <td>Average Ethereum ETF</td>
+                                <td>~0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-BITQ" value="BITQ"></td>
                                 <td>BITQ - Crypto Innovators</td>
+                                <td>0.85</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-MSTX" value="MSTX"></td>
                                 <td>MSTX - 2x MicroStrategy (Leveraged)</td>
+                                <td>1.05</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-WGMI" value="WGMI"></td>
                                 <td>WGMI - Mining/AI</td>
+                                <td>0.75</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-STCE" value="STCE"></td>
                                 <td>STCE - Schwab Thematic</td>
+                                <td>0.30</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-MNRS" value="MNRS"></td>
                                 <td>MNRS - Grayscale Miners</td>
+                                <td>0.65</td>
                             </tr>
                         </tbody>
                     </table>
@@ -294,6 +312,7 @@
                             <thead>
                                 <tr class="bg-[var(--accent)] bg-opacity-10">
                                     <th class="border border-[var(--border)] p-3 text-left">ETF</th>
+                                    <th class="border border-[var(--border)] p-3 text-left">Expense Ratio (%)</th>
                                     <th class="border border-[var(--border)] p-3 text-left">Return (%)</th>
                                 </tr>
                             </thead>
@@ -411,6 +430,26 @@
             }
         };
 
+        const EXPENSE_RATIOS = {
+            'IBIT': 0.25,
+            'FBTC': 0.25,
+            'GBTC': 1.50,
+            'ARKB': 0.21,
+            'BITB': 0.20,
+            'average-btc': 0.25,
+            'ETHA': 0.25,
+            'FETH': 0.25,
+            'ETHE': 2.50,
+            'ETH-MINI': 0.15,
+            'ETHW': 0.20,
+            'average-eth': 0.25,
+            'BITQ': 0.85,
+            'MSTX': 1.05,
+            'WGMI': 0.75,
+            'STCE': 0.30,
+            'MNRS': 0.65
+        };
+
         let chart = null;
 
         function updateComparison() {
@@ -438,10 +477,12 @@
             selectedKeys.forEach(key => {
                 const label = document.querySelector(`#etf-table label[for="etf-${key}"]`).textContent.trim();
                 const returnPct = returns[key] || 0;
+                const expense = EXPENSE_RATIOS[key] || 0;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="border border-[var(--border)] p-3">${label}</td>
+                    <td class="border border-[var(--border)] p-3">${expense.toFixed(2)}</td>
                     <td class="border border-[var(--border)] p-3 ${returnPct >= 0 ? 'profit-positive' : 'profit-negative'}"><strong>${returnPct.toFixed(1)}%</strong></td>
                 `;
                 tableBody.appendChild(row);
