@@ -138,6 +138,12 @@
             margin-bottom: 1rem;
             color: var(--accent);
         }
+        .section h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -175,14 +181,128 @@
 
         <div class="card">
             <div class="calculator-form">
-                <!-- Existing calculator inputs (same as before) -->
-                <!-- ... all inputs from previous version ... -->
+                <div class="input-group">
+                    <label for="mode-select">Calculation Mode</label>
+                    <select id="mode-select">
+                        <option value="historical">Historical Data (Fast)</option>
+                        <option value="live">Live API (Real-Time)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="investment">Investment Amount ($)</label>
+                    <input type="number" id="investment" placeholder="e.g., 10000" value="10000" min="1">
+                </div>
+
+                <div class="input-group">
+                    <label for="etf-select">Select ETF</label>
+                    <select id="etf-select">
+                        <optgroup label="Bitcoin Spot ETFs">
+                            <option value="IBIT">IBIT - BlackRock</option>
+                            <option value="FBTC">FBTC - Fidelity</option>
+                            <option value="GBTC">GBTC - Grayscale</option>
+                            <option value="ARKB">ARKB - ARK/21Shares</option>
+                            <option value="BITB">BITB - Bitwise</option>
+                            <option value="average-btc">Average Bitcoin ETF</option>
+                        </optgroup>
+                        <optgroup label="Ethereum Spot ETFs">
+                            <option value="ETHA">ETHA - BlackRock</option>
+                            <option value="FETH">FETH - Fidelity</option>
+                            <option value="ETHE">ETHE - Grayscale</option>
+                            <option value="ETH-MINI">ETH Mini - Grayscale</option>
+                            <option value="ETHW">ETHW - Bitwise</option>
+                            <option value="average-eth">Average Ethereum ETF</option>
+                        </optgroup>
+                        <optgroup label="Thematic & Leveraged">
+                            <option value="BITQ">BITQ - Bitwise Crypto Innovators</option>
+                            <option value="MSTX">MSTX - Defiance 2x MicroStrategy</option>
+                            <option value="WGMI">WGMI - CoinShares Mining/AI</option>
+                            <option value="STCE">STCE - Schwab Thematic</option>
+                            <option value="MNRS">MNRS - Grayscale Miners</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="purchase-date">Purchase Date</label>
+                    <input type="date" id="purchase-date" value="2025-01-01">
+                </div>
+
+                <div class="input-group">
+                    <label for="sell-date">Sell Date (or Today)</label>
+                    <input type="date" id="sell-date" value="">
+                </div>
+
+                <div class="input-group">
+                    <label for="federal-bracket">Federal Tax Bracket (% for Short-Term)</label>
+                    <select id="federal-bracket">
+                        <option value="0">0%</option>
+                        <option value="10">10%</option>
+                        <option value="12">12%</option>
+                        <option value="22">22%</option>
+                        <option value="24">24%</option>
+                        <option value="32">32%</option>
+                        <option value="35">35%</option>
+                        <option value="37">37%</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="state-select">State of Residence (Top Capital Gains Rate %)</label>
+                    <select id="state-select">
+                        <option value="0">No State Tax (e.g., AK, FL, NV, NH, SD, TN, TX, WA*, WY)</option>
+                        <option value="13.3">California (13.3%)</option>
+                        <option value="11">Hawaii (11%)</option>
+                        <option value="10.9">New York (10.9%)</option>
+                        <option value="10.75">New Jersey (10.75%)</option>
+                        <option value="9.9">Oregon (9.9%)</option>
+                        <option value="9.85">Minnesota (9.85%)</option>
+                        <option value="8.75">Vermont (8.75%)</option>
+                        <option value="8.53">Iowa (8.53%)</option>
+                        <option value="7.65">Wisconsin (7.65%)</option>
+                        <option value="7.15">Maine (7.15%)</option>
+                        <option value="6.99">Connecticut (6.99%)</option>
+                        <option value="6.9">Montana (6.9%)</option>
+                        <option value="6.84">Nebraska (6.84%)</option>
+                        <option value="6.5">West Virginia (6.5%)</option>
+                        <option value="5.99">Rhode Island (5.99%)</option>
+                        <option value="5.9">New Mexico (5.9%)</option>
+                        <option value="5.5">Massachusetts (5.5%)</option>
+                        <option value="5.25">Illinois (5.25%)</option>
+                        <option value="5">Ohio (5%)</option>
+                        <option value="4.95">Pennsylvania (4.95%)</option>
+                        <option value="4.85">Michigan (4.85%)</option>
+                        <option value="4.75">North Carolina (4.75%)</option>
+                        <option value="4.7">Colorado (4.7%)</option>
+                        <option value="4.65">Arizona (4.65%)</option>
+                        <option value="4.63">Utah (4.63%)</option>
+                        <option value="4.5">Indiana (4.5%)</option>
+                        <option value="4.4">Maryland (4.4%)</option>
+                        <option value="4.25">Alabama (4.25%)</option>
+                        <option value="4">Kentucky (4%)</option>
+                        <option value="3.99">Delaware (3.99%)</option>
+                        <option value="3.07">Missouri (3.07%)</option>
+                        <option value="3">Oklahoma (3%)</option>
+                        <option value="2.9">Georgia (2.9%)</option>
+                        <option value="2.5">Kansas (2.5%)</option>
+                        <option value="2">Arkansas (2%)</option>
+                        <option value="0">Other / No State Capital Gains Tax</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="niit">Apply Net Investment Income Tax (3.8%)? (For AGI > $200k single / $250k married)</label>
+                    <select id="niit">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
 
                 <button onclick="estimateTax()" class="btn w-full text-lg py-3">Estimate Taxes</button>
 
                 <div id="result" class="result-box hidden">
                     <div id="result-content"></div>
-                    <p class="text-sm opacity-70 mt-4">Simplified estimate. Does not include AMT, deductions, local taxes, or full thresholds. Consult a tax professional.</p>
+                    <p class="text-sm opacity-70 mt-4">Simplified estimate. Does not include NIIT thresholds, AMT, deductions, or local taxes. Consult a tax professional.</p>
                 </div>
                 <p id="loading" class="loading hidden text-center mt-4">Fetching prices...</p>
             </div>
@@ -276,9 +396,198 @@
         </footer>
     </main>
 
-    <!-- Script (same as previous with all logic) -->
+    <!-- Full Functional Script -->
     <script>
-        // ... full script from previous version ...
+        const ETF_SYMBOLS = {
+            'IBIT': 'IBIT',
+            'FBTC': 'FBTC',
+            'GBTC': 'GBTC',
+            'ARKB': 'ARKB',
+            'BITB': 'BITB',
+            'average-btc': ['IBIT', 'FBTC', 'GBTC', 'ARKB', 'BITB'],
+            'ETHA': 'ETHA',
+            'FETH': 'FETH',
+            'ETHE': 'ETHE',
+            'ETH-MINI': 'ETH',
+            'ETHW': 'ETHW',
+            'average-eth': ['ETHA', 'FETH', 'ETHE', 'ETH', 'ETHW'],
+            'BITQ': 'BITQ',
+            'MSTX': 'MSTX',
+            'WGMI': 'WGMI',
+            'STCE': 'STCE',
+            'MNRS': 'MNRS'
+        };
+
+        const ETF_INCEPTIONS = {
+            'IBIT': '2024-01-11',
+            'FBTC': '2024-01-11',
+            'GBTC': '2024-01-11',
+            'ARKB': '2024-01-11',
+            'BITB': '2024-01-11',
+            'average-btc': '2024-01-11',
+            'ETHA': '2024-07-23',
+            'FETH': '2024-07-23',
+            'ETHE': '2024-07-23',
+            'ETH-MINI': '2024-07-23',
+            'ETHW': '2024-07-23',
+            'average-eth': '2024-07-23',
+            'BITQ': '2021-05-11',
+            'MSTX': '2024-08-15',
+            'WGMI': '2022-02-01',
+            'STCE': '2022-07-12',
+            'MNRS': '2022-02-01'
+        };
+
+        const HISTORICAL_RETURNS = {
+            'IBIT': { ytd: -9.2, '1y': -9.2, 'since-inception': 148.5 },
+            'FBTC': { ytd: -8.9, '1y': -8.9, 'since-inception': 150.0 },
+            'GBTC': { ytd: -10.5, '1y': -10.5, 'since-inception': 138.0 },
+            'ARKB': { ytd: -9.4, '1y': -9.4, 'since-inception': 147.0 },
+            'BITB': { ytd: -9.0, '1y': -9.0, 'since-inception': 149.5 },
+            'average-btc': { ytd: -9.4, '1y': -9.4, 'since-inception': 146.6 },
+            'ETHA': { ytd: -13.0, '1y': -13.0, 'since-inception': 108.0 },
+            'FETH': { ytd: -13.3, '1y': -13.3, 'since-inception': 106.5 },
+            'ETHE': { ytd: -14.8, '1y': -14.8, 'since-inception': 98.0 },
+            'ETH-MINI': { ytd: -13.1, '1y': -13.1, 'since-inception': 109.0 },
+            'ETHW': { ytd: -13.5, '1y': -13.5, 'since-inception': 107.0 },
+            'average-eth': { ytd: -13.5, '1y': -13.5, 'since-inception': 105.7 },
+            'BITQ': { ytd: -16.0, '1y': -16.0, 'since-inception': 48.0 },
+            'MSTX': { ytd: -22.0, '1y': -22.0, 'since-inception': 75.0 },
+            'WGMI': { ytd: -19.0, '1y': -19.0, 'since-inception': 58.0 },
+            'STCE': { ytd: -15.0, '1y': -15.0, 'since-inception': 68.0 },
+            'MNRS': { ytd: -17.5, '1y': -17.5, 'since-inception': 52.0 }
+        };
+
+        function updatePurchaseDateMin() {
+            const etfKey = document.getElementById('etf-select').value;
+            const inception = ETF_INCEPTIONS[etfKey] || '2024-01-01';
+            document.getElementById('purchase-date').min = inception;
+            document.getElementById('purchase-date').value = inception;
+        }
+
+        async function fetchPrice(symbol) {
+            const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?range=1d&interval=1d');
+            try {
+                const resp = await fetch(proxy);
+                const data = await resp.json();
+                const parsed = JSON.parse(data.contents);
+                return parsed.chart.result[0].meta.regularMarketPrice;
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
+        }
+
+        async function estimateTax() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+
+            const investment = parseFloat(document.getElementById('investment').value) || 0;
+            const etfKey = document.getElementById('etf-select').value;
+            const purchaseDateStr = document.getElementById('purchase-date').value;
+            const sellDateStr = document.getElementById('sell-date').value || new Date().toISOString().split('T')[0];
+            const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 0;
+            const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
+            const applyNiit = document.getElementById('niit').value === 'yes';
+            const mode = document.getElementById('mode-select').value;
+
+            if (investment <= 0 || !purchaseDateStr || !sellDateStr) {
+                alert('Valid inputs required.');
+                document.getElementById('loading').classList.add('hidden');
+                return;
+            }
+
+            const purchaseDate = new Date(purchaseDateStr);
+            const sellDate = new Date(sellDateStr);
+            const holdingDays = (sellDate - purchaseDate) / (1000 * 60 * 60 * 24);
+            const isLongTerm = holdingDays > 365;
+
+            let returnPct;
+            if (mode === 'historical') {
+                returnPct = HISTORICAL_RETURNS[etfKey].since-inception || 0;
+            } else {
+                let symbols = Array.isArray(ETF_SYMBOLS[etfKey]) ? ETF_SYMBOLS[etfKey] : [ETF_SYMBOLS[etfKey]];
+                let purchasePrices = [];
+                let sellPrices = [];
+                for (let sym of symbols) {
+                    const current = await fetchPrice(sym);
+                    if (current) sellPrices.push(current);
+
+                    const pTimestamp = Math.floor(purchaseDate.getTime() / 1000);
+                    const pHistProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${pTimestamp}&period2=${pTimestamp + 86400}&interval=1d`);
+                    try {
+                        const presp = await fetch(pHistProxy);
+                        const pdata = await presp.json();
+                        const pparsed = JSON.parse(pdata.contents);
+                        purchasePrices.push(pparsed.chart.result[0]?.meta?.regularMarketPrice || current || 0);
+                    } catch {
+                        purchasePrices.push(current || 0);
+                    }
+                }
+                const avgPurchase = purchasePrices.reduce((a,b) => a + b, 0) / purchasePrices.length || 1;
+                const avgSell = sellPrices.reduce((a,b) => a + b, 0) / sellPrices.length;
+                returnPct = ((avgSell - avgPurchase) / avgPurchase) * 100;
+            }
+
+            document.getElementById('loading').classList.add('hidden');
+
+            const finalValue = investment * (1 + returnPct / 100);
+            const profit = finalValue - investment;
+
+            if (profit <= 0) {
+                document.getElementById('result-content').innerHTML = `
+                    <strong>${etfName}</strong><br>
+                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                    Profit/Loss: <span class="profit-negative">$${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
+                    No capital gains tax due to loss. May be deductible (up to $3,000/year). Consult tax pro.
+                `;
+                document.getElementById('result').classList.remove('hidden');
+                return;
+            }
+
+            const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
+            let federalTax = profit * (federalTaxRate / 100);
+
+            const niitRate = applyNiit ? 3.8 : 0;
+            const niitTax = profit * (niitRate / 100);
+
+            const stateTax = profit * (stateRate / 100);
+
+            const totalTax = federalTax + niitTax + stateTax;
+            const afterTaxValue = finalValue - totalTax;
+
+            const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`).textContent.trim();
+            const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+
+            document.getElementById('result-content').innerHTML = `
+                <strong>${etfName}</strong><br>
+                Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                State: ${stateName}<br>
+                NIIT: ${niitRate}% (applied if selected)<br><br>
+                Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
+                Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
+            `;
+
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        document.getElementById('etf-select').addEventListener('change', updatePurchaseDateMin);
+        window.addEventListener('load', updatePurchaseDateMin);
+
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'normal';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
     </script>
 </body>
 </html>
