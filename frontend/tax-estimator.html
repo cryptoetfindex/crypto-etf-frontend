@@ -204,8 +204,8 @@
                     <label for="mode-select">Calculation Mode</label>
                     <select id="mode-select">
                         <option value="" disabled selected>Select calculation mode...</option>
-                        <option value="historical">Historical Data (Fast)</option>
-                        <option value="live">Live API (Real-Time)</option>
+                        <option value="historical">Historical Data (Fast - Recommended)</option>
+                        <option value="live">Live API (Real-Time - May be slower)</option>
                     </select>
                 </div>
 
@@ -328,7 +328,7 @@
                     <div id="result-content"></div>
                     <p class="text-sm opacity-70 mt-4">Simplified estimate. Does not include NIIT thresholds, AMT, deductions, or local taxes. Consult a tax professional.</p>
                 </div>
-                <p id="loading" class="loading hidden text-center mt-4">Fetching prices...</p>
+                <p id="loading" class="loading hidden text-center mt-4">Calculating... (Live mode may take a few seconds)</p>
             </div>
         </div>
 
@@ -494,13 +494,11 @@
             const niit = document.getElementById('niit').value !== '';
 
             const complete = investment && mode && etf && purchase && federal && state && niit;
-            const btn = document.getElementById('calculate-btn');
-            btn.disabled = !complete;
+            document.getElementById('calculate-btn').disabled = !complete;
         }
 
-        async function estimateTax() {
-            const btn = document.getElementById('calculate-btn');
-            if (btn.disabled) return;
+        function estimateTax() {
+            if (document.getElementById('calculate-btn').disabled) return;
 
             document.getElementById('loading').classList.remove('hidden');
             document.getElementById('result').classList.add('hidden');
@@ -516,21 +514,73 @@
 
             const purchaseDate = new Date(purchaseDateStr);
             const sellDate = new Date(sellDateStr);
-            const holdingDays = (sellDate - purchaseDate) / (1000 * 60 * 60 * 24);
+            const holdingDays = Math.max(0, (sellDate - purchaseDate) / (1000 * 60 * 60 * 24));
             const isLongTerm = holdingDays > 365;
 
             let returnPct = 0;
             if (mode === 'historical') {
                 returnPct = HISTORICAL_RETURNS[etfKey]?.since-inception || 0;
+                performCalculation(returnPct);
             } else {
+                // Live mode - fetch prices sequentially to reduce parallel load
+                fetchLivePricesAndCalculate(etfKey, purchaseDateStr, sellDateStr).then(performCalculation);
+            }
+
+            function performCalculation(returnPct) {
+                document.getElementById('loading').classList.add('hidden');
+
+                const finalValue = investment * (1 + returnPct / 100);
+                const profit = finalValue - investment;
+
+                let resultHTML = '';
+                if (profit <= 0) {
+                    resultHTML = `
+                        <strong>${etfName || 'Selected ETF'}</strong><br>
+                        Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                        Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
+                        No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
+                    `;
+                } else {
+                    const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
+                    const federalTax = profit * (federalTaxRate / 100);
+                    const niitTax = applyNiit ? profit * 0.038 : 0;
+                    const stateTax = profit * (stateRate / 100);
+                    const totalTax = federalTax + niitTax + stateTax;
+                    const afterTaxValue = finalValue - totalTax;
+
+                    const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
+                    const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
+
+                    resultHTML = `
+                        <strong>${etfName}</strong><br>
+                        Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                        State: ${stateName}<br>
+                        NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br><br>
+                        Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
+                        Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                        NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                        State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                        <strong>Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong><br>
+                        <strong>After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+                    `;
+                }
+
+                document.getElementById('result-content').innerHTML = resultHTML;
+                document.getElementById('result').classList.remove('hidden');
+            }
+
+            async function fetchLivePricesAndCalculate(etfKey, purchaseDateStr, sellDateStr) {
                 let symbols = Array.isArray(ETF_SYMBOLS[etfKey]) ? ETF_SYMBOLS[etfKey] : [ETF_SYMBOLS[etfKey]];
                 let purchasePrices = [];
                 let sellPrices = [];
+
                 for (let sym of symbols) {
+                    // Current price (sell date = today or specified)
                     const current = await fetchPrice(sym);
                     if (current) sellPrices.push(current);
 
-                    const pTimestamp = Math.floor(purchaseDate.getTime() / 1000);
+                    // Purchase price
+                    const pTimestamp = Math.floor(new Date(purchaseDateStr).getTime() / 1000);
                     const pHistProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${pTimestamp}&period2=${pTimestamp + 86400}&interval=1d`);
                     try {
                         const presp = await fetch(pHistProxy);
@@ -541,76 +591,39 @@
                     } catch (e) {
                         purchasePrices.push(current || 0);
                     }
+
+                    // Small delay to be kind to API
+                    await new Promise(r => setTimeout(r, 200));
                 }
+
                 const avgPurchase = purchasePrices.reduce((a, b) => a + b, 0) / purchasePrices.length || 1;
                 const avgSell = sellPrices.reduce((a, b) => a + b, 0) / sellPrices.length || avgPurchase;
-                returnPct = ((avgSell - avgPurchase) / avgPurchase) * 100;
+                return ((avgSell - avgPurchase) / avgPurchase) * 100;
             }
-
-            document.getElementById('loading').classList.add('hidden');
-
-            const finalValue = investment * (1 + returnPct / 100);
-            const profit = finalValue - investment;
-
-            let resultHTML = '';
-            if (profit <= 0) {
-                resultHTML = `
-                    <strong>${etfName || 'Selected ETF'}</strong><br>
-                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
-                    Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
-                    No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
-                `;
-            } else {
-                const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
-                const federalTax = profit * (federalTaxRate / 100);
-                const niitTax = applyNiit ? profit * 0.038 : 0;
-                const stateTax = profit * (stateRate / 100);
-                const totalTax = federalTax + niitTax + stateTax;
-                const afterTaxValue = finalValue - totalTax;
-
-                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
-                const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
-
-                resultHTML = `
-                    <strong>${etfName}</strong><br>
-                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
-                    State: ${stateName}<br>
-                    NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br><br>
-                    Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
-                    Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                    NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                    State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                    <strong>Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong><br>
-                    <strong>After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
-                `;
-            }
-
-            document.getElementById('result-content').innerHTML = resultHTML;
-            document.getElementById('result').classList.remove('hidden');
         }
 
         async function fetchPrice(symbol) {
             const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?range=1d&interval=1d');
             try {
                 const resp = await fetch(proxy);
+                if (!resp.ok) return null;
                 const data = await resp.json();
                 const parsed = JSON.parse(data.contents);
-                return parsed.chart.result[0].meta.regularMarketPrice;
+                return parsed.chart.result[0]?.meta?.regularMarketPrice || null;
             } catch (e) {
                 console.error('Fetch error:', e);
                 return null;
             }
         }
 
-        // Attach event listeners
-        document.querySelectorAll('#investment, #mode-select, #etf-select, #purchase-date, #sell-date, #federal-bracket, #state-select, #niit').forEach(el => {
+        // Event listeners
+        document.querySelectorAll('input, select').forEach(el => {
             el.addEventListener('input', checkFormComplete);
             el.addEventListener('change', checkFormComplete);
         });
 
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
 
-        // Initial load
         window.addEventListener('load', () => {
             checkFormComplete();
             updatePurchaseDateMin();
