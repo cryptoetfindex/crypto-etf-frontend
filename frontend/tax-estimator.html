@@ -394,6 +394,63 @@
             </ul>
         </section>
 
+        <!-- New Section: Crypto ETF vs Direct Crypto Tax Comparison -->
+        <section class="section card">
+            <h2>Crypto ETF vs Direct Crypto Holding Tax Comparison (2025)</h2>
+            <table class="w-full border-collapse mt-6">
+                <thead>
+                    <tr class="bg-[var(--accent)] bg-opacity-10">
+                        <th class="border border-[var(--border)] p-3 text-left">Aspect</th>
+                        <th class="border border-[var(--border)] p-3 text-left">Spot Crypto ETF</th>
+                        <th class="border border-[var(--border)] p-3 text-left">Direct Crypto Holding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-[var(--border)] p-3 font-semibold">Tax Treatment</td>
+                        <td class="border border-[var(--border)] p-3">Property (same as direct crypto)</td>
+                        <td class="border border-[var(--border)] p-3">Property</td>
+                    </tr>
+                    <tr class="bg-[var(--card)] bg-opacity-50">
+                        <td class="border border-[var(--border)] p-3 font-semibold">Capital Gains on Sale</td>
+                        <td class="border border-[var(--border)] p-3">Yes - short/long-term rates apply</td>
+                        <td class="border border-[var(--border)] p-3">Yes - identical short/long-term rates</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-[var(--border)] p-3 font-semibold">Wash Sale Rule</td>
+                        <td class="border border-[var(--border)] p-3">No (can loss harvest freely)</td>
+                        <td class="border border-[var(--border)] p-3">No</td>
+                    </tr>
+                    <tr class="bg-[var(--card)] bg-opacity-50">
+                        <td class="border border-[var(--border)] p-3 font-semibold">Reporting</td>
+                        <td class="border border-[var(--border)] p-3">Broker 1099-B/DA (easier tracking)</td>
+                        <td class="border border-[var(--border)] p-3">Self-reported (more record-keeping)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-[var(--border)] p-3 font-semibold">Distributions</td>
+                        <td class="border border-[var(--border)] p-3">Minimal (in-kind mechanism)</td>
+                        <td class="border border-[var(--border)] p-3">N/A (no distributions)</td>
+                    </tr>
+                    <tr class="bg-[var(--card)] bg-opacity-50">
+                        <td class="border border-[var(--border)] p-3 font-semibold">Tax Efficiency</td>
+                        <td class="border border-[var(--border)] p-3">Very high (in-kind redemptions)</td>
+                        <td class="border border-[var(--border)] p-3">High (only taxed on sale)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-[var(--border)] p-3 font-semibold">Key Advantage</td>
+                        <td class="border border-[var(--border)] p-3">Easier brokerage integration & reporting</td>
+                        <td class="border border-[var(--border)] p-3">Direct ownership, no management fees</td>
+                    </tr>
+                    <tr class="bg-[var(--card)] bg-opacity-50">
+                        <td class="border border-[var(--border)] p-3 font-semibold">Key Disadvantage</td>
+                        <td class="border border-[var(--border)] p-3">Expense ratio fees reduce returns</td>
+                        <td class="border border-[var(--border)] p-3">More complex self-tracking & custody risk</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="mt-4 text-sm opacity-80">Summary: Spot crypto ETFs have **nearly identical tax treatment** to direct holdings, with the main difference being easier reporting and slightly higher fees.</p>
+        </section>
+
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool and guide are for educational purposes only and do not constitute tax, financial, investment, or legal advice. Tax laws are highly complex and vary by individual circumstances, jurisdiction, income, filing status, and evolving IRS/state regulations. Calculations are simplified approximations and do not account for alternative minimum tax (AMT), phase-outs, deductions, credits, local taxes, Medicare surtax, wash sale rules (where applicable), straddle rules, constructive sales, foreign reporting (FBAR/8938), or specific ETF structures (e.g., futures K-1s). Real-time data from Yahoo Finance may be delayed or inaccurate. Crypto ETFs may have unique treatments. We are not tax professionals. Always consult a qualified CPA, tax attorney, or financial advisor for personalized advice. We disclaim all liability for any decisions or outcomes resulting from use of this tool. Data as of December 26, 2025; subject to change.
@@ -492,7 +549,6 @@
             const federal = document.getElementById('federal-bracket').value !== '';
             const state = document.getElementById('state-select').value !== '';
             const niit = document.getElementById('niit').value !== '';
-
             const complete = investment && mode && etf && purchase && federal && state && niit;
             document.getElementById('calculate-btn').disabled = !complete;
         }
@@ -520,56 +576,52 @@
             let returnPct = 0;
             if (mode === 'historical') {
                 returnPct = HISTORICAL_RETURNS[etfKey]?.since-inception || 0;
-                performCalculation(returnPct);
             } else {
-                // Live mode is intentionally slower - use Historical for instant results
                 alert("Live mode is currently disabled for performance. Please use Historical Data (Fast - Recommended) for instant results.");
                 document.getElementById('loading').classList.add('hidden');
                 return;
             }
 
-            function performCalculation(returnPct) {
-                document.getElementById('loading').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
 
-                const finalValue = investment * (1 + returnPct / 100);
-                const profit = finalValue - investment;
+            const finalValue = investment * (1 + returnPct / 100);
+            const profit = finalValue - investment;
 
-                let resultHTML = '';
-                if (profit <= 0) {
-                    resultHTML = `
-                        <strong>${etfName || 'Selected ETF'}</strong><br>
-                        Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
-                        Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
-                        No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
-                    `;
-                } else {
-                    const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
-                    const federalTax = profit * (federalTaxRate / 100);
-                    const niitTax = applyNiit ? profit * 0.038 : 0;
-                    const stateTax = profit * (stateRate / 100);
-                    const totalTax = federalTax + niitTax + stateTax;
-                    const afterTaxValue = finalValue - totalTax;
+            let resultHTML = '';
+            if (profit <= 0) {
+                resultHTML = `
+                    <strong>${etfKey ? document.querySelector('#etf-select option[value="' + etfKey + '"]').textContent.trim() : 'Selected ETF'}</strong><br>
+                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                    Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
+                    No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
+                `;
+            } else {
+                const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
+                const federalTax = profit * (federalTaxRate / 100);
+                const niitTax = applyNiit ? profit * 0.038 : 0;
+                const stateTax = profit * (stateRate / 100);
+                const totalTax = federalTax + niitTax + stateTax;
+                const afterTaxValue = finalValue - totalTax;
 
-                    const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
-                    const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
+                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
+                const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
 
-                    resultHTML = `
-                        <strong>${etfName}</strong><br>
-                        Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
-                        State: ${stateName}<br>
-                        NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br><br>
-                        Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
-                        Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                        NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                        State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
-                        <strong>Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong><br>
-                        <strong>After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
-                    `;
-                }
-
-                document.getElementById('result-content').innerHTML = resultHTML;
-                document.getElementById('result').classList.remove('hidden');
+                resultHTML = `
+                    <strong>${etfName}</strong><br>
+                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                    State: ${stateName}<br>
+                    NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br><br>
+                    Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
+                    Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    <strong>Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong><br>
+                    <strong>After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+                `;
             }
+
+            document.getElementById('result-content').innerHTML = resultHTML;
+            document.getElementById('result').classList.remove('hidden');
         }
 
         // Event listeners
