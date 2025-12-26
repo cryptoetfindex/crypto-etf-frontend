@@ -539,10 +539,12 @@
             </ul>
             <p class="mt-4 text-sm opacity-80">Note: While crypto itself has no wash sale rule, mixing with stocks/ETFs in the same account may trigger it. These tools help simulate and optimize.</p>
         </section>
+
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool and guide are for educational purposes only and do not constitute tax, financial, investment, or legal advice. Tax laws are highly complex and vary by individual circumstances, jurisdiction, income, filing status, and evolving IRS/state regulations. Calculations are simplified approximations and do not account for alternative minimum tax (AMT), phase-outs, deductions, credits, local taxes, Medicare surtax, wash sale rules (where applicable), straddle rules, constructive sales, foreign reporting (FBAR/8938), or specific ETF structures (e.g., futures K-1s). Real-time data from Yahoo Finance may be delayed or inaccurate. Crypto ETFs may have unique treatments. We are not tax professionals. Always consult a qualified CPA, tax attorney, or financial advisor for personalized advice. We disclaim all liability for any decisions or outcomes resulting from use of this tool. Data as of December 26, 2025; subject to change.
         </p>
+
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -555,6 +557,7 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </main>
+
     <script>
         const HISTORICAL_RETURNS = {
             'IBIT': 148.5,
@@ -575,6 +578,7 @@
             'STCE': 68.0,
             'MNRS': 52.0
         };
+
         // Show/hide shares input when checkbox changes
         document.querySelectorAll('#etf-table input[type="checkbox"]').forEach(cb => {
             cb.addEventListener('change', function() {
@@ -584,9 +588,11 @@
                 estimateTax();
             });
         });
+
         function estimateTax() {
             const selected = [];
             let totalShares = 0;
+
             document.querySelectorAll('#etf-table input[type="checkbox"]:checked').forEach(cb => {
                 const key = cb.value;
                 const sharesInput = document.getElementById('shares-' + key);
@@ -596,68 +602,83 @@
                     totalShares += shares;
                 }
             });
+
             if (selected.length === 0) {
                 document.getElementById('result-content').innerHTML = '<p>Please select and enter shares for at least one ETF.</p>';
                 document.getElementById('result').classList.remove('hidden');
                 return;
             }
+
             const weightedReturn = selected.reduce((sum, item) => sum + (item.returnPct * item.shares), 0) / totalShares;
-            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder cost basis
-            const finalValue = totalInvestment * (1 + weightedReturn / 100);
-            const profit = finalValue - totalInvestment;
+            const totalCostBasis = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder $100/share cost basis
+            const currentValue = totalCostBasis * (1 + weightedReturn / 100);
+            const realizedGain = currentValue - totalCostBasis;
+
             const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
             const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 22;
             const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
             const applyNiit = document.getElementById('niit').value === 'yes';
             const accountType = document.getElementById('account-type').value;
+            const simulateWashSale = document.getElementById('wash-sale').checked;
+
             const isLongTerm = holdingPeriod === 'long';
             const selectedNames = selected.map(item => {
                 const label = document.querySelector(`#etf-table label[for="etf-${item.key}"]`).textContent.trim();
                 return `${label} (${item.shares} shares)`;
             }).join('<br>');
+
             const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+
             let resultHTML = '';
+
             if (accountType === 'roth') {
                 resultHTML = `
                     <strong>Roth IRA / Roth 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     <strong>All growth and qualified withdrawals are completely tax-free.</strong><br>
-                    Estimated portfolio value: $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
+                    Estimated portfolio value: $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
                 `;
             } else if (accountType === 'traditional') {
                 resultHTML = `
                     <strong>Traditional IRA / 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     Growth is tax-deferred. Taxes due on withdrawal at ordinary income rates.<br>
-                    Estimated future value (pre-tax): $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                    Estimated future value (pre-tax): $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
                 `;
             } else {
                 // Taxable account
-                if (profit <= 0) {
-                    resultHTML = `
+                let effectiveGain = realizedGain;
+                if (simulateWashSale && realizedGain < 0) {
+                    resultHTML += `<p><strong>Wash Sale Simulation (for demonstration only - not applicable to crypto):</strong> Disallowed loss: $${Math.abs(realizedGain).toLocaleString(undefined, {minimumFractionDigits: 2})} added to basis of repurchased shares.</p>`;
+                    effectiveGain = 0; // Simplified: full disallowance for demo
+                }
+
+                if (effectiveGain <= 0) {
+                    resultHTML += `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
-                        Realized Gain/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)</span><br><br>
+                        Realized Gain/Loss: <span class="profit-negative">$${Math.abs(effectiveGain).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)</span><br><br>
                         No capital gains tax due. You may deduct up to $3,000 of losses against ordinary income.
                     `;
                 } else {
                     const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
-                    const federalTax = profit * (federalTaxRate / 100);
-                    const niitTax = applyNiit ? profit * 0.038 : 0;
-                    const stateTax = profit * (stateRate / 100);
+                    const federalTax = effectiveGain * (federalTaxRate / 100);
+                    const niitTax = applyNiit ? effectiveGain * 0.038 : 0;
+                    const stateTax = effectiveGain * (stateRate / 100);
                     const totalTax = federalTax + niitTax + stateTax;
-                    const afterTaxValue = finalValue - totalTax;
-                    resultHTML = `
+                    const afterTaxValue = currentValue - totalTax;
+
+                    resultHTML += `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                         NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                         State: ${stateName}<br><br>
-                        Pre-Tax Gain: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)<br><br>
+                        Pre-Tax Gain: $${effectiveGain.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)<br><br>
                         Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
@@ -666,17 +687,22 @@
                     `;
                 }
             }
+
             document.getElementById('result-content').innerHTML = resultHTML;
             document.getElementById('result').classList.remove('hidden');
         }
-        // Attach listeners to all interactive elements
-        document.querySelectorAll('#etf-table input, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit').forEach(el => {
+
+        // Attach listeners to ALL inputs (including number fields and wash-sale checkbox)
+        document.querySelectorAll('#etf-table input, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit, #wash-sale').forEach(el => {
             el.addEventListener('input', estimateTax);
             el.addEventListener('change', estimateTax);
         });
+
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
-        // Run once on page load
+
+        // Run on load
         window.addEventListener('load', estimateTax);
+
         // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
