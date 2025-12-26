@@ -152,18 +152,15 @@
             text-align: center;
             font-weight: 600;
         }
-        .selected-etfs {
+        .etf-row {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
         }
-        .etf-tag {
-            background: var(--accent);
-            color: #000;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
+        .etf-row input[type="number"] {
+            width: 120px;
+            padding: 0.5rem;
         }
     </style>
 </head>
@@ -202,32 +199,94 @@
         <div class="card">
             <div class="calculator-form">
                 <div class="input-group">
-                    <label for="investment">Total Investment Amount ($)</label>
-                    <input type="number" id="investment" placeholder="Enter total amount across all ETFs (e.g., 50000)" min="1">
-                </div>
-
-                <div class="input-group">
-                    <label>Select ETFs (Click to select multiple)</label>
-                    <div id="etf-list" class="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-60 overflow-y-auto border border-[var(--border)] p-3 rounded">
-                        <label class="cursor-pointer"><input type="checkbox" value="IBIT" class="mr-2"> IBIT - BlackRock</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="FBTC" class="mr-2"> FBTC - Fidelity</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="GBTC" class="mr-2"> GBTC - Grayscale</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="ARKB" class="mr-2"> ARKB - ARK/21Shares</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="BITB" class="mr-2"> BITB - Bitwise</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="average-btc" class="mr-2"> Average Bitcoin ETF</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="ETHA" class="mr-2"> ETHA - BlackRock</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="FETH" class="mr-2"> FETH - Fidelity</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="ETHE" class="mr-2"> ETHE - Grayscale</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="ETH-MINI" class="mr-2"> ETH Mini - Grayscale</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="ETHW" class="mr-2"> ETHW - Bitwise</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="average-eth" class="mr-2"> Average Ethereum ETF</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="BITQ" class="mr-2"> BITQ - Crypto Innovators</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="MSTX" class="mr-2"> MSTX - 2x MicroStrategy</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="WGMI" class="mr-2"> WGMI - Mining/AI</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="STCE" class="mr-2"> STCE - Schwab Thematic</label>
-                        <label class="cursor-pointer"><input type="checkbox" value="MNRS" class="mr-2"> MNRS - Grayscale Miners</label>
+                    <label>Select ETFs & Enter Shares Held</label>
+                    <div id="etf-list" class="space-y-2 max-h-96 overflow-y-auto border border-[var(--border)] p-4 rounded">
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-IBIT" value="IBIT" class="mr-2">
+                            <label for="etf-IBIT" class="flex-1">IBIT - BlackRock</label>
+                            <input type="number" id="shares-IBIT" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-FBTC" value="FBTC" class="mr-2">
+                            <label for="etf-FBTC" class="flex-1">FBTC - Fidelity</label>
+                            <input type="number" id="shares-FBTC" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-GBTC" value="GBTC" class="mr-2">
+                            <label for="etf-GBTC" class="flex-1">GBTC - Grayscale</label>
+                            <input type="number" id="shares-GBTC" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ARKB" value="ARKB" class="mr-2">
+                            <label for="etf-ARKB" class="flex-1">ARKB - ARK/21Shares</label>
+                            <input type="number" id="shares-ARKB" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-BITB" value="BITB" class="mr-2">
+                            <label for="etf-BITB" class="flex-1">BITB - Bitwise</label>
+                            <input type="number" id="shares-BITB" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-average-btc" value="average-btc" class="mr-2">
+                            <label for="etf-average-btc" class="flex-1">Average Bitcoin ETF</label>
+                            <input type="number" id="shares-average-btc" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHA" value="ETHA" class="mr-2">
+                            <label for="etf-ETHA" class="flex-1">ETHA - BlackRock</label>
+                            <input type="number" id="shares-ETHA" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-FETH" value="FETH" class="mr-2">
+                            <label for="etf-FETH" class="flex-1">FETH - Fidelity</label>
+                            <input type="number" id="shares-FETH" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHE" value="ETHE" class="mr-2">
+                            <label for="etf-ETHE" class="flex-1">ETHE - Grayscale</label>
+                            <input type="number" id="shares-ETHE" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETH-MINI" value="ETH-MINI" class="mr-2">
+                            <label for="etf-ETH-MINI" class="flex-1">ETH Mini - Grayscale</label>
+                            <input type="number" id="shares-ETH-MINI" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-ETHW" value="ETHW" class="mr-2">
+                            <label for="etf-ETHW" class="flex-1">ETHW - Bitwise</label>
+                            <input type="number" id="shares-ETHW" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-average-eth" value="average-eth" class="mr-2">
+                            <label for="etf-average-eth" class="flex-1">Average Ethereum ETF</label>
+                            <input type="number" id="shares-average-eth" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-BITQ" value="BITQ" class="mr-2">
+                            <label for="etf-BITQ" class="flex-1">BITQ - Crypto Innovators</label>
+                            <input type="number" id="shares-BITQ" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-MSTX" value="MSTX" class="mr-2">
+                            <label for="etf-MSTX" class="flex-1">MSTX - 2x MicroStrategy (Leveraged)</label>
+                            <input type="number" id="shares-MSTX" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-WGMI" value="WGMI" class="mr-2">
+                            <label for="etf-WGMI" class="flex-1">WGMI - Mining/AI</label>
+                            <input type="number" id="shares-WGMI" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-STCE" value="STCE" class="mr-2">
+                            <label for="etf-STCE" class="flex-1">STCE - Schwab Thematic</label>
+                            <input type="number" id="shares-STCE" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
+                        <div class="etf-row">
+                            <input type="checkbox" id="etf-MNRS" value="MNRS" class="mr-2">
+                            <label for="etf-MNRS" class="flex-1">MNRS - Grayscale Miners</label>
+                            <input type="number" id="shares-MNRS" placeholder="Shares (e.g., 12.34)" step="0.01" min="0" class="hidden">
+                        </div>
                     </div>
-                    <div id="selected-etfs-display" class="selected-etfs mt-2"></div>
                 </div>
 
                 <div class="input-group">
@@ -346,7 +405,7 @@
             <ul class="space-y-2">
                 <li><strong>Spot Crypto ETFs</strong>: Treated as property. Gains/losses only on sale. No wash sale rule (can harvest losses and rebuy immediately).</li>
                 <li><strong>Futures-Based ETFs</strong>: Section 1256 — 60% long-term / 40% short-term treatment; marked-to-market annually.</li>
-                <li><strong>Leveraged/Thematic</strong>: May trigger K-1s, straddle rules, or constructive sales if using derivatives.</li>
+                <li><strong>Leveraged/Thematic ETFs</strong>: Often use derivatives → potential K-1 forms, straddle rules, constructive sale rules, and mark-to-market treatment. May generate unrelated business taxable income (UBTI) in retirement accounts.</li>
                 <li>2025 Reporting: Brokers issue 1099-DA for gross proceeds (basis reporting starts 2026).</li>
             </ul>
 
@@ -375,6 +434,7 @@
             <ul class="space-y-2">
                 <li><strong>Roth IRA/401(k)</strong>: Tax-free growth and qualified withdrawals. No taxes on gains or dividends.</li>
                 <li><strong>Traditional IRA/401(k)</strong>: Tax-deferred growth. Taxes paid on withdrawal (ordinary income rates).</li>
+                <li><strong>Leveraged ETFs in IRAs</strong>: May generate UBTI (unrelated business taxable income), triggering taxes even inside retirement accounts.</li>
                 <li><strong>Opportunity Zones</strong>: Defer gains by rolling into OZ funds.</li>
             </ul>
 
@@ -496,25 +556,43 @@
             'MNRS': 52.0
         };
 
-        function updateSelectedETFs() {
-            const checkboxes = document.querySelectorAll('#etf-list input[type="checkbox"]:checked');
-            const display = document.getElementById('selected-etfs-display');
-            display.innerHTML = '';
-            checkboxes.forEach(cb => {
-                const tag = document.createElement('span');
-                tag.className = 'etf-tag';
-                tag.textContent = cb.parentNode.textContent.trim();
-                display.appendChild(tag);
+        // Show/hide shares input when checkbox is toggled
+        document.querySelectorAll('#etf-list input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const sharesInput = this.parentElement.querySelector('input[type="number"]');
+                sharesInput.classList.toggle('hidden', !this.checked);
+                if (!this.checked) sharesInput.value = '';
+                estimateTax();
             });
-            if (checkboxes.length === 0) {
-                display.innerHTML = '<span class="text-gray-500">No ETFs selected</span>';
-            }
-        }
+        });
 
         function estimateTax() {
-            const investment = parseFloat(document.getElementById('investment').value) || 0;
-            const checkboxes = document.querySelectorAll('#etf-list input[type="checkbox"]:checked');
-            const selectedKeys = Array.from(checkboxes).map(cb => cb.value);
+            const selected = [];
+            let totalShares = 0;
+
+            document.querySelectorAll('#etf-list input[type="checkbox"]:checked').forEach(cb => {
+                const key = cb.value;
+                const sharesInput = document.getElementById('shares-' + key);
+                const shares = parseFloat(sharesInput.value) || 0;
+                if (shares > 0) {
+                    selected.push({ key, shares, returnPct: HISTORICAL_RETURNS[key] || 100 });
+                    totalShares += shares;
+                }
+            });
+
+            if (selected.length === 0) {
+                document.getElementById('result-content').innerHTML = '<p>Please select and enter shares for at least one ETF.</p>';
+                document.getElementById('result').classList.remove('hidden');
+                return;
+            }
+
+            // Weighted average return based on shares
+            const weightedReturn = selected.reduce((sum, item) => sum + (item.returnPct * item.shares), 0) / totalShares;
+
+            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder cost basis of $100/share for simplicity
+            const finalValue = totalInvestment * (1 + weightedReturn / 100);
+            const profit = finalValue - totalInvestment;
+
             const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
             const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 22;
@@ -522,36 +600,24 @@
             const applyNiit = document.getElementById('niit').value === 'yes';
             const accountType = document.getElementById('account-type').value;
 
-            if (selectedKeys.length === 0) {
-                document.getElementById('result-content').innerHTML = '<p>Please select at least one ETF.</p>';
-                document.getElementById('result').classList.remove('hidden');
-                return;
-            }
-
-            // Average return across selected ETFs
-            const avgReturnPct = selectedKeys.reduce((sum, key) => sum + (HISTORICAL_RETURNS[key] || 100), 0) / selectedKeys.length;
-
-            const finalValue = investment * (1 + avgReturnPct / 100);
-            const profit = finalValue - investment;
-
             const isLongTerm = holdingPeriod === 'long';
-            const selectedNames = selectedKeys.map(key => document.querySelector(`#etf-list input[value="${key}"]`).parentNode.textContent.trim()).join(', ');
-            const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
-            const costBasisLabel = document.querySelector(`#cost-basis option[value="${costBasisMethod}"]`).textContent;
+            const selectedNames = selected.map(item => {
+                const label = document.querySelector(`#etf-list label[for="etf-${item.key}"]`).textContent.trim();
+                return `${label} (${item.shares} shares)`;
+            }).join('<br>');
 
             let resultHTML = '';
-
             if (accountType === 'roth') {
                 resultHTML = `
                     <strong>Roth IRA / Roth 401(k) Selected</strong><br>
-                    ETFs: ${selectedNames || 'None'}<br><br>
+                    Holdings:<br>${selectedNames}<br><br>
                     <strong>All growth and qualified withdrawals are completely tax-free.</strong><br>
                     Estimated after-tax value: $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
                 `;
             } else if (accountType === 'traditional') {
                 resultHTML = `
                     <strong>Traditional IRA / 401(k) Selected</strong><br>
-                    ETFs: ${selectedNames || 'None'}<br><br>
+                    Holdings:<br>${selectedNames}<br><br>
                     Growth is tax-deferred. Taxes due on withdrawal at ordinary income rates.<br>
                     Estimated future value (pre-tax): $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
                 `;
@@ -559,10 +625,11 @@
                 // Taxable account
                 if (profit <= 0) {
                     resultHTML = `
-                        <strong>Taxable Account - ETFs: ${selectedNames}</strong><br>
+                        <strong>Taxable Account</strong><br>
+                        Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
-                        Cost Basis Method: ${costBasisLabel}<br>
-                        Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${avgReturnPct.toFixed(2)}%)</span><br><br>
+                        Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
+                        Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}%)</span><br><br>
                         No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
                     `;
                 } else {
@@ -573,13 +640,16 @@
                     const totalTax = federalTax + niitTax + stateTax;
                     const afterTaxValue = finalValue - totalTax;
 
+                    const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+
                     resultHTML = `
-                        <strong>Taxable Account - ETFs: ${selectedNames}</strong><br>
+                        <strong>Taxable Account</strong><br>
+                        Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
-                        Cost Basis Method: ${costBasisLabel}<br>
+                        Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                         NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                         State: ${stateName}<br><br>
-                        Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${avgReturnPct.toFixed(2)}%)<br><br>
+                        Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}%)<br><br>
                         Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
@@ -593,25 +663,25 @@
             document.getElementById('result').classList.remove('hidden');
         }
 
-        // Update selected ETFs display and calculate instantly
+        // Show shares input when checkbox checked
         document.querySelectorAll('#etf-list input[type="checkbox"]').forEach(cb => {
-            cb.addEventListener('change', () => {
-                updateSelectedETFs();
+            cb.addEventListener('change', function() {
+                const sharesInput = document.getElementById('shares-' + this.value);
+                sharesInput.classList.toggle('hidden', !this.checked);
+                if (!this.checked) sharesInput.value = '';
                 estimateTax();
             });
         });
 
-        document.querySelectorAll('#investment, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit').forEach(el => {
+        // Recalculate on any change
+        document.querySelectorAll('#investment, #holding-period, #cost-basis, #account-type, #federal-bracket, #state-select, #niit, #etf-list input').forEach(el => {
             el.addEventListener('input', estimateTax);
             el.addEventListener('change', estimateTax);
         });
 
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
 
-        window.addEventListener('load', () => {
-            updateSelectedETFs();
-            estimateTax();
-        });
+        window.addEventListener('load', estimateTax);
 
         // Theme switcher
         function applyTheme(t) {
