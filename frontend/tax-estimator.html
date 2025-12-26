@@ -75,11 +75,6 @@
             transition: all 0.2s;
         }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
         .calculator-form {
             max-width: 700px;
             margin: 2rem auto;
@@ -119,9 +114,6 @@
             opacity: 0.8;
             text-align: center;
             margin: 2rem 0;
-        }
-        .loading {
-            opacity: 0.6;
         }
         .tips-section {
             margin-top: 3rem;
@@ -194,10 +186,6 @@
             <p class="text-xl max-w-4xl mx-auto opacity-90">Comprehensive calculator for federal, state, NIIT, short/long-term gains, and tax optimization for Bitcoin, Ethereum, and thematic ETFs (real-time data as of December 26, 2025).</p>
         </header>
 
-        <div class="instruction">
-            <strong>Instructions:</strong> Please make a selection in <strong>every dropdown</strong> and fill in the investment amount before clicking "Estimate Taxes". The button will enable automatically when all fields are complete.
-        </div>
-
         <div class="card">
             <div class="calculator-form">
                 <div class="input-group">
@@ -208,7 +196,7 @@
                 <div class="input-group">
                     <label for="etf-select">Select ETF</label>
                     <select id="etf-select">
-                        <option value="" disabled selected>Select an ETF...</option>
+                        <option value="" selected>Select an ETF (optional)</option>
                         <optgroup label="Bitcoin Spot ETFs">
                             <option value="IBIT">IBIT - BlackRock</option>
                             <option value="FBTC">FBTC - Fidelity</option>
@@ -236,10 +224,17 @@
                 </div>
 
                 <div class="input-group">
+                    <label for="holding-period">Holding Period</label>
+                    <select id="holding-period">
+                        <option value="short" selected>Short-Term (≤ 1 year)</option>
+                        <option value="long">Long-Term (> 1 year)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
                     <label for="cost-basis">Cost Basis Method</label>
                     <select id="cost-basis">
-                        <option value="" disabled selected>Select cost basis method...</option>
-                        <option value="fifo">FIFO (First In, First Out - Default)</option>
+                        <option value="fifo" selected>FIFO (First In, First Out - Default)</option>
                         <option value="lifo">LIFO (Last In, First Out)</option>
                         <option value="hifo">HIFO (Highest In, First Out - Minimizes gains)</option>
                         <option value="specific">Specific ID (Choose highest basis lots)</option>
@@ -249,11 +244,10 @@
                 <div class="input-group">
                     <label for="federal-bracket">Federal Tax Bracket (% for Short-Term)</label>
                     <select id="federal-bracket">
-                        <option value="" disabled selected>Select federal bracket...</option>
+                        <option value="22" selected>22% (Typical)</option>
                         <option value="0">0%</option>
                         <option value="10">10%</option>
                         <option value="12">12%</option>
-                        <option value="22">22%</option>
                         <option value="24">24%</option>
                         <option value="32">32%</option>
                         <option value="35">35%</option>
@@ -264,8 +258,7 @@
                 <div class="input-group">
                     <label for="state-select">State of Residence (Top Capital Gains Rate %)</label>
                     <select id="state-select">
-                        <option value="" disabled selected>Select state or N/A...</option>
-                        <option value="0">No State Tax (e.g., AK, FL, NV, NH, SD, TN, TX, WA*, WY)</option>
+                        <option value="0" selected>No State Tax (e.g., FL, TX, etc.)</option>
                         <option value="13.3">California (13.3%)</option>
                         <option value="11">Hawaii (11%)</option>
                         <option value="10.9">New York (10.9%)</option>
@@ -308,13 +301,12 @@
                 <div class="input-group">
                     <label for="niit">Apply Net Investment Income Tax (3.8%)?</label>
                     <select id="niit">
-                        <option value="" disabled selected>Select NIIT option...</option>
-                        <option value="no">No (AGI below threshold)</option>
+                        <option value="no" selected>No (AGI below threshold)</option>
                         <option value="yes">Yes (AGI > $200k single / $250k married)</option>
                     </select>
                 </div>
 
-                <button id="calculate-btn" class="btn w-full text-lg py-3" disabled>Estimate Taxes</button>
+                <button id="calculate-btn" class="btn w-full text-lg py-3">Estimate Taxes</button>
 
                 <div id="result" class="result-box hidden">
                     <div id="result-content"></div>
@@ -481,57 +473,46 @@
             'MNRS': { since-inception: 52.0 }
         };
 
-        function checkFormComplete() {
-            const investment = document.getElementById('investment').value.trim() !== '';
-            const etf = document.getElementById('etf-select').value !== '';
-            const costBasis = document.getElementById('cost-basis').value !== '';
-            const federal = document.getElementById('federal-bracket').value !== '';
-            const state = document.getElementById('state-select').value !== '';
-            const niit = document.getElementById('niit').value !== '';
-
-            const complete = investment && etf && costBasis && federal && state && niit;
-            const btn = document.getElementById('calculate-btn');
-            btn.disabled = !complete;
-        }
-
         function estimateTax() {
-            if (document.getElementById('calculate-btn').disabled) return;
-
             const investment = parseFloat(document.getElementById('investment').value) || 0;
-            const etfKey = document.getElementById('etf-select').value;
+            const etfKey = document.getElementById('etf-select').value || 'average-btc'; // default to average if none selected
+            const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
-            const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 0;
+            const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 22;
             const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
             const applyNiit = document.getElementById('niit').value === 'yes';
 
-            const returnPct = HISTORICAL_RETURNS[etfKey]?.['since-inception'] || 0;
+            const returnPct = HISTORICAL_RETURNS[etfKey]?.['since-inception'] || 100; // fallback
 
             const finalValue = investment * (1 + returnPct / 100);
             const profit = finalValue - investment;
 
             let resultHTML = '';
             if (profit <= 0) {
-                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`).textContent.trim();
+                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
                 resultHTML = `
                     <strong>${etfName}</strong><br>
+                    Holding Period: ${holdingPeriod === 'short' ? 'Short-Term' : 'Long-Term'}<br>
                     Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                     Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
                     No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
                 `;
             } else {
-                const federalTaxRate = Math.min(federalRate, 20);
+                const isLongTerm = holdingPeriod === 'long';
+                const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
                 const federalTax = profit * (federalTaxRate / 100);
                 const niitTax = applyNiit ? profit * 0.038 : 0;
                 const stateTax = profit * (stateRate / 100);
                 const totalTax = federalTax + niitTax + stateTax;
                 const afterTaxValue = finalValue - totalTax;
 
-                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`).textContent.trim();
-                const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
+                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
+                const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
                 const costBasisLabel = document.querySelector(`#cost-basis option[value="${costBasisMethod}"]`).textContent;
 
                 resultHTML = `
                     <strong>${etfName}</strong><br>
+                    Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
                     Cost Basis Method: ${costBasisLabel}<br>
                     NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                     State: ${stateName}<br><br>
@@ -548,19 +529,7 @@
             document.getElementById('result').classList.remove('hidden');
         }
 
-        // Attach event listeners to all relevant inputs/selects
-        document.querySelectorAll('#investment, #etf-select, #cost-basis, #federal-bracket, #state-select, #niit').forEach(el => {
-            el.addEventListener('input', checkFormComplete);
-            el.addEventListener('change', checkFormComplete);
-        });
-
-        // Click listener for calculate button
         document.getElementById('calculate-btn').addEventListener('click', estimateTax);
-
-        // Initial check on load
-        window.addEventListener('load', () => {
-            checkFormComplete();
-        });
 
         // Theme switcher
         function applyTheme(t) {
