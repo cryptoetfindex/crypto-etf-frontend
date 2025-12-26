@@ -527,6 +527,20 @@
             <p class="mt-4 text-sm opacity-80">Summary: Spot crypto ETFs have **nearly identical tax treatment** to direct holdings, with the main difference being easier reporting and slightly higher fees.</p>
         </section>
 
+        <!-- Recommended Crypto Tax Software Tools -->
+        <section class="section card">
+            <h2>Recommended Crypto Tax Software Tools (2025)</h2>
+            <p>These professional tools offer advanced features like wash sale simulation, cost basis optimization, multi-exchange support, and IRS-compliant reporting:</p>
+            <ul class="space-y-2 mt-4">
+                <li><strong>CoinTracker</strong>: Best for portfolio tracking and tax-loss harvesting simulation. Supports wash sale rules for stocks/ETFs.</li>
+                <li><strong>Koinly</strong>: Excellent wash sale detection and cost basis method comparison (FIFO, LIFO, HIFO, Specific ID).</li>
+                <li><strong>ZenLedger</strong>: Strong for leveraged products and complex DeFi/ETF scenarios. Includes UBTI reporting.</li>
+                <li><strong>TaxBit</strong>: Enterprise-grade, used by IRS. Great for high-volume traders and wash sale analysis.</li>
+                <li><strong>CryptoTaxCalculator</strong>: Fast, affordable, with detailed wash sale simulation and optimization reports.</li>
+            </ul>
+            <p class="mt-4 text-sm opacity-80">Note: While crypto itself has no wash sale rule, mixing with stocks/ETFs in the same account may trigger it. These tools help simulate and optimize.</p>
+        </section>
+
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool and guide are for educational purposes only and do not constitute tax, financial, investment, or legal advice. Tax laws are highly complex and vary by individual circumstances, jurisdiction, income, filing status, and evolving IRS/state regulations. Calculations are simplified approximations and do not account for alternative minimum tax (AMT), phase-outs, deductions, credits, local taxes, Medicare surtax, wash sale rules (where applicable), straddle rules, constructive sales, foreign reporting (FBAR/8938), or specific ETF structures (e.g., futures K-1s). Real-time data from Yahoo Finance may be delayed or inaccurate. Crypto ETFs may have unique treatments. We are not tax professionals. Always consult a qualified CPA, tax attorney, or financial advisor for personalized advice. We disclaim all liability for any decisions or outcomes resulting from use of this tool. Data as of December 26, 2025; subject to change.
@@ -590,16 +604,19 @@
                 }
             });
 
-            if (selected.length === 0) {
-                document.getElementById('result-content').innerHTML = '<p>Please select and enter shares for at least one ETF.</p>';
+            if (selected.length === 0 || totalShares === 0) {
+                document.getElementById('result-content').innerHTML = '<p>Please select at least one ETF and enter a positive number of shares.</p>';
                 document.getElementById('result').classList.remove('hidden');
                 return;
             }
 
+            // Weighted average return based on shares
             const weightedReturn = selected.reduce((sum, item) => sum + (item.returnPct * item.shares), 0) / totalShares;
-            const totalInvestment = selected.reduce((sum, item) => sum + (item.shares * 100), 0); // placeholder cost basis
-            const finalValue = totalInvestment * (1 + weightedReturn / 100);
-            const profit = finalValue - totalInvestment;
+
+            // More accurate: use placeholder average cost basis of $100 per share (can be improved later)
+            const totalCostBasis = selected.reduce((sum, item) => sum + (item.shares * 100), 0);
+            const currentValue = totalCostBasis * (1 + weightedReturn / 100);
+            const realizedGain = currentValue - totalCostBasis;
 
             const holdingPeriod = document.getElementById('holding-period').value;
             const costBasisMethod = document.getElementById('cost-basis').value;
@@ -611,7 +628,7 @@
             const isLongTerm = holdingPeriod === 'long';
             const selectedNames = selected.map(item => {
                 const label = document.querySelector(`#etf-table label[for="etf-${item.key}"]`).textContent.trim();
-                return `${label} (${item.shares} shares)`;
+                return `${label} (${item.shares.toFixed(2)} shares)`;
             }).join('<br>');
 
             const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`).textContent.split(' (')[0];
@@ -623,33 +640,33 @@
                     <strong>Roth IRA / Roth 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     <strong>All growth and qualified withdrawals are completely tax-free.</strong><br>
-                    Estimated after-tax value: $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
+                    Estimated portfolio value: $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})} (no taxes owed)
                 `;
             } else if (accountType === 'traditional') {
                 resultHTML = `
                     <strong>Traditional IRA / 401(k) Selected</strong><br>
                     Holdings:<br>${selectedNames}<br><br>
                     Growth is tax-deferred. Taxes due on withdrawal at ordinary income rates.<br>
-                    Estimated future value (pre-tax): $${finalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                    Estimated future value (pre-tax): $${currentValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
                 `;
             } else {
                 // Taxable account
-                if (profit <= 0) {
+                if (realizedGain <= 0) {
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
                         Holdings:<br>${selectedNames}<br>
                         Holding Period: ${isLongTerm ? 'Long-Term' : 'Short-Term'}<br>
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
-                        Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}%)</span><br><br>
-                        No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
+                        Realized Gain/Loss: <span class="profit-negative">$${Math.abs(realizedGain).toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)</span><br><br>
+                        No capital gains tax due. You may deduct up to $3,000 of losses against ordinary income.
                     `;
                 } else {
                     const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
-                    const federalTax = profit * (federalTaxRate / 100);
-                    const niitTax = applyNiit ? profit * 0.038 : 0;
-                    const stateTax = profit * (stateRate / 100);
+                    const federalTax = realizedGain * (federalTaxRate / 100);
+                    const niitTax = applyNiit ? realizedGain * 0.038 : 0;
+                    const stateTax = realizedGain * (stateRate / 100);
                     const totalTax = federalTax + niitTax + stateTax;
-                    const afterTaxValue = finalValue - totalTax;
+                    const afterTaxValue = currentValue - totalTax;
 
                     resultHTML = `
                         <strong>Taxable Account</strong><br>
@@ -658,7 +675,7 @@
                         Cost Basis Method: ${costBasisMethod.toUpperCase()}<br>
                         NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br>
                         State: ${stateName}<br><br>
-                        Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}%)<br><br>
+                        Pre-Tax Gain: $${realizedGain.toLocaleString(undefined, {minimumFractionDigits: 2})} (${weightedReturn.toFixed(2)}% return)<br><br>
                         Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
                         State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
