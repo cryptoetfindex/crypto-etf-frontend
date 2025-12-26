@@ -97,8 +97,11 @@
             padding: 0.75rem;
             border-radius: 8px;
             border: 1px solid var(--border);
-            background: rgba(255,255,255,0.05);
+            background: var(--card);
             color: var(--text);
+        }
+        [data-theme="dark"] input, [data-theme="dark"] select {
+            background: #1e293b;
         }
         .result-box {
             background: rgba(14, 165, 233, 0.1);
@@ -332,7 +335,6 @@
         <!-- Comprehensive Tax Implications Guide -->
         <section class="section card">
             <h2>Comprehensive Tax Implications for Crypto ETF Investments (2025)</h2>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">1. Basic Tax Structure</h3>
             <ul class="space-y-2">
                 <li>ETFs are generally tax-efficient due to in-kind creation/redemption (minimal capital gains distributions).</li>
@@ -340,7 +342,6 @@
                 <li>Losses offset gains; excess up to $3,000/year vs. ordinary income; carry forward indefinitely.</li>
                 <li>Cost basis methods: FIFO (default), LIFO, HIFO, or specific ID for optimization.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">2. Crypto-Specific Rules</h3>
             <ul class="space-y-2">
                 <li><strong>Spot Crypto ETFs</strong>: Treated as property. Gains/losses only on sale. No wash sale rule (can harvest losses and rebuy immediately).</li>
@@ -348,13 +349,11 @@
                 <li><strong>Leveraged/Thematic</strong>: May trigger K-1s, straddle rules, or constructive sales if using derivatives.</li>
                 <li>2025 Reporting: Brokers issue 1099-DA for gross proceeds (basis reporting starts 2026).</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">3. Net Investment Income Tax (NIIT)</h3>
             <ul class="space-y-2">
                 <li>3.8% surtax on investment income (including ETF gains) if MAGI > $200k single / $250k married filing jointly.</li>
                 <li>Applies to both short and long-term gains. Not deductible for AMT.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">4. State Capital Gains Taxes (2025 Approximate Top Rates)</h3>
             <ul class="space-y-2">
                 <li><strong>0%</strong>: AK, FL, NV, NH, SD, TN, TX, WY (WA has 7% on gains >$250k)</li>
@@ -362,21 +361,18 @@
                 <li><strong>Moderate</strong>: MA (5.5% + 4% surtax >$1M), IL (4.95%), NC (4.75%), etc.</li>
                 <li>Most states tax gains as ordinary income; few conform to federal LTCG rates.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">5. Tax-Loss Harvesting & Offsetting</h3>
             <ul class="space-y-2">
                 <li>No wash sale rule for spot crypto ETFs — harvest losses freely.</li>
                 <li>Offset STCG first (higher rates), then LTCG.</li>
                 <li>Carry forward unlimited losses.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">6. Tax-Advantaged Accounts</h3>
             <ul class="space-y-2">
                 <li>Roth IRA/401(k): Tax-free growth and withdrawals.</li>
                 <li>Traditional IRA/401(k): Tax-deferred growth.</li>
                 <li>Opportunity Zones: Defer gains by rolling into OZ funds.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">7. Advanced Considerations</h3>
             <ul class="space-y-2">
                 <li><strong>Basis Step-Up</strong>: Heirs receive stepped-up basis at death.</li>
@@ -385,7 +381,6 @@
                 <li><strong>Foreign Investors</strong>: 30% withholding on dividends; FATCA reporting.</li>
                 <li><strong>AMT & Phase-Outs</strong>: High earners may lose LTCG benefits.</li>
             </ul>
-
             <h3 class="text-xl font-semibold mt-6 mb-3">8. Tax Optimization Strategies</h3>
             <ul class="space-y-2">
                 <li>Hold >1 year for LTCG rates.</li>
@@ -417,12 +412,66 @@
         </footer>
     </main>
 
-    <!-- Full Functional Script -->
     <script>
-        // All constants and functions from previous version
-        const ETF_SYMBOLS = { /* unchanged */ };
-        const ETF_INCEPTIONS = { /* unchanged */ };
-        const HISTORICAL_RETURNS = { /* unchanged */ };
+        const ETF_SYMBOLS = {
+            'IBIT': 'IBIT',
+            'FBTC': 'FBTC',
+            'GBTC': 'GBTC',
+            'ARKB': 'ARKB',
+            'BITB': 'BITB',
+            'average-btc': ['IBIT', 'FBTC', 'GBTC', 'ARKB', 'BITB'],
+            'ETHA': 'ETHA',
+            'FETH': 'FETH',
+            'ETHE': 'ETHE',
+            'ETH-MINI': 'ETH',
+            'ETHW': 'ETHW',
+            'average-eth': ['ETHA', 'FETH', 'ETHE', 'ETH', 'ETHW'],
+            'BITQ': 'BITQ',
+            'MSTX': 'MSTX',
+            'WGMI': 'WGMI',
+            'STCE': 'STCE',
+            'MNRS': 'MNRS'
+        };
+
+        const ETF_INCEPTIONS = {
+            'IBIT': '2024-01-11',
+            'FBTC': '2024-01-11',
+            'GBTC': '2024-01-11',
+            'ARKB': '2024-01-11',
+            'BITB': '2024-01-11',
+            'average-btc': '2024-01-11',
+            'ETHA': '2024-07-23',
+            'FETH': '2024-07-23',
+            'ETHE': '2024-07-23',
+            'ETH-MINI': '2024-07-23',
+            'ETHW': '2024-07-23',
+            'average-eth': '2024-07-23',
+            'BITQ': '2021-05-11',
+            'MSTX': '2024-08-15',
+            'WGMI': '2022-02-01',
+            'STCE': '2022-07-12',
+            'MNRS': '2022-02-01'
+        };
+
+        const HISTORICAL_RETURNS = {
+            'IBIT': { ytd: -9.2, '1y': -9.2, 'since-inception': 148.5 },
+            'FBTC': { ytd: -8.9, '1y': -8.9, 'since-inception': 150.0 },
+            'GBTC': { ytd: -10.5, '1y': -10.5, 'since-inception': 138.0 },
+            'ARKB': { ytd: -9.4, '1y': -9.4, 'since-inception': 147.0 },
+            'BITB': { ytd: -9.0, '1y': -9.0, 'since-inception': 149.5 },
+            'average-btc': { ytd: -9.4, '1y': -9.4, 'since-inception': 146.6 },
+            'ETHA': { ytd: -13.0, '1y': -13.0, 'since-inception': 108.0 },
+            'FETH': { ytd: -13.3, '1y': -13.3, 'since-inception': 106.5 },
+            'ETHE': { ytd: -14.8, '1y': -14.8, 'since-inception': 98.0 },
+            'ETH-MINI': { ytd: -13.1, '1y': -13.1, 'since-inception': 109.0 },
+            'ETHW': { ytd: -13.5, '1y': -13.5, 'since-inception': 107.0 },
+            'average-eth': { ytd: -13.5, '1y': -13.5, 'since-inception': 105.7 },
+            'BITQ': { ytd: -16.0, '1y': -16.0, 'since-inception': 48.0 },
+            'MSTX': { ytd: -22.0, '1y': -22.0, 'since-inception': 75.0 },
+            'WGMI': { ytd: -19.0, '1y': -19.0, 'since-inception': 58.0 },
+            'STCE': { ytd: -15.0, '1y': -15.0, 'since-inception': 68.0 },
+            'MNRS': { ytd: -17.5, '1y': -17.5, 'since-inception': 52.0 }
+        };
 
         function updatePurchaseDateMin() {
             const etfKey = document.getElementById('etf-select').value;
@@ -436,38 +485,140 @@
         }
 
         function checkFormComplete() {
-            const investment = document.getElementById('investment').value.trim();
-            const mode = document.getElementById('mode-select').value;
-            const etf = document.getElementById('etf-select').value;
-            const purchase = document.getElementById('purchase-date').value;
-            const federal = document.getElementById('federal-bracket').value;
-            const state = document.getElementById('state-select').value;
-            const niit = document.getElementById('niit').value;
+            const investment = document.getElementById('investment').value.trim() !== '';
+            const mode = document.getElementById('mode-select').value !== '';
+            const etf = document.getElementById('etf-select').value !== '';
+            const purchase = document.getElementById('purchase-date').value !== '';
+            const federal = document.getElementById('federal-bracket').value !== '';
+            const state = document.getElementById('state-select').value !== '';
+            const niit = document.getElementById('niit').value !== '';
+
             const complete = investment && mode && etf && purchase && federal && state && niit;
-            document.getElementById('calculate-btn').disabled = !complete;
+            const btn = document.getElementById('calculate-btn');
+            btn.disabled = !complete;
         }
 
         async function estimateTax() {
-            if (document.getElementById('calculate-btn').disabled) return;
-            // full calculation logic unchanged
+            const btn = document.getElementById('calculate-btn');
+            if (btn.disabled) return;
+
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+
+            const investment = parseFloat(document.getElementById('investment').value) || 0;
+            const etfKey = document.getElementById('etf-select').value;
+            const purchaseDateStr = document.getElementById('purchase-date').value;
+            const sellDateStr = document.getElementById('sell-date').value || new Date().toISOString().split('T')[0];
+            const federalRate = parseFloat(document.getElementById('federal-bracket').value) || 0;
+            const stateRate = parseFloat(document.getElementById('state-select').value) || 0;
+            const applyNiit = document.getElementById('niit').value === 'yes';
+            const mode = document.getElementById('mode-select').value;
+
+            const purchaseDate = new Date(purchaseDateStr);
+            const sellDate = new Date(sellDateStr);
+            const holdingDays = (sellDate - purchaseDate) / (1000 * 60 * 60 * 24);
+            const isLongTerm = holdingDays > 365;
+
+            let returnPct = 0;
+            if (mode === 'historical') {
+                returnPct = HISTORICAL_RETURNS[etfKey]?.since-inception || 0;
+            } else {
+                let symbols = Array.isArray(ETF_SYMBOLS[etfKey]) ? ETF_SYMBOLS[etfKey] : [ETF_SYMBOLS[etfKey]];
+                let purchasePrices = [];
+                let sellPrices = [];
+                for (let sym of symbols) {
+                    const current = await fetchPrice(sym);
+                    if (current) sellPrices.push(current);
+
+                    const pTimestamp = Math.floor(purchaseDate.getTime() / 1000);
+                    const pHistProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?period1=${pTimestamp}&period2=${pTimestamp + 86400}&interval=1d`);
+                    try {
+                        const presp = await fetch(pHistProxy);
+                        const pdata = await presp.json();
+                        const pparsed = JSON.parse(pdata.contents);
+                        const price = pparsed.chart.result[0]?.meta?.regularMarketPrice || current || 0;
+                        purchasePrices.push(price);
+                    } catch (e) {
+                        purchasePrices.push(current || 0);
+                    }
+                }
+                const avgPurchase = purchasePrices.reduce((a, b) => a + b, 0) / purchasePrices.length || 1;
+                const avgSell = sellPrices.reduce((a, b) => a + b, 0) / sellPrices.length || avgPurchase;
+                returnPct = ((avgSell - avgPurchase) / avgPurchase) * 100;
+            }
+
+            document.getElementById('loading').classList.add('hidden');
+
+            const finalValue = investment * (1 + returnPct / 100);
+            const profit = finalValue - investment;
+
+            let resultHTML = '';
+            if (profit <= 0) {
+                resultHTML = `
+                    <strong>${etfName || 'Selected ETF'}</strong><br>
+                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                    Profit/Loss: <span class="profit-negative">$${Math.abs(profit).toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)</span><br><br>
+                    No capital gains tax due. Potential loss deduction up to $3,000/year against ordinary income.
+                `;
+            } else {
+                const federalTaxRate = isLongTerm ? Math.min(federalRate, 20) : federalRate;
+                const federalTax = profit * (federalTaxRate / 100);
+                const niitTax = applyNiit ? profit * 0.038 : 0;
+                const stateTax = profit * (stateRate / 100);
+                const totalTax = federalTax + niitTax + stateTax;
+                const afterTaxValue = finalValue - totalTax;
+
+                const etfName = document.querySelector(`#etf-select option[value="${etfKey}"]`)?.textContent.trim() || 'Selected ETF';
+                const stateName = document.querySelector(`#state-select option[value="${stateRate}"]`)?.textContent.split(' (')[0] || 'Selected State';
+
+                resultHTML = `
+                    <strong>${etfName}</strong><br>
+                    Holding: ${Math.floor(holdingDays)} days (${isLongTerm ? 'Long-Term' : 'Short-Term'})<br>
+                    State: ${stateName}<br>
+                    NIIT Applied: ${applyNiit ? 'Yes (3.8%)' : 'No'}<br><br>
+                    Pre-Tax Profit: $${profit.toLocaleString(undefined, {minimumFractionDigits: 2})} (${returnPct.toFixed(2)}%)<br><br>
+                    Federal Tax (${federalTaxRate}%): $${federalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    NIIT (3.8%): $${niitTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    State Tax (${stateRate}%): $${stateTax.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                    <strong>Total Estimated Tax: $${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong><br>
+                    <strong>After-Tax Value: $${afterTaxValue.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+                `;
+            }
+
+            document.getElementById('result-content').innerHTML = resultHTML;
+            document.getElementById('result').classList.remove('hidden');
         }
 
         async function fetchPrice(symbol) {
-            // unchanged
+            const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?range=1d&interval=1d');
+            try {
+                const resp = await fetch(proxy);
+                const data = await resp.json();
+                const parsed = JSON.parse(data.contents);
+                return parsed.chart.result[0].meta.regularMarketPrice;
+            } catch (e) {
+                console.error('Fetch error:', e);
+                return null;
+            }
         }
 
-        // Listeners
-        document.querySelectorAll('input, select').forEach(el => {
+        // Attach event listeners
+        document.querySelectorAll('#investment, #mode-select, #etf-select, #purchase-date, #sell-date, #federal-bracket, #state-select, #niit').forEach(el => {
             el.addEventListener('input', checkFormComplete);
             el.addEventListener('change', checkFormComplete);
         });
+
+        document.getElementById('calculate-btn').addEventListener('click', estimateTax);
+
+        // Initial load
         window.addEventListener('load', () => {
             checkFormComplete();
             updatePurchaseDateMin();
         });
+
         document.getElementById('etf-select').addEventListener('change', updatePurchaseDateMin);
 
-        // Theme switcher - Light/Dark only
+        // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
