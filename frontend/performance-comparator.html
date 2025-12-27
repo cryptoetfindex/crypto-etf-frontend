@@ -160,9 +160,12 @@
         #etf-table tr:last-child td {
             border-bottom: none;
         }
-        #performanceChart {
-            max-height: 400px;
-            width: 100% !important;
+        /* Fix chart display */
+        #chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -344,7 +347,9 @@
                             </thead>
                             <tbody id="comparison-body"></tbody>
                         </table>
-                        <canvas id="performanceChart" height="300"></canvas>
+                        <div id="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -376,10 +381,12 @@
                 <li>Consider both absolute returns and risk-adjusted metrics.</li>
             </ul>
         </section>
+
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool is for educational purposes only and does not constitute financial or investment advice. Performance data is historical and not indicative of future results. Crypto investments are volatile and carry risk of loss. Data as of December 26, 2025; subject to change.
         </p>
+
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -413,7 +420,7 @@
                 'WGMI': 58.0,
                 'STCE': 68.0,
                 'MNRS': 52.0,
-                'SPY': 200.0, // Placeholder
+                'SPY': 200.0,
                 'QQQ': 250.0,
                 'VTI': 180.0,
                 'VOO': 190.0
@@ -544,8 +551,8 @@
                 const label = document.querySelector(`#etf-table label[for="etf-${key}"]`).textContent.trim();
                 const returnPct = returns[key] || 0;
                 const expense = EXPENSE_RATIOS[key] || 0;
-                const volatility = VOLATILITY[key] || 1; // Avoid division by zero
-                const sharpe = ((returnPct / 100) - RISK_FREE_RATE) / (volatility / 100); // Annualized assumption
+                const volatility = VOLATILITY[key] || 1;
+                const sharpe = ((returnPct / 100) - RISK_FREE_RATE) / (volatility / 100);
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -560,7 +567,7 @@
                 chartData.push(returnPct);
             });
 
-            // Update or create chart
+            // Update chart
             const ctx = document.getElementById('performanceChart').getContext('2d');
             if (chart) {
                 chart.destroy();
@@ -607,7 +614,7 @@
             el.addEventListener('change', updateComparison);
         });
 
-        // Initial load (shows empty if nothing selected)
+        // Initial load
         window.addEventListener('load', updateComparison);
 
         // Theme switcher
@@ -615,7 +622,7 @@
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
-            if (chart) updateComparison(); // Refresh chart colors on theme change
+            if (chart) updateComparison();
         }
         window.addEventListener('load', () => {
             const saved = localStorage.getItem('theme') || 'light';
