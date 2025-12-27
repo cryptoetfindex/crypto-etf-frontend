@@ -147,6 +147,26 @@
             color: #ffffff;
             margin-right: 4rem;
         }
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .tool-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .tool-card:hover { transform: translateY(-4px); }
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
     </style>
     <!-- Structured Data for SEO/RAO: WebPage Schema -->
     <script type="application/ld+json">
@@ -247,7 +267,6 @@
             <span class="ticker-item">5. MNRS (Grayscale Miners) – $150M</span>
         </div>
     </div>
-
     <!-- Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -272,14 +291,12 @@
             </select>
         </div>
     </nav>
-
     <!-- Main Content -->
     <main class="container max-w-1400 mx-auto p-6" itemprop="mainContentOfPage">
         <header class="text-center py-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4" itemprop="headline">Crypto ETF Index (December 2025)</h1>
             <p class="text-xl max-w-4xl mx-auto opacity-90" itemprop="description">Your #1 independent resource for tracking Bitcoin, Ethereum, leveraged, and thematic crypto ETFs – with live data, comparisons, news, and guides. Perfect for blockchain ETF investors.</p>
         </header>
-
         <!-- Top Spot ETFs -->
         <section class="card mb-8" itemscope itemtype="https://schema.org/Table">
             <h2 class="text-2xl font-semibold mb-4 text-center">Top 5 Spot Bitcoin ETFs by AUM</h2>
@@ -304,7 +321,6 @@
                 </table>
             </div>
         </section>
-
         <section class="card mb-8" itemscope itemtype="https://schema.org/Table">
             <h2 class="text-2xl font-semibold mb-4 text-center">Top 5 Spot Ethereum ETFs by AUM</h2>
             <div class="overflow-x-auto">
@@ -328,7 +344,6 @@
                 </table>
             </div>
         </section>
-
         <section class="card mb-8" itemscope itemtype="https://schema.org/Table">
             <h2 class="text-2xl font-semibold mb-4 text-center">Top 5 Thematic & Leveraged Crypto ETFs by AUM</h2>
             <div class="overflow-x-auto">
@@ -353,6 +368,32 @@
             </div>
         </section>
 
+        <!-- New Section: Latest Tools -->
+        <section class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-6 text-center">Latest Tools – Now Live!</h2>
+            <div class="tool-grid">
+                <!-- ROI Calculator -->
+                <div class="tool-card">
+                    <h3>ROI Calculator</h3>
+                    <p class="mb-4">Calculate hypothetical returns using historical performance for all major crypto ETFs.</p>
+                    <a href="/frontend/roi-calculator.html" class="btn">Open ROI Calculator →</a>
+                </div>
+                <!-- Performance Comparator -->
+                <div class="tool-card">
+                    <h3>Performance Comparator</h3>
+                    <p class="mb-4">Side-by-side returns (YTD, 1Y, since inception) with 7 interactive chart types.</p>
+                    <a href="/frontend/performance-comparator.html" class="btn">Compare Performance →</a>
+                </div>
+                <!-- Tax Efficiency Estimator -->
+                <div class="tool-card">
+                    <h3>Tax Efficiency Estimator</h3>
+                    <p class="mb-4">Estimate capital gains impact and tax implications for different holding periods.</p>
+                    <a href="/frontend/tax-estimator.html" class="btn">Estimate Taxes →</a>
+                </div>
+            </div>
+            <p class="text-center mt-6"><a href="/frontend/tools.html" class="btn">View All Tools →</a></p>
+        </section>
+
         <!-- Key Insights with News Links -->
         <section class="card mb-8" itemscope itemtype="https://schema.org/ItemList">
             <h2 class="text-2xl font-semibold mb-4" itemprop="name">Key Insights & Latest News</h2>
@@ -364,7 +405,6 @@
                 <li itemscope itemtype="https://schema.org/ListItem" itemprop="position" content="5">• <strong>Look Ahead:</strong> Final week volatility expected; Q1 2026 may bring staking yields and more altcoin ETFs. <a href="/frontend/news/crypto-etf-lookahead-dec2025.html" class="text-[var(--accent)] underline">2026 forecast →</a></li>
             </ul>
         </section>
-
         <!-- Latest Articles -->
         <section class="card mb-8">
             <h2 class="text-2xl font-semibold mb-6 text-center">Latest Articles & Analysis</h2>
@@ -372,7 +412,6 @@
                 <div class="text-center opacity-70">Loading latest articles...</div>
             </div>
         </section>
-
         <!-- Quick Start for New Users -->
         <section class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-center">New to Crypto ETFs? Start Here</h2>
@@ -394,11 +433,9 @@
                 </div>
             </div>
         </section>
-
         <p class="disclaimer">
             Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of December 21, 2025; verify with issuers.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -411,7 +448,6 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </main>
-
     <script>
         // Duplicate ticker content for seamless loop
         document.addEventListener('DOMContentLoaded', () => {
@@ -425,7 +461,6 @@
             duplicateContent('ethereum-ticker');
             duplicateContent('thematic-ticker');
         });
-
         // Latest Articles (updated with new lookahead article)
         const NEWS_ARTICLES = [
             { file: "crypto-etf-lookahead-dec2025.html", date: "2025-12-21", title: "Look Ahead: Final Week of 2025 & Q1 2026 Crypto ETF Forecast", desc: "Q4 recap, top performers, and 2026 outlook" },
@@ -434,11 +469,9 @@
             { file: "xrp-etf-1b-milestone.html", date: "2025-12-16", title: "XRP ETFs Surpass $1B AUM Milestone", desc: "Zero outflow days since launch" },
             { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow", desc: "Profit-taking amid correction" }
         ];
-
         function formatDate(d) {
             return new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         }
-
         function loadHomeNews() {
             const grid = document.getElementById('home-news-grid');
             grid.innerHTML = '';
@@ -458,16 +491,13 @@
             archive.innerHTML = `<h3 class="text-2xl font-bold mb-4">Older Articles</h3><p class="mb-6">View all past analysis</p><a href="/frontend/news.html" class="btn inline-block">Browse All News →</a>`;
             grid.appendChild(archive);
         }
-
         document.addEventListener('DOMContentLoaded', loadHomeNews);
-
         // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
         }
-
         window.addEventListener('load', () => {
             const saved = localStorage.getItem('theme') || 'normal';
             applyTheme(saved);
