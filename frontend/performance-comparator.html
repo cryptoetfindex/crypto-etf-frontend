@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="https://schema.org/WebPage">
+<html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Performance Comparator 2025</title>
-    <meta name="description" content="Simple tool to compare crypto ETF returns (YTD, 1Y, since inception) with interactive charts.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,7 +14,7 @@
             color: #1e293b;
             margin: 0;
         }
-        [data-theme="dark"] {
+        [data-theme="dark"] body {
             background: #020617;
             color: #e2e8f0;
         }
@@ -32,20 +29,20 @@
             background: #0f172a;
             border-color: #1e293b;
         }
-        .accent { color: #0ea5e9; }
-        [data-theme="dark"] .accent { color: #f59e0b; }
-        .chart-container {
-            height: 400px;
-            margin-top: 1rem;
+        .chart-wrapper {
             position: relative;
+            width: 100%;
+            height: 500px;
+            margin-top: 2rem;
         }
-        .placeholder {
+        .placeholder-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            font-size: 1.4rem;
             opacity: 0.6;
-            font-size: 1.2rem;
+            pointer-events: none;
             text-align: center;
             width: 80%;
         }
@@ -99,7 +96,6 @@
         <div class="card">
             <label class="block font-semibold mb-4">Select ETFs</label>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- All ETFs -->
                 <label><input type="checkbox" value="IBIT"> IBIT - BlackRock (0.25%)</label>
                 <label><input type="checkbox" value="FBTC"> FBTC - Fidelity (0.25%)</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale (1.50%)</label>
@@ -135,12 +131,11 @@
                 <div class="flex-1">
                     <label class="block font-semibold mb-2">Chart Type</label>
                     <select id="chart-type" class="w-full p-3 border rounded">
-                        <option value="bar">Bar</option>
-                        <option value="horizontalBar">Horizontal Bar</option>
-                        <option value="line">Line</option>
-                        <option value="radar">Radar</option>
-                        <option value="doughnut">Doughnut</option>
-                        <option value="pie">Pie</option>
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                        <option value="radar">Radar Chart</option>
+                        <option value="doughnut">Doughnut Chart</option>
+                        <option value="pie">Pie Chart</option>
                         <option value="polarArea">Polar Area</option>
                     </select>
                 </div>
@@ -151,7 +146,7 @@
             <div class="chart-wrapper">
                 <canvas id="performanceChart"></canvas>
                 <div id="placeholder" class="placeholder-text">
-                    Select one or more ETFs to display the comparison chart
+                    Select one or more ETFs above to display the comparison chart
                 </div>
             </div>
         </div>
@@ -171,7 +166,13 @@
         function updateChart() {
             const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
             const period = document.getElementById('period').value;
-            const type = document.getElementById('chart-type').value;
+            let type = document.getElementById('chart-type').value;
+
+            // 'horizontalBar' was removed in Chart.js v3+, use 'bar' with indexAxis instead
+            if (type === 'horizontalBar') {
+                type = 'bar';
+            }
+
             const data = RETURNS[period];
 
             // Update tags
@@ -192,16 +193,24 @@
 
             if (selected.length === 0) {
                 placeholder.style.display = 'block';
-                if (chart) chart.destroy();
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
                 return;
             }
+
             placeholder.style.display = 'none';
 
             const labels = selected.map(key => document.querySelector(`label input[value="${key}"]`).parentNode.textContent.trim());
             const values = selected.map(key => data[key] || 0);
 
-            if (chart) chart.destroy();
-            chart = new Chart(document.getElementById('performanceChart'), {
+            if (chart) {
+                chart.destroy();
+            }
+
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            chart = new Chart(ctx, {
                 type: type,
                 data: {
                     labels: labels,
@@ -215,7 +224,11 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    indexAxis: document.getElementById('chart-type').value === 'horizontalBar' ? 'y' : 'x', // Horizontal for old 'horizontalBar'
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
                 }
             });
         }
@@ -226,7 +239,7 @@
         // Theme
         document.getElementById('theme-select').addEventListener('change', e => {
             document.body.dataset.theme = e.target.value;
-            if (chart) updateChart();
+            updateChart();
         });
     </script>
 </body>
