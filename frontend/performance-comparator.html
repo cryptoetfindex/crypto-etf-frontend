@@ -160,14 +160,14 @@
         #etf-table tr:last-child td {
             border-bottom: none;
         }
-        /* Chart container to ensure visibility */
-        #chart-container {
+        /* Chart container */
+        .chart-wrapper {
             position: relative;
             height: 450px;
             width: 100%;
             margin-top: 2rem;
         }
-        canvas#performanceChart {
+        canvas {
             display: block;
             width: 100% !important;
             height: 100% !important;
@@ -219,6 +219,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- All ETFs as before -->
                             <tr>
                                 <td><input type="checkbox" id="etf-IBIT" value="IBIT"></td>
                                 <td>IBIT - BlackRock (Crypto)</td>
@@ -304,7 +305,6 @@
                                 <td>MNRS - Grayscale Miners (Crypto)</td>
                                 <td>0.65</td>
                             </tr>
-                            <!-- Traditional ETFs -->
                             <tr>
                                 <td><input type="checkbox" id="etf-SPY" value="SPY"></td>
                                 <td>SPY - S&P 500 (Traditional)</td>
@@ -338,6 +338,19 @@
                     </select>
                 </div>
 
+                <div class="input-group">
+                    <label for="chart-type">Chart Type</label>
+                    <select id="chart-type">
+                        <option value="bar">Bar Chart</option>
+                        <option value="horizontalBar">Horizontal Bar</option>
+                        <option value="line">Line Chart</option>
+                        <option value="radar">Radar Chart</option>
+                        <option value="doughnut">Doughnut Chart</option>
+                        <option value="pie">Pie Chart</option>
+                        <option value="polarArea">Polar Area</option>
+                    </select>
+                </div>
+
                 <div id="result" class="result-box hidden">
                     <div id="result-content">
                         <h3 class="text-xl font-semibold mb-4 text-center">Performance Comparison</h3>
@@ -352,7 +365,7 @@
                             </thead>
                             <tbody id="comparison-body"></tbody>
                         </table>
-                        <div id="chart-container">
+                        <div class="chart-wrapper">
                             <canvas id="performanceChart"></canvas>
                         </div>
                     </div>
@@ -382,7 +395,7 @@
             <ul class="space-y-2">
                 <li>Spot vs. Futures: Spot ETFs generally track price more accurately with lower tracking error.</li>
                 <li>Thematic ETFs: Higher volatility but potential for outperformance in bull markets.</li>
-                <li>Use bar charts for quick visual comparison of returns.</li>
+                <li>Use different chart types for various perspectives: bar for direct comparison, radar for multi-dimensional view.</li>
                 <li>Consider both absolute returns and risk-adjusted metrics.</li>
             </ul>
         </section>
@@ -526,7 +539,7 @@
             'VOO': 0.03
         };
 
-        const RISK_FREE_RATE = 0.02; // 2% risk-free rate
+        const RISK_FREE_RATE = 0.02;
 
         let chart = null;
 
@@ -537,6 +550,7 @@
             });
 
             const period = document.getElementById('period').value;
+            const chartType = document.getElementById('chart-type').value;
             const returns = HISTORICAL_RETURNS[period];
 
             const tableBody = document.getElementById('comparison-body');
@@ -572,17 +586,19 @@
                 chartData.push(returnPct);
             });
 
-            // Update chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
+            // Destroy old chart
             if (chart) {
                 chart.destroy();
             }
+
+            // Create new chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
             chart = new Chart(ctx, {
-                type: 'bar',
+                type: chartType,
                 data: {
                     labels: chartLabels,
                     datasets: [{
-                        label: period === 'since-inception' ? 'Since Inception Return (%)' : 
+                        label: period === 'since-inception' ? 'Since Inception Return (%)' :
                                period === 'ytd' ? 'YTD Return (%)' : '1-Year Return (%)',
                         data: chartData,
                         backgroundColor: 'rgba(14, 165, 233, 0.6)',
@@ -593,14 +609,13 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: false, // Helps with visibility
                     plugins: {
                         legend: {
                             position: 'top',
                             labels: { color: var(--text) }
                         }
                     },
-                    scales: {
+                    scales: chartType.includes('Bar') ? {
                         y: {
                             beginAtZero: true,
                             grid: { color: var(--border) },
@@ -610,20 +625,17 @@
                             grid: { color: var(--border) },
                             ticks: { color: var(--text) }
                         }
-                    }
+                    } : {}
                 }
             });
         }
 
-        // Instant update on any change
-        document.querySelectorAll('#etf-table input[type="checkbox"], #period').forEach(el => {
+        // Listeners
+        document.querySelectorAll('#etf-table input[type="checkbox"], #period, #chart-type').forEach(el => {
             el.addEventListener('change', updateComparison);
         });
 
-        // Force update after DOM load
-        document.addEventListener('DOMContentLoaded', () => {
-            updateComparison();
-        });
+        document.addEventListener('DOMContentLoaded', updateComparison);
 
         // Theme switcher
         function applyTheme(t) {
