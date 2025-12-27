@@ -172,6 +172,16 @@
             width: 100% !important;
             height: 100% !important;
         }
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            opacity: 0.6;
+            pointer-events: none;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -351,7 +361,7 @@
                     </select>
                 </div>
 
-                <div id="result" class="result-box hidden">
+                <div class="result-box">
                     <div id="result-content">
                         <h3 class="text-xl font-semibold mb-4 text-center">Performance Comparison</h3>
                         <table class="w-full border-collapse mb-6">
@@ -367,6 +377,9 @@
                         </table>
                         <div class="chart-wrapper">
                             <canvas id="performanceChart"></canvas>
+                            <div id="chart-placeholder" class="placeholder-text">
+                                Select ETFs above to display the chart
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -491,7 +504,7 @@
             }
         };
 
-        const VOLATILITY = { // Placeholder annual volatility %
+        const VOLATILITY = {
             'IBIT': 50.0,
             'FBTC': 50.0,
             'GBTC': 55.0,
@@ -542,6 +555,7 @@
         const RISK_FREE_RATE = 0.02;
 
         let chart = null;
+        const placeholder = document.getElementById('chart-placeholder');
 
         function updateComparison() {
             const selectedKeys = [];
@@ -560,11 +574,15 @@
             const chartData = [];
 
             if (selectedKeys.length === 0) {
-                document.getElementById('result').classList.add('hidden');
+                placeholder.style.display = 'block';
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
                 return;
             }
 
-            document.getElementById('result').classList.remove('hidden');
+            placeholder.style.display = 'none';
 
             selectedKeys.forEach(key => {
                 const label = document.querySelector(`#etf-table label[for="etf-${key}"]`).textContent.trim();
@@ -586,13 +604,11 @@
                 chartData.push(returnPct);
             });
 
-            // Destroy old chart
+            // Update or create chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
             if (chart) {
                 chart.destroy();
             }
-
-            // Create new chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
             chart = new Chart(ctx, {
                 type: chartType,
                 data: {
