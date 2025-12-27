@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Performance Comparator 2025</title>
+    <meta name="description" content="Simple tool to compare crypto ETF returns (YTD, 1Y, since inception) with interactive charts.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,6 +20,17 @@
         [data-theme="dark"] body {
             background: #020617;
             color: #e2e8f0;
+        }
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        [data-theme="dark"] .navbar {
+            background: #0f172a;
+            border-color: #1e293b;
         }
         .card {
             background: #ffffff;
@@ -74,14 +88,52 @@
             font-weight: bold;
             cursor: pointer;
         }
+        .guide-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: #f1f5f9;
+            border-radius: 12px;
+        }
+        [data-theme="dark"] .guide-section {
+            background: #1e293b;
+        }
+        .guide-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0ea5e9;
+        }
+        [data-theme="dark"] .guide-section h2 {
+            color: #f59e0b;
+        }
+        .guide-section h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: #0ea5e9;
+        }
+        [data-theme="dark"] .guide-section h3 {
+            color: #f59e0b;
+        }
     </style>
 </head>
 <body data-theme="light">
-    <nav class="bg-white dark:bg-[#0f172a] border-b border-[#e2e8f0] dark:border-[#1e293b] sticky top-0 z-50 py-4 px-6">
-        <div class="max-w-1400 mx-auto flex justify-between items-center">
+    <!-- Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[#0ea5e9] dark:text-[#f59e0b] font-semibold">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">About</a></li>
+            </ul>
             <select id="theme-select" class="bg-white dark:bg-[#0f172a] border border-[#e2e8f0] dark:border-[#1e293b] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
@@ -207,28 +259,66 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Comprehensive Chart Reading Guide -->
+            <div class="guide-section card">
+                <h2>Guide to Reading the Charts</h2>
+                <p class="mb-6">Each chart type offers a different perspective on ETF performance. Use the one that best fits your analysis style.</p>
+
+                <h3>Bar Chart</h3>
+                <p>Classic vertical bars — ideal for comparing absolute returns across ETFs. The longest bar indicates the highest return. Great for quick rankings.</p>
+
+                <h3>Horizontal Bar Chart</h3>
+                <p>Same as bar chart but sideways — better when you have many ETFs or long labels, as horizontal layout prevents overlapping text.</p>
+
+                <h3>Line Chart</h3>
+                <p>Connects data points with lines — emphasizes relative performance and ranking. Useful for spotting consistent leaders or laggards.</p>
+
+                <h3>Radar Chart</h3>
+                <p>Displays values on axes radiating from center — best with 3–8 ETFs. Shows overall "shape" of performance (e.g., balanced vs. extreme).</p>
+
+                <h3>Doughnut / Pie Chart</h3>
+                <p>Shows proportion of total return — highlights market share of performance. Note: only meaningful with positive returns (negative values not shown well).</p>
+
+                <h3>Polar Area Chart</h3>
+                <p>Similar to pie but area reflects magnitude — emphasizes largest performers visually. Good for seeing dominance at a glance.</p>
+
+                <p class="mt-8 font-semibold">Tip: Switch between time periods (YTD, 1Y, Since Inception) to see how rankings change over different horizons.</p>
+            </div>
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="text-center mt-12 pb-8 border-t border-[#e2e8f0] dark:border-[#1e293b] pt-8">
+        <div class="flex flex-wrap gap-4 justify-center mb-6">
+            <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+            <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+            <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+            <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+            <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+        </div>
+        <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
+    </footer>
+
     <script>
         const RETURNS = {
-            'ytd': { 
+            'ytd': {
                 IBIT: -9.6, FBTC: -9.5, GBTC: -12.0, ARKB: -9.8, BITB: -9.7, BTCO: -9.9, EZBC: -9.8, BRRR: -9.6, HODL: -9.7, BTCW: -9.8,
-                ETHA: 0, FETH: 0, ETHE: -5.0, 'ETH-MINI': 0, ETHW: 0, 
-                BITQ: 20.0, MSTX: 40.0, WGMI: 30.0, STCE: 15.0, MNRS: 25.0, 
-                SPY: 18.0, QQQ: 27.0, VTI: 20.0, VOO: 18.0 
+                ETHA: 0, FETH: 0, ETHE: -5.0, 'ETH-MINI': 0, ETHW: 0,
+                BITQ: 20.0, MSTX: 40.0, WGMI: 30.0, STCE: 15.0, MNRS: 25.0,
+                SPY: 18.0, QQQ: 27.0, VTI: 20.0, VOO: 18.0
             },
-            '1y': { 
+            '1y': {
                 IBIT: 46.0, FBTC: 46.5, GBTC: 40.0, ARKB: 45.0, BITB: 46.0, BTCO: 45.5, EZBC: 45.0, BRRR: 46.0, HODL: 45.8, BTCW: 45.0,
                 ETHA: 50.0, FETH: 50.0, ETHE: 45.0, 'ETH-MINI': 52.0, ETHW: 50.0,
                 BITQ: 60.0, MSTX: 100.0, WGMI: 80.0, STCE: 50.0, MNRS: 70.0,
-                SPY: 25.0, QQQ: 35.0, VTI: 28.0, VOO: 25.0 
+                SPY: 25.0, QQQ: 35.0, VTI: 28.0, VOO: 25.0
             },
-            'since-inception': { 
+            'since-inception': {
                 IBIT: 148.5, FBTC: 150.0, GBTC: 138.0, ARKB: 147.0, BITB: 149.5, BTCO: 148.0, EZBC: 147.0, BRRR: 148.0, HODL: 147.5, BTCW: 146.0,
                 ETHA: 0, FETH: 0, ETHE: -10.0, 'ETH-MINI': 5.0, ETHW: 0,
                 BITQ: 48.0, MSTX: 75.0, WGMI: 58.0, STCE: 68.0, MNRS: 52.0,
-                SPY: 200.0, QQQ: 250.0, VTI: 180.0, VOO: 190.0 
+                SPY: 200.0, QQQ: 250.0, VTI: 180.0, VOO: 190.0
             }
         };
 
