@@ -177,10 +177,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.6;
             pointer-events: none;
             text-align: center;
+            width: 80%;
         }
     </style>
 </head>
@@ -229,7 +230,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- All ETFs as before -->
                             <tr>
                                 <td><input type="checkbox" id="etf-IBIT" value="IBIT"></td>
                                 <td>IBIT - BlackRock (Crypto)</td>
@@ -378,7 +378,7 @@
                         <div class="chart-wrapper">
                             <canvas id="performanceChart"></canvas>
                             <div id="chart-placeholder" class="placeholder-text">
-                                Select ETFs above to display the chart
+                                Select one or more ETFs above to display the performance chart
                             </div>
                         </div>
                     </div>
@@ -604,11 +604,13 @@
                 chartData.push(returnPct);
             });
 
-            // Update or create chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
+            // Destroy old chart
             if (chart) {
                 chart.destroy();
             }
+
+            // Create new chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
             chart = new Chart(ctx, {
                 type: chartType,
                 data: {
@@ -619,7 +621,8 @@
                         data: chartData,
                         backgroundColor: 'rgba(14, 165, 233, 0.6)',
                         borderColor: var(--accent),
-                        borderWidth: 2
+                        borderWidth: 2,
+                        tension: 0.3 // For line chart smoothness
                     }]
                 },
                 options: {
@@ -631,7 +634,7 @@
                             labels: { color: var(--text) }
                         }
                     },
-                    scales: chartType.includes('Bar') ? {
+                    scales: {
                         y: {
                             beginAtZero: true,
                             grid: { color: var(--border) },
@@ -641,7 +644,7 @@
                             grid: { color: var(--border) },
                             ticks: { color: var(--text) }
                         }
-                    } : {}
+                    }
                 }
             });
         }
@@ -651,7 +654,10 @@
             el.addEventListener('change', updateComparison);
         });
 
-        document.addEventListener('DOMContentLoaded', updateComparison);
+        // Initial load – show placeholder
+        document.addEventListener('DOMContentLoaded', () => {
+            updateComparison();
+        });
 
         // Theme switcher
         function applyTheme(t) {
