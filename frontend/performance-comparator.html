@@ -29,11 +29,13 @@
             background: #0f172a;
             border-color: #1e293b;
         }
+        .chart-section {
+            margin-bottom: 3rem;
+        }
         .chart-wrapper {
             position: relative;
+            height: 450px;
             width: 100%;
-            height: 500px;
-            margin-top: 2rem;
         }
         .placeholder-text {
             position: absolute;
@@ -96,27 +98,30 @@
         <div class="card">
             <label class="block font-semibold mb-4">Select ETFs</label>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <label><input type="checkbox" value="IBIT"> IBIT - BlackRock (0.25%)</label>
-                <label><input type="checkbox" value="FBTC"> FBTC - Fidelity (0.25%)</label>
-                <label><input type="checkbox" value="GBTC"> GBTC - Grayscale (1.50%)</label>
-                <label><input type="checkbox" value="ARKB"> ARKB - ARK/21Shares (0.21%)</label>
-                <label><input type="checkbox" value="BITB"> BITB - Bitwise (0.20%)</label>
-                <label><input type="checkbox" value="average-btc"> Average Bitcoin ETF (~0.25%)</label>
-                <label><input type="checkbox" value="ETHA"> ETHA - BlackRock (0.25%)</label>
-                <label><input type="checkbox" value="FETH"> FETH - Fidelity (0.25%)</label>
-                <label><input type="checkbox" value="ETHE"> ETHE - Grayscale (2.50%)</label>
-                <label><input type="checkbox" value="ETH-MINI"> ETH Mini - Grayscale (0.15%)</label>
-                <label><input type="checkbox" value="ETHW"> ETHW - Bitwise (0.20%)</label>
-                <label><input type="checkbox" value="average-eth"> Average Ethereum ETF (~0.25%)</label>
-                <label><input type="checkbox" value="BITQ"> BITQ - Crypto Innovators (0.85%)</label>
-                <label><input type="checkbox" value="MSTX"> MSTX - 2x MicroStrategy (1.05%)</label>
-                <label><input type="checkbox" value="WGMI"> WGMI - Mining/AI (0.75%)</label>
-                <label><input type="checkbox" value="STCE"> STCE - Schwab Thematic (0.30%)</label>
-                <label><input type="checkbox" value="MNRS"> MNRS - Grayscale Miners (0.65%)</label>
-                <label><input type="checkbox" value="SPY"> SPY - S&P 500 (0.09%)</label>
-                <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100 (0.20%)</label>
-                <label><input type="checkbox" value="VTI"> VTI - Total Stock Market (0.03%)</label>
-                <label><input type="checkbox" value="VOO"> VOO - Vanguard S&P 500 (0.03%)</label>
+                <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
+                <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin Fund</label>
+                <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
+                <label><input type="checkbox" value="ARKB"> ARKB - ARK 21Shares Bitcoin ETF</label>
+                <label><input type="checkbox" value="BITB"> BITB - Bitwise Bitcoin ETF</label>
+                <label><input type="checkbox" value="BTCO"> BTCO - Invesco Galaxy Bitcoin ETF</label>
+                <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin ETF</label>
+                <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin Fund</label>
+                <label><input type="checkbox" value="HODL"> HODL - VanEck Bitcoin Trust</label>
+                <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin Fund</label>
+                <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
+                <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
+                <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
+                <label><input type="checkbox" value="ETH-MINI"> ETH Mini - Grayscale Ethereum Mini Trust</label>
+                <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
+                <label><input type="checkbox" value="BITQ"> BITQ - Bitwise Crypto Industry Innovators ETF</label>
+                <label><input type="checkbox" value="MSTX"> MSTX - Defiance Daily Target 2X Long MSTR ETF</label>
+                <label><input type="checkbox" value="WGMI"> WGMI - Valkyrie Bitcoin Miners ETF</label>
+                <label><input type="checkbox" value="STCE"> STCE - Schwab Crypto Thematic ETF</label>
+                <label><input type="checkbox" value="MNRS"> MNRS - Bitwise Crypto Miners ETF</label>
+                <label><input type="checkbox" value="SPY"> SPY - SPDR S&P 500 ETF (Traditional)</label>
+                <label><input type="checkbox" value="QQQ"> QQQ - Invesco QQQ Trust (Traditional)</label>
+                <label><input type="checkbox" value="VTI"> VTI - Vanguard Total Stock Market ETF (Traditional)</label>
+                <label><input type="checkbox" value="VOO"> VOO - Vanguard S&P 500 ETF (Traditional)</label>
             </div>
 
             <div class="flex gap-4 mb-6">
@@ -128,25 +133,57 @@
                         <option value="since-inception">Since Inception</option>
                     </select>
                 </div>
-                <div class="flex-1">
-                    <label class="block font-semibold mb-2">Chart Type</label>
-                    <select id="chart-type" class="w-full p-3 border rounded">
-                        <option value="bar">Bar Chart</option>
-                        <option value="line">Line Chart</option>
-                        <option value="radar">Radar Chart</option>
-                        <option value="doughnut">Doughnut Chart</option>
-                        <option value="pie">Pie Chart</option>
-                        <option value="polarArea">Polar Area</option>
-                    </select>
-                </div>
             </div>
 
             <div id="selected-tags" class="selected-tags"></div>
 
-            <div class="chart-wrapper">
-                <canvas id="performanceChart"></canvas>
-                <div id="placeholder" class="placeholder-text">
-                    Select one or more ETFs above to display the comparison chart
+            <!-- All Charts Displayed -->
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Bar Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Horizontal Bar Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="horizontalBarChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Line Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Radar Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Doughnut Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Pie Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 class="text-2xl font-semibold mb-4">Polar Area Chart</h3>
+                <div class="chart-wrapper">
+                    <canvas id="polarAreaChart"></canvas>
                 </div>
             </div>
         </div>
@@ -154,25 +191,34 @@
 
     <script>
         const RETURNS = {
-            'ytd': { IBIT: 120, FBTC: 122, GBTC: 110, ARKB: 118, BITB: 121, 'average-btc': 118.2, ETHA: 85, FETH: 83.5, ETHE: 75, 'ETH-MINI': 86, ETHW: 84, 'average-eth': 82.7, BITQ: 35, MSTX: 60, WGMI: 45, STCE: 55, MNRS: 40, SPY: 28, QQQ: 35, VTI: 25, VOO: 27 },
-            '1y': { IBIT: 130, FBTC: 132, GBTC: 120, ARKB: 128, BITB: 131, 'average-btc': 128.2, ETHA: 95, FETH: 93.5, ETHE: 85, 'ETH-MINI': 96, ETHW: 94, 'average-eth': 92.7, BITQ: 40, MSTX: 65, WGMI: 50, STCE: 60, MNRS: 45, SPY: 25, QQQ: 30, VTI: 22, VOO: 24 },
-            'since-inception': { IBIT: 148.5, FBTC: 150, GBTC: 138, ARKB: 147, BITB: 149.5, 'average-btc': 146.6, ETHA: 108, FETH: 106.5, ETHE: 98, 'ETH-MINI': 109, ETHW: 107, 'average-eth': 105.7, BITQ: 48, MSTX: 75, WGMI: 58, STCE: 68, MNRS: 52, SPY: 200, QQQ: 250, VTI: 180, VOO: 190 }
+            'ytd': { 
+                IBIT: -9.6, FBTC: -9.5, GBTC: -12.0, ARKB: -9.8, BITB: -9.7, BTCO: -9.9, EZBC: -9.8, BRRR: -9.6, HODL: -9.7, BTCW: -9.8,
+                ETHA: 0, FETH: 0, ETHE: -5.0, 'ETH-MINI': 0, ETHW: 0, 
+                BITQ: 20.0, MSTX: 40.0, WGMI: 30.0, STCE: 15.0, MNRS: 25.0, 
+                SPY: 18.0, QQQ: 27.0, VTI: 20.0, VOO: 18.0 
+            },
+            '1y': { 
+                IBIT: 46.0, FBTC: 46.5, GBTC: 40.0, ARKB: 45.0, BITB: 46.0, BTCO: 45.5, EZBC: 45.0, BRRR: 46.0, HODL: 45.8, BTCW: 45.0,
+                ETHA: 50.0, FETH: 50.0, ETHE: 45.0, 'ETH-MINI': 52.0, ETHW: 50.0,
+                BITQ: 60.0, MSTX: 100.0, WGMI: 80.0, STCE: 50.0, MNRS: 70.0,
+                SPY: 25.0, QQQ: 35.0, VTI: 28.0, VOO: 25.0 
+            },
+            'since-inception': { 
+                IBIT: 148.5, FBTC: 150.0, GBTC: 138.0, ARKB: 147.0, BITB: 149.5, BTCO: 148.0, EZBC: 147.0, BRRR: 148.0, HODL: 147.5, BTCW: 146.0,
+                ETHA: 0, FETH: 0, ETHE: -10.0, 'ETH-MINI': 5.0, ETHW: 0,
+                BITQ: 48.0, MSTX: 75.0, WGMI: 58.0, STCE: 68.0, MNRS: 52.0,
+                SPY: 200.0, QQQ: 250.0, VTI: 180.0, VOO: 190.0 
+            }
         };
 
-        let chart = null;
-        const placeholder = document.getElementById('placeholder');
+        const charts = {};
+        const chartIds = ['barChart', 'horizontalBarChart', 'lineChart', 'radarChart', 'doughnutChart', 'pieChart', 'polarAreaChart'];
+        const chartTypes = ['bar', 'bar', 'line', 'radar', 'doughnut', 'pie', 'polarArea'];
         const tagsContainer = document.getElementById('selected-tags');
 
-        function updateChart() {
+        function updateAllCharts() {
             const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
             const period = document.getElementById('period').value;
-            let type = document.getElementById('chart-type').value;
-
-            // 'horizontalBar' was removed in Chart.js v3+, use 'bar' with indexAxis instead
-            if (type === 'horizontalBar') {
-                type = 'bar';
-            }
-
             const data = RETURNS[period];
 
             // Update tags
@@ -187,59 +233,53 @@
             document.querySelectorAll('.tag button').forEach(btn => {
                 btn.onclick = () => {
                     document.querySelector(`input[value="${btn.dataset.key}"]`).checked = false;
-                    updateChart();
+                    updateAllCharts();
                 };
             });
 
             if (selected.length === 0) {
-                placeholder.style.display = 'block';
-                if (chart) {
-                    chart.destroy();
-                    chart = null;
-                }
+                chartIds.forEach(id => document.querySelector(`#${id}`).parentNode.querySelector('.placeholder-text')?.style.display = 'block');
+                Object.values(charts).forEach(ch => ch.destroy());
                 return;
             }
 
-            placeholder.style.display = 'none';
+            chartIds.forEach(id => document.querySelector(`#${id}`).parentNode.querySelector('.placeholder-text')?.style.display = 'none');
 
             const labels = selected.map(key => document.querySelector(`label input[value="${key}"]`).parentNode.textContent.trim());
             const values = selected.map(key => data[key] || 0);
 
-            if (chart) {
-                chart.destroy();
-            }
-
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: type,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: period === 'ytd' ? 'YTD Return (%)' : period === '1y' ? '1-Year Return (%)' : 'Since Inception Return (%)',
-                        data: values,
-                        backgroundColor: 'rgba(14, 165, 233, 0.6)',
-                        borderColor: '#0ea5e9',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: document.getElementById('chart-type').value === 'horizontalBar' ? 'y' : 'x', // Horizontal for old 'horizontalBar'
-                    plugins: {
-                        legend: { position: 'top' }
+            chartIds.forEach((id, index) => {
+                if (charts[id]) charts[id].destroy();
+                const ctx = document.getElementById(id).getContext('2d');
+                charts[id] = new Chart(ctx, {
+                    type: chartTypes[index],
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: period === 'ytd' ? 'YTD Return (%)' : period === '1y' ? '1-Year Return (%)' : 'Since Inception Return (%)',
+                            data: values,
+                            backgroundColor: 'rgba(14, 165, 233, 0.6)',
+                            borderColor: '#0ea5e9',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: id === 'horizontalBarChart' ? 'y' : 'x',
+                        plugins: { legend: { position: 'top' } }
                     }
-                }
+                });
             });
         }
 
-        document.querySelectorAll('input[type="checkbox"], #period, #chart-type').forEach(el => el.addEventListener('change', updateChart));
-        document.addEventListener('DOMContentLoaded', updateChart);
+        document.querySelectorAll('input[type="checkbox"], #period').forEach(el => el.addEventListener('change', updateAllCharts));
+        document.addEventListener('DOMContentLoaded', updateAllCharts);
 
         // Theme
         document.getElementById('theme-select').addEventListener('change', e => {
             document.body.dataset.theme = e.target.value;
-            updateChart();
+            updateAllCharts();
         });
     </script>
 </body>
