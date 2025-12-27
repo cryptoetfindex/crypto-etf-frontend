@@ -160,17 +160,12 @@
         #etf-table tr:last-child td {
             border-bottom: none;
         }
-        /* Chart container */
+        /* Chart container - fixed */
         .chart-wrapper {
             position: relative;
-            height: 450px;
             width: 100%;
+            height: 500px; /* Increased height */
             margin-top: 2rem;
-        }
-        canvas {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
         }
         .placeholder-text {
             position: absolute;
@@ -558,10 +553,8 @@
         const placeholder = document.getElementById('chart-placeholder');
 
         function updateComparison() {
-            const selectedKeys = [];
-            document.querySelectorAll('#etf-table input[type="checkbox"]:checked').forEach(cb => {
-                selectedKeys.push(cb.value);
-            });
+            const selectedKeys = Array.from(document.querySelectorAll('#etf-table input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
 
             const period = document.getElementById('period').value;
             const chartType = document.getElementById('chart-type').value;
@@ -576,6 +569,7 @@
             if (selectedKeys.length === 0) {
                 placeholder.style.display = 'block';
                 if (chart) {
+                    chart.clear();
                     chart.destroy();
                     chart = null;
                 }
@@ -604,13 +598,16 @@
                 chartData.push(returnPct);
             });
 
-            // Destroy old chart
+            // Clear and destroy old chart safely
             if (chart) {
+                chart.clear();
                 chart.destroy();
             }
 
             // Create new chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const ctx = document.getElementById('performanceChart');
+            if (!ctx) return; // Safety check
+
             chart = new Chart(ctx, {
                 type: chartType,
                 data: {
@@ -620,7 +617,7 @@
                                period === 'ytd' ? 'YTD Return (%)' : '1-Year Return (%)',
                         data: chartData,
                         backgroundColor: 'rgba(14, 165, 233, 0.6)',
-                        borderColor: var(--accent),
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
                         borderWidth: 2,
                         tension: 0.3
                     }]
@@ -631,18 +628,18 @@
                     plugins: {
                         legend: {
                             position: 'top',
-                            labels: { color: var(--text) }
+                            labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            grid: { color: var(--border) },
-                            ticks: { color: var(--text) }
+                            grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() },
+                            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         },
                         x: {
-                            grid: { color: var(--border) },
-                            ticks: { color: var(--text) }
+                            grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() },
+                            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         }
                     }
                 }
@@ -654,8 +651,8 @@
             el.addEventListener('change', updateComparison);
         });
 
-        // Initial load – show placeholder
-        document.addEventListener('DOMContentLoaded', () => {
+        // Run once after everything is loaded
+        window.addEventListener('load', () => {
             updateComparison();
         });
 
@@ -664,7 +661,7 @@
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
-            if (chart) updateComparison();
+            updateComparison(); // Re-render chart with new colors
         }
         window.addEventListener('load', () => {
             const saved = localStorage.getItem('theme') || 'light';
