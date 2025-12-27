@@ -142,6 +142,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Bar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="barChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -149,6 +152,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Horizontal Bar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="horizontalBarChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -156,6 +162,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Line Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="lineChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -163,6 +172,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Radar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="radarChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -170,6 +182,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Doughnut Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="doughnutChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -177,6 +192,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Pie Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="pieChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
 
@@ -184,6 +202,9 @@
                 <h3 class="text-2xl font-semibold mb-4">Polar Area Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="polarAreaChart"></canvas>
+                    <div class="placeholder-text">
+                        Select one or more ETFs above to display the chart
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,19 +259,30 @@
             });
 
             if (selected.length === 0) {
-                chartIds.forEach(id => document.querySelector(`#${id}`).parentNode.querySelector('.placeholder-text')?.style.display = 'block');
-                Object.values(charts).forEach(ch => ch.destroy());
+                chartIds.forEach(id => {
+                    const wrapper = document.querySelector(`#${id}`).parentNode;
+                    wrapper.querySelector('.placeholder-text').style.display = 'block';
+                });
+                Object.values(charts).forEach(ch => {
+                    if (ch) ch.destroy();
+                });
+                Object.keys(charts).forEach(key => delete charts[key]);
                 return;
             }
 
-            chartIds.forEach(id => document.querySelector(`#${id}`).parentNode.querySelector('.placeholder-text')?.style.display = 'none');
+            chartIds.forEach(id => {
+                const wrapper = document.querySelector(`#${id}`).parentNode;
+                wrapper.querySelector('.placeholder-text').style.display = 'none';
+            });
 
             const labels = selected.map(key => document.querySelector(`label input[value="${key}"]`).parentNode.textContent.trim());
             const values = selected.map(key => data[key] || 0);
 
             chartIds.forEach((id, index) => {
-                if (charts[id]) charts[id].destroy();
                 const ctx = document.getElementById(id).getContext('2d');
+                if (charts[id]) {
+                    charts[id].destroy();
+                }
                 charts[id] = new Chart(ctx, {
                     type: chartTypes[index],
                     data: {
