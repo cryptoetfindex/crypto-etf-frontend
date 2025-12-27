@@ -160,17 +160,16 @@
         #etf-table tr:last-child td {
             border-bottom: none;
         }
-        /* Chart container */
+        /* Chart container - forced visibility */
         .chart-wrapper {
             position: relative;
-            height: 450px;
             width: 100%;
+            min-height: 500px;
             margin-top: 2rem;
-        }
-        canvas {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
         }
         .placeholder-text {
             position: absolute;
@@ -178,7 +177,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 1.4rem;
-            opacity: 0.8;
+            opacity: 0.6;
             pointer-events: none;
             text-align: center;
             width: 80%;
@@ -209,12 +208,14 @@
             </select>
         </div>
     </nav>
+
     <!-- Main Content -->
     <main class="container max-w-1400 mx-auto p-6">
         <header class="text-center py-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Performance Comparator 2025</h1>
             <p class="text-xl max-w-4xl mx-auto opacity-90">Side-by-side comparison of returns (YTD, 1Y, since inception) with interactive charts for Bitcoin, Ethereum, and thematic ETFs (data as of Dec 26, 2025).</p>
         </header>
+
         <div class="card">
             <div class="calculator-form">
                 <div class="input-group">
@@ -336,6 +337,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="input-group">
                     <label for="period">Select Time Period</label>
                     <select id="period">
@@ -344,6 +346,7 @@
                         <option value="1y">1 Year</option>
                     </select>
                 </div>
+
                 <div class="input-group">
                     <label for="chart-type">Chart Type</label>
                     <select id="chart-type">
@@ -356,6 +359,7 @@
                         <option value="polarArea">Polar Area</option>
                     </select>
                 </div>
+
                 <div class="result-box">
                     <div id="result-content">
                         <h3 class="text-xl font-semibold mb-4 text-center">Performance Comparison</h3>
@@ -380,6 +384,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Comprehensive Performance Guide -->
         <section class="section card mt-12">
             <h2>Understanding Crypto ETF Performance (2025)</h2>
@@ -406,10 +411,12 @@
                 <li>Consider both absolute returns and risk-adjusted metrics.</li>
             </ul>
         </section>
+
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool is for educational purposes only and does not constitute financial or investment advice. Performance data is historical and not indicative of future results. Crypto investments are volatile and carry risk of loss. Data as of December 26, 2025; subject to change.
         </p>
+
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -422,6 +429,7 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
     </main>
+
     <script>
         const HISTORICAL_RETURNS = {
             'since-inception': {
@@ -549,10 +557,8 @@
         const placeholder = document.getElementById('chart-placeholder');
 
         function updateComparison() {
-            const selectedKeys = [];
-            document.querySelectorAll('#etf-table input[type="checkbox"]:checked').forEach(cb => {
-                selectedKeys.push(cb.value);
-            });
+            const selectedKeys = Array.from(document.querySelectorAll('#etf-table input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
 
             const period = document.getElementById('period').value;
             const chartType = document.getElementById('chart-type').value;
@@ -601,7 +607,8 @@
             }
 
             // Create new chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const canvas = document.getElementById('performanceChart');
+            const ctx = canvas.getContext('2d');
             chart = new Chart(ctx, {
                 type: chartType,
                 data: {
@@ -611,7 +618,7 @@
                                period === 'ytd' ? 'YTD Return (%)' : '1-Year Return (%)',
                         data: chartData,
                         backgroundColor: 'rgba(14, 165, 233, 0.6)',
-                        borderColor: var(--accent),
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
                         borderWidth: 2,
                         tension: 0.3
                     }]
@@ -622,35 +629,40 @@
                     plugins: {
                         legend: {
                             position: 'top',
-                            labels: { color: var(--text) }
+                            labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         }
                     },
-                    scales: chartType.includes('Bar') ? {
+                    scales: {
                         y: {
                             beginAtZero: true,
-                            grid: { color: var(--border) },
-                            ticks: { color: var(--text) }
+                            grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() },
+                            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         },
                         x: {
-                            grid: { color: var(--border) },
-                            ticks: { color: var(--text) }
+                            grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() },
+                            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() }
                         }
-                    } : {}
+                    }
                 }
             });
         }
+
         // Listeners
         document.querySelectorAll('#etf-table input[type="checkbox"], #period, #chart-type').forEach(el => {
             el.addEventListener('change', updateComparison);
         });
-        // Initial load – show placeholder
-        document.addEventListener('DOMContentLoaded', updateComparison);
+
+        // Run on DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            updateComparison();
+        });
+
         // Theme switcher
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
-            if (chart) updateComparison();
+            updateComparison();
         }
         window.addEventListener('load', () => {
             const saved = localStorage.getItem('theme') || 'light';
