@@ -160,6 +160,10 @@
         #etf-table tr:last-child td {
             border-bottom: none;
         }
+        #performanceChart {
+            max-height: 400px;
+            width: 100% !important;
+        }
     </style>
 </head>
 <body>
@@ -197,7 +201,7 @@
         <div class="card">
             <div class="calculator-form">
                 <div class="input-group">
-                    <label>Select ETFs to Compare</label>
+                    <label>Select ETFs to Compare (including Traditional ETFs)</label>
                     <table id="etf-table">
                         <thead>
                             <tr>
@@ -209,88 +213,109 @@
                         <tbody>
                             <tr>
                                 <td><input type="checkbox" id="etf-IBIT" value="IBIT"></td>
-                                <td>IBIT - BlackRock</td>
+                                <td>IBIT - BlackRock (Crypto)</td>
                                 <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-FBTC" value="FBTC"></td>
-                                <td>FBTC - Fidelity</td>
+                                <td>FBTC - Fidelity (Crypto)</td>
                                 <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-GBTC" value="GBTC"></td>
-                                <td>GBTC - Grayscale</td>
+                                <td>GBTC - Grayscale (Crypto)</td>
                                 <td>1.50</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ARKB" value="ARKB"></td>
-                                <td>ARKB - ARK/21Shares</td>
+                                <td>ARKB - ARK/21Shares (Crypto)</td>
                                 <td>0.21</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-BITB" value="BITB"></td>
-                                <td>BITB - Bitwise</td>
+                                <td>BITB - Bitwise (Crypto)</td>
                                 <td>0.20</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-average-btc" value="average-btc"></td>
-                                <td>Average Bitcoin ETF</td>
+                                <td>Average Bitcoin ETF (Crypto)</td>
                                 <td>~0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHA" value="ETHA"></td>
-                                <td>ETHA - BlackRock</td>
+                                <td>ETHA - BlackRock (Crypto)</td>
                                 <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-FETH" value="FETH"></td>
-                                <td>FETH - Fidelity</td>
+                                <td>FETH - Fidelity (Crypto)</td>
                                 <td>0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHE" value="ETHE"></td>
-                                <td>ETHE - Grayscale</td>
+                                <td>ETHE - Grayscale (Crypto)</td>
                                 <td>2.50</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETH-MINI" value="ETH-MINI"></td>
-                                <td>ETH Mini - Grayscale</td>
+                                <td>ETH Mini - Grayscale (Crypto)</td>
                                 <td>0.15</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-ETHW" value="ETHW"></td>
-                                <td>ETHW - Bitwise</td>
+                                <td>ETHW - Bitwise (Crypto)</td>
                                 <td>0.20</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-average-eth" value="average-eth"></td>
-                                <td>Average Ethereum ETF</td>
+                                <td>Average Ethereum ETF (Crypto)</td>
                                 <td>~0.25</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-BITQ" value="BITQ"></td>
-                                <td>BITQ - Crypto Innovators</td>
+                                <td>BITQ - Crypto Innovators (Crypto)</td>
                                 <td>0.85</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-MSTX" value="MSTX"></td>
-                                <td>MSTX - 2x MicroStrategy (Leveraged)</td>
+                                <td>MSTX - 2x MicroStrategy (Leveraged Crypto)</td>
                                 <td>1.05</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-WGMI" value="WGMI"></td>
-                                <td>WGMI - Mining/AI</td>
+                                <td>WGMI - Mining/AI (Crypto)</td>
                                 <td>0.75</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-STCE" value="STCE"></td>
-                                <td>STCE - Schwab Thematic</td>
+                                <td>STCE - Schwab Thematic (Crypto)</td>
                                 <td>0.30</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="etf-MNRS" value="MNRS"></td>
-                                <td>MNRS - Grayscale Miners</td>
+                                <td>MNRS - Grayscale Miners (Crypto)</td>
                                 <td>0.65</td>
+                            </tr>
+                            <!-- Traditional ETFs -->
+                            <tr>
+                                <td><input type="checkbox" id="etf-SPY" value="SPY"></td>
+                                <td>SPY - S&P 500 (Traditional)</td>
+                                <td>0.09</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="etf-QQQ" value="QQQ"></td>
+                                <td>QQQ - Nasdaq-100 (Traditional)</td>
+                                <td>0.20</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="etf-VTI" value="VTI"></td>
+                                <td>VTI - Total Stock Market (Traditional)</td>
+                                <td>0.03</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="etf-VOO" value="VOO"></td>
+                                <td>VOO - Vanguard S&P 500 (Traditional)</td>
+                                <td>0.03</td>
                             </tr>
                         </tbody>
                     </table>
@@ -314,6 +339,7 @@
                                     <th class="border border-[var(--border)] p-3 text-left">ETF</th>
                                     <th class="border border-[var(--border)] p-3 text-left">Expense Ratio (%)</th>
                                     <th class="border border-[var(--border)] p-3 text-left">Return (%)</th>
+                                    <th class="border border-[var(--border)] p-3 text-left">Sharpe Ratio</th>
                                 </tr>
                             </thead>
                             <tbody id="comparison-body"></tbody>
@@ -350,12 +376,10 @@
                 <li>Consider both absolute returns and risk-adjusted metrics.</li>
             </ul>
         </section>
-
         <!-- Legal Disclaimer -->
         <p class="disclaimer">
             <strong>IMPORTANT LEGAL DISCLAIMER</strong>: This tool is for educational purposes only and does not constitute financial or investment advice. Performance data is historical and not indicative of future results. Crypto investments are volatile and carry risk of loss. Data as of December 26, 2025; subject to change.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -388,7 +412,11 @@
                 'MSTX': 75.0,
                 'WGMI': 58.0,
                 'STCE': 68.0,
-                'MNRS': 52.0
+                'MNRS': 52.0,
+                'SPY': 200.0, // Placeholder
+                'QQQ': 250.0,
+                'VTI': 180.0,
+                'VOO': 190.0
             },
             'ytd': {
                 'IBIT': 120.0,
@@ -407,7 +435,11 @@
                 'MSTX': 60.0,
                 'WGMI': 45.0,
                 'STCE': 55.0,
-                'MNRS': 40.0
+                'MNRS': 40.0,
+                'SPY': 28.0,
+                'QQQ': 35.0,
+                'VTI': 25.0,
+                'VOO': 27.0
             },
             '1y': {
                 'IBIT': 130.0,
@@ -426,8 +458,36 @@
                 'MSTX': 65.0,
                 'WGMI': 50.0,
                 'STCE': 60.0,
-                'MNRS': 45.0
+                'MNRS': 45.0,
+                'SPY': 25.0,
+                'QQQ': 30.0,
+                'VTI': 22.0,
+                'VOO': 24.0
             }
+        };
+
+        const VOLATILITY = { // Placeholder annual volatility %
+            'IBIT': 50.0,
+            'FBTC': 50.0,
+            'GBTC': 55.0,
+            'ARKB': 50.0,
+            'BITB': 50.0,
+            'average-btc': 50.0,
+            'ETHA': 60.0,
+            'FETH': 60.0,
+            'ETHE': 65.0,
+            'ETH-MINI': 60.0,
+            'ETHW': 60.0,
+            'average-eth': 60.0,
+            'BITQ': 70.0,
+            'MSTX': 80.0,
+            'WGMI': 75.0,
+            'STCE': 65.0,
+            'MNRS': 70.0,
+            'SPY': 15.0,
+            'QQQ': 20.0,
+            'VTI': 18.0,
+            'VOO': 15.0
         };
 
         const EXPENSE_RATIOS = {
@@ -447,8 +507,14 @@
             'MSTX': 1.05,
             'WGMI': 0.75,
             'STCE': 0.30,
-            'MNRS': 0.65
+            'MNRS': 0.65,
+            'SPY': 0.09,
+            'QQQ': 0.20,
+            'VTI': 0.03,
+            'VOO': 0.03
         };
+
+        const RISK_FREE_RATE = 0.02; // 2% risk-free rate
 
         let chart = null;
 
@@ -478,12 +544,15 @@
                 const label = document.querySelector(`#etf-table label[for="etf-${key}"]`).textContent.trim();
                 const returnPct = returns[key] || 0;
                 const expense = EXPENSE_RATIOS[key] || 0;
+                const volatility = VOLATILITY[key] || 1; // Avoid division by zero
+                const sharpe = ((returnPct / 100) - RISK_FREE_RATE) / (volatility / 100); // Annualized assumption
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="border border-[var(--border)] p-3">${label}</td>
                     <td class="border border-[var(--border)] p-3">${expense.toFixed(2)}</td>
                     <td class="border border-[var(--border)] p-3 ${returnPct >= 0 ? 'profit-positive' : 'profit-negative'}"><strong>${returnPct.toFixed(1)}%</strong></td>
+                    <td class="border border-[var(--border)] p-3">${sharpe.toFixed(2)}</td>
                 `;
                 tableBody.appendChild(row);
 
@@ -511,6 +580,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: 'top',
