@@ -14,7 +14,7 @@
     <meta property="og:description" content="Every Bitcoin-related ETF and ETP – spot, leveraged, inverse, strategy – with latest AUM, fees, and performance data.">
     <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
+    <link rel="canonical" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -24,12 +24,77 @@
             --background: linear-gradient(135deg, #0d1b2a, #1b263b);
             --text-color: #e0e1dd;
             --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
             --accent-color: #00ddeb;
             --shadow-color: rgba(0, 221, 235, 0.2);
             --button-bg: #00ddeb;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select, table, .disclaimer etc. */
+        [data-theme="light"] {
+            --background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            --text-color: #333333;
+            --card-bg: rgba(245, 245, 245, 0.9);
+            --accent-color: #80e8f0;
+            --shadow-color: rgba(128, 232, 240, 0.2);
+            --button-bg: #80e8f0;
+        }
+        [data-theme="dark"] {
+            --background: linear-gradient(135deg, #0a121e, #15283a);
+            --text-color: #d3d3d3;
+            --card-bg: rgba(21, 40, 58, 0.9);
+            --accent-color: #ffbb00;
+            --shadow-color: rgba(255, 187, 0, 0.2);
+            --button-bg: #ffbb00;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        .policy-btn {
+            background: var(--button-bg);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .policy-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .theme-select {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         table { 
             width: 100%; 
             border-collapse: separate; 
@@ -48,7 +113,13 @@
             top: 0; 
             z-index: 10; 
         }
-        /* Mobile responsive table - stack on small screens */
+        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
+        a {
+            color: var(--accent-color);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr { 
                 display: block; 
@@ -80,28 +151,26 @@
         }
         .positive { color: #00ff88; font-weight: bold; }
         .negative { color: #ff6666; font-weight: bold; }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
     </style>
 </head>
 <body>
     <div id="particles"></div>
-
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/frontend/bitcoin-etfs.html" class="text-var(--accent-color) hover:underline">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
             <select id="theme-select" class="theme-select">
                 <option value="normal">Normal</option>
@@ -152,7 +221,7 @@
                             <td data-label="Avg Volume">64,098,408</td>
                             <td data-label="Prev Close ($)">$48.71</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.01%</td>
-                            <td data-label="Details Page"><a href="/frontend/ibit.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/ibit.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">FBTC</td>
@@ -166,7 +235,7 @@
                             <td data-label="Avg Volume">6,354,806</td>
                             <td data-label="Prev Close ($)">$74.85</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.96%</td>
-                            <td data-label="Details Page"><a href="/frontend/fbtc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/fbtc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">GBTC</td>
@@ -180,7 +249,7 @@
                             <td data-label="Avg Volume">5,247,183</td>
                             <td data-label="Prev Close ($)">$67.10</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.03%</td>
-                            <td data-label="Details Page"><a href="/frontend/gbtc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/gbtc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BTC</td>
@@ -194,7 +263,7 @@
                             <td data-label="Avg Volume">2,388,091</td>
                             <td data-label="Prev Close ($)">$37.98</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.04%</td>
-                            <td data-label="Details Page"><a href="/frontend/btc-mini.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/btc-mini.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BITB</td>
@@ -208,7 +277,7 @@
                             <td data-label="Avg Volume">2,675,817</td>
                             <td data-label="Prev Close ($)">$46.63</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.02%</td>
-                            <td data-label="Details Page"><a href="/frontend/bitb.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bitb.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">ARKB</td>
@@ -222,7 +291,7 @@
                             <td data-label="Avg Volume">4,641,881</td>
                             <td data-label="Prev Close ($)">$28.51</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.89%</td>
-                            <td data-label="Details Page"><a href="/frontend/arkb.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/arkb.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">HODL</td>
@@ -236,7 +305,7 @@
                             <td data-label="Avg Volume">2,295,091</td>
                             <td data-label="Prev Close ($)">$24.28</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.02%</td>
-                            <td data-label="Details Page"><a href="/frontend/hodl.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/hodl.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BTCO</td>
@@ -250,7 +319,7 @@
                             <td data-label="Avg Volume">190,166</td>
                             <td data-label="Prev Close ($)">$85.57</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.98%</td>
-                            <td data-label="Details Page"><a href="/frontend/btco.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/btco.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">EZBC</td>
@@ -264,7 +333,7 @@
                             <td data-label="Avg Volume">278,591</td>
                             <td data-label="Prev Close ($)">$49.68</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.99%</td>
-                            <td data-label="Details Page"><a href="/frontend/ezbc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/ezbc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BRRR</td>
@@ -278,7 +347,7 @@
                             <td data-label="Avg Volume">421,482</td>
                             <td data-label="Prev Close ($)">$24.25</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.90%</td>
-                            <td data-label="Details Page"><a href="/frontend/brrr.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/brrr.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BTCW</td>
@@ -292,7 +361,7 @@
                             <td data-label="Avg Volume">58,754</td>
                             <td data-label="Prev Close ($)">$90.97</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.93%</td>
-                            <td data-label="Details Page"><a href="/frontend/btcw.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/btcw.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -312,68 +381,6 @@
                             <th>Issuer</th>
                             <th>Total Assets ($MM)</th>
                             <th>Expense Ratio</th>
-                            <th>YTD Return (%)</th>
-                            <th>1-Year Return (%)</th>
-                            <th>3-Year Return (%)</th>
-                            <th>Avg Volume</th>
-                            <th>Prev Close ($)</th>
-                            <th>1-Day Change (%)</th>
-                            <th>Type</th>
-                            <th>Details Page</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Ticker">BITO</td>
-                            <td data-label="ETF Name">ProShares Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$2,340.99</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-12.80%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+65.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">27,966,884</td>
-                            <td data-label="Prev Close ($)">$12.67</td>
-                            <td data-label="1-Day Change (%)" class="negative">-2.01%</td>
-                            <td data-label="Type">Futures-based</td>
-                            <td data-label="Details Page"><a href="/frontend/bito.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITX</td>
-                            <td data-label="ETF Name">2x Bitcoin Strategy ETF</td>
-                            <td data-label="Issuer">Volatility Shares</td>
-                            <td data-label="Total Assets ($MM)">$1,442.71</td>
-                            <td data-label="Expense Ratio">1.85%</td>
-                            <td data-label="YTD Return (%)" class="negative">-40.44%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-20.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">10,712,780</td>
-                            <td data-label="Prev Close ($)">$26.96</td>
-                            <td data-label="1-Day Change (%)" class="negative">-3.89%</td>
-                            <td data-label="Type">2x Leveraged</td>
-                            <td data-label="Details Page"><a href="/frontend/bitx.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITU</td>
-                            <td data-label="ETF Name">ProShares Ultra Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$708.62</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-38.95%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-15.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">3,750,597</td>
-                            <td data-label="Prev Close ($)">$26.95</td>
-                            <td data-label="1-Day Change (%)" class="negative">-4.13%</td>
-                            <td data-label="Type">2x Leveraged</td>
-                            <td data-label="Details Page"><a href="/frontend/bitu.html" class="text-var(--accent-color)">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITI</td>
-                            <td data-label="ETF Name">ProShares Short Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$122.73</td>
-                            <td data-label="Expense Ratio">0.95%</td>
                             <td data-label="YTD Return (%)" class="negative">-0.17%</td>
                             <td data-label="1-Year Return (%)" class="negative">-60.00%</td>
                             <td data-label="3-Year Return (%)">N/A</td>
@@ -381,7 +388,7 @@
                             <td data-label="Prev Close ($)">$23.63</td>
                             <td data-label="1-Day Change (%)" class="positive">+1.99%</td>
                             <td data-label="Type">Inverse (-1x)</td>
-                            <td data-label="Details Page"><a href="/frontend/biti.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/biti.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">SBIT</td>
@@ -396,7 +403,7 @@
                             <td data-label="Prev Close ($)">$45.69</td>
                             <td data-label="1-Day Change (%)" class="positive">+4.05%</td>
                             <td data-label="Type">Inverse (-2x)</td>
-                            <td data-label="Details Page"><a href="/frontend/sbit.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/sbit.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BTCI</td>
@@ -411,7 +418,7 @@
                             <td data-label="Prev Close ($)">$44.13</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.98%</td>
                             <td data-label="Type">Option Income</td>
-                            <td data-label="Details Page"><a href="/frontend/btci.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/btci.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BITY</td>
@@ -426,7 +433,7 @@
                             <td data-label="Prev Close ($)">$39.19</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.75%</td>
                             <td data-label="Type">Option Income</td>
-                            <td data-label="Details Page"><a href="/frontend/bity.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bity.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BITC</td>
@@ -441,7 +448,7 @@
                             <td data-label="Prev Close ($)">$37.67</td>
                             <td data-label="1-Day Change (%)" class="positive">+0.05%</td>
                             <td data-label="Type">Rotation Strategy</td>
-                            <td data-label="Details Page"><a href="/frontend/bitc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bitc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">DEFI</td>
@@ -456,7 +463,7 @@
                             <td data-label="Prev Close ($)">$97.18</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.12%</td>
                             <td data-label="Type">Futures-based</td>
-                            <td data-label="Details Page"><a href="/frontend/defi.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/defi.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BAGY</td>
@@ -471,7 +478,7 @@
                             <td data-label="Prev Close ($)">$36.94</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.76%</td>
                             <td data-label="Type">Covered Call</td>
-                            <td data-label="Details Page"><a href="/frontend/bagy.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bagy.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -512,7 +519,7 @@
                             <td data-label="Prev Close ($)">$149.00</td>
                             <td data-label="1-Day Change (%)" class="negative">-3.20%</td>
                             <td data-label="Type">Tech + Crypto Exposure</td>
-                            <td data-label="Details Page"><a href="/frontend/arkw.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/arkw.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BITQ</td>
@@ -526,7 +533,7 @@
                             <td data-label="Prev Close ($)">$19.63</td>
                             <td data-label="1-Day Change (%)" class="negative">-3.96%</td>
                             <td data-label="Type">Crypto Companies</td>
-                            <td data-label="Details Page"><a href="/frontend/bitq.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bitq.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">MSTX</td>
@@ -540,7 +547,7 @@
                             <td data-label="Prev Close ($)">$4.37</td>
                             <td data-label="1-Day Change (%)" class="negative">-8.19%</td>
                             <td data-label="Type">2x MicroStrategy</td>
-                            <td data-label="Details Page"><a href="/frontend/mstx.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/mstx.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">STCE</td>
@@ -554,7 +561,7 @@
                             <td data-label="Prev Close ($)">$60.24</td>
                             <td data-label="1-Day Change (%)" class="negative">-3.52%</td>
                             <td data-label="Type">Crypto Thematic</td>
-                            <td data-label="Details Page"><a href="/frontend/stce.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/stce.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">WGMI</td>
@@ -568,7 +575,7 @@
                             <td data-label="Prev Close ($)">$36.51</td>
                             <td data-label="1-Day Change (%)" class="negative">-4.82%</td>
                             <td data-label="Type">Bitcoin Miners</td>
-                            <td data-label="Details Page"><a href="/frontend/wgmi.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/wgmi.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">SPBC</td>
@@ -582,7 +589,7 @@
                             <td data-label="Prev Close ($)">$43.96</td>
                             <td data-label="1-Day Change (%)" class="negative">-1.26%</td>
                             <td data-label="Type">Equity + Bitcoin</td>
-                            <td data-label="Details Page"><a href="/frontend/spbc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/spbc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BITS</td>
@@ -596,7 +603,7 @@
                             <td data-label="Prev Close ($)">$75.87</td>
                             <td data-label="1-Day Change (%)" class="negative">-3.45%</td>
                             <td data-label="Type">Blockchain + Bitcoin</td>
-                            <td data-label="Details Page"><a href="/frontend/bits.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bits.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">MNRS</td>
@@ -610,7 +617,7 @@
                             <td data-label="Prev Close ($)">$29.34</td>
                             <td data-label="1-Day Change (%)" class="negative">-5.11%</td>
                             <td data-label="Type">Bitcoin Miners</td>
-                            <td data-label="Details Page"><a href="/frontend/mnrs.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/mnrs.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">SATO</td>
@@ -624,7 +631,7 @@
                             <td data-label="Prev Close ($)">$18.86</td>
                             <td data-label="1-Day Change (%)" class="negative">-3.78%</td>
                             <td data-label="Type">Crypto Economy</td>
-                            <td data-label="Details Page"><a href="/frontend/sato.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/sato.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BLKC</td>
@@ -638,7 +645,7 @@
                             <td data-label="Prev Close ($)">N/A</td>
                             <td data-label="1-Day Change (%)">0.00%</td>
                             <td data-label="Type">Blockchain Companies</td>
-                            <td data-label="Details Page"><a href="/frontend/blkc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/blkc.html">View →</a></td>
                         </tr>
                         <tr>
                             <td data-label="Ticker">BCOR</td>
@@ -652,7 +659,7 @@
                             <td data-label="Prev Close ($)">$26.62</td>
                             <td data-label="1-Day Change (%)" class="negative">-2.99%</td>
                             <td data-label="Type">Bitcoin Adopters</td>
-                            <td data-label="Details Page"><a href="/frontend/bcor.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Details Page"><a href="/frontend/bcor.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -674,21 +681,48 @@
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 pb-8">
-            <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
-                <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
-                <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
-                <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
-                <button class="policy-btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
-                <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
             </div>
-            <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
         </footer>
-    </div>
+    </main>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme apply, particles, modals
+        // Theme switcher
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'normal';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ddeb' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ddeb', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
