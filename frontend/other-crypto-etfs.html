@@ -5,61 +5,160 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Emerging & Other Crypto ETFs Directory 2025</title>
-    <meta name="description" content="Full list of all emerging spot crypto ETFs beyond Bitcoin and Ethereum in 2025 – XRP, Solana, multi-asset baskets, and other altcoins. Compare AUM, fees, issuers, and performance.">
-    <meta name="keywords" content="emerging crypto etfs 2025, xrp etfs list, solana etfs list, multi asset crypto etf, altcoin etfs aum fees">
+    <title>Complete Emerging & Other Crypto ETFs Directory - All Funds 2026</title>
+    <meta name="description" content="Full list of all emerging spot crypto ETFs beyond Bitcoin and Ethereum – XRP, Solana, multi-asset baskets, and other altcoins. Compare AUM, fees, issuers, and performance.">
+    <meta name="keywords" content="emerging crypto etfs 2026, xrp etfs list, solana etfs list, multi asset crypto etf, altcoin etfs aum fees">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Complete Emerging & Other Crypto ETFs Directory 2025">
-    <meta property="og:description" content="Every emerging spot crypto ETF – XRP, Solana, multi-asset – with AUM, fees, and official links.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/other-crypto-etfs.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/other-crypto-etfs.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Complete Emerging & Other Crypto ETFs Directory 2026">
+    <meta property="og:description" content="Every emerging spot crypto ETF – XRP, Solana, multi-asset – with latest AUM, fees, and official links.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/other-crypto-etfs.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/other-crypto-etfs.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select, table, .disclaimer etc. */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--accent-color); }
-        th { background: rgba(0, 221, 235, 0.1); color: var(--accent-color); }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        a {
+            color: var(--accent);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid var(--accent);
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: 45%;
+                font-weight: bold;
+                color: var(--accent);
+            }
+        }
+        .positive { color: #10b981; font-weight: bold; }
+        .negative { color: #ef4444; font-weight: bold; }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="particles"></div>
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="text-var(--accent-color) hover:underline">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="text-[var(--accent)] hover:underline">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
@@ -67,82 +166,129 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Emerging & Other Crypto ETFs Directory (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Full list of all spot ETFs beyond Bitcoin and Ethereum – XRP, Solana, multi-asset baskets, and other altcoins. Data approximate; verify with issuers.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Emerging & Other Crypto ETFs Directory</h1>
+            <p class="text-xl max-w-4xl mx-auto">Full list of all spot ETFs beyond Bitcoin and Ethereum – XRP, Solana, multi-asset baskets, and other altcoins. Data approximate as of January 01, 2026; verify with issuers.</p>
         </header>
 
         <!-- XRP ETFs Section -->
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Spot XRP ETFs – Fastest Growing Category (~$1.2B+ Total AUM)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-center">Spot XRP ETFs (~$1.2B+ Total AUM)</h2>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
+                            <th>ETF Name</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM</th>
-                            <th>Expense Ratio</th>
-                            <th>Launch</th>
-                            <th>Recent Notes</th>
-                            <th>Official Site</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Prev Close ($)</th>
+                            <th>1-Day Change (%)</th>
                             <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>XRPC</td>
-                            <td>Canary Capital</td>
-                            <td>$300M+</td>
-                            <td>0.75–1.15%</td>
-                            <td>Nov 2025</td>
-                            <td>Launch leader; massive inflows</td>
-                            <td><a href="https://canarycapital.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/xrpc.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Ticker">XRPC</td>
+                            <td data-label="ETF Name">Canary XRP ETF</td>
+                            <td data-label="Issuer">Canary Capital</td>
+                            <td data-label="Total Assets ($MM)">324.67</td>
+                            <td data-label="Prev Close ($)">$19.45</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.26%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpc.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>GXRP</td>
-                            <td>Grayscale</td>
-                            <td>$200M+</td>
-                            <td>0.35–2.50%</td>
-                            <td>Nov 2025</td>
-                            <td>Converted trust; steady growth</td>
-                            <td><a href="https://grayscale.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/gxrp.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Ticker">XRP</td>
+                            <td data-label="ETF Name">Bitwise XRP ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">232.27</td>
+                            <td data-label="Prev Close ($)">$20.52</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.05%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrp.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>(Bitwise XRP)</td>
-                            <td>Bitwise</td>
-                            <td>$150M+</td>
-                            <td>0.20–0.50%</td>
-                            <td>Nov 2025</td>
-                            <td>Low-fee option; rapid adoption</td>
-                            <td><a href="https://bitwiseinvestments.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td><a href="/frontend/bitwise-xrp.html" class="text-var(--accent-color)">View →</a></td>
+                            <td data-label="Ticker">XRPZ</td>
+                            <td data-label="ETF Name">Franklin XRP ETF</td>
+                            <td data-label="Issuer">Franklin Templeton</td>
+                            <td data-label="Total Assets ($MM)">209.87</td>
+                            <td data-label="Prev Close ($)">$19.91</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.07%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpz.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>EZRP / TOXR</td>
-                            <td>Franklin Templeton / 21Shares</td>
-                            <td>$100M+ each</td>
-                            <td>Varies</td>
-                            <td>Nov 2025</td>
-                            <td>Established issuers entering</td>
-                            <td>Issuer sites</td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">XXRP</td>
+                            <td data-label="ETF Name">Teucrium 2x Long Daily XRP ETF</td>
+                            <td data-label="Issuer">Teucrium</td>
+                            <td data-label="Total Assets ($MM)">187.35</td>
+                            <td data-label="Prev Close ($)">$9.54</td>
+                            <td data-label="1-Day Change (%)" class="negative">-3.73%</td>
+                            <td data-label="Details Page"><a href="/frontend/xxrp.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Various</td>
-                            <td>REX-Osprey, Amplify, etc.</td>
-                            <td>Varies</td>
-                            <td>Varies</td>
-                            <td>2025</td>
-                            <td>Smaller entrants</td>
-                            <td>Issuer sites</td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">XRPI</td>
+                            <td data-label="ETF Name">Volatility Shares Trust XRP ETF</td>
+                            <td data-label="Issuer">Volatility Shares</td>
+                            <td data-label="Total Assets ($MM)">138.59</td>
+                            <td data-label="Prev Close ($)">$10.57</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.04%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpi.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">XRPT</td>
+                            <td data-label="ETF Name">Volatility Shares Trust XRP 2X ETF</td>
+                            <td data-label="Issuer">Volatility Shares</td>
+                            <td data-label="Total Assets ($MM)">97.74</td>
+                            <td data-label="Prev Close ($)">$4.93</td>
+                            <td data-label="1-Day Change (%)" class="negative">-3.90%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpt.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">XRPR</td>
+                            <td data-label="ETF Name">REX-Osprey XRP ETF</td>
+                            <td data-label="Issuer">REX-Osprey</td>
+                            <td data-label="Total Assets ($MM)">92.30</td>
+                            <td data-label="Prev Close ($)">$14.98</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.35%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpr.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">UXRP</td>
+                            <td data-label="ETF Name">ProShares Ultra XRP ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">58.43</td>
+                            <td data-label="Prev Close ($)">$9.05</td>
+                            <td data-label="1-Day Change (%)" class="negative">-4.13%</td>
+                            <td data-label="Details Page"><a href="/frontend/uxrp.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">XRPM</td>
+                            <td data-label="ETF Name">Amplify XRP 3% Monthly Premium Income ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Total Assets ($MM)">5.40</td>
+                            <td data-label="Prev Close ($)">$21.62</td>
+                            <td data-label="1-Day Change (%)" class="negative">-1.73%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpm.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">XRPK</td>
+                            <td data-label="ETF Name">T-REX 2X Long XRP Daily Target ETF</td>
+                            <td data-label="Issuer">T-REX</td>
+                            <td data-label="Total Assets ($MM)">199.35</td>
+                            <td data-label="Prev Close ($)">$19.65</td>
+                            <td data-label="1-Day Change (%)" class="negative">-4.09%</td>
+                            <td data-label="Details Page"><a href="/frontend/xrpk.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TOXR</td>
+                            <td data-label="ETF Name">21Shares XRP ETF Beneficial INT SH</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Total Assets ($MM)">-</td>
+                            <td data-label="Prev Close ($)">$17.87</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.10%</td>
+                            <td data-label="Details Page"><a href="/frontend/toxr.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">XRP ETFs hit $1.2B+ combined AUM with zero outflow days – fastest-growing category ever.</p>
         </div>
 
         <!-- Solana ETFs Section -->
@@ -153,162 +299,396 @@
                     <thead>
                         <tr>
                             <th>Ticker</th>
+                            <th>ETF Name</th>
                             <th>Issuer</th>
-                            <th>Approx. AUM</th>
-                            <th>Expense Ratio</th>
-                            <th>Launch</th>
-                            <th>Recent Notes</th>
-                            <th>Official Site</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Prev Close ($)</th>
+                            <th>1-Day Change (%)</th>
                             <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>FSOL</td>
-                            <td>Fidelity</td>
-                            <td>$200M+</td>
-                            <td>0.25%</td>
-                            <td>2025</td>
-                            <td>Major player; staking potential</td>
-                            <td><a href="https://www.fidelity.com/etfs/crypto-funds" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">BSOL</td>
+                            <td data-label="ETF Name">Bitwise Solana Staking ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">629.80</td>
+                            <td data-label="Prev Close ($)">$16.40</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.18%</td>
+                            <td data-label="Details Page"><a href="/frontend/bsol.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BSOL</td>
-                            <td>Bitwise</td>
-                            <td>$150M+</td>
-                            <td>0.20–0.25%</td>
-                            <td>2025</td>
-                            <td>Low fees; strong early flows</td>
-                            <td><a href="https://bitwiseinvestments.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">SSK</td>
+                            <td data-label="ETF Name">REX-Osprey SOL + Staking ETF</td>
+                            <td data-label="Issuer">REX-Osprey</td>
+                            <td data-label="Total Assets ($MM)">159.72</td>
+                            <td data-label="Prev Close ($)">$19.06</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.58%</td>
+                            <td data-label="Details Page"><a href="/frontend/ssk.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>SOL</td>
-                            <td>VanEck / 21Shares</td>
-                            <td>$150M+</td>
-                            <td>0.20–0.50%</td>
-                            <td>2025</td>
-                            <td>Competitive options</td>
-                            <td>Issuer sites</td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">GSOL</td>
+                            <td data-label="ETF Name">Grayscale Solana Trust ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Total Assets ($MM)">157.97</td>
+                            <td data-label="Prev Close ($)">$9.10</td>
+                            <td data-label="1-Day Change (%)" class="negative">-1.57%</td>
+                            <td data-label="Details Page"><a href="/frontend/gsol.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>SOLC</td>
-                            <td>Canary Marinade</td>
-                            <td>Varies</td>
-                            <td>0.50%</td>
-                            <td>2025</td>
-                            <td>Staking-focused variant</td>
-                            <td>Issuer site</td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">VSOL</td>
+                            <td data-label="ETF Name">VanEck Solana ETF</td>
+                            <td data-label="Issuer">VanEck</td>
+                            <td data-label="Total Assets ($MM)">23.20</td>
+                            <td data-label="Prev Close ($)">$16.17</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.27%</td>
+                            <td data-label="Details Page"><a href="/frontend/vsol.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Others</td>
-                            <td>Invesco, CoinShares, etc.</td>
-                            <td>Varies</td>
-                            <td>Varies</td>
-                            <td>2025</td>
-                            <td>Additional smaller funds</td>
-                            <td>Issuer sites</td>
-                            <td>Coming soon</td>
+                            <td data-label="Ticker">TSOL</td>
+                            <td data-label="ETF Name">21Shares Solana ETF</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Total Assets ($MM)">5.69</td>
+                            <td data-label="Prev Close ($)">$12.48</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.18%</td>
+                            <td data-label="Details Page"><a href="/frontend/tsol.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">QSOL</td>
+                            <td data-label="ETF Name">Invesco Galaxy Solana ETF</td>
+                            <td data-label="Issuer">Invesco</td>
+                            <td data-label="Total Assets ($MM)">2.20</td>
+                            <td data-label="Prev Close ($)">$12.41</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.12%</td>
+                            <td data-label="Details Page"><a href="/frontend/qsol.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">SOEZ</td>
+                            <td data-label="ETF Name">Franklin Solana ETF</td>
+                            <td data-label="Issuer">Franklin Templeton</td>
+                            <td data-label="Total Assets ($MM)">3.12</td>
+                            <td data-label="Prev Close ($)">$21.19</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.21%</td>
+                            <td data-label="Details Page"><a href="/frontend/soez.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">SOLC</td>
+                            <td data-label="ETF Name">Canary Marinade Solana ETF</td>
+                            <td data-label="Issuer">Canary</td>
+                            <td data-label="Total Assets ($MM)">1.91</td>
+                            <td data-label="Prev Close ($)">$24.06</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.27%</td>
+                            <td data-label="Details Page"><a href="/frontend/solc.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">SOLM</td>
+                            <td data-label="ETF Name">Amplify Solana 3% Monthly Option Income ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Total Assets ($MM)">568.02K</td>
+                            <td data-label="Prev Close ($)">$18.49</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.57%</td>
+                            <td data-label="Details Page"><a href="/frontend/solm.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">SOLX</td>
+                            <td data-label="ETF Name">T-REX 2X Long SOL Daily Target ETF</td>
+                            <td data-label="Issuer">T-REX</td>
+                            <td data-label="Total Assets ($MM)">233.73K</td>
+                            <td data-label="Prev Close ($)">$23.85</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.93%</td>
+                            <td data-label="Details Page"><a href="/frontend/solx.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">SLON</td>
+                            <td data-label="ETF Name">ProShares Ultra Solana ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">28.77</td>
+                            <td data-label="Prev Close ($)">$14.07</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.50%</td>
+                            <td data-label="Details Page"><a href="/frontend/slon.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Solana ETFs show steady growth; regulatory delay on options trading noted.</p>
         </div>
 
-        <!-- Multi-Asset Basket ETFs Section -->
+        <!-- Other Altcoin & Multi-Asset ETFs -->
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Multi-Asset / Basket Crypto ETFs (~$500M+ Combined AUM)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-center">Other Altcoin & Multi-Asset Crypto ETFs</h2>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
+                            <th>ETF Name</th>
                             <th>Issuer</th>
-                            <th>Key Holdings</th>
-                            <th>Approx. AUM</th>
-                            <th>Expense Ratio</th>
-                            <th>Notes</th>
-                            <th>Official Site</th>
+                            <th>Focus</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Prev Close ($)</th>
+                            <th>1-Day Change (%)</th>
+                            <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>GDLC</td>
-                            <td>Grayscale Digital Large Cap</td>
-                            <td>BTC, ETH, XRP, SOL, ADA + others</td>
-                            <td>$200M+</td>
-                            <td>~0.59%</td>
-                            <td>Large-cap diversified basket</td>
-                            <td><a href="https://grayscale.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td data-label="Ticker">BITW</td>
+                            <td data-label="ETF Name">Bitwise 10 Crypto Index ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Focus">Top 10 Crypto Basket</td>
+                            <td data-label="Total Assets ($MM)">-</td>
+                            <td data-label="Prev Close ($)">$58.76</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.36%</td>
+                            <td data-label="Details Page"><a href="/frontend/bitw.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>EZPZ</td>
-                            <td>Franklin Templeton</td>
-                            <td>BTC, ETH, XRP, SOL, DOGE + more</td>
-                            <td>$150M+</td>
-                            <td>Varies</td>
-                            <td>Expanded altcoin exposure</td>
-                            <td><a href="https://www.franklintempleton.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td data-label="Ticker">GDLC</td>
+                            <td data-label="ETF Name">Grayscale CoinDesk Crypto 5 ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Focus">Top 5 Crypto Basket</td>
+                            <td data-label="Total Assets ($MM)">535.84</td>
+                            <td data-label="Prev Close ($)">$41.32</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.38%</td>
+                            <td data-label="Details Page"><a href="/frontend/gdlc.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>NCIQ</td>
-                            <td>Hashdex Nasdaq Crypto Index</td>
-                            <td>Index-based (BTC, ETH, major alts)</td>
-                            <td>$100M+</td>
-                            <td>Varies</td>
-                            <td>Passive index tracking</td>
-                            <td><a href="https://hashdex.com/" target="_blank" class="text-var(--accent-color)">Link</a></td>
+                            <td data-label="Ticker">NCIQ</td>
+                            <td data-label="ETF Name">Hashdex Nasdaq Crypto Index US ETF</td>
+                            <td data-label="Issuer">Hashdex</td>
+                            <td data-label="Focus">Broad Crypto Index</td>
+                            <td data-label="Total Assets ($MM)">120.82</td>
+                            <td data-label="Prev Close ($)">$22.73</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.34%</td>
+                            <td data-label="Details Page"><a href="/frontend/nciq.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>Others</td>
-                            <td>Various (REX, Bitwise baskets)</td>
-                            <td>Varies</td>
-                            <td>Varies</td>
-                            <td>Varies</td>
-                            <td>Smaller diversified products</td>
-                            <td>Issuer sites</td>
+                            <td data-label="Ticker">EZPZ</td>
+                            <td data-label="ETF Name">Franklin Crypto Index ETF</td>
+                            <td data-label="Issuer">Franklin Templeton</td>
+                            <td data-label="Focus">Diversified Crypto Basket</td>
+                            <td data-label="Total Assets ($MM)">10.19</td>
+                            <td data-label="Prev Close ($)">$22.64</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.64%</td>
+                            <td data-label="Details Page"><a href="/frontend/ezpz.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">GLNK</td>
+                            <td data-label="ETF Name">Grayscale Chainlink Trust ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Focus">Chainlink (LINK)</td>
+                            <td data-label="Total Assets ($MM)">73.96</td>
+                            <td data-label="Prev Close ($)">$10.89</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.96%</td>
+                            <td data-label="Details Page"><a href="/frontend/glnk.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">HBR</td>
+                            <td data-label="ETF Name">Canary HBAR ETF</td>
+                            <td data-label="Issuer">Canary</td>
+                            <td data-label="Focus">Hedera (HBAR)</td>
+                            <td data-label="Total Assets ($MM)">53.39</td>
+                            <td data-label="Prev Close ($)">$14.63</td>
+                            <td data-label="1-Day Change (%)" class="negative">-3.01%</td>
+                            <td data-label="Details Page"><a href="/frontend/hbr.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">LTCC</td>
+                            <td data-label="ETF Name">Canary Litecoin ETF</td>
+                            <td data-label="Issuer">Canary</td>
+                            <td data-label="Focus">Litecoin (LTC)</td>
+                            <td data-label="Total Assets ($MM)">7.07</td>
+                            <td data-label="Prev Close ($)">$18.63</td>
+                            <td data-label="1-Day Change (%)" class="negative">-2.20%</td>
+                            <td data-label="Details Page"><a href="/frontend/ltcc.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">DOJE</td>
+                            <td data-label="ETF Name">REX-Osprey DOGE ETF</td>
+                            <td data-label="Issuer">REX-Osprey</td>
+                            <td data-label="Focus">Dogecoin (DOGE)</td>
+                            <td data-label="Total Assets ($MM)">19.94</td>
+                            <td data-label="Prev Close ($)">$10.91</td>
+                            <td data-label="1-Day Change (%)" class="negative">-5.13%</td>
+                            <td data-label="Details Page"><a href="/frontend/doje.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">BWOW</td>
+                            <td data-label="ETF Name">Bitwise Dogecoin ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Focus">Dogecoin (DOGE)</td>
+                            <td data-label="Total Assets ($MM)">1.21</td>
+                            <td data-label="Prev Close ($)">$19.23</td>
+                            <td data-label="1-Day Change (%)" class="negative">-4.54%</td>
+                            <td data-label="Details Page"><a href="/frontend/bwow.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">GDOG</td>
+                            <td data-label="ETF Name">Grayscale Dogecoin Trust ETF Accred Inv</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Focus">Dogecoin (DOGE)</td>
+                            <td data-label="Total Assets ($MM)">3.80</td>
+                            <td data-label="Prev Close ($)">$13.77</td>
+                            <td data-label="1-Day Change (%)" class="negative">-4.43%</td>
+                            <td data-label="Details Page"><a href="/frontend/gdog.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TXXD</td>
+                            <td data-label="ETF Name">21Shares 2x Long Dogecoin ETF</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Focus">2x Leveraged Dogecoin</td>
+                            <td data-label="Total Assets ($MM)">1.27</td>
+                            <td data-label="Prev Close ($)">$12.91</td>
+                            <td data-label="1-Day Change (%)" class="negative">-8.91%</td>
+                            <td data-label="Details Page"><a href="/frontend/txxd.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TXXS</td>
+                            <td data-label="ETF Name">21Shares 2x Long Sui ETF</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Focus">2x Leveraged Sui</td>
+                            <td data-label="Total Assets ($MM)">1.35</td>
+                            <td data-label="Prev Close ($)">$15.98</td>
+                            <td data-label="1-Day Change (%)" class="negative">-4.16%</td>
+                            <td data-label="Details Page"><a href="/frontend/txxs.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">DIME</td>
+                            <td data-label="ETF Name">CoinShares Altcoins ETF</td>
+                            <td data-label="Issuer">CoinShares</td>
+                            <td data-label="Focus">Altcoin Basket</td>
+                            <td data-label="Total Assets ($MM)">1.71</td>
+                            <td data-label="Prev Close ($)">$11.65</td>
+                            <td data-label="1-Day Change (%)" class="negative">-1.12%</td>
+                            <td data-label="Details Page"><a href="/frontend/dime.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">STBQ</td>
+                            <td data-label="ETF Name">Amplify Stablecoin Technology ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Focus">Stablecoin Ecosystem</td>
+                            <td data-label="Total Assets ($MM)">507.97K</td>
+                            <td data-label="Prev Close ($)">$25.06</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.67%</td>
+                            <td data-label="Details Page"><a href="/frontend/stbq.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TKNQ</td>
+                            <td data-label="ETF Name">Amplify Tokenization Technology ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Focus">Tokenization/RWA</td>
+                            <td data-label="Total Assets ($MM)">505.05K</td>
+                            <td data-label="Prev Close ($)">$25.03</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.85%</td>
+                            <td data-label="Details Page"><a href="/frontend/tknq.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">ORO</td>
+                            <td data-label="ETF Name">Arrow Valtoro ETF</td>
+                            <td data-label="Issuer">Arrow</td>
+                            <td data-label="Focus">Gold + Crypto Hybrid</td>
+                            <td data-label="Total Assets ($MM)">3.17</td>
+                            <td data-label="Prev Close ($)">$18.06</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.70%</td>
+                            <td data-label="Details Page"><a href="/frontend/oro.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">WTIB</td>
+                            <td data-label="ETF Name">USCF Oil Plus Bitcoin Strategy Fund</td>
+                            <td data-label="Issuer">USCF</td>
+                            <td data-label="Focus">Oil + Bitcoin</td>
+                            <td data-label="Total Assets ($MM)">365.72K</td>
+                            <td data-label="Prev Close ($)">$18.60</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.54%</td>
+                            <td data-label="Details Page"><a href="/frontend/wtib.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TTOP</td>
+                            <td data-label="ETF Name">21Shares FTSE Crypto 10 Index ETF</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Focus">Crypto Top 10 Index</td>
+                            <td data-label="Total Assets ($MM)">854.16K</td>
+                            <td data-label="Prev Close ($)">$21.27</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.30%</td>
+                            <td data-label="Details Page"><a href="/frontend/ttop.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">TXBC</td>
+                            <td data-label="ETF Name">21Shares FTSE Crypto 10 ex-BTC Index ETF</td>
+                            <td data-label="Issuer">21Shares</td>
+                            <td data-label="Focus">Crypto Top 10 ex-BTC</td>
+                            <td data-label="Total Assets ($MM)">834.41K</td>
+                            <td data-label="Prev Close ($)">$20.79</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.41%</td>
+                            <td data-label="Details Page"><a href="/frontend/txbc.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Multi-asset ETFs provide instant diversification across top cryptos.</p>
         </div>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
             <ul class="space-y-4 text-lg">
-                <li>• Emerging ETFs (XRP, Solana, baskets) total ~$2B+ AUM – fastest-growing segment in 2025.</li>
-                <li>• XRP category leads with $1.2B+ and zero outflow days since November launch.</li>
-                <li>• Higher regulatory scrutiny for altcoins; options trading delayed for Solana.</li>
-                <li>• Multi-asset funds gaining traction for risk-averse diversification.</li>
-                <li>• Fees generally higher than BTC/ETH majors (0.20–1.15%).</li>
+                <li>• Emerging ETFs (XRP, Solana, altcoins, baskets) total ~$2B+ AUM – fastest-growing segment.</li>
+                <li>• XRP category leads with over $1.2B combined AUM and strong retail interest.</li>
+                <li>• Solana ETFs show steady institutional inflows despite regulatory delays on options.</li>
+                <li>• Multi-asset and thematic funds gaining traction for diversification.</li>
+                <li>• Higher volatility and regulatory risk compared to BTC/ETH majors.</li>
             </ul>
         </div>
 
         <p class="disclaimer text-center">
-            Not financial advice. Emerging crypto ETFs carry elevated risks including regulatory uncertainty. Data approximate as of December 17, 2025; verify with issuers.
+            Not financial advice. Emerging crypto ETFs carry elevated risks including regulatory uncertainty and higher volatility. Data approximate as of January 01, 2026; verify with issuers.
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 pb-8">
-            <div class="policy-buttons flex flex-wrap gap-4 justify-center mb-6">
-                <button class="policy-btn" data-modal="privacy-policy">Privacy Policy</button>
-                <button class="policy-btn" data-modal="terms-of-service">Terms of Service</button>
-                <button class="policy-btn" data-modal="risk-policy">Risk Policy</button>
-                <button class="policy-btn" data-modal="affiliate-disclosure">Affiliate Disclosure</button>
-                <a href="/frontend/sitemap.html" class="policy-btn">Site Map</a>
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
             </div>
-            <p class="copyright text-sm">Copyright © Crypto ETF Index 2025</p>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme apply, particles, modals
+        // Theme switcher (light/dark only)
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
