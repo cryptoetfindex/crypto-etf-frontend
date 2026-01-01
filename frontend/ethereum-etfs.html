@@ -5,67 +5,150 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethereum ETFs Directory - Complete List & Reviews (December 2025)</title>
-    <meta name="description" content="Full directory of all U.S. spot Ethereum ETFs in 2025. Compare ETHA, FETH, ETHE, ETH Mini, leveraged, inverse, and multi-asset Ethereum funds by AUM, fees, performance, and inflows. Independent reviews and data.">
-    <meta name="keywords" content="ethereum etfs 2025, spot ethereum etf list, etha blackrock, feth fidelity, ethe grayscale, ethereum etf comparison, best ethereum etf, ethereum leveraged etf">
+    <title>Complete Ethereum ETFs Directory - All Funds 2025</title>
+    <meta name="description" content="Full list of every U.S. Ethereum-related ETF and ETP in 2025 – spot, leveraged, inverse, strategy, and multi-asset funds. Compare AUM, fees, performance, and official links.">
+    <meta name="keywords" content="all ethereum etfs 2025, complete ethereum etf list, spot ethereum etfs, leveraged ethereum etfs, ethereum mini trust">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Crypto ETF Index">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Ethereum ETFs Directory - Complete List December 2025">
-    <meta property="og:description" content="Comprehensive list of all spot Ethereum ETFs including ETHA, FETH, ETHE, ETH Mini, leveraged (ETHU, ETHT), inverse (ETHD, SETH), and multi-asset funds with latest AUM, performance, and reviews.">
-    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://cryptoetfindex.com/frontend/ethereum-etfs.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ethereum ETFs Directory - Complete List December 2025">
-    <meta name="twitter:description" content="All spot Ethereum ETFs ranked by AUM: ETHA, FETH, ETHE, ETH Mini, leveraged, inverse, and multi-asset funds. Independent data and reviews.">
-    <meta name="twitter:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
-    <link rel="canonical" href="https://cryptoetfindex.com/frontend/ethereum-etfs.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Complete Ethereum ETFs & ETPs Directory 2025">
+    <meta property="og:description" content="Every Ethereum-related ETF and ETP – spot, leveraged, inverse, strategy – with latest AUM, fees, and performance data.">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/ethereum-etfs.html">
+    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/ethereum-etfs.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-        }
-        [data-theme="light"] {
-            --background: #f0f4f8;
-            --text-color: #1b263b;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --accent-color: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
         [data-theme="dark"] {
-            --background: #0a0e17;
-            --text-color: #e0e1dd;
-            --card-bg: rgba(10, 14, 23, 0.9);
-            --accent-color: #00ffea;
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
         }
-        body { background: var(--background); color: var(--text-color); font-family: 'Orbitron', sans-serif; }
-        .navbar { background: rgba(27, 38, 59, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
-        .card { background: var(--card-bg); padding: 2rem; border-radius: 1rem; box-shadow: 0 0 20px var(--shadow-color); }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--accent-color); }
-        th { background: rgba(0, 221, 235, 0.1); color: var(--accent-color); }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
-        a { color: var(--accent-color); }
-        a:hover { text-decoration: underline; }
-        .responsive-table { overflow-x: auto; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .disclaimer {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        a {
+            color: var(--accent);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid var(--accent);
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: 45%;
+                font-weight: bold;
+                color: var(--accent);
+            }
+        }
+        .positive { color: #10b981; font-weight: bold; }
+        .negative { color: #ef4444; font-weight: bold; }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
                 <li><a href="/">Home</a></li>
                 <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="text-[var(--accent-color)] underline">Ethereum ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="text-[var(--accent)] hover:underline">Ethereum ETFs</a></li>
                 <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
                 <li><a href="/frontend/comparisons.html">Comparisons</a></li>
                 <li><a href="/frontend/guides.html">Guides</a></li>
@@ -73,246 +156,458 @@
                 <li><a href="/frontend/tools.html">Tools</a></li>
                 <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
 
+    <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Ethereum ETFs Directory (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. spot Ethereum ETFs, leveraged, inverse, and multi-asset funds. Data approximate as of December 21, 2025.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Ethereum ETFs & ETPs Directory</h1>
+            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. Ethereum-related ETFs and ETPs – spot, leveraged, inverse, strategy, and multi-asset funds. Data approximate; verify with issuers.</p>
         </header>
 
+        <!-- Pure Spot Ethereum ETFs Section -->
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">All Spot & Ethereum-Related ETFs by AUM</h2>
-            <div class="responsive-table overflow-x-auto">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Pure Spot Ethereum ETFs</h2>
+            <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
-                            <th>Symbol</th>
+                            <th>Ticker</th>
                             <th>ETF Name</th>
                             <th>Issuer</th>
                             <th>Total Assets ($MM)</th>
+                            <th>Expense Ratio</th>
                             <th>YTD Return (%)</th>
+                            <th>1-Year Return (%)</th>
+                            <th>3-Year Return (%)</th>
                             <th>Avg Volume</th>
                             <th>Prev Close ($)</th>
                             <th>1-Day Change (%)</th>
-                            <th>Details</th>
+                            <th>Details Page</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ETHA</td>
-                            <td>iShares Ethereum Trust ETF</td>
-                            <td>BlackRock</td>
-                            <td>$10,053.20</td>
-                            <td>-16.96%</td>
-                            <td>51,722,736</td>
-                            <td>$21.00</td>
-                            <td>-1.50%</td>
-                            <td><a href="/frontend/etha.html">View →</a></td>
+                            <td data-label="Ticker">ETHA</td>
+                            <td data-label="ETF Name">iShares Ethereum Trust ETF</td>
+                            <td data-label="Issuer">BlackRock</td>
+                            <td data-label="Total Assets ($MM)">$10,180</td>
+                            <td data-label="Expense Ratio">0.25%</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.96%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+45.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">51,722,736</td>
+                            <td data-label="Prev Close ($)">$22.43</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.45%</td>
+                            <td data-label="Details Page"><a href="/frontend/etha.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHE</td>
-                            <td>Grayscale Ethereum Trust ETF</td>
-                            <td>Grayscale</td>
-                            <td>$2,559.76</td>
-                            <td>-18.59%</td>
-                            <td>7,017,908</td>
-                            <td>$22.81</td>
-                            <td>-1.38%</td>
-                            <td><a href="/frontend/ethe.html">View →</a></td>
+                            <td data-label="Ticker">ETHE</td>
+                            <td data-label="ETF Name">Grayscale Ethereum Trust ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Total Assets ($MM)">$2,610</td>
+                            <td data-label="Expense Ratio">2.50%</td>
+                            <td data-label="YTD Return (%)" class="negative">-18.59%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+43.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">7,017,908</td>
+                            <td data-label="Prev Close ($)">$24.37</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.45%</td>
+                            <td data-label="Details Page"><a href="/frontend/ethe.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>FETH</td>
-                            <td>Fidelity Ethereum Fund ETF</td>
-                            <td>Fidelity</td>
-                            <td>$2,093.29</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>0.00%</td>
-                            <td><a href="/frontend/feth.html">View →</a></td>
+                            <td data-label="Ticker">FETH</td>
+                            <td data-label="ETF Name">Fidelity Ethereum Fund ETF</td>
+                            <td data-label="Issuer">Fidelity</td>
+                            <td data-label="Total Assets ($MM)">$2,180</td>
+                            <td data-label="Expense Ratio">0.25%</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.50%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+44.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$29.61</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.41%</td>
+                            <td data-label="Details Page"><a href="/frontend/feth.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETH</td>
-                            <td>Grayscale Ethereum Mini Trust ETF</td>
-                            <td>Grayscale</td>
-                            <td>$2,018.96</td>
-                            <td>-16.70%</td>
-                            <td>7,354,119</td>
-                            <td>$26.23</td>
-                            <td>-1.43%</td>
-                            <td><a href="/frontend/eth-mini.html">View →</a></td>
+                            <td data-label="Ticker">ETH</td>
+                            <td data-label="ETF Name">Grayscale Ethereum Mini Trust ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Total Assets ($MM)">$2,130</td>
+                            <td data-label="Expense Ratio">0.15%</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.70%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+44.50%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">7,354,119</td>
+                            <td data-label="Prev Close ($)">$28.06</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.57%</td>
+                            <td data-label="Details Page"><a href="/frontend/eth-mini.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHU</td>
-                            <td>2x Ether ETF</td>
-                            <td>ProShares</td>
-                            <td>$1,477.79</td>
-                            <td>-65.59%</td>
-                            <td>7,438,956</td>
-                            <td>$48.53</td>
-                            <td>-2.69%</td>
-                            <td><a href="/frontend/ethu.html">View →</a></td>
+                            <td data-label="Ticker">ETHW</td>
+                            <td data-label="ETF Name">Bitwise Ethereum ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">$338.78</td>
+                            <td data-label="Expense Ratio">0.20%</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.94%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+44.20%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">1,702,085</td>
+                            <td data-label="Prev Close ($)">$21.27</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.47%</td>
+                            <td data-label="Details Page"><a href="/frontend/ethw.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BITW</td>
-                            <td>Bitwise 10 Crypto Index ETF</td>
-                            <td>Bitwise</td>
-                            <td>$1,042.03</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>0.00%</td>
-                            <td><a href="/frontend/bitw.html">View →</a></td>
+                            <td data-label="Ticker">ETHV</td>
+                            <td data-label="ETF Name">VanEck Ethereum ETF</td>
+                            <td data-label="Issuer">VanEck</td>
+                            <td data-label="Total Assets ($MM)">$169.31</td>
+                            <td data-label="Expense Ratio">0.20%</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.76%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+44.10%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">357,897</td>
+                            <td data-label="Prev Close ($)">$43.44</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.39%</td>
+                            <td data-label="Details Page"><a href="/frontend/ethv.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHW</td>
-                            <td>Bitwise Ethereum ETF</td>
-                            <td>Bitwise</td>
-                            <td>$339.54</td>
-                            <td>-16.94%</td>
-                            <td>1,702,085</td>
-                            <td>$19.91</td>
-                            <td>-1.44%</td>
-                            <td><a href="/frontend/ethw.html">View →</a></td>
+                            <td data-label="Ticker">QETH</td>
+                            <td data-label="ETF Name">Invesco Galaxy Ethereum ETF</td>
+                            <td data-label="Issuer">Invesco</td>
+                            <td data-label="Total Assets ($MM)">$25.45</td>
+                            <td data-label="Expense Ratio">0.25%</td>
+                            <td data-label="YTD Return (%)" class="negative">-17.13%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+43.80%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">108,623</td>
+                            <td data-label="Prev Close ($)">$29.57</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.41%</td>
+                            <td data-label="Details Page"><a href="/frontend/qeth.html">View →</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm mt-4 text-center">Pure spot Ethereum ETFs hold actual ETH. Total AUM ~$30B+.</p>
+        </div>
+
+        <!-- Leveraged / Inverse / Strategy Ethereum ETPs -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Leveraged, Inverse & Strategy Ethereum ETPs</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>ETF Name</th>
+                            <th>Issuer</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>Expense Ratio</th>
+                            <th>YTD Return (%)</th>
+                            <th>1-Year Return (%)</th>
+                            <th>3-Year Return (%)</th>
+                            <th>Avg Volume</th>
+                            <th>Prev Close ($)</th>
+                            <th>1-Day Change (%)</th>
+                            <th>Type</th>
+                            <th>Details Page</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Ticker">ETHU</td>
+                            <td data-label="ETF Name">2x Ether ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$1,580</td>
+                            <td data-label="Expense Ratio">0.95%</td>
+                            <td data-label="YTD Return (%)" class="negative">-65.59%</td>
+                            <td data-label="1-Year Return (%)" class="negative">-30.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">7,438,956</td>
+                            <td data-label="Prev Close ($)">$54.70</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.87%</td>
+                            <td data-label="Type">2x Leveraged</td>
+                            <td data-label="Details Page"><a href="/frontend/ethu.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHT</td>
-                            <td>ProShares Ultra Ether ETF</td>
-                            <td>ProShares</td>
-                            <td>$321.80</td>
-                            <td>-68.79%</td>
-                            <td>1,831,745</td>
-                            <td>$33.45</td>
-                            <td>-2.87%</td>
-                            <td><a href="/frontend/etht.html">View →</a></td>
+                            <td data-label="Ticker">ETHT</td>
+                            <td data-label="ETF Name">ProShares Ultra Ether ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$321.29</td>
+                            <td data-label="Expense Ratio">0.95%</td>
+                            <td data-label="YTD Return (%)" class="negative">-68.79%</td>
+                            <td data-label="1-Year Return (%)" class="negative">-35.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">1,831,745</td>
+                            <td data-label="Prev Close ($)">$37.58</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.97%</td>
+                            <td data-label="Type">2x Leveraged</td>
+                            <td data-label="Details Page"><a href="/frontend/etht.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHV</td>
-                            <td>VanEck Ethereum ETF</td>
-                            <td>VanEck</td>
-                            <td>$163.02</td>
-                            <td>-16.76%</td>
-                            <td>357,897</td>
-                            <td>$40.64</td>
-                            <td>-1.36%</td>
-                            <td><a href="/frontend/ethv.html">View →</a></td>
+                            <td data-label="Ticker">ETHD</td>
+                            <td data-label="ETF Name">ProShares UltraShort Ether ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$86.09</td>
+                            <td data-label="Expense Ratio">0.95%</td>
+                            <td data-label="YTD Return (%)" class="negative">-67.70%</td>
+                            <td data-label="1-Year Return (%)" class="negative">-80.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">3,962,799</td>
+                            <td data-label="Prev Close ($)">$49.51</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.96%</td>
+                            <td data-label="Type">Inverse (-2x)</td>
+                            <td data-label="Details Page"><a href="/frontend/ethd.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>NCIQ</td>
-                            <td>Hashdex Nasdaq Crypto Index US ETF</td>
-                            <td>Hashdex</td>
-                            <td>$119.24</td>
-                            <td>N/A</td>
-                            <td>38,402</td>
-                            <td>$21.91</td>
-                            <td>-1.79%</td>
-                            <td><a href="/frontend/nciq.html">View →</a></td>
+                            <td data-label="Ticker">EETH</td>
+                            <td data-label="ETF Name">ProShares Ether ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$75.06</td>
+                            <td data-label="Expense Ratio">0.95%</td>
+                            <td data-label="YTD Return (%)" class="negative">-22.50%</td>
+                            <td data-label="1-Year Return (%)" class="positive">+40.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">188,957</td>
+                            <td data-label="Prev Close ($)">$37.20</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.46%</td>
+                            <td data-label="Type">Long Ether</td>
+                            <td data-label="Details Page"><a href="/frontend/eeth.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>ETHD</td>
-                            <td>ProShares UltraShort Ether ETF</td>
-                            <td>ProShares</td>
-                            <td>$104.90</td>
-                            <td>-67.70%</td>
-                            <td>3,962,799</td>
-                            <td>$57.53</td>
-                            <td>+2.77%</td>
-                            <td><a href="/frontend/ethd.html">View →</a></td>
+                            <td data-label="Ticker">SETH</td>
+                            <td data-label="ETF Name">ProShares Short Ether ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$11.17</td>
+                            <td data-label="Expense Ratio">0.95%</td>
+                            <td data-label="YTD Return (%)" class="negative">-24.27%</td>
+                            <td data-label="1-Year Return (%)" class="negative">-45.00%</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">161,308</td>
+                            <td data-label="Prev Close ($)">$41.95</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.47%</td>
+                            <td data-label="Type">Inverse (-1x)</td>
+                            <td data-label="Details Page"><a href="/frontend/seth.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>EETH</td>
-                            <td>ProShares Ether ETF</td>
-                            <td>ProShares</td>
-                            <td>$67.68</td>
-                            <td>-22.50%</td>
-                            <td>188,957</td>
-                            <td>$36.65</td>
-                            <td>-1.45%</td>
-                            <td><a href="/frontend/eeth.html">View →</a></td>
+                            <td data-label="Ticker">ETCO</td>
+                            <td data-label="ETF Name">Grayscale Ethereum Covered Call ETF</td>
+                            <td data-label="Issuer">Grayscale</td>
+                            <td data-label="Total Assets ($MM)">$6.02</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$18.80</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.21%</td>
+                            <td data-label="Type">Covered Call</td>
+                            <td data-label="Details Page"><a href="/frontend/etco.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>QETH</td>
-                            <td>Invesco Galaxy Ethereum ETF</td>
-                            <td>Invesco</td>
-                            <td>$24.55</td>
-                            <td>-17.13%</td>
-                            <td>108,623</td>
-                            <td>$27.67</td>
-                            <td>-1.50%</td>
-                            <td><a href="/frontend/qeth.html">View →</a></td>
+                            <td data-label="Ticker">ETTY</td>
+                            <td data-label="ETF Name">Amplify Ethereum 3% Monthly Option Income ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Total Assets ($MM)">$2.48</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$16.31</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.68%</td>
+                            <td data-label="Type">Option Income</td>
+                            <td data-label="Details Page"><a href="/frontend/etty.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BETH</td>
-                            <td>ProShares Bitcoin & Ether Market Cap Weight ETF</td>
-                            <td>ProShares</td>
-                            <td>$16.32</td>
-                            <td>-14.28%</td>
-                            <td>6,512</td>
-                            <td>$51.94</td>
-                            <td>-1.33%</td>
-                            <td><a href="/frontend/beth.html">View →</a></td>
+                            <td data-label="Ticker">EHY</td>
+                            <td data-label="ETF Name">Amplify Ethereum Max Income Covered Call ETF</td>
+                            <td data-label="Issuer">Amplify</td>
+                            <td data-label="Total Assets ($MM)">$3.37</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$16.38</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.76%</td>
+                            <td data-label="Type">Covered Call</td>
+                            <td data-label="Details Page"><a href="/frontend/ehy.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>SETH</td>
-                            <td>ProShares Short Ether ETF</td>
-                            <td>ProShares</td>
-                            <td>$15.21</td>
-                            <td>-24.27%</td>
-                            <td>161,308</td>
-                            <td>$45.01</td>
-                            <td>+1.35%</td>
-                            <td><a href="/frontend/seth.html">View →</a></td>
+                            <td data-label="Ticker">ETU</td>
+                            <td data-label="ETF Name">T-Rex 2X Long Ether Daily Target ETF</td>
+                            <td data-label="Issuer">T-Rex</td>
+                            <td data-label="Total Assets ($MM)">$20.83</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$14.43</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.14%</td>
+                            <td data-label="Type">2x Leveraged</td>
+                            <td data-label="Details Page"><a href="/frontend/etu.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BTFC</td>
-                            <td>CoinShares Bitcoin and Ether ETF</td>
-                            <td>CoinShares</td>
-                            <td>$12.24</td>
-                            <td>-16.42%</td>
-                            <td>77,588</td>
-                            <td>$4.99</td>
-                            <td>-1.38%</td>
-                            <td><a href="/frontend/btfc.html">View →</a></td>
+                            <td data-label="Ticker">ETQ</td>
+                            <td data-label="ETF Name">T-Rex 2X Inverse Ether Daily Target ETF</td>
+                            <td data-label="Issuer">T-Rex</td>
+                            <td data-label="Total Assets ($MM)">$1.99</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$43.12</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.83%</td>
+                            <td data-label="Type">Inverse (-2x)</td>
+                            <td data-label="Details Page"><a href="/frontend/etq.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BETE</td>
-                            <td>ProShares Bitcoin & Ether Equal Weight ETF</td>
-                            <td>ProShares</td>
-                            <td>$10.52</td>
-                            <td>-12.57%</td>
-                            <td>6,506</td>
-                            <td>$47.19</td>
-                            <td>-1.52%</td>
-                            <td><a href="/frontend/bete.html">View →</a></td>
+                            <td data-label="Ticker">ETHI</td>
+                            <td data-label="ETF Name">Defiance Leveraged Long Income Ethereum ETF</td>
+                            <td data-label="Issuer">Defiance</td>
+                            <td data-label="Total Assets ($MM)">$4.23</td>
+                            <td data-label="Expense Ratio">Varies</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">$6.14</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.30%</td>
+                            <td data-label="Type">Leveraged Income</td>
+                            <td data-label="Details Page"><a href="/frontend/ethi.html">View →</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Multi-Asset / Related Ethereum ETFs -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Multi-Asset & Related Ethereum ETFs</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>ETF Name</th>
+                            <th>Issuer</th>
+                            <th>Total Assets ($MM)</th>
+                            <th>YTD Return (%)</th>
+                            <th>1-Year Return (%)</th>
+                            <th>3-Year Return (%)</th>
+                            <th>Avg Volume</th>
+                            <th>Prev Close ($)</th>
+                            <th>1-Day Change (%)</th>
+                            <th>Type</th>
+                            <th>Details Page</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Ticker">BITW</td>
+                            <td data-label="ETF Name">Bitwise 10 Crypto Index ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">$1,042</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">N/A</td>
+                            <td data-label="Prev Close ($)">N/A</td>
+                            <td data-label="1-Day Change (%)">0.00%</td>
+                            <td data-label="Type">Multi-Crypto Index</td>
+                            <td data-label="Details Page"><a href="/frontend/bitw.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>AETH</td>
-                            <td>Bitwise Trendwise Ether and Treasuries Rotation Strategy ETF</td>
-                            <td>Bitwise</td>
-                            <td>$9.26</td>
-                            <td>-0.10%</td>
-                            <td>3,317</td>
-                            <td>$37.03</td>
-                            <td>+0.19%</td>
-                            <td><a href="/frontend/aeth.html">View →</a></td>
+                            <td data-label="Ticker">NCIQ</td>
+                            <td data-label="ETF Name">Hashdex Nasdaq Crypto Index US ETF</td>
+                            <td data-label="Issuer">Hashdex</td>
+                            <td data-label="Total Assets ($MM)">$120.82</td>
+                            <td data-label="YTD Return (%)">N/A</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">38,402</td>
+                            <td data-label="Prev Close ($)">$22.73</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.34%</td>
+                            <td data-label="Type">Crypto Index</td>
+                            <td data-label="Details Page"><a href="/frontend/nciq.html">View →</a></td>
                         </tr>
                         <tr>
-                            <td>BTOP</td>
-                            <td>Bitwise Trendwise BTC/ETH and Treasuries Rotation Strategy ETF</td>
-                            <td>Bitwise</td>
-                            <td>$5.89</td>
-                            <td>-15.92%</td>
-                            <td>5,949</td>
-                            <td>$29.44</td>
-                            <td>0.00%</td>
-                            <td><a href="/frontend/btop.html">View →</a></td>
+                            <td data-label="Ticker">BETH</td>
+                            <td data-label="ETF Name">ProShares Bitcoin & Ether Market Cap Weight ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$15.23</td>
+                            <td data-label="YTD Return (%)" class="negative">-14.28%</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">6,512</td>
+                            <td data-label="Prev Close ($)">$51.06</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.24%</td>
+                            <td data-label="Type">BTC/ETH Market Cap</td>
+                            <td data-label="Details Page"><a href="/frontend/beth.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">BTFC</td>
+                            <td data-label="ETF Name">CoinShares Bitcoin and Ether ETF</td>
+                            <td data-label="Issuer">CoinShares</td>
+                            <td data-label="Total Assets ($MM)">$24.31</td>
+                            <td data-label="YTD Return (%)" class="negative">-16.42%</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">77,588</td>
+                            <td data-label="Prev Close ($)">$5.22</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.19%</td>
+                            <td data-label="Type">BTC/ETH Blend</td>
+                            <td data-label="Details Page"><a href="/frontend/btfc.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">BETE</td>
+                            <td data-label="ETF Name">ProShares Bitcoin & Ether Equal Weight ETF</td>
+                            <td data-label="Issuer">ProShares</td>
+                            <td data-label="Total Assets ($MM)">$9.55</td>
+                            <td data-label="YTD Return (%)" class="negative">-12.57%</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">6,506</td>
+                            <td data-label="Prev Close ($)">$46.01</td>
+                            <td data-label="1-Day Change (%)" class="positive">+0.20%</td>
+                            <td data-label="Type">BTC/ETH Equal Weight</td>
+                            <td data-label="Details Page"><a href="/frontend/bete.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">AETH</td>
+                            <td data-label="ETF Name">Bitwise Trendwise Ether and Treasuries Rotation Strategy ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">$9.05</td>
+                            <td data-label="YTD Return (%)" class="negative">-0.10%</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">3,317</td>
+                            <td data-label="Prev Close ($)">$36.15</td>
+                            <td data-label="1-Day Change (%)" class="negative">-0.10%</td>
+                            <td data-label="Type">Rotation Strategy</td>
+                            <td data-label="Details Page"><a href="/frontend/aeth.html">View →</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Ticker">BTOP</td>
+                            <td data-label="ETF Name">Bitwise Trendwise BTC/ETH and Treasuries Rotation Strategy ETF</td>
+                            <td data-label="Issuer">Bitwise</td>
+                            <td data-label="Total Assets ($MM)">$5.04</td>
+                            <td data-label="YTD Return (%)" class="negative">-15.92%</td>
+                            <td data-label="1-Year Return (%)">N/A</td>
+                            <td data-label="3-Year Return (%)">N/A</td>
+                            <td data-label="Avg Volume">5,949</td>
+                            <td data-label="Prev Close ($)">$28.78</td>
+                            <td data-label="1-Day Change (%)">0.00%</td>
+                            <td data-label="Type">BTC/ETH Rotation</td>
+                            <td data-label="Details Page"><a href="/frontend/btop.html">View →</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -321,8 +616,8 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
-            <ul class="space-y-3 text-lg">
-                <li>• Total spot Ethereum ETF AUM ~$30B+ as of December 2025</li>
+            <ul class="space-y-4 text-lg">
+                <li>• Total spot Ethereum ETF AUM ~$30B+ as of January 2026</li>
                 <li>• BlackRock (ETHA) and Fidelity (FETH) dominate with strongest inflows and liquidity</li>
                 <li>• Grayscale Mini Trust (ETH) offers lowest fee at 0.15%</li>
                 <li>• Leveraged (ETHU, ETHT) and inverse (ETHD, SETH) products highly volatile – for short-term trading only</li>
@@ -330,27 +625,59 @@
             </ul>
         </div>
 
-        <p class="disclaimer">
-            Not financial advice. Investments in crypto ETFs involve high risk, including potential loss of principal. Data approximate as of December 21, 2025; always verify with official sources.
+        <p class="disclaimer text-center">
+            Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of January 01, 2026; verify with issuers.
         </p>
 
-        <footer class="text-center mt-12">
-            <p>© 2025 Crypto ETF Index. All rights reserved.</p>
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
-    </div>
+    </main>
 
     <script>
-        const themeSelect = document.getElementById('theme-select');
-        if (themeSelect) {
-            themeSelect.addEventListener('change', (e) => {
-                const theme = e.target.value;
-                if (theme === 'normal') {
-                    document.documentElement.removeAttribute('data-theme');
-                } else {
-                    document.documentElement.dataset.theme = theme;
-                }
-            });
+        // Theme switcher (only light/dark)
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
         }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
