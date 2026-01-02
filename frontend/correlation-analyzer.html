@@ -252,7 +252,9 @@
     </div>
 
     <script>
-        let heatmapChart, trendChart, monteCarloChart;
+        let heatmapChart = null;
+        let trendChart = null;
+        let monteCarloChart = null;
 
         // Theme switcher
         function applyTheme(t) {
@@ -363,15 +365,17 @@
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-            addEtfSelector(); // Add first selector
-            document.getElementById('add-etf').addEventListener('click', addEtfSelector);
 
-            // Auto-run analysis on any change
+            // Add first selector
+            addEtfSelector();
+
+            // Event listeners
+            document.getElementById('add-etf').addEventListener('click', addEtfSelector);
             document.getElementById('etf-selectors').addEventListener('change', runAnalysis);
             document.getElementById('esg-adjust').addEventListener('change', runAnalysis);
             document.getElementById('time-period').addEventListener('change', runAnalysis);
 
-            // Initial run (will show placeholder)
+            // Initial run
             runAnalysis();
 
             particlesJS('particles', {
@@ -405,7 +409,7 @@
             selector.querySelector('.remove-btn').addEventListener('click', () => {
                 if (container.children.length > 1) {
                     selector.remove();
-                    runAnalysis(); // Update after removal
+                    runAnalysis();
                 } else {
                     alert('At least one ETF is required.');
                 }
@@ -422,7 +426,6 @@
             const esgAdjust = document.getElementById('esg-adjust').checked;
 
             if (selected.length < 2) {
-                // Show placeholder state
                 document.getElementById('avg-correlation').textContent = 'Select 2+ ETFs';
                 document.getElementById('avg-beta').textContent = 'Select 2+ ETFs';
                 document.getElementById('avg-covariance').textContent = 'Select 2+ ETFs';
@@ -434,7 +437,6 @@
                 return;
             }
 
-            // Get returns data
             const returnsData = selected.map(ticker => HISTORICAL_DAILY_RETURNS[ticker] || HISTORICAL_DAILY_RETURNS['IBIT']);
 
             // Correlation matrix
@@ -519,7 +521,7 @@
                 }
             });
 
-            // Historical Trend
+            // Historical Trend (rolling 30-day)
             const rollingDays = 30;
             const trendData = {};
             selected.forEach((ticker, i) => {
@@ -586,7 +588,9 @@
         }
 
         function updateCharts() {
-            [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch && ch.update());
+            if (heatmapChart) heatmapChart.update();
+            if (trendChart) trendChart.update();
+            if (monteCarloChart) monteCarloChart.update();
         }
     </script>
 </body>
