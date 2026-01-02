@@ -366,16 +366,13 @@
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
 
-            // Add first selector
             addEtfSelector();
 
-            // Event listeners
             document.getElementById('add-etf').addEventListener('click', addEtfSelector);
             document.getElementById('etf-selectors').addEventListener('change', runAnalysis);
             document.getElementById('esg-adjust').addEventListener('change', runAnalysis);
             document.getElementById('time-period').addEventListener('change', runAnalysis);
 
-            // Initial run
             runAnalysis();
 
             particlesJS('particles', {
@@ -446,7 +443,6 @@
                 return;
             }
 
-            // Get returns data
             const returnsData = selected.map(ticker => HISTORICAL_DAILY_RETURNS[ticker] || HISTORICAL_DAILY_RETURNS['IBIT']);
 
             // Correlation matrix
