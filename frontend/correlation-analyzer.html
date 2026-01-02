@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+    <!-- FIXED: Use compatible version of matrix plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -276,11 +277,10 @@
             SPY: 'high', QQQ: 'high'
         };
 
-        // Generate correlated returns for visible data
+        // Generate correlated returns
         const baseNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.03);
         const HISTORICAL_DAILY_RETURNS = {};
 
-        // Bitcoin ETFs - high correlation
         const btcTickers = ['IBIT', 'FBTC', 'GBTC', 'BTC', 'BITB', 'ARKB', 'HODL', 'BTCO', 'EZBC', 'BRRR', 'BTCW'];
         const btcMeans = [0.0023, 0.00235, 0.0022, 0.00232, 0.00234, 0.00231, 0.00229, 0.00228, 0.00233, 0.00236, 0.00227];
         btcTickers.forEach((ticker, idx) => {
@@ -288,7 +288,6 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => btcMeans[idx] + baseNoise[i] * 0.9 + uniqueNoise[i]);
         });
 
-        // Ethereum ETFs - moderate correlation
         const ethTickers = ['ETHA', 'FETH', 'ETHE', 'ETH', 'ETHW', 'ETHV', 'QETH'];
         const ethMeans = [0.0014, 0.00142, 0.0013, 0.00145, 0.00141, 0.00139, 0.00138];
         ethTickers.forEach((ticker, idx) => {
@@ -296,7 +295,6 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => ethMeans[idx] + baseNoise[i] * 0.6 + uniqueNoise[i]);
         });
 
-        // Other ETFs - lower correlation
         const otherTickers = ['XRPC','XRP','XRPZ','XXRP','XRPI','XRPT','XRPR','UXRP','XRPM','XRPK','TOXR',
                               'BSOL','SSK','GSOL','VSOL','TSOL','QSOL','SOEZ','SOLC','SOLM','SOLX','SLON',
                               'BITW','GDLC','NCIQ','EZPZ','GLNK','HBR','LTCC','DOJE','BWOW','GDOG','TXXD','TXXS',
@@ -307,34 +305,28 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => mean + baseNoise[i] * 0.3 + uniqueNoise[i]);
         });
 
-        // Custom math functions (using pure JS for reliability)
+        // Pure JS math (no mathjs needed)
         function mean(arr) {
-            return arr.reduce((sum, val) => sum + val, 0) / arr.length;
+            return arr.reduce((s, v) => s + v, 0) / arr.length;
         }
         function std(arr) {
             const m = mean(arr);
-            const variance = arr.reduce((sum, val) => sum + Math.pow(val - m, 2), 0) / arr.length;
-            return Math.sqrt(variance);
+            return Math.sqrt(arr.reduce((s, v) => s + (v - m)**2, 0) / arr.length);
         }
         function variance(arr) {
             const m = mean(arr);
-            return arr.reduce((sum, val) => sum + Math.pow(val - m, 2), 0) / arr.length;
+            return arr.reduce((s, v) => s + (v - m)**2, 0) / arr.length;
         }
         function covariance(a, b) {
-            const meanA = mean(a);
-            const meanB = mean(b);
-            let sum = 0;
-            for (let i = 0; i < a.length; i++) {
-                sum += (a[i] - meanA) * (b[i] - meanB);
-            }
-            return sum / a.length;
+            const ma = mean(a);
+            const mb = mean(b);
+            return a.reduce((s, _, i) => s + (a[i] - ma) * (b[i] - mb), 0) / a.length;
         }
         function correlation(a, b) {
             const cov = covariance(a, b);
-            const stdA = std(a);
-            const stdB = std(b);
-            if (stdA === 0 || stdB === 0) return 0;
-            return cov / (stdA * stdB);
+            const sa = std(a);
+            const sb = std(b);
+            return (sa && sb) ? cov / (sa * sb) : 0;
         }
         function beta(a, b) {
             return covariance(a, b) / variance(b);
@@ -380,7 +372,6 @@
             const esgAdjust = document.getElementById('esg-adjust').checked;
             const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t]);
 
-            // Correlation matrix
             const corrMatrix = Array(n).fill().map(() => Array(n).fill(1));
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
@@ -398,7 +389,6 @@
                 }
             }
 
-            // Metrics
             const refData = returnsData[0];
             const weights = Array(n).fill(1/n);
             const portReturns = returnsData[0].map((_, d) =>
