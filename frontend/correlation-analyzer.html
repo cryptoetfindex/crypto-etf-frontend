@@ -276,30 +276,38 @@
             SPY: 'high', QQQ: 'high'
         };
 
-        // Generate returns with higher correlation (base + correlated noise + unique noise)
+        // Generate correlated returns
         const baseNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.03);
         const HISTORICAL_DAILY_RETURNS = {};
-        const etfs = ['IBIT', 'FBTC', 'GBTC', 'BTC', 'BITB', 'ARKB', 'HODL', 'BTCO', 'EZBC', 'BRRR', 'BTCW'];
-        const means = [0.0023, 0.00235, 0.0022, 0.00232, 0.00234, 0.00231, 0.00229, 0.00228, 0.00233, 0.00236, 0.00227];
-        etfs.forEach((ticker, idx) => {
-            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.02);
-            HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => means[idx] + baseNoise[i] * 0.8 + uniqueNoise[i]);
+
+        // Bitcoin ETFs - high correlation
+        const btcTickers = ['IBIT', 'FBTC', 'GBTC', 'BTC', 'BITB', 'ARKB', 'HODL', 'BTCO', 'EZBC', 'BRRR', 'BTCW'];
+        const btcMeans = [0.0023, 0.00235, 0.0022, 0.00232, 0.00234, 0.00231, 0.00229, 0.00228, 0.00233, 0.00236, 0.00227];
+        btcTickers.forEach((ticker, idx) => {
+            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.015); // reduced unique noise
+            HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => btcMeans[idx] + baseNoise[i] * 0.9 + uniqueNoise[i]);
         });
-        // Ethereum lower mean, less correlated
-        const ethMeans = [0.0014, 0.00142, 0.0013, 0.00145, 0.00141, 0.00139, 0.00138];
+
+        // Ethereum ETFs - moderate correlation to BTC
         const ethTickers = ['ETHA', 'FETH', 'ETHE', 'ETH', 'ETHW', 'ETHV', 'QETH'];
+        const ethMeans = [0.0014, 0.00142, 0.0013, 0.00145, 0.00141, 0.00139, 0.00138];
         ethTickers.forEach((ticker, idx) => {
-            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.025);
-            HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => ethMeans[idx] + baseNoise[i] * 0.5 + uniqueNoise[i]);
+            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.02);
+            HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => ethMeans[idx] + baseNoise[i] * 0.6 + uniqueNoise[i]);
         });
-        // Other ETFs with varying correlations
-        // (add similar for XRP, Solana, etc. - abbreviated for brevity, but in full code include all)
-        // For brevity in response, assume all defined similarly with varying correlation levels
 
-        // Full data for all ETFs (as in your original, but with correlated base)
-        // ... (use the generated with correlation as above for key groups)
+        // Other groups (XRP, Solana, etc.) - lower correlation
+        const otherTickers = ['XRPC','XRP','XRPZ','XXRP','XRPI','XRPT','XRPR','UXRP','XRPM','XRPK','TOXR',
+                              'BSOL','SSK','GSOL','VSOL','TSOL','QSOL','SOEZ','SOLC','SOLM','SOLX','SLON',
+                              'BITW','GDLC','NCIQ','EZPZ','GLNK','HBR','LTCC','DOJE','BWOW','GDOG','TXXD','TXXS',
+                              'DIME','STBQ','TKNQ','ORO','WTIB','TTOP','TXBC','SPY','QQQ'];
+        otherTickers.forEach(ticker => {
+            const mean = 0.001 + Math.random() * 0.002;
+            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.04);
+            HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => mean + baseNoise[i] * 0.3 + uniqueNoise[i]);
+        });
 
-        // Custom math functions (robust)
+        // Custom math functions
         function mean(arr) { return math.mean(arr); }
         function std(arr) { return math.std(arr); }
         function variance(arr) { return math.variance(arr); }
@@ -320,8 +328,7 @@
             return cov / (stdA * stdB);
         }
         function beta(a, b) {
-            const varB = variance(b);
-            return varB ? covariance(a, b) / varB : 0;
+            return covariance(a, b) / variance(b);
         }
 
         function updateTagsAndAnalysis() {
