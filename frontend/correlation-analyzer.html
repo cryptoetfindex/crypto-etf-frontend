@@ -172,9 +172,7 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis</h2>
             <p class="mb-4">Choose up to 10 ETFs to analyze correlations, risk metrics, and projections. Use the dropdowns to add.</p>
-            <div id="etf-selectors">
-                <!-- Initial row added by script -->
-            </div>
+            <div id="etf-selectors"></div>
             <button id="add-etf" class="btn mt-4">Add Another ETF</button>
             <div class="form-group mt-4">
                 <label>Time Period</label>
@@ -386,14 +384,20 @@
             updateCharts();
         }
 
-        // Initialize on load
+        // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-            addEtfSelector(); // Add first selector
+
+            // Add first ETF selector
+            addEtfSelector();
+
+            // Attach event listeners
             document.getElementById('add-etf').addEventListener('click', addEtfSelector);
             document.getElementById('analyze').addEventListener('click', runAnalysis);
+
+            // Particles
             particlesJS('particles', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -432,10 +436,14 @@
         }
 
         function runAnalysis() {
+            console.log('Run Analysis clicked'); // Debug
+
             const selectors = document.querySelectorAll('.etf-select');
             const selected = Array.from(selectors)
                 .map(s => s.value)
                 .filter(v => v && v !== '');
+
+            console.log('Selected ETFs:', selected); // Debug
 
             if (selected.length < 2) {
                 alert('Please select at least 2 ETFs to analyze correlations.');
@@ -484,7 +492,7 @@
             const avgCov = math.mean(covariances).toFixed(6);
 
             const equalWeights = Array(n).fill(1 / n);
-            const portfolioReturns = returnsData[0].map((_, day) => 
+            const portfolioReturns = returnsData[0].map((_, day) =>
                 returnsData.reduce((sum, returns, i) => sum + returns[day] * equalWeights[i], 0)
             );
             const portVol = math.std(portfolioReturns) * Math.sqrt(252) * 100;
