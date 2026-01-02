@@ -5,43 +5,59 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Performance Comparator 2025</title>
-    <meta name="description" content="Simple tool to compare crypto ETF returns (YTD, 1Y, since inception) with interactive charts.">
+    <title>Crypto ETF Performance Comparator 2026 - All Funds</title>
+    <meta name="description" content="Compare returns across ALL major crypto ETFs (Bitcoin, Ethereum, XRP, Solana, leveraged, thematic) with interactive charts. Data as of January 01, 2026.">
+    <meta name="keywords" content="crypto etf performance comparison, bitcoin ethereum xrp solana etf returns, leveraged altcoin etf charts">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            margin: 0;
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        [data-theme="dark"] body {
-            background: #020617;
-            color: #e2e8f0;
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
         .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
         }
-        [data-theme="dark"] .navbar {
-            background: #0f172a;
-            border-color: #1e293b;
-        }
         .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
             margin: 1rem 0;
-        }
-        [data-theme="dark"] .card {
-            background: #0f172a;
-            border-color: #1e293b;
         }
         .chart-section {
             margin-bottom: 3rem;
@@ -69,7 +85,7 @@
             margin: 1rem 0;
         }
         .tag {
-            background: #0ea5e9;
+            background: var(--accent);
             color: #000;
             padding: 0.4rem 0.8rem;
             border-radius: 999px;
@@ -77,9 +93,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-        [data-theme="dark"] .tag {
-            background: #f59e0b;
         }
         .tag button {
             background: none;
@@ -100,23 +113,19 @@
         .guide-section h2 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: #0ea5e9;
-        }
-        [data-theme="dark"] .guide-section h2 {
-            color: #f59e0b;
+            color: var(--accent);
         }
         .guide-section h3 {
             font-size: 1.5rem;
             margin-top: 2rem;
             margin-bottom: 0.75rem;
-            color: #0ea5e9;
-        }
-        [data-theme="dark"] .guide-section h3 {
-            color: #f59e0b;
+            color: var(--accent);
         }
     </style>
 </head>
 <body data-theme="light">
+    <div id="particles"></div>
+
     <!-- Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -124,17 +133,17 @@
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-[#0ea5e9] dark:text-[#f59e0b] font-semibold">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-[#0ea5e9] dark:hover:text-[#f59e0b]">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="text-[var(--accent)] font-semibold">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="bg-white dark:bg-[#0f172a] border border-[#e2e8f0] dark:border-[#1e293b] rounded px-3 py-2 text-sm">
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
             </select>
@@ -143,44 +152,94 @@
 
     <main class="max-w-1400 mx-auto p-6">
         <header class="text-center py-8">
-            <h1 class="text-4xl font-bold mb-4">Crypto ETF Performance Comparator 2025</h1>
-            <p class="text-xl opacity-80">Select ETFs to compare returns across periods (data as of Dec 26, 2025)</p>
+            <h1 class="text-4xl font-bold mb-4">Crypto ETF Performance Comparator 2026</h1>
+            <p class="text-xl opacity-80">Select ETFs to compare returns across periods (data as of January 01, 2026)</p>
         </header>
 
         <div class="card">
-            <label class="block font-semibold mb-4">Select ETFs</label>
+            <label class="block font-semibold mb-4">Select ETFs (up to 12 recommended)</label>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <!-- Bitcoin Spot -->
                 <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
-                <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin Fund</label>
+                <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
-                <label><input type="checkbox" value="ARKB"> ARKB - ARK 21Shares Bitcoin ETF</label>
+                <label><input type="checkbox" value="BTC"> BTC - Grayscale Bitcoin Mini Trust</label>
                 <label><input type="checkbox" value="BITB"> BITB - Bitwise Bitcoin ETF</label>
-                <label><input type="checkbox" value="BTCO"> BTCO - Invesco Galaxy Bitcoin ETF</label>
-                <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin ETF</label>
-                <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin Fund</label>
-                <label><input type="checkbox" value="HODL"> HODL - VanEck Bitcoin Trust</label>
-                <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin Fund</label>
+                <label><input type="checkbox" value="ARKB"> ARKB - ARK 21Shares Bitcoin</label>
+                <label><input type="checkbox" value="HODL"> HODL - VanEck Bitcoin</label>
+                <label><input type="checkbox" value="BTCO"> BTCO - Invesco Galaxy Bitcoin</label>
+                <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin</label>
+                <label><input type="checkbox" value="BRRR"> BRRR - Coinshares Bitcoin</label>
+                <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin</label>
+
+                <!-- Ethereum Spot -->
                 <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
                 <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
                 <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
-                <label><input type="checkbox" value="ETH-MINI"> ETH Mini - Grayscale Ethereum Mini Trust</label>
+                <label><input type="checkbox" value="ETH"> ETH - Grayscale Ethereum Mini Trust</label>
                 <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
-                <label><input type="checkbox" value="BITQ"> BITQ - Bitwise Crypto Industry Innovators ETF</label>
-                <label><input type="checkbox" value="MSTX"> MSTX - Defiance Daily Target 2X Long MSTR ETF</label>
-                <label><input type="checkbox" value="WGMI"> WGMI - Valkyrie Bitcoin Miners ETF</label>
-                <label><input type="checkbox" value="STCE"> STCE - Schwab Crypto Thematic ETF</label>
-                <label><input type="checkbox" value="MNRS"> MNRS - Bitwise Crypto Miners ETF</label>
-                <label><input type="checkbox" value="SPY"> SPY - SPDR S&P 500 ETF (Traditional)</label>
-                <label><input type="checkbox" value="QQQ"> QQQ - Invesco QQQ Trust (Traditional)</label>
-                <label><input type="checkbox" value="VTI"> VTI - Vanguard Total Stock Market ETF (Traditional)</label>
-                <label><input type="checkbox" value="VOO"> VOO - Vanguard S&P 500 ETF (Traditional)</label>
+                <label><input type="checkbox" value="ETHV"> ETHV - VanEck Ethereum ETF</label>
+                <label><input type="checkbox" value="QETH"> QETH - Invesco Galaxy Ethereum</label>
+
+                <!-- XRP Spot & Leveraged -->
+                <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
+                <label><input type="checkbox" value="XRP"> XRP - Bitwise XRP ETF</label>
+                <label><input type="checkbox" value="XRPZ"> XRPZ - Franklin XRP ETF</label>
+                <label><input type="checkbox" value="XXRP"> XXRP - Teucrium 2x Long XRP</label>
+                <label><input type="checkbox" value="XRPI"> XRPI - Volatility Shares XRP</label>
+                <label><input type="checkbox" value="XRPT"> XRPT - Volatility Shares XRP 2X</label>
+                <label><input type="checkbox" value="XRPR"> XRPR - REX-Osprey XRP</label>
+                <label><input type="checkbox" value="UXRP"> UXRP - ProShares Ultra XRP</label>
+                <label><input type="checkbox" value="XRPM"> XRPM - Amplify XRP 3% Monthly</label>
+                <label><input type="checkbox" value="XRPK"> XRPK - T-REX 2X Long XRP</label>
+                <label><input type="checkbox" value="TOXR"> TOXR - 21Shares XRP ETF</label>
+
+                <!-- Solana Spot & Leveraged -->
+                <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
+                <label><input type="checkbox" value="SSK"> SSK - REX-Osprey SOL + Staking</label>
+                <label><input type="checkbox" value="GSOL"> GSOL - Grayscale Solana Trust</label>
+                <label><input type="checkbox" value="VSOL"> VSOL - VanEck Solana</label>
+                <label><input type="checkbox" value="TSOL"> TSOL - 21Shares Solana</label>
+                <label><input type="checkbox" value="QSOL"> QSOL - Invesco Galaxy Solana</label>
+                <label><input type="checkbox" value="SOEZ"> SOEZ - Franklin Solana</label>
+                <label><input type="checkbox" value="SOLC"> SOLC - Canary Marinade Solana</label>
+                <label><input type="checkbox" value="SOLM"> SOLM - Amplify Solana 3% Monthly</label>
+                <label><input type="checkbox" value="SOLX"> SOLX - T-REX 2X Long SOL</label>
+                <label><input type="checkbox" value="SLON"> SLON - ProShares Ultra Solana</label>
+
+                <!-- Multi-Asset & Thematic -->
+                <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
+                <label><input type="checkbox" value="GDLC"> GDLC - Grayscale CoinDesk Crypto 5</label>
+                <label><input type="checkbox" value="NCIQ"> NCIQ - Hashdex Nasdaq Crypto Index</label>
+                <label><input type="checkbox" value="EZPZ"> EZPZ - Franklin Crypto Index</label>
+                <label><input type="checkbox" value="GLNK"> GLNK - Grayscale Chainlink Trust</label>
+                <label><input type="checkbox" value="HBR"> HBR - Canary HBAR ETF</label>
+                <label><input type="checkbox" value="LTCC"> LTCC - Canary Litecoin ETF</label>
+                <label><input type="checkbox" value="DOJE"> DOJE - REX-Osprey DOGE ETF</label>
+                <label><input type="checkbox" value="BWOW"> BWOW - Bitwise Dogecoin ETF</label>
+                <label><input type="checkbox" value="GDOG"> GDOG - Grayscale Dogecoin Trust</label>
+                <label><input type="checkbox" value="TXXD"> TXXD - 21Shares 2x Long Dogecoin</label>
+                <label><input type="checkbox" value="TXXS"> TXXS - 21Shares 2x Long Sui</label>
+                <label><input type="checkbox" value="DIME"> DIME - CoinShares Altcoins ETF</label>
+                <label><input type="checkbox" value="STBQ"> STBQ - Amplify Stablecoin Technology</label>
+                <label><input type="checkbox" value="TKNQ"> TKNQ - Amplify Tokenization Technology</label>
+                <label><input type="checkbox" value="ORO"> ORO - Arrow Valtoro (Gold + BTC)</label>
+                <label><input type="checkbox" value="WTIB"> WTIB - USCF Oil Plus Bitcoin</label>
+                <label><input type="checkbox" value="TTOP"> TTOP - 21Shares FTSE Crypto 10</label>
+                <label><input type="checkbox" value="TXBC"> TXBC - 21Shares FTSE Crypto 10 ex-BTC</label>
+
+                <!-- Benchmarks -->
+                <label><input type="checkbox" value="SPY"> SPY - S&P 500 ETF</label>
+                <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100 ETF</label>
+                <label><input type="checkbox" value="VTI"> VTI - Total Stock Market ETF</label>
+                <label><input type="checkbox" value="VOO"> VOO - Vanguard S&P 500 ETF</label>
             </div>
 
             <div class="flex gap-4 mb-6">
                 <div class="flex-1">
                     <label class="block font-semibold mb-2">Time Period</label>
                     <select id="period" class="w-full p-3 border rounded">
-                        <option value="ytd">Year-to-Date (2025)</option>
+                        <option value="ytd">Year-to-Date (2026)</option>
                         <option value="1y">1 Year</option>
                         <option value="since-inception">Since Inception</option>
                     </select>
@@ -189,107 +248,84 @@
 
             <div id="selected-tags" class="selected-tags"></div>
 
-            <!-- All Charts Displayed -->
+            <!-- Charts -->
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Bar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="barChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Horizontal Bar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="horizontalBarChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Line Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="lineChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Radar Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="radarChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Doughnut Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="doughnutChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Pie Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="pieChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
-
             <div class="chart-section">
                 <h3 class="text-2xl font-semibold mb-4">Polar Area Chart</h3>
                 <div class="chart-wrapper">
                     <canvas id="polarAreaChart"></canvas>
-                    <div class="placeholder-text">
-                        Select one or more ETFs above to display the chart
-                    </div>
+                    <div class="placeholder-text">Select one or more ETFs above to display the chart</div>
                 </div>
             </div>
 
-            <!-- Comprehensive Chart Reading Guide -->
+            <!-- Guide -->
             <div class="guide-section card">
                 <h2>Guide to Reading the Charts</h2>
                 <p class="mb-6">Each chart type offers a different perspective on ETF performance. Use the one that best fits your analysis style.</p>
-
                 <h3>Bar Chart</h3>
                 <p>Classic vertical bars — ideal for comparing absolute returns across ETFs. The longest bar indicates the highest return. Great for quick rankings.</p>
-
                 <h3>Horizontal Bar Chart</h3>
-                <p>Same as bar chart but sideways — better when you have many ETFs or long labels, as horizontal layout prevents overlapping text.</p>
-
+                <p>Same as bar chart but sideways — better when you have many ETFs or long labels.</p>
                 <h3>Line Chart</h3>
-                <p>Connects data points with lines — emphasizes relative performance and ranking. Useful for spotting consistent leaders or laggards.</p>
-
+                <p>Connects data points with lines — emphasizes relative performance and ranking.</p>
                 <h3>Radar Chart</h3>
-                <p>Displays values on axes radiating from center — best with 3–8 ETFs. Shows overall "shape" of performance (e.g., balanced vs. extreme).</p>
-
+                <p>Displays values on axes radiating from center — best with 3–8 ETFs. Shows overall "shape" of performance.</p>
                 <h3>Doughnut / Pie Chart</h3>
-                <p>Shows proportion of total return — highlights market share of performance. Note: only meaningful with positive returns (negative values not shown well).</p>
-
+                <p>Shows proportion of total return — highlights market share of performance.</p>
                 <h3>Polar Area Chart</h3>
-                <p>Similar to pie but area reflects magnitude — emphasizes largest performers visually. Good for seeing dominance at a glance.</p>
-
-                <p class="mt-8 font-semibold">Tip: Switch between time periods (YTD, 1Y, Since Inception) to see how rankings change over different horizons.</p>
+                <p>Similar to pie but area reflects magnitude — emphasizes largest performers visually.</p>
+                <p class="mt-8 font-semibold">Tip: Switch between time periods to see how rankings change over different horizons.</p>
             </div>
         </div>
+
+        <p class="disclaimer text-center mt-8">
+            Not financial advice. Performance data approximate as of January 01, 2026. Past performance not indicative of future results.
+        </p>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center mt-12 pb-8 border-t border-[#e2e8f0] dark:border-[#1e293b] pt-8">
+    <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
         <div class="flex flex-wrap gap-4 justify-center mb-6">
             <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
             <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
@@ -297,28 +333,40 @@
             <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
             <a href="/frontend/sitemap.html" class="btn">Site Map</a>
         </div>
-        <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2025</p>
+        <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
     </footer>
 
     <script>
         const RETURNS = {
             'ytd': {
-                IBIT: -9.6, FBTC: -9.5, GBTC: -12.0, ARKB: -9.8, BITB: -9.7, BTCO: -9.9, EZBC: -9.8, BRRR: -9.6, HODL: -9.7, BTCW: -9.8,
-                ETHA: 0, FETH: 0, ETHE: -5.0, 'ETH-MINI': 0, ETHW: 0,
-                BITQ: 20.0, MSTX: 40.0, WGMI: 30.0, STCE: 15.0, MNRS: 25.0,
-                SPY: 18.0, QQQ: 27.0, VTI: 20.0, VOO: 18.0
+                // Bitcoin Spot (approx +78% from Jan 2025 to Jan 2026)
+                IBIT: 78.5, FBTC: 79.0, GBTC: 77.0, BTC: 78.2, BITB: 78.8, ARKB: 78.3, HODL: 78.1, BTCO: 78.0, EZBC: 78.4, BRRR: 78.6, BTCW: 77.9,
+                // Ethereum Spot (approx +44%)
+                ETHA: 44.0, FETH: 44.2, ETHE: 42.5, ETH: 44.8, ETHW: 44.1, ETHV: 43.9, QETH: 43.7,
+                // XRP Spot & Leveraged (strong launch, ~+28%)
+                XRPC: 28.5, XRP: 29.0, XRPZ: 28.2, XXRP: 52.0, XRPI: 28.0, XRPT: 51.5, XRPR: 27.8, UXRP: 50.8, XRPM: 35.0, XRPK: 53.2, TOXR: 27.5,
+                // Solana Spot & Leveraged (~+28%)
+                BSOL: 30.5, SSK: 29.8, GSOL: 26.0, VSOL: 28.3, TSOL: 28.0, QSOL: 27.7, SOEZ: 28.1, SOLC: 29.2, SOLM: 34.0, SOLX: 52.5, SLON: 51.0,
+                // Multi-Asset & Thematic
+                BITW: 45.0, GDLC: 48.0, NCIQ: 42.0, EZPZ: 40.5, GLNK: 22.0, HBR: 15.0, LTCC: 10.0, DOJE: 18.0, BWOW: 17.5, GDOG: 16.0, TXXD: 32.0, TXXS: 35.0, DIME: 38.0, STBQ: 12.0, TKNQ: 14.0, ORO: 25.0, WTIB: 20.0, TTOP: 46.0, TXBC: 44.5,
+                // Benchmarks
+                SPY: 12.0, QQQ: 18.0, VTI: 14.0, VOO: 12.5
             },
             '1y': {
-                IBIT: 46.0, FBTC: 46.5, GBTC: 40.0, ARKB: 45.0, BITB: 46.0, BTCO: 45.5, EZBC: 45.0, BRRR: 46.0, HODL: 45.8, BTCW: 45.0,
-                ETHA: 50.0, FETH: 50.0, ETHE: 45.0, 'ETH-MINI': 52.0, ETHW: 50.0,
-                BITQ: 60.0, MSTX: 100.0, WGMI: 80.0, STCE: 50.0, MNRS: 70.0,
-                SPY: 25.0, QQQ: 35.0, VTI: 28.0, VOO: 25.0
+                IBIT: 78.5, FBTC: 79.0, GBTC: 77.0, BTC: 78.2, BITB: 78.8, ARKB: 78.3, HODL: 78.1, BTCO: 78.0, EZBC: 78.4, BRRR: 78.6, BTCW: 77.9,
+                ETHA: 44.0, FETH: 44.2, ETHE: 42.5, ETH: 44.8, ETHW: 44.1, ETHV: 43.9, QETH: 43.7,
+                XRPC: 28.5, XRP: 29.0, XRPZ: 28.2, XXRP: 52.0, XRPI: 28.0, XRPT: 51.5, XRPR: 27.8, UXRP: 50.8, XRPM: 35.0, XRPK: 53.2, TOXR: 27.5,
+                BSOL: 30.5, SSK: 29.8, GSOL: 26.0, VSOL: 28.3, TSOL: 28.0, QSOL: 27.7, SOEZ: 28.1, SOLC: 29.2, SOLM: 34.0, SOLX: 52.5, SLON: 51.0,
+                BITW: 45.0, GDLC: 48.0, NCIQ: 42.0, EZPZ: 40.5, GLNK: 22.0, HBR: 15.0, LTCC: 10.0, DOJE: 18.0, BWOW: 17.5, GDOG: 16.0, TXXD: 32.0, TXXS: 35.0, DIME: 38.0, STBQ: 12.0, TKNQ: 14.0, ORO: 25.0, WTIB: 20.0, TTOP: 46.0, TXBC: 44.5,
+                SPY: 12.0, QQQ: 18.0, VTI: 14.0, VOO: 12.5
             },
             'since-inception': {
-                IBIT: 148.5, FBTC: 150.0, GBTC: 138.0, ARKB: 147.0, BITB: 149.5, BTCO: 148.0, EZBC: 147.0, BRRR: 148.0, HODL: 147.5, BTCW: 146.0,
-                ETHA: 0, FETH: 0, ETHE: -10.0, 'ETH-MINI': 5.0, ETHW: 0,
-                BITQ: 48.0, MSTX: 75.0, WGMI: 58.0, STCE: 68.0, MNRS: 52.0,
-                SPY: 200.0, QQQ: 250.0, VTI: 180.0, VOO: 190.0
+                IBIT: 148.5, FBTC: 150.0, GBTC: 138.0, BTC: 78.2, BITB: 149.5, ARKB: 147.0, HODL: 147.5, BTCO: 148.0, EZBC: 147.0, BRRR: 148.0, BTCW: 146.0,
+                ETHA: 44.0, FETH: 44.2, ETHE: 42.5, ETH: 44.8, ETHW: 44.1, ETHV: 43.9, QETH: 43.7,
+                XRPC: 28.5, XRP: 29.0, XRPZ: 28.2, XXRP: 52.0, XRPI: 28.0, XRPT: 51.5, XRPR: 27.8, UXRP: 50.8, XRPM: 35.0, XRPK: 53.2, TOXR: 27.5,
+                BSOL: 30.5, SSK: 29.8, GSOL: 26.0, VSOL: 28.3, TSOL: 28.0, QSOL: 27.7, SOEZ: 28.1, SOLC: 29.2, SOLM: 34.0, SOLX: 52.5, SLON: 51.0,
+                BITW: 120.0, GDLC: 110.0, NCIQ: 85.0, EZPZ: 40.5, GLNK: 22.0, HBR: 15.0, LTCC: 10.0, DOJE: 18.0, BWOW: 17.5, GDOG: 16.0, TXXD: 32.0, TXXS: 35.0, DIME: 38.0, STBQ: 12.0, TKNQ: 14.0, ORO: 25.0, WTIB: 20.0, TTOP: 46.0, TXBC: 44.5,
+                SPY: 200.0, QQQ: 280.0, VTI: 190.0, VOO: 195.0
             }
         };
 
@@ -353,10 +401,7 @@
                     const wrapper = document.querySelector(`#${id}`).parentNode;
                     wrapper.querySelector('.placeholder-text').style.display = 'block';
                 });
-                Object.values(charts).forEach(ch => {
-                    if (ch) ch.destroy();
-                });
-                Object.keys(charts).forEach(key => delete charts[key]);
+                Object.values(charts).forEach(ch => ch && ch.destroy());
                 return;
             }
 
@@ -370,10 +415,9 @@
 
             chartIds.forEach((id, index) => {
                 const ctx = document.getElementById(id).getContext('2d');
-                if (charts[id]) {
-                    charts[id].destroy();
-                }
-                charts[id] = new Chart(ctx, {
+                if (charts[id]) charts[id].destroy();
+
+                const config = {
                     type: chartTypes[index],
                     data: {
                         labels: labels,
@@ -389,19 +433,52 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         indexAxis: id === 'horizontalBarChart' ? 'y' : 'x',
-                        plugins: { legend: { position: 'top' } }
+                        plugins: { legend: { position: 'top' } },
+                        scales: id === 'radarChart' ? {} : { y: { beginAtZero: true } }
                     }
-                });
+                };
+
+                charts[id] = new Chart(ctx, config);
             });
         }
 
         document.querySelectorAll('input[type="checkbox"], #period').forEach(el => el.addEventListener('change', updateAllCharts));
         document.addEventListener('DOMContentLoaded', updateAllCharts);
 
-        // Theme
-        document.getElementById('theme-select').addEventListener('change', e => {
-            document.body.dataset.theme = e.target.value;
-            updateAllCharts();
+        // Theme switcher
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
         });
     </script>
 </body>
