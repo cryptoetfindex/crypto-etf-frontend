@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Fee Comparator 2026 - Compare Expense Ratios</title>
+    <meta name="description" content="Interactive tool to compare expense ratios across all major crypto ETFs in 2026. Sort by fee, AUM, issuer. Helps investors find lowest-cost options. Coming soon: live fee updates.">
+    <meta name="keywords" content="crypto etf fee comparison 2026, lowest fee bitcoin etf, ethereum xrp solana etf expense ratios">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Fee Comparator 2026">
+    <meta property="og:description" content="Compare expense ratios and find the lowest-cost crypto ETFs for your portfolio.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/fee-comparator.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/fee-comparator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+            cursor: pointer;
+        }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .highlight {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .chart-wrapper {
+            margin-top: 2rem;
+            position: relative;
+            height: 400px;
+        }
+        .coming-soon {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        [data-theme="dark"] .coming-soon {
+            background: #451a03;
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Fee Comparator 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Interactive tool to compare expense ratios across all major crypto ETFs. Sort by fee, category, issuer, AUM. Helps find lowest-cost options. Coming soon: live fee updates.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Fee Comparison Table</h2>
+            <p class="mb-4">Select categories or search to filter. Click headers to sort. Data as of January 01, 2026.</p>
+            <div class="flex gap-4 mb-4">
+                <input type="text" id="search" placeholder="Search ETF or Issuer" class="w-full p-2 border rounded">
+            </div>
+            <div class="flex gap-4 mb-4 flex-wrap">
+                <label><input type="checkbox" class="category-filter" value="bitcoin" checked> Bitcoin</label>
+                <label><input type="checkbox" class="category-filter" value="ethereum" checked> Ethereum</label>
+                <label><input type="checkbox" class="category-filter" value="xrp" checked> XRP</label>
+                <label><input type="checkbox" class="category-filter" value="solana" checked> Solana</label>
+                <label><input type="checkbox" class="category-filter" value="multi" checked> Multi-Asset/Thematic</label>
+                <label><input type="checkbox" class="category-filter" value="leveraged" checked> Leveraged</label>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="fee-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="ticker">Ticker</th>
+                            <th data-sort="issuer">Issuer</th>
+                            <th data-sort="category">Category</th>
+                            <th data-sort="expense">Expense Ratio (%)</th>
+                            <th data-sort="aum">AUM ($M)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Bitcoin Spot -->
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="67000" data-ticker="IBIT" data-issuer="BlackRock">
+                            <td>IBIT</td>
+                            <td>BlackRock</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>67000</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.00" data-aum="22000" data-ticker="FBTC" data-issuer="Fidelity">
+                            <td>FBTC</td>
+                            <td>Fidelity</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.00</td>
+                            <td>22000</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="1.50" data-aum="16000" data-ticker="GBTC" data-issuer="Grayscale">
+                            <td>GBTC</td>
+                            <td>Grayscale</td>
+                            <td>Bitcoin Spot</td>
+                            <td>1.50</td>
+                            <td>16000</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.15" data-aum="2800" data-ticker="BTC" data-issuer="Grayscale">
+                            <td>BTC</td>
+                            <td>Grayscale</td>
+                            <td>Bitcoin Spot Mini</td>
+                            <td>0.15</td>
+                            <td>2800</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.20" data-aum="5100" data-ticker="BITB" data-issuer="Bitwise">
+                            <td>BITB</td>
+                            <td>Bitwise</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.20</td>
+                            <td>5100</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.21" data-aum="3000" data-ticker="ARKB" data-issuer="ARK 21Shares">
+                            <td>ARKB</td>
+                            <td>ARK 21Shares</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.21</td>
+                            <td>3000</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="2800" data-ticker="HODL" data-issuer="VanEck">
+                            <td>HODL</td>
+                            <td>VanEck</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>2800</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="2000" data-ticker="BTCO" data-issuer="Invesco Galaxy">
+                            <td>BTCO</td>
+                            <td>Invesco Galaxy</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>2000</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.19" data-aum="1500" data-ticker="EZBC" data-issuer="Franklin">
+                            <td>EZBC</td>
+                            <td>Franklin</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.19</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="1200" data-ticker="BRRR" data-issuer="Coinshares">
+                            <td>BRRR</td>
+                            <td>Coinshares</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.30" data-aum="800" data-ticker="BTCW" data-issuer="WisdomTree">
+                            <td>BTCW</td>
+                            <td>WisdomTree</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.30</td>
+                            <td>800</td>
+                        </tr>
+
+                        <!-- Ethereum Spot -->
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="10000" data-ticker="ETHA" data-issuer="BlackRock">
+                            <td>ETHA</td>
+                            <td>BlackRock</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>10000</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.00" data-aum="8000" data-ticker="FETH" data-issuer="Fidelity">
+                            <td>FETH</td>
+                            <td>Fidelity</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.00</td>
+                            <td>8000</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="2.50" data-aum="5000" data-ticker="ETHE" data-issuer="Grayscale">
+                            <td>ETHE</td>
+                            <td>Grayscale</td>
+                            <td>Ethereum Spot</td>
+                            <td>2.50</td>
+                            <td>5000</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.15" data-aum="2000" data-ticker="ETH" data-issuer="Grayscale">
+                            <td>ETH</td>
+                            <td>Grayscale</td>
+                            <td>Ethereum Spot Mini</td>
+                            <td>0.15</td>
+                            <td>2000</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.20" data-aum="1800" data-ticker="ETHW" data-issuer="Bitwise">
+                            <td>ETHW</td>
+                            <td>Bitwise</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.20</td>
+                            <td>1800</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="1500" data-ticker="ETHV" data-issuer="VanEck">
+                            <td>ETHV</td>
+                            <td>VanEck</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="1200" data-ticker="QETH" data-issuer="Invesco Galaxy">
+                            <td>QETH</td>
+                            <td>Invesco Galaxy</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>1200</td>
+                        </tr>
+
+                        <!-- XRP -->
+                        <tr data-category="xrp" data-expense="0.75" data-aum="700" data-ticker="XRPC" data-issuer="Canary">
+                            <td>XRPC</td>
+                            <td>Canary</td>
+                            <td>XRP Spot</td>
+                            <td>0.75</td>
+                            <td>700</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.25" data-aum="500" data-ticker="XRP" data-issuer="Bitwise">
+                            <td>XRP</td>
+                            <td>Bitwise</td>
+                            <td>XRP Spot</td>
+                            <td>0.25</td>
+                            <td>500</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.29" data-aum="400" data-ticker="XRPZ" data-issuer="Franklin">
+                            <td>XRPZ</td>
+                            <td>Franklin</td>
+                            <td>XRP Spot</td>
+                            <td>0.29</td>
+                            <td>400</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="1.05" data-aum="200" data-ticker="XXRP" data-issuer="Teucrium">
+                            <td>XXRP</td>
+                            <td>Teucrium</td>
+                            <td>XRP 2x Leveraged</td>
+                            <td>1.05</td>
+                            <td>200</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.95" data-aum="150" data-ticker="XRPI" data-issuer="Volatility Shares">
+                            <td>XRPI</td>
+                            <td>Volatility Shares</td>
+                            <td>XRP Spot</td>
+                            <td>0.95</td>
+                            <td>150</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="1.15" data-aum="100" data-ticker="XRPT" data-issuer="Volatility Shares">
+                            <td>XRPT</td>
+                            <td>Volatility Shares</td>
+                            <td>XRP 2x Leveraged</td>
+                            <td>1.15</td>
+                            <td>100</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.50" data-aum="80" data-ticker="XRPR" data-issuer="REX-Osprey">
+                            <td>XRPR</td>
+                            <td>REX-Osprey</td>
+                            <td>XRP Spot</td>
+                            <td>0.50</td>
+                            <td>80</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.95" data-aum="70" data-ticker="UXRP" data-issuer="ProShares">
+                            <td>UXRP</td>
+                            <td>ProShares</td>
+                            <td>XRP 2x Leveraged</td>
+                            <td>0.95</td>
+                            <td>70</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.95" data-aum="5" data-ticker="XRPM" data-issuer="Amplify">
+                            <td>XRPM</td>
+                            <td>Amplify</td>
+                            <td>XRP Income</td>
+                            <td>0.95</td>
+                            <td>5</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="1.15" data-aum="200" data-ticker="XRPK" data-issuer="T-REX">
+                            <td>XRPK</td>
+                            <td>T-REX</td>
+                            <td>XRP 2x Leveraged</td>
+                            <td>1.15</td>
+                            <td>200</td>
+                        </tr>
+                        <tr data-category="xrp" data-expense="0.50" data-aum="6" data-ticker="TOXR" data-issuer="21Shares">
+                            <td>TOXR</td>
+                            <td>21Shares</td>
+                            <td>XRP Spot</td>
+                            <td>0.50</td>
+                            <td>6</td>
+                        </tr>
+
+                        <!-- Solana -->
+                        <tr data-category="solana" data-expense="0.25" data-aum="630" data-ticker="BSOL" data-issuer="Bitwise">
+                            <td>BSOL</td>
+                            <td>Bitwise</td>
+                            <td>Solana Staking</td>
+                            <td>0.25</td>
+                            <td>630</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.50" data-aum="160" data-ticker="SSK" data-issuer="REX-Osprey">
+                            <td>SSK</td>
+                            <td>REX-Osprey</td>
+                            <td>Solana Staking</td>
+                            <td>0.50</td>
+                            <td>160</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="2.50" data-aum="158" data-ticker="GSOL" data-issuer="Grayscale">
+                            <td>GSOL</td>
+                            <td>Grayscale</td>
+                            <td>Solana Spot</td>
+                            <td>2.50</td>
+                            <td>158</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.20" data-aum="23" data-ticker="VSOL" data-issuer="VanEck">
+                            <td>VSOL</td>
+                            <td>VanEck</td>
+                            <td>Solana Spot</td>
+                            <td>0.20</td>
+                            <td>23</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.21" data-aum="6" data-ticker="TSOL" data-issuer="21Shares">
+                            <td>TSOL</td>
+                            <td>21Shares</td>
+                            <td>Solana Spot</td>
+                            <td>0.21</td>
+                            <td>6</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.25" data-aum="2" data-ticker="QSOL" data-issuer="Invesco Galaxy">
+                            <td>QSOL</td>
+                            <td>Invesco Galaxy</td>
+                            <td>Solana Spot</td>
+                            <td>0.25</td>
+                            <td>2</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.29" data-aum="3" data-ticker="SOEZ" data-issuer="Franklin">
+                            <td>SOEZ</td>
+                            <td>Franklin</td>
+                            <td>Solana Spot</td>
+                            <td>0.29</td>
+                            <td>3</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.50" data-aum="2" data-ticker="SOLC" data-issuer="Canary">
+                            <td>SOLC</td>
+                            <td>Canary</td>
+                            <td>Solana Staking</td>
+                            <td>0.50</td>
+                            <td>2</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.95" data-aum="1" data-ticker="SOLM" data-issuer="Amplify">
+                            <td>SOLM</td>
+                            <td>Amplify</td>
+                            <td>Solana Income</td>
+                            <td>0.95</td>
+                            <td>1</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="1.15" data-aum="0.2" data-ticker="SOLX" data-issuer="T-REX">
+                            <td>SOLX</td>
+                            <td>T-REX</td>
+                            <td>Solana 2x Leveraged</td>
+                            <td>1.15</td>
+                            <td>0.2</td>
+                        </tr>
+                        <tr data-category="solana" data-expense="0.95" data-aum="29" data-ticker="SLON" data-issuer="ProShares">
+                            <td>SLON</td>
+                            <td>ProShares</td>
+                            <td>Solana 2x Leveraged</td>
+                            <td>0.95</td>
+                            <td>29</td>
+                        </tr>
+
+                        <!-- Multi-Asset -->
+                        <tr data-category="multi" data-expense="0.85" data-aum="1000" data-ticker="BITW" data-issuer="Bitwise">
+                            <td>BITW</td>
+                            <td>Bitwise</td>
+                            <td>Multi-Asset</td>
+                            <td>0.85</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="2.50" data-aum="536" data-ticker="GDLC" data-issuer="Grayscale">
+                            <td>GDLC</td>
+                            <td>Grayscale</td>
+                            <td>Multi-Asset</td>
+                            <td>2.50</td>
+                            <td>536</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.90" data-aum="800" data-ticker="NCIQ" data-issuer="Hashdex">
+                            <td>NCIQ</td>
+                            <td>Hashdex</td>
+                            <td>Multi-Asset</td>
+                            <td>0.90</td>
+                            <td>800</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.29" data-aum="10" data-ticker="EZPZ" data-issuer="Franklin">
+                            <td>EZPZ</td>
+                            <td>Franklin</td>
+                            <td>Multi-Asset</td>
+                            <td>0.29</td>
+                            <td>10</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="2.50" data-aum="74" data-ticker="GLNK" data-issuer="Grayscale">
+                            <td>GLNK</td>
+                            <td>Grayscale</td>
+                            <td>Chainlink Spot</td>
+                            <td>2.50</td>
+                            <td>74</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.75" data-aum="53" data-ticker="HBR" data-issuer="Canary">
+                            <td>HBR</td>
+                            <td>Canary</td>
+                            <td>HBAR Spot</td>
+                            <td>0.75</td>
+                            <td>53</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.75" data-aum="7" data-ticker="LTCC" data-issuer="Canary">
+                            <td>LTCC</td>
+                            <td>Canary</td>
+                            <td>Litecoin Spot</td>
+                            <td>0.75</td>
+                            <td>7</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.75" data-aum="20" data-ticker="DOJE" data-issuer="REX-Osprey">
+                            <td>DOJE</td>
+                            <td>REX-Osprey</td>
+                            <td>Dogecoin Spot</td>
+                            <td>0.75</td>
+                            <td>20</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.50" data-aum="1" data-ticker="BWOW" data-issuer="Bitwise">
+                            <td>BWOW</td>
+                            <td>Bitwise</td>
+                            <td>Dogecoin Spot</td>
+                            <td>0.50</td>
+                            <td>1</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="2.50" data-aum="4" data-ticker="GDOG" data-issuer="Grayscale">
+                            <td>GDOG</td>
+                            <td>Grayscale</td>
+                            <td>Dogecoin Spot</td>
+                            <td>2.50</td>
+                            <td>4</td>
+                        </tr>
+                        <tr data-category="leveraged" data-expense="1.15" data-aum="1" data-ticker="TXXD" data-issuer="21Shares">
+                            <td>TXXD</td>
+                            <td>21Shares</td>
+                            <td>Dogecoin 2x</td>
+                            <td>1.15</td>
+                            <td>1</td>
+                        </tr>
+                        <tr data-category="leveraged" data-expense="1.15" data-aum="1" data-ticker="TXXS" data-issuer="21Shares">
+                            <td>TXXS</td>
+                            <td>21Shares</td>
+                            <td>Sui 2x</td>
+                            <td>1.15</td>
+                            <td>1</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.65" data-aum="2" data-ticker="DIME" data-issuer="CoinShares">
+                            <td>DIME</td>
+                            <td>CoinShares</td>
+                            <td>Altcoins Basket</td>
+                            <td>0.65</td>
+                            <td>2</td>
+                        </tr>
+                        <tr data-category="thematic" data-expense="0.75" data-aum="0.5" data-ticker="STBQ" data-issuer="Amplify">
+                            <td>STBQ</td>
+                            <td>Amplify</td>
+                            <td>Stablecoin Thematic</td>
+                            <td>0.75</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr data-category="thematic" data-expense="0.75" data-aum="0.5" data-ticker="TKNQ" data-issuer="Amplify">
+                            <td>TKNQ</td>
+                            <td>Amplify</td>
+                            <td>Tokenization Thematic</td>
+                            <td>0.75</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr data-category="hybrid" data-expense="0.95" data-aum="3" data-ticker="ORO" data-issuer="Arrow">
+                            <td>ORO</td>
+                            <td>Arrow</td>
+                            <td>Gold + BTC Hybrid</td>
+                            <td>0.95</td>
+                            <td>3</td>
+                        </tr>
+                        <tr data-category="hybrid" data-expense="0.95" data-aum="0.4" data-ticker="WTIB" data-issuer="USCF">
+                            <td>WTIB</td>
+                            <td>USCF</td>
+                            <td>Oil + BTC Hybrid</td>
+                            <td>0.95</td>
+                            <td>0.4</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.65" data-aum="0.9" data-ticker="TTOP" data-issuer="21Shares">
+                            <td>TTOP</td>
+                            <td>21Shares</td>
+                            <td>Top 10 Crypto Index</td>
+                            <td>0.65</td>
+                            <td>0.9</td>
+                        </tr>
+                        <tr data-category="multi" data-expense="0.65" data-aum="0.8" data-ticker="TXBC" data-issuer="21Shares">
+                            <td>TXBC</td>
+                            <td>21Shares</td>
+                            <td>Top 10 ex-BTC</td>
+                            <td>0.65</td>
+                            <td>0.8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm mt-4">Data as of January 01, 2026; approximate. AUM in millions. Fees may change – verify with issuer.</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Why Fees Matter (Impact Over Time)</h2>
+            <p class="text-lg mb-4">Lower fees compound to significant savings over years. Example: $10,000 invested at 10% annual return:</p>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Expense Ratio</th>
+                            <th>10 Years Value</th>
+                            <th>Fee Drag</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.15%</td>
+                            <td>$25,488</td>
+                            <td>$149</td>
+                        </tr>
+                        <tr>
+                            <td>0.25%</td>
+                            <td>$25,259</td>
+                            <td>$248</td>
+                        </tr>
+                        <tr>
+                            <td>0.75%</td>
+                            <td>$24,043</td>
+                            <td>$744</td>
+                        </tr>
+                        <tr>
+                            <td>1.50%</td>
+                            <td>$22,227</td>
+                            <td>$1,488</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm mt-4">Assumes 10% gross annual return; fees compound annually.</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Fee Comparator Chart</h2>
+            <div class="chart-wrapper">
+                <canvas id="feeChart"></canvas>
+            </div>
+            <p class="text-sm mt-4">Bar chart of selected ETFs' expense ratios (sorted lowest to highest).</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Tips for Minimizing Fees</h2>
+            <ul class="space-y-4 text-lg">
+                <li>• Choose mini trusts (BTC Mini, ETH Mini) for lowest fees (0.15%).</li>
+                <li>• Use Bitwise or VanEck for competitive 0.20% spot fees.</li>
+                <li>• Avoid Grayscale trusts (2.50%) unless for specific reasons.</li>
+                <li>• For leveraged/income, expect higher fees – use sparingly.</li>
+                <li>• Consider AUM – larger funds often have better liquidity, indirectly reducing costs.</li>
+            </ul>
+            <div class="coming-soon">
+                Coming Soon: Live Fee Tracker – Real-time expense ratio updates from issuer APIs.
+            </div>
+        </div>
+
+        <div class="card mb-8 text-center">
+            <p class="text-lg">Related Resources:</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-4">
+                <a href="/frontend/bitcoin-etfs.html" class="btn">Bitcoin ETFs</a>
+                <a href="/frontend/ethereum-etfs.html" class="btn">Ethereum ETFs</a>
+                <a href="/frontend/other-crypto-etfs.html" class="btn">Altcoin ETFs</a>
+                <a href="/frontend/comparisons.html" class="btn">Performance Comparator</a>
+                <a href="/frontend/guides.html" class="btn">All Guides</a>
+            </div>
+        </div>
+
+        <p class="disclaimer">
+            Fees approximate as of January 01, 2026; verify with issuer. This tool is informational only – not financial advice.
+        </p>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme switcher
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+            initTable();
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        let chart;
+
+        function initTable() {
+            const table = document.getElementById('fee-table');
+            const headers = table.querySelectorAll('th[data-sort]');
+            headers.forEach(header => {
+                header.addEventListener('click', () => sortTable(table, header.dataset.sort));
+            });
+            const search = document.getElementById('search');
+            search.addEventListener('input', () => filterTable(table, search.value));
+            const filters = document.querySelectorAll('.category-filter');
+            filters.forEach(filter => {
+                filter.addEventListener('change', () => filterByCategory(table);
+            });
+            filterByCategory(table); // Initial filter
+        }
+
+        function filterTable(table, searchTerm) {
+            const rows = table.querySelectorAll('tbody tr');
+            const term = searchTerm.toLowerCase();
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+            updateChart(table);
+        }
+
+        function filterByCategory(table) {
+            const activeCategories = Array.from(document.querySelectorAll('.category-filter:checked')).map(f => f.value);
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const cat = row.dataset.category;
+                row.style.display = activeCategories.includes(cat) ? '' : 'none';
+            });
+            updateChart(table);
+        }
+
+        function sortTable(table, column) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const isNumber = column === 'expense' || column === 'aum';
+            rows.sort((a, b) => {
+                let valA = a.dataset[column] || a.querySelector(`td:nth-child(${Array.from(table.querySelector('thead tr th')).findIndex(th => th.dataset.sort === column) + 1}`)?.textContent.trim();
+                let valB = b.dataset[column] || b.querySelector(`td:nth-child(${Array.from(table.querySelector('thead tr th')).findIndex(th => th.dataset.sort === column) + 1}`)?.textContent.trim();
+                if (isNumber) {
+                    valA = parseFloat(valA);
+                    valB = parseFloat(valB);
+                    return valA - valB;
+                } else {
+                    return valA.localeCompare(valB);
+                }
+            });
+            rows.forEach(row => tbody.appendChild(row));
+            updateChart(table);
+        }
+
+        function updateChart(table) {
+            const visibleRows = Array.from(table.querySelectorAll('tbody tr')).filter(r => r.style.display !== 'none');
+            const labels = visibleRows.map(row => row.dataset.ticker);
+            const data = visibleRows.map(row => parseFloat(row.dataset.expense));
+            if (chart) chart.destroy();
+            chart = new Chart(document.getElementById('feeChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Expense Ratio (%)',
+                        data: data,
+                        backgroundColor: var(--accent)
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+            });
+        }
+    </script>
+</body>
+</html>
