@@ -123,7 +123,7 @@
 </head>
 <body data-theme="light">
     <div id="particles"></div>
-    <!-- Sticky Navbar -->
+    <!-- Navbar (unchanged) -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
@@ -147,7 +147,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
@@ -159,7 +158,7 @@
             <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- Bitcoin Spot ETFs -->
+                <!-- Full list of ETFs - all preserved -->
                 <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
                 <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
@@ -171,7 +170,6 @@
                 <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin</label>
                 <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin</label>
                 <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin</label>
-                <!-- Ethereum Spot ETFs -->
                 <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
                 <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
                 <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
@@ -179,7 +177,6 @@
                 <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
                 <label><input type="checkbox" value="ETHV"> ETHV - VanEck Ethereum ETF</label>
                 <label><input type="checkbox" value="QETH"> QETH - Invesco Galaxy Ethereum</label>
-                <!-- XRP Spot ETFs -->
                 <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
                 <label><input type="checkbox" value="XRP"> XRP - Bitwise XRP ETF</label>
                 <label><input type="checkbox" value="XRPZ"> XRPZ - Franklin XRP ETF</label>
@@ -191,7 +188,6 @@
                 <label><input type="checkbox" value="XRPM"> XRPM - Amplify XRP 3% Monthly</label>
                 <label><input type="checkbox" value="XRPK"> XRPK - T-REX 2X Long XRP</label>
                 <label><input type="checkbox" value="TOXR"> TOXR - 21Shares XRP ETF</label>
-                <!-- Solana Spot & Staking ETFs -->
                 <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
                 <label><input type="checkbox" value="SSK"> SSK - REX-Osprey SOL + Staking</label>
                 <label><input type="checkbox" value="GSOL"> GSOL - Grayscale Solana Trust</label>
@@ -203,7 +199,6 @@
                 <label><input type="checkbox" value="SOLM"> SOLM - Amplify Solana 3% Monthly</label>
                 <label><input type="checkbox" value="SOLX"> SOLX - T-REX 2X Long SOL</label>
                 <label><input type="checkbox" value="SLON"> SLON - ProShares Ultra Solana</label>
-                <!-- Other Altcoin & Thematic ETFs -->
                 <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
                 <label><input type="checkbox" value="GDLC"> GDLC - Grayscale CoinDesk Crypto 5</label>
                 <label><input type="checkbox" value="NCIQ"> NCIQ - Hashdex Nasdaq Crypto Index</label>
@@ -223,7 +218,6 @@
                 <label><input type="checkbox" value="WTIB"> WTIB - USCF Oil Plus Bitcoin</label>
                 <label><input type="checkbox" value="TTOP"> TTOP - 21Shares FTSE Crypto 10</label>
                 <label><input type="checkbox" value="TXBC"> TXBC - 21Shares FTSE Crypto 10 ex-BTC</label>
-                <!-- Benchmarks -->
                 <label><input type="checkbox" value="SPY"> SPY - S&P 500</label>
                 <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100</label>
             </div>
@@ -374,33 +368,39 @@
         }
 
         function updateTagsAndAnalysis() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            const selected = Array.from(checkboxes).map(cb => cb.value);
+            const selectedTickers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+
             const tagsContainer = document.getElementById('selected-tags');
             tagsContainer.innerHTML = '';
-            selected.forEach(ticker => {
-                const checkbox = document.querySelector(`input[value="${ticker}"]`);
-                const label = checkbox.parentNode;
-                const labelText = label.textContent.trim().replace(ticker, '').trim(); // Robust extraction
+
+            selectedTickers.forEach(ticker => {
+                const labelEl = document.querySelector(`label input[value="${ticker}"]`).parentElement;
+                const fullLabel = labelEl.textContent.trim();
+                const displayName = fullLabel.replace(/^[^-]*-\s*/, ''); // Remove "TICKER - " part safely
+
                 const tag = document.createElement('div');
                 tag.className = 'tag';
-                tag.innerHTML = `${labelText} <button data-key="${ticker}">×</button>`;
+                tag.innerHTML = `${displayName} <button data-ticker="${ticker}">×</button>`;
                 tagsContainer.appendChild(tag);
             });
+
             document.querySelectorAll('.tag button').forEach(btn => {
                 btn.onclick = () => {
-                    document.querySelector(`input[value="${btn.dataset.key}"]`).checked = false;
+                    const ticker = btn.dataset.ticker;
+                    const cb = document.querySelector(`input[value="${ticker}"]`);
+                    if (cb) cb.checked = false;
                     updateTagsAndAnalysis();
                 };
             });
-            runAnalysis(selected);
+
+            runAnalysis(selectedTickers);
         }
 
         function runAnalysis(selected) {
             if (selected.length < 2) {
-                ['avg-correlation', 'avg-beta', 'avg-covariance', 'portfolio-vol'].forEach(id => {
-                    document.getElementById(id).textContent = 'Select 2+ ETFs';
-                });
+                document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
+                    .forEach(el => el.textContent = 'Select 2+ ETFs');
                 document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
                 [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
                 heatmapChart = trendChart = monteCarloChart = null;
@@ -412,10 +412,12 @@
 
             const n = selected.length;
             const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
+
             for (let i = 0; i < n; i++) {
                 for (let j = 0; j < n; j++) {
-                    if (i === j) corrMatrix[i][j] = 1;
-                    else {
+                    if (i === j) {
+                        corrMatrix[i][j] = 1;
+                    } else {
                         let corr = math.correlation(returnsData[i], returnsData[j]);
                         if (esgAdjust) {
                             const esgI = ESG_RATINGS[selected[i]] || 'medium';
@@ -474,8 +476,13 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { x: {type: 'category', labels: selected, position: 'top'}, y: {type: 'category', labels: selected.reverse()} },
-                    plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
+                    scales: {
+                        x: { type: 'category', labels: selected, position: 'top' },
+                        y: { type: 'category', labels: selected.reverse() }
+                    },
+                    plugins: {
+                        tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } }
+                    }
                 }
             });
 
@@ -499,7 +506,7 @@
                     datasets: Object.entries(trendData).map(([t, data], i) => ({
                         label: t,
                         data,
-                        borderColor: ['#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6'][i % 5],
+                        borderColor: ['#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#a78bfa'][i % 6],
                         tension: 0.3
                     }))
                 },
