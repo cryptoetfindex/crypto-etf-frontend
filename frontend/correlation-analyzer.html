@@ -10,6 +10,11 @@
     <meta name="keywords" content="crypto etf correlation analyzer 2026, bitcoin ethereum correlation tool, portfolio risk analyzer, fintech correlation screener">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Correlation Analyzer 2026">
+    <meta property="og:description" content="Analyze correlations between crypto ETFs with AI-driven insights and advanced visualizations.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/correlation-analyzer.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/correlation-analyzer.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -141,20 +146,17 @@
             </select>
         </div>
     </nav>
-
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
             <p class="text-xl max-w-4xl mx-auto">The most advanced correlation analyzer tool for crypto ETFs: Select funds, calculate correlations, beta, covariance, visualize heatmaps, historical trends, Monte Carlo projections, AI portfolio optimization, ESG-adjusted correlations, and more forward-thinking features.</p>
         </header>
-
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis (up to 12 recommended)</h2>
-            <p class="mb-4">Check any ETFs to include them in the analysis. Updates automatically.</p>
-
+            <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- All ETFs - none pre-selected -->
+                <!-- Bitcoin Spot ETFs -->
                 <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
                 <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
@@ -166,6 +168,7 @@
                 <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin</label>
                 <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin</label>
                 <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin</label>
+                <!-- Ethereum Spot ETFs -->
                 <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
                 <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
                 <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
@@ -173,6 +176,7 @@
                 <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
                 <label><input type="checkbox" value="ETHV"> ETHV - VanEck Ethereum ETF</label>
                 <label><input type="checkbox" value="QETH"> QETH - Invesco Galaxy Ethereum</label>
+                <!-- XRP Spot ETFs -->
                 <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
                 <label><input type="checkbox" value="XRP"> XRP - Bitwise XRP ETF</label>
                 <label><input type="checkbox" value="XRPZ"> XRPZ - Franklin XRP ETF</label>
@@ -184,6 +188,7 @@
                 <label><input type="checkbox" value="XRPM"> XRPM - Amplify XRP 3% Monthly</label>
                 <label><input type="checkbox" value="XRPK"> XRPK - T-REX 2X Long XRP</label>
                 <label><input type="checkbox" value="TOXR"> TOXR - 21Shares XRP ETF</label>
+                <!-- Solana Spot & Staking ETFs -->
                 <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
                 <label><input type="checkbox" value="SSK"> SSK - REX-Osprey SOL + Staking</label>
                 <label><input type="checkbox" value="GSOL"> GSOL - Grayscale Solana Trust</label>
@@ -195,6 +200,7 @@
                 <label><input type="checkbox" value="SOLM"> SOLM - Amplify Solana 3% Monthly</label>
                 <label><input type="checkbox" value="SOLX"> SOLX - T-REX 2X Long SOL</label>
                 <label><input type="checkbox" value="SLON"> SLON - ProShares Ultra Solana</label>
+                <!-- Other Altcoin & Thematic ETFs -->
                 <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
                 <label><input type="checkbox" value="GDLC"> GDLC - Grayscale CoinDesk Crypto 5</label>
                 <label><input type="checkbox" value="NCIQ"> NCIQ - Hashdex Nasdaq Crypto Index</label>
@@ -380,6 +386,21 @@
             runAnalysis(selected);
         }
 
+        // Custom stat functions (since mathjs doesn't have them built-in)
+        function covariance(a, b) {
+            const meanA = math.mean(a);
+            const meanB = math.mean(b);
+            return math.mean(math.subtract(a, meanA).map((val, i) => val * (b[i] - meanB)));
+        }
+
+        function correlation(a, b) {
+            return covariance(a, b) / (math.std(a) * math.std(b));
+        }
+
+        function beta(a, b) {
+            return covariance(a, b) / math.variance(b);
+        }
+
         function runAnalysis(selected) {
             if (selected.length < 2) {
                 document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
@@ -400,7 +421,7 @@
                     if (i === j) {
                         corrMatrix[i][j] = 1;
                     } else {
-                        let corr = math.correlation(returnsData[i], returnsData[j]);
+                        let corr = correlation(returnsData[i], returnsData[j]);
                         if (esgAdjust) {
                             const esgI = ESG_RATINGS[selected[i]] || 'medium';
                             const esgJ = ESG_RATINGS[selected[j]] || 'medium';
@@ -420,10 +441,10 @@
             const btcIdx = selected.indexOf('IBIT');
             const ref = btcIdx !== -1 ? returnsData[btcIdx] : returnsData[0];
 
-            const betas = returnsData.map(r => math.beta(r, ref));
+            const betas = returnsData.map(r => beta(r, ref));
             const avgBeta = math.mean(betas).toFixed(3);
 
-            const covs = returnsData.map(r => math.covariance(r, ref));
+            const covs = returnsData.map(r => covariance(r, ref));
             const avgCov = math.mean(covs).toFixed(6);
 
             const weights = Array(n).fill(1 / n);
@@ -443,6 +464,7 @@
                 type: 'matrix',
                 data: {
                     datasets: [{
+                        label: 'Correlation',
                         data: corrMatrix.flatMap((row, i) => row.map((v, j) => ({x: selected[j], y: selected[i], v}))),
                         backgroundColor: c => {
                             const v = c.raw.v;
@@ -470,7 +492,7 @@
                 for (let d = rolling; d < 252; d++) {
                     const slice = returnsData[i].slice(d - rolling, d);
                     const refSlice = ref.slice(d - rolling, d);
-                    trendData[t].push(math.correlation(slice, refSlice));
+                    trendData[t].push(correlation(slice, refSlice));
                 }
             });
 
@@ -544,7 +566,6 @@
             document.getElementById('esg-adjust').addEventListener('change', updateTagsAndAnalysis);
             document.getElementById('time-period').addEventListener('change', updateTagsAndAnalysis);
 
-            // Start clean — no pre-selected
             runAnalysis([]);
 
             particlesJS('particles', {
