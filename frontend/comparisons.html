@@ -5,75 +5,124 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Comparisons 2025 - Bitcoin vs Ethereum vs Emerging Funds</title>
-    <meta name="description" content="Side-by-side comparisons of the best crypto ETFs in 2025. Compare fees, AUM, performance, inflows, and key features across Bitcoin, Ethereum, XRP, and multi-asset funds.">
-    <meta name="keywords" content="crypto etf comparison 2025, bitcoin etf vs ethereum etf, best bitcoin etf, lowest fee crypto etf, ibit vs fbtc, xrp etf comparison">
+    <title>Crypto ETF Comparisons 2026 - Bitcoin vs Ethereum vs Altcoins</title>
+    <meta name="description" content="Side-by-side comparisons of the best crypto ETFs in 2026. Compare fees, AUM, performance, inflows, and key features across Bitcoin, Ethereum, XRP, Solana, and multi-asset funds.">
+    <meta name="keywords" content="crypto etf comparison 2026, bitcoin etf vs ethereum etf, best bitcoin etf, lowest fee crypto etf, ibit vs fbtc, xrp solana etf comparison">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Comparisons 2025">
+    <meta property="og:title" content="Crypto ETF Comparisons 2026">
     <meta property="og:description" content="In-depth side-by-side comparisons of top spot crypto ETFs by category, fees, performance, and more.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/comparisons.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/comparisons.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/comparisons.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/comparisons.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select, table, .disclaimer etc. */
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
         .comparison-card {
-            background: var(--card-bg);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .comparison-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--accent);
+        }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="particles"></div>
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="text-var(--accent-color) hover:underline">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="hover:text-var(--accent-color)">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="text-[var(--accent)] hover:underline">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
@@ -81,86 +130,119 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Comparisons (December 2025)</h1>
-            <p class="text-xl max-w-4xl mx-auto">In-depth side-by-side comparisons to help you evaluate the best spot crypto ETFs by fees, AUM, inflows, liquidity, and more. Choose the right fund for your portfolio.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Comparisons</h1>
+            <p class="text-xl max-w-4xl mx-auto">In-depth side-by-side comparisons to help you evaluate the best spot crypto ETFs by fees, AUM, performance, and more. Data as of January 01, 2026.</p>
         </header>
 
         <div class="comparison-grid">
-            <!-- Bitcoin ETFs Comparison -->
+            <!-- Top Bitcoin ETFs -->
             <div class="comparison-card">
-                <h3>Best Bitcoin ETFs 2025</h3>
-                <p class="mb-4">Compare top spot Bitcoin funds: IBIT vs FBTC vs GBTC vs ARKB</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• Lowest fees: ARKB & BITB (0.20-0.21%)</li>
-                    <li>• Highest AUM: IBIT (~$50B+)</li>
-                    <li>• Best liquidity: IBIT & FBTC</li>
+                <h3>Top Bitcoin ETFs</h3>
+                <p class="mb-4">Compare leading spot Bitcoin funds by AUM, fees & liquidity</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Largest: IBIT (~$67B AUM)</li>
+                    <li>• Lowest Fee: BTC Mini (0.15%)</li>
+                    <li>• Best Liquidity: IBIT & FBTC</li>
+                    <li>• Total BTC ETF AUM: ~$120B+</li>
                 </ul>
-                <a href="/frontend/bitcoin-etf-comparison.html" class="policy-btn">View Full Comparison →</a>
+                <a href="/frontend/bitcoin-etfs.html" class="btn">View Bitcoin ETFs →</a>
             </div>
 
-            <!-- Ethereum ETFs Comparison -->
+            <!-- Top Ethereum ETFs -->
             <div class="comparison-card">
-                <h3>Best Ethereum ETFs 2025</h3>
-                <p class="mb-4">ETHA vs FETH vs ETHE vs Mini Trusts</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• Leader by AUM: ETHA (~$16B+)</li>
-                    <li>• Lowest fee: ETH Mini (0.15%)</li>
-                    <li>• Recent inflows strong across category</li>
+                <h3>Top Ethereum ETFs</h3>
+                <p class="mb-4">Compare major spot Ethereum funds</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Leader: ETHA (~$10B AUM)</li>
+                    <li>• Lowest Fee: ETH Mini (0.15%)</li>
+                    <li>• Strong Inflows: ETHA & FETH</li>
+                    <li>• Total ETH ETF AUM: ~$30B+</li>
                 </ul>
-                <a href="/frontend/ethereum-etf-comparison.html" class="policy-btn">View Full Comparison →</a>
+                <a href="/frontend/ethereum-etfs.html" class="btn">View Ethereum ETFs →</a>
             </div>
 
             <!-- Bitcoin vs Ethereum -->
             <div class="comparison-card">
                 <h3>Bitcoin vs Ethereum ETFs</h3>
-                <p class="mb-4">Which is better for 2025 exposure?</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• BTC: Higher AUM, more established</li>
-                    <li>• ETH: Growth potential, staking (future)</li>
-                    <li>• Diversify with both?</li>
+                <p class="mb-4">Head-to-head: Which is better for 2026?</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• BTC: Higher AUM, stability</li>
+                    <li>• ETH: Growth potential, ecosystem</li>
+                    <li>• Consider both for diversification</li>
+                    <li>• BTC dominates inflows historically</li>
                 </ul>
-                <a href="/frontend/bitcoin-vs-ethereum-etfs.html" class="policy-btn">View Comparison →</a>
+                <a href="/frontend/bitcoin-etfs.html" class="btn">Compare BTC ETFs →</a>
+                <a href="/frontend/ethereum-etfs.html" class="btn mt-2">Compare ETH ETFs →</a>
             </div>
 
-            <!-- Emerging (XRP/Solana) -->
+            <!-- XRP ETFs -->
             <div class="comparison-card">
-                <h3>Emerging Crypto ETFs</h3>
-                <p class="mb-4">XRP ETFs vs Solana vs Multi-Asset</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• Fastest growth: XRP category ($1B+ milestone)</li>
-                    <li>• Diversification: Basket funds (GDLC, EZPZ)</li>
-                    <li>• Higher risk/reward profile</li>
+                <h3>XRP ETFs</h3>
+                <p class="mb-4">Fastest-growing category (~$1.2B AUM)</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Top Funds: XRPC, XRP, XRPZ</li>
+                    <li>• Strong retail inflows</li>
+                    <li>• Leveraged options available</li>
+                    <li>• High volatility profile</li>
                 </ul>
-                <a href="/frontend/emerging-etf-comparison.html" class="policy-btn">View Full Comparison →</a>
+                <a href="/frontend/other-crypto-etfs.html" class="btn">View XRP ETFs →</a>
             </div>
 
-            <!-- Lowest Fees Overall -->
+            <!-- Solana ETFs -->
+            <div class="comparison-card">
+                <h3>Solana ETFs</h3>
+                <p class="mb-4">Growing ecosystem with staking options (~$700M+ AUM)</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Leader: BSOL (staking yield)</li>
+                    <li>• Pure Spot: VSOL, TSOL</li>
+                    <li>• Leveraged: SOLX, SLON</li>
+                    <li>• Institutional interest rising</li>
+                </ul>
+                <a href="/frontend/other-crypto-etfs.html" class="btn">View Solana ETFs →</a>
+            </div>
+
+            <!-- Multi-Asset & Thematic -->
+            <div class="comparison-card">
+                <h3>Multi-Asset & Thematic ETFs</h3>
+                <p class="mb-4">Diversified baskets and niche strategies</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Top 10 Index: TTOP, TXBC (ex-BTC)</li>
+                    <li>• Hybrid: ORO (Gold + BTC)</li>
+                    <li>• RWA/Tokenization: TKNQ</li>
+                    <li>• Stablecoin Tech: STBQ</li>
+                </ul>
+                <a href="/frontend/other-crypto-etfs.html" class="btn">View Thematic ETFs →</a>
+            </div>
+
+            <!-- Lowest Fee ETFs -->
             <div class="comparison-card">
                 <h3>Lowest Fee Crypto ETFs</h3>
-                <p class="mb-4">Top funds with expense ratios under 0.25%</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• ETH Mini Trust: 0.15%</li>
-                    <li>• BITB/ARKB: 0.20-0.21%</li>
+                <p class="mb-4">Top funds with expense ratios under 0.30%</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• BTC & ETH Mini Trusts: 0.15%</li>
+                    <li>• Bitwise/VanEck: ~0.20%</li>
                     <li>• Most majors: 0.25%</li>
+                    <li>• Fee wars driving competition</li>
                 </ul>
-                <a href="/frontend/lowest-fee-etfs.html" class="policy-btn">View Ranking →</a>
+                <a href="/frontend/bitcoin-etfs.html" class="btn">View All ETFs →</a>
             </div>
 
-            <!-- Inflows Leaders -->
+            <!-- Performance Leaders -->
             <div class="comparison-card">
-                <h3>Top Inflow ETFs (Recent)</h3>
-                <p class="mb-4">Funds seeing strongest investor demand</p>
-                <ul class="text-left space-y-2 mb-4">
-                    <li>• XRP ETFs: Consistent positive flows</li>
-                    <li>• ETH products: Early December gains</li>
-                    <li>• BTC: Mixed amid volatility</li>
+                <h3>Top Performing ETFs (YTD 2026)</h3>
+                <p class="mb-4">Highest returns across categories</p>
+                <ul class="text-left space-y-2 mb-4 text-sm">
+                    <li>• Bitcoin ETFs: ~+78%</li>
+                    <li>• Ethereum ETFs: ~+44%</li>
+                    <li>• XRP ETFs: ~+28%</li>
+                    <li>• Solana ETFs: ~+28%</li>
                 </ul>
-                <a href="/frontend/top-inflow-etfs.html" class="policy-btn">View Latest Flows →</a>
+                <a href="/frontend/tools.html" class="btn">Use ROI Calculator →</a>
             </div>
         </div>
 
         <div class="card mt-12 text-center">
-            <p class="text-lg">More detailed comparisons coming soon. Data approximate as of December 16, 2025.</p>
+            <p class="text-lg">All comparisons based on latest available data. Use our tools for custom analysis.</p>
         </div>
 
         <p class="disclaimer">
@@ -168,14 +250,54 @@
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12">
-            <!-- Same as home: policy buttons, copyright, disclaimer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme, particles, modals
+        // Theme switcher (light/dark only)
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
