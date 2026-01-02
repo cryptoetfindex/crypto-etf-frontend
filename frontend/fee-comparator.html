@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Fee Comparator 2026 - Compare Expense Ratios</title>
-    <meta name="description" content="Interactive tool to compare expense ratios across all major crypto ETFs in 2026. Sort by fee, AUM, issuer. Helps investors find lowest-cost options. Coming soon: live fee updates.">
+    <meta name="description" content="Interactive tool to compare expense ratios across all major crypto ETFs in 2026. Sort by fee, AUM, issuer. Helps find lowest-cost options. Coming soon: live fee updates.">
     <meta name="keywords" content="crypto etf fee comparison 2026, lowest fee bitcoin etf, ethereum xrp solana etf expense ratios">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
@@ -90,6 +90,8 @@
             color: var(--accent);
             cursor: pointer;
         }
+        th.sorted-asc::after { content: ' ↑'; }
+        th.sorted-desc::after { content: ' ↓'; }
         .disclaimer {
             font-size: 0.875rem;
             opacity: 0.8;
@@ -120,6 +122,21 @@
         [data-theme="dark"] .coming-soon {
             background: #451a03;
             color: #fbbf24;
+        }
+        .calculator {
+            margin-top: 2rem;
+        }
+        .calculator input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        #fee-impact-table {
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -159,7 +176,7 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Fee Comparison Table</h2>
-            <p class="mb-4">Select categories or search to filter. Click headers to sort. Data as of January 01, 2026.</p>
+            <p class="mb-4">Select categories or search to filter. Click headers to sort (asc/desc). Data as of January 01, 2026.</p>
             <div class="flex gap-4 mb-4">
                 <input type="text" id="search" placeholder="Search ETF or Issuer" class="w-full p-2 border rounded">
             </div>
@@ -175,11 +192,11 @@
                 <table id="fee-table">
                     <thead>
                         <tr>
-                            <th data-sort="ticker">Ticker</th>
-                            <th data-sort="issuer">Issuer</th>
-                            <th data-sort="category">Category</th>
-                            <th data-sort="expense">Expense Ratio (%)</th>
-                            <th data-sort="aum">AUM ($M)</th>
+                            <th data-sort="ticker">Ticker <span class="sort-icon"></span></th>
+                            <th data-sort="issuer">Issuer <span class="sort-icon"></span></th>
+                            <th data-sort="category">Category <span class="sort-icon"></span></th>
+                            <th data-sort="expense">Expense Ratio (%) <span class="sort-icon"></span></th>
+                            <th data-sort="aum">AUM ($M) <span class="sort-icon"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -456,14 +473,14 @@
                             <td>0.95</td>
                             <td>1</td>
                         </tr>
-                        <tr data-category="solana" data-expense="1.15" data-aum="0.2" data-ticker="SOLX" data-issuer="T-REX">
+                        <tr data-category="leveraged" data-expense="1.15" data-aum="0.2" data-ticker="SOLX" data-issuer="T-REX">
                             <td>SOLX</td>
                             <td>T-REX</td>
                             <td>Solana 2x Leveraged</td>
                             <td>1.15</td>
                             <td>0.2</td>
                         </tr>
-                        <tr data-category="solana" data-expense="0.95" data-aum="29" data-ticker="SLON" data-issuer="ProShares">
+                        <tr data-category="leveraged" data-expense="0.95" data-aum="29" data-ticker="SLON" data-issuer="ProShares">
                             <td>SLON</td>
                             <td>ProShares</td>
                             <td>Solana 2x Leveraged</td>
@@ -612,42 +629,40 @@
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Why Fees Matter (Impact Over Time)</h2>
-            <p class="text-lg mb-4">Lower fees compound to significant savings over years. Example: $10,000 invested at 10% annual return:</p>
-            <div class="overflow-x-auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Expense Ratio</th>
-                            <th>10 Years Value</th>
-                            <th>Fee Drag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0.15%</td>
-                            <td>$25,488</td>
-                            <td>$149</td>
-                        </tr>
-                        <tr>
-                            <td>0.25%</td>
-                            <td>$25,259</td>
-                            <td>$248</td>
-                        </tr>
-                        <tr>
-                            <td>0.75%</td>
-                            <td>$24,043</td>
-                            <td>$744</td>
-                        </tr>
-                        <tr>
-                            <td>1.50%</td>
-                            <td>$22,227</td>
-                            <td>$1,488</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2 class="text-2xl font-semibold mb-4">Fee Impact Calculator</h2>
+            <p class="mb-4">See how fees affect long-term returns. Enter details below.</p>
+            <div class="calculator">
+                <input type="number" id="investment" placeholder="Initial Investment ($)" value="10000">
+                <input type="number" id="annual-return" placeholder="Expected Annual Return (%)" value="10">
+                <input type="number" id="years" placeholder="Years" value="10">
+                <input type="number" id="fee1" placeholder="Fee 1 (%)" value="0.25" step="0.01">
+                <input type="number" id="fee2" placeholder="Fee 2 (%)" value="0.95" step="0.01">
+                <button id="calculate-fees" class="btn w-full mt-2">Calculate Impact</button>
             </div>
-            <p class="text-sm mt-4">Assumes 10% gross annual return; fees compound annually.</p>
+            <table id="fee-impact-table" class="hidden mt-4">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Fee 1</th>
+                        <th>Fee 2</th>
+                        <th>Difference</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ending Value</td>
+                        <td id="value1"></td>
+                        <td id="value2"></td>
+                        <td id="value-diff"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Fees Paid</td>
+                        <td id="fees1"></td>
+                        <td id="fees2"></td>
+                        <td id="fees-diff"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="card mb-8">
@@ -701,6 +716,9 @@
     </div>
 
     <script>
+        let chart;
+        let sortState = {};
+
         // Theme switcher
         function applyTheme(t) {
             if (t === 'light') {
@@ -710,6 +728,7 @@
             }
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
+            updateChartColors(); // Update chart if open
         }
 
         window.addEventListener('load', () => {
@@ -717,85 +736,85 @@
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
             initTable();
+            initFeeCalculator();
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: false },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                    modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
         });
-
-        // Particles.js
-        particlesJS('particles', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#0ea5e9' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
-
-        let chart;
 
         function initTable() {
             const table = document.getElementById('fee-table');
             const headers = table.querySelectorAll('th[data-sort]');
             headers.forEach(header => {
-                header.addEventListener('click', () => sortTable(table, header.dataset.sort));
+                header.addEventListener('click', () => sortTable(header.dataset.sort));
             });
             const search = document.getElementById('search');
-            search.addEventListener('input', () => filterTable(table, search.value));
+            search.addEventListener('input', () => filterTable(search.value));
             const filters = document.querySelectorAll('.category-filter');
             filters.forEach(filter => {
-                filter.addEventListener('change', () => filterByCategory(table);
+                filter.addEventListener('change', filterByCategory);
             });
-            filterByCategory(table); // Initial filter
+            filterByCategory();
         }
 
-        function filterTable(table, searchTerm) {
-            const rows = table.querySelectorAll('tbody tr');
-            const term = searchTerm.toLowerCase();
+        function filterTable(term) {
+            term = term.toLowerCase();
+            const rows = document.querySelectorAll('#fee-table tbody tr');
             rows.forEach(row => {
                 const text = row.textContent.toLowerCase();
                 row.style.display = text.includes(term) ? '' : 'none';
             });
-            updateChart(table);
+            updateChart();
         }
 
-        function filterByCategory(table) {
-            const activeCategories = Array.from(document.querySelectorAll('.category-filter:checked')).map(f => f.value);
-            const rows = table.querySelectorAll('tbody tr');
+        function filterByCategory() {
+            const active = Array.from(document.querySelectorAll('.category-filter:checked')).map(f => f.value);
+            const rows = document.querySelectorAll('#fee-table tbody tr');
             rows.forEach(row => {
-                const cat = row.dataset.category;
-                row.style.display = activeCategories.includes(cat) ? '' : 'none';
+                row.style.display = active.includes(row.dataset.category) ? '' : 'none';
             });
-            updateChart(table);
+            updateChart();
         }
 
-        function sortTable(table, column) {
+        function sortTable(column) {
+            const table = document.getElementById('fee-table');
             const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const rows = Array.from(tbody.rows);
+            const isAsc = sortState[column] === 'asc';
+            const multiplier = isAsc ? 1 : -1;
             const isNumber = column === 'expense' || column === 'aum';
             rows.sort((a, b) => {
-                let valA = a.dataset[column] || a.querySelector(`td:nth-child(${Array.from(table.querySelector('thead tr th')).findIndex(th => th.dataset.sort === column) + 1}`)?.textContent.trim();
-                let valB = b.dataset[column] || b.querySelector(`td:nth-child(${Array.from(table.querySelector('thead tr th')).findIndex(th => th.dataset.sort === column) + 1}`)?.textContent.trim();
+                let valA = a.dataset[column] || a.cells[Array.from(table.rows[0].cells).findIndex(c => c.dataset.sort === column)].textContent.trim();
+                let valB = b.dataset[column] || b.cells[Array.from(table.rows[0].cells).findIndex(c => c.dataset.sort === column)].textContent.trim();
                 if (isNumber) {
                     valA = parseFloat(valA);
                     valB = parseFloat(valB);
-                    return valA - valB;
+                    return multiplier * (valA - valB);
                 } else {
-                    return valA.localeCompare(valB);
+                    return multiplier * valA.localeCompare(valB);
                 }
             });
             rows.forEach(row => tbody.appendChild(row));
-            updateChart(table);
+            sortState[column] = isAsc ? 'desc' : 'asc';
+            updateChart();
         }
 
-        function updateChart(table) {
-            const visibleRows = Array.from(table.querySelectorAll('tbody tr')).filter(r => r.style.display !== 'none');
+        function updateChart() {
+            const visibleRows = Array.from(document.querySelectorAll('#fee-table tbody tr')).filter(r => r.style.display !== 'none');
             const labels = visibleRows.map(row => row.dataset.ticker);
             const data = visibleRows.map(row => parseFloat(row.dataset.expense));
             if (chart) chart.destroy();
@@ -812,6 +831,40 @@
                 options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
             });
         }
+
+        function initFeeCalculator() {
+            document.getElementById('calculate-fees').addEventListener('click', calculateFeeImpact);
+        }
+
+        function calculateFeeImpact() {
+            const investment = parseFloat(document.getElementById('investment').value) || 10000;
+            const annualReturn = parseFloat(document.getElementById('annual-return').value) / 100 || 0.1;
+            const years = parseFloat(document.getElementById('years').value) || 10;
+            const fee1 = parseFloat(document.getElementById('fee1').value) / 100 || 0.0025;
+            const fee2 = parseFloat(document.getElementById('fee2').value) / 100 || 0.0095;
+
+            const value1 = investment * (1 + annualReturn - fee1) ** years;
+            const value2 = investment * (1 + annualReturn - fee2) ** years;
+            const fees1 = value1 - investment * (1 + annualReturn) ** years;
+            const fees2 = value2 - investment * (1 + annualReturn) ** years;
+
+            document.getElementById('value1').textContent = `$${value1.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+            document.getElementById('value2').textContent = `$${value2.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+            document.getElementById('value-diff').textContent = `$${ (value1 - value2).toLocaleString(undefined, {maximumFractionDigits: 0}) }`;
+            document.getElementById('fees1').textContent = `$${Math.abs(fees1).toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+            document.getElementById('fees2').textContent = `$${Math.abs(fees2).toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+            document.getElementById('fees-diff').textContent = `$${Math.abs(fees1 - fees2).toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+            document.getElementById('fee-impact-table').classList.remove('hidden');
+        }
+
+        function updateChartColors() {
+            if (chart) {
+                chart.data.datasets[0].backgroundColor = var(--accent);
+                chart.update();
+            }
+        }
+
+        document.getElementById('theme-select').addEventListener('change', updateChartColors);
     </script>
 </body>
 </html>
