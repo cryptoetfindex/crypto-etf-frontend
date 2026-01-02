@@ -431,12 +431,22 @@
                 document.getElementById('avg-covariance').textContent = 'Select 2+ ETFs';
                 document.getElementById('portfolio-vol').textContent = 'Select 2+ ETFs';
                 document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
-                if (heatmapChart) heatmapChart.destroy();
-                if (trendChart) trendChart.destroy();
-                if (monteCarloChart) monteCarloChart.destroy();
+                if (heatmapChart) {
+                    heatmapChart.destroy();
+                    heatmapChart = null;
+                }
+                if (trendChart) {
+                    trendChart.destroy();
+                    trendChart = null;
+                }
+                if (monteCarloChart) {
+                    monteCarloChart.destroy();
+                    monteCarloChart = null;
+                }
                 return;
             }
 
+            // Get returns data
             const returnsData = selected.map(ticker => HISTORICAL_DAILY_RETURNS[ticker] || HISTORICAL_DAILY_RETURNS['IBIT']);
 
             // Correlation matrix
