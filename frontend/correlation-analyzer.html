@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,17 +141,20 @@
             </select>
         </div>
     </nav>
+
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
             <p class="text-xl max-w-4xl mx-auto">The most advanced correlation analyzer tool for crypto ETFs: Select funds, calculate correlations, beta, covariance, visualize heatmaps, historical trends, Monte Carlo projections, AI portfolio optimization, ESG-adjusted correlations, and more forward-thinking features.</p>
         </header>
+
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis (up to 12 recommended)</h2>
-            <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically.</p>
+            <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically — works with 1 or more ETFs.</p>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- Bitcoin Spot ETFs -->
+                <!-- All ETFs - none pre-selected -->
                 <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
                 <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
@@ -164,7 +166,6 @@
                 <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin</label>
                 <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin</label>
                 <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin</label>
-                <!-- Ethereum Spot ETFs -->
                 <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
                 <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
                 <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
@@ -172,7 +173,6 @@
                 <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
                 <label><input type="checkbox" value="ETHV"> ETHV - VanEck Ethereum ETF</label>
                 <label><input type="checkbox" value="QETH"> QETH - Invesco Galaxy Ethereum</label>
-                <!-- XRP Spot ETFs -->
                 <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
                 <label><input type="checkbox" value="XRP"> XRP - Bitwise XRP ETF</label>
                 <label><input type="checkbox" value="XRPZ"> XRPZ - Franklin XRP ETF</label>
@@ -184,7 +184,6 @@
                 <label><input type="checkbox" value="XRPM"> XRPM - Amplify XRP 3% Monthly</label>
                 <label><input type="checkbox" value="XRPK"> XRPK - T-REX 2X Long XRP</label>
                 <label><input type="checkbox" value="TOXR"> TOXR - 21Shares XRP ETF</label>
-                <!-- Solana Spot & Staking ETFs -->
                 <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
                 <label><input type="checkbox" value="SSK"> SSK - REX-Osprey SOL + Staking</label>
                 <label><input type="checkbox" value="GSOL"> GSOL - Grayscale Solana Trust</label>
@@ -196,7 +195,6 @@
                 <label><input type="checkbox" value="SOLM"> SOLM - Amplify Solana 3% Monthly</label>
                 <label><input type="checkbox" value="SOLX"> SOLX - T-REX 2X Long SOL</label>
                 <label><input type="checkbox" value="SLON"> SLON - ProShares Ultra Solana</label>
-                <!-- Other Altcoin & Thematic ETFs -->
                 <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
                 <label><input type="checkbox" value="GDLC"> GDLC - Grayscale CoinDesk Crypto 5</label>
                 <label><input type="checkbox" value="NCIQ"> NCIQ - Hashdex Nasdaq Crypto Index</label>
@@ -219,6 +217,7 @@
                 <label><input type="checkbox" value="SPY"> SPY - S&P 500</label>
                 <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100</label>
             </div>
+
             <div class="form-group mt-4">
                 <label>Time Period (affects historical trend chart)</label>
                 <select id="time-period" class="w-full p-2 border rounded">
@@ -227,12 +226,15 @@
                     <option value="since-inception">Since Inception</option>
                 </select>
             </div>
+
             <label class="block mt-4">
                 <input type="checkbox" id="esg-adjust" class="mr-2">
                 ESG-Adjusted Correlations (Hypothetical - reduces correlation for high-ESG funds)
             </label>
+
             <div id="selected-tags" class="selected-tags"></div>
         </div>
+
         <!-- Charts & Metrics -->
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Correlation Heatmap</h2>
@@ -243,22 +245,26 @@
             <div class="chart-wrapper"><canvas id="trendChart"></canvas></div>
         </div>
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Monte Carlo Correlation Projection</h2>
+            <h2 class="text-2xl font-semibold mb-4">Monte Carlo Projection</h2>
             <div class="chart-wrapper"><canvas id="monteCarloChart"></canvas></div>
         </div>
+
         <div class="metrics-grid">
-            <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Select 2+ ETFs</p></div>
+            <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Select 1+ ETF</p></div>
+            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Select 1+ ETF</p></div>
+            <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Select 1+ ETF</p></div>
+            <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Select 1+ ETF</p></div>
         </div>
+
         <div class="card mb-8" id="ai-insights">
-            <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
-            <p id="ai-optimization">Select 2+ ETFs to get AI insights.</p>
+            <h2 class="text-2xl font-semibold mb-4">AI Portfolio Insights</h2>
+            <p id="ai-optimization">Select 1+ ETF to get AI insights.</p>
         </div>
+
         <p class="disclaimer">
             This tool uses historical and simulated data for educational purposes only. Not financial advice. Crypto investments are volatile and carry substantial risk.
         </p>
+
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -271,9 +277,11 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
+
     <script>
         Chart.register(ChartMatrix);
         let heatmapChart = null, trendChart = null, monteCarloChart = null;
+
         const ESG_RATINGS = {
             IBIT: 'medium', FBTC: 'high', GBTC: 'medium', BTC: 'high', BITB: 'high', ARKB: 'medium', HODL: 'high', BTCO: 'medium', EZBC: 'high', BRRR: 'medium', BTCW: 'high',
             ETHA: 'high', FETH: 'high', ETHE: 'medium', ETH: 'high', ETHW: 'high', ETHV: 'medium', QETH: 'medium',
@@ -282,6 +290,7 @@
             BITW: 'high', GDLC: 'medium', NCIQ: 'high', EZPZ: 'high', GLNK: 'medium', HBR: 'high', LTCC: 'medium', DOJE: 'low', BWOW: 'low', GDOG: 'low', TXXD: 'low', TXXS: 'low', DIME: 'medium', STBQ: 'high', TKNQ: 'high', ORO: 'medium', WTIB: 'low', TTOP: 'high', TXBC: 'high',
             SPY: 'high', QQQ: 'high'
         };
+
         const HISTORICAL_DAILY_RETURNS = {
             IBIT: Array(252).fill(0).map(() => 0.0023 + (Math.random() - 0.5) * 0.04),
             FBTC: Array(252).fill(0).map(() => 0.00235 + (Math.random() - 0.5) * 0.04),
@@ -345,93 +354,105 @@
             SPY: Array(252).fill(0).map(() => 0.0004 + (Math.random() - 0.5) * 0.01),
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
-        function updateTagsAndAnalysis() {
-            const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(cb => cb.value);
-            const tagsContainer = document.getElementById('selected-tags');
-            tagsContainer.innerHTML = '';
-            selected.forEach(ticker => {
-                const label = document.querySelector(`label input[value="${ticker}"]`).parentNode.textContent.trim();
-                const tag = document.createElement('div');
-                tag.className = 'tag';
-                tag.innerHTML = `${label} <button data-key="${ticker}">×</button>`;
-                tagsContainer.appendChild(tag);
-            });
-            document.querySelectorAll('.tag button').forEach(btn => {
-                btn.onclick = () => {
-                    document.querySelector(`input[value="${btn.dataset.key}"]`).checked = false;
-                    updateTagsAndAnalysis();
-                };
-            });
-            runAnalysis(selected);
-        }
-        // Custom stat functions (since mathjs doesn't have them built-in)
+
+        // Custom math functions
         function covariance(a, b) {
             const meanA = math.mean(a);
             const meanB = math.mean(b);
-            return math.mean(math.subtract(a, meanA).map((val, i) => val * (b[i] - meanB)));
+            return math.mean(math.dotMultiply(math.subtract(a, meanA), math.subtract(b, meanB)));
         }
         function correlation(a, b) {
-            return covariance(a, b) / (math.std(a) * math.std(b));
+            const cov = covariance(a, b);
+            const stdA = math.std(a);
+            const stdB = math.std(b);
+            return stdA === 0 || stdB === 0 ? 0 : cov / (stdA * stdB);
         }
         function beta(a, b) {
             return covariance(a, b) / math.variance(b);
         }
+
+        function updateTagsAndAnalysis() {
+            const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+
+            const tagsContainer = document.getElementById('selected-tags');
+            tagsContainer.innerHTML = '';
+            selected.forEach(ticker => {
+                const label = document.querySelector(`label input[value="${ticker}"]`).parentNode;
+                const displayName = label.textContent.trim();
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${displayName} <button data-ticker="${ticker}">×</button>`;
+                tagsContainer.appendChild(tag);
+            });
+            document.querySelectorAll('.tag button').forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelector(`input[value="${btn.dataset.ticker}"]`).checked = false;
+                    updateTagsAndAnalysis();
+                };
+            });
+
+            runAnalysis(selected);
+        }
+
         function runAnalysis(selected) {
-            if (selected.length < 2) {
-                document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
-                    .forEach(el => el.textContent = 'Select 2+ ETFs');
-                document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
-                [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
-                heatmapChart = trendChart = monteCarloChart = null;
-                return;
-            }
+            // Always run — even with 1 ETF
+            const n = selected.length;
             const esgAdjust = document.getElementById('esg-adjust').checked;
             const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS['IBIT']);
-            const n = selected.length;
-            const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
+
+            // Correlation Matrix
+            const corrMatrix = Array(n).fill().map(() => Array(n).fill(1)); // default to 1 (self-correlation)
             for (let i = 0; i < n; i++) {
-                for (let j = 0; j < n; j++) {
-                    if (i === j) {
-                        corrMatrix[i][j] = 1;
-                    } else {
-                        let corr = correlation(returnsData[i], returnsData[j]);
-                        if (esgAdjust) {
-                            const esgI = ESG_RATINGS[selected[i]] || 'medium';
-                            const esgJ = ESG_RATINGS[selected[j]] || 'medium';
-                            let adj = 0;
-                            if (esgI === 'high' && esgJ === 'high') adj = 0.2;
-                            else if (esgI === 'high' || esgJ === 'high') adj = 0.1;
-                            corr *= (1 - adj);
-                        }
-                        corrMatrix[i][j] = parseFloat(corr.toFixed(3));
+                for (let j = i + 1; j < n; j++) {
+                    let corr = correlation(returnsData[i], returnsData[j]);
+                    if (esgAdjust) {
+                        const esgI = ESG_RATINGS[selected[i]] || 'medium';
+                        const esgJ = ESG_RATINGS[selected[j]] || 'medium';
+                        let adj = 0;
+                        if (esgI === 'high' && esgJ === 'high') adj = 0.2;
+                        else if (esgI === 'high' || esgJ === 'high') adj = 0.1;
+                        corr *= (1 - adj);
                     }
+                    corr = parseFloat(corr.toFixed(3));
+                    corrMatrix[i][j] = corr;
+                    corrMatrix[j][i] = corr;
                 }
             }
-            const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
-            const avgCorr = math.mean(flat).toFixed(3);
-            const btcIdx = selected.indexOf('IBIT');
-            const ref = btcIdx !== -1 ? returnsData[btcIdx] : returnsData[0];
-            const betas = returnsData.map(r => beta(r, ref));
-            const avgBeta = math.mean(betas).toFixed(3);
-            const covs = returnsData.map(r => covariance(r, ref));
-            const avgCov = math.mean(covs).toFixed(6);
-            const weights = Array(n).fill(1 / n);
-            const portReturns = returnsData[0].map((_, d) =>
-                returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
-            );
-            const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
-            document.getElementById('avg-correlation').textContent = avgCorr;
-            document.getElementById('avg-beta').textContent = avgBeta;
-            document.getElementById('avg-covariance').textContent = avgCov;
-            document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
+
+            // Metrics
+            if (n === 1) {
+                document.getElementById('avg-correlation').textContent = '1.00';
+                document.getElementById('avg-beta').textContent = '1.00';
+                document.getElementById('avg-covariance').textContent = math.variance(returnsData[0]).toFixed(6);
+                const vol = math.std(returnsData[0]) * Math.sqrt(252) * 100;
+                document.getElementById('portfolio-vol').textContent = vol.toFixed(2) + '%';
+            } else {
+                const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
+                const avgCorr = math.mean(flat).toFixed(3);
+                const ref = returnsData[0];
+                const betas = returnsData.map(r => beta(r, ref));
+                const avgBeta = math.mean(betas).toFixed(3);
+                const covs = returnsData.map(r => covariance(r, ref));
+                const avgCov = math.mean(covs).toFixed(6);
+                const weights = Array(n).fill(1 / n);
+                const portReturns = returnsData[0].map((_, d) =>
+                    returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
+                );
+                const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
+
+                document.getElementById('avg-correlation').textContent = avgCorr;
+                document.getElementById('avg-beta').textContent = avgBeta;
+                document.getElementById('avg-covariance').textContent = avgCov;
+                document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
+            }
+
             // Heatmap
             if (heatmapChart) heatmapChart.destroy();
             heatmapChart = new Chart(document.getElementById('heatmapChart'), {
                 type: 'matrix',
                 data: {
                     datasets: [{
-                        label: 'Correlation',
                         data: corrMatrix.flatMap((row, i) => row.map((v, j) => ({x: selected[j], y: selected[i], v}))),
                         backgroundColor: c => {
                             const v = c.raw.v;
@@ -450,17 +471,20 @@
                     plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
                 }
             });
+
             // Historical Trend
             const rolling = 30;
             const trendData = {};
+            const refData = returnsData[0];
             selected.forEach((t, i) => {
                 trendData[t] = [];
                 for (let d = rolling; d < 252; d++) {
                     const slice = returnsData[i].slice(d - rolling, d);
-                    const refSlice = ref.slice(d - rolling, d);
+                    const refSlice = refData.slice(d - rolling, d);
                     trendData[t].push(correlation(slice, refSlice));
                 }
             });
+
             if (trendChart) trendChart.destroy();
             trendChart = new Chart(document.getElementById('trendChart'), {
                 type: 'line',
@@ -475,9 +499,11 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
+
             // Monte Carlo
             const paths = 100;
             const mcValues = [];
+            const weights = Array(n).fill(1 / n);
             for (let p = 0; p < paths; p++) {
                 let value = 100;
                 for (let d = 0; d < 252; d++) {
@@ -490,6 +516,7 @@
                 }
                 mcValues.push(value);
             }
+
             if (monteCarloChart) monteCarloChart.destroy();
             monteCarloChart = new Chart(document.getElementById('monteCarloChart'), {
                 type: 'line',
@@ -504,31 +531,40 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
+
             // AI Insights
+            const portVol = n === 1 
+                ? math.std(returnsData[0]) * Math.sqrt(252) * 100 
+                : math.std(portReturns) * Math.sqrt(252) * 100;
+
             document.getElementById('ai-optimization').innerHTML = `
-                <strong>AI Portfolio Optimization (Minimum Variance Demo):</strong><br>
-                Recommended equal weights:<br>
-                ${selected.map(t => `${t}: ${(100/n).toFixed(1)}%`).join('<br>')}<br><br>
+                <strong>AI Portfolio Insights:</strong><br>
+                Selected ETFs: ${selected.join(', ')}<br>
+                Recommended equal allocation: ${selected.map(t => `${t}: ${(100/n).toFixed(1)}%`).join(', ')}<br><br>
                 Projected annualized volatility: ${portVol.toFixed(1)}%<br>
-                ESG adjustment ${esgAdjust ? 'applied' : 'not applied'} – high-ESG pairs reduce correlation by 10–20%.
+                ${esgAdjust ? 'ESG adjustment applied (high-ESG pairs reduced by 10–20%)' : 'No ESG adjustment'}
             `;
         }
+
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', saved);
             document.getElementById('theme-select').value = saved;
+
             document.getElementById('theme-select').addEventListener('change', e => {
                 const t = e.target.value;
                 document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
                 localStorage.setItem('theme', t);
             });
+
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateTagsAndAnalysis));
             document.getElementById('esg-adjust').addEventListener('change', updateTagsAndAnalysis);
-            document.getElementById('time-period').addEventListener('change', updateTagsAndAnalysis);
-            runAnalysis([]);
+
+            runAnalysis([]); // Initial clean state
+
             particlesJS('particles', {
                 particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    number: { value: 80 },
                     color: { value: '#0ea5e9' },
                     shape: { type: 'circle' },
                     opacity: { value: 0.5 },
@@ -537,9 +573,7 @@
                     move: { enable: true, speed: 2 }
                 },
                 interactivity: {
-                    detect_on: 'canvas',
-                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
-                    modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
                 },
                 retina_detect: true
             });
@@ -547,4 +581,3 @@
     </script>
 </body>
 </html>
-```
