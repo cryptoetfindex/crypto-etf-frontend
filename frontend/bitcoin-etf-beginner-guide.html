@@ -5,62 +5,149 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beginner's Guide to Bitcoin ETFs 2025</title>
-    <meta name="description" content="Complete beginner's guide to Bitcoin ETFs in 2025. What they are, how they work, benefits vs direct ownership, top funds, and getting started safely.">
-    <meta name="keywords" content="bitcoin etf beginner guide, what is bitcoin etf, bitcoin etf explained 2025, beginner bitcoin etf investing">
+    <title>Beginner's Guide to Bitcoin ETFs 2026 - In-Depth</title>
+    <meta name="description" content="The most comprehensive beginner's guide to Bitcoin ETFs in 2026. Everything you need to know: what they are, how they work, benefits vs direct ownership, top funds, risks, taxes, strategies, and getting started safely.">
+    <meta name="keywords" content="bitcoin etf beginner guide 2026, what is bitcoin etf, bitcoin etf explained, beginner bitcoin etf investing, spot bitcoin etf guide">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Beginner's Guide to Bitcoin ETFs 2025">
-    <meta property="og:description" content="Simple explanation of spot Bitcoin ETFs, why they're popular, and how beginners can invest in 2025.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etf-beginner-guide.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etf-beginner-guide.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Beginner's Guide to Bitcoin ETFs 2026 - In-Depth">
+    <meta property="og:description" content="Simple yet comprehensive explanation of spot Bitcoin ETFs, why they're the easiest way to invest in Bitcoin, and everything beginners need for 2026.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/bitcoin-etf-beginner-guide.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/bitcoin-etf-beginner-guide.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select etc. */
-        .faq { margin-top: 2rem; }
-        .faq h3 { color: var(--accent-color); cursor: pointer; }
-        .faq p { display: none; margin-top: 1rem; }
-        .faq.active p { display: block; }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+        }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .highlight {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .faq {
+            margin-top: 2rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--accent);
+            padding: 1rem;
+            background: rgba(14, 165, 233, 0.05);
+            border-radius: 8px;
+        }
+        .faq-answer {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="particles"></div>
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="text-var(--accent-color) hover:underline">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="text-[var(--accent)] hover:underline">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
@@ -68,25 +155,46 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Beginner's Guide to Bitcoin ETFs 2025</h1>
-            <p class="text-xl max-w-4xl mx-auto">Everything new investors need to know about spot Bitcoin ETFs – the easiest and most regulated way to gain Bitcoin exposure.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Beginner's Guide to Bitcoin ETFs 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">The most comprehensive beginner's guide to spot Bitcoin ETFs – the easiest, most regulated way to gain Bitcoin exposure in 2026.</p>
         </header>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">What Is a Bitcoin ETF?</h2>
-            <p class="text-lg">A Bitcoin ETF is an exchange-traded fund that holds actual Bitcoin and tracks its price. You buy shares on stock exchanges (like Apple stock) through regular brokerage accounts.</p>
-            <p class="text-lg mt-4">Spot Bitcoin ETFs (approved in 2024) hold real Bitcoin in secure custody – no futures contracts or derivatives.</p>
+            <p class="text-lg mb-4">A Bitcoin ETF is an exchange-traded fund that holds actual Bitcoin and tracks its price. You buy shares on traditional stock exchanges (NYSE, Nasdaq) through regular brokerage accounts – just like buying Apple or Tesla stock.</p>
+            <p class="text-lg mb-4"><strong>Spot Bitcoin ETFs</strong> (launched 2024) hold real Bitcoin in secure, insured custody. There are no futures contracts or derivatives – the ETF price moves almost 1:1 with Bitcoin's spot price (minus small fees).</p>
+            <div class="highlight">
+                <strong>2026 Milestone:</strong> Spot Bitcoin ETFs now manage over $150B in assets, making them one of the fastest-growing ETF categories in history.
+            </div>
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Why Are Bitcoin ETFs Popular?</h2>
+            <h2 class="text-2xl font-semibold mb-4">How Do Bitcoin ETFs Work?</h2>
+            <p class="text-lg mb-4">Behind the scenes:</p>
             <ul class="space-y-4 text-lg">
-                <li>• <strong>Easy Access:</strong> Buy via Fidelity, Vanguard, Robinhood – no crypto wallets or exchanges needed.</li>
-                <li>• <strong>Regulated:</strong> SEC oversight, audited holdings, investor protections.</li>
-                <li>• <strong>Retirement Accounts:</strong> Hold in IRAs/401(k)s for tax advantages.</li>
-                <li>• <strong>No Private Keys:</strong> No risk of losing seed phrases or getting hacked on personal wallets.</li>
-                <li>• <strong>Institutional Backing:</strong> Managed by trusted firms like BlackRock and Fidelity.</li>
+                <li>• The ETF issuer (BlackRock, Fidelity, etc.) buys and holds real Bitcoin.</li>
+                <li>• Bitcoin is stored in cold storage by regulated custodians (primarily Coinbase Custody).</li>
+                <li>• Authorized Participants (large institutions) create/redeem ETF shares using Bitcoin deposits/withdrawals.</li>
+                <li>• Shares trade on exchanges all day – price stays very close to Bitcoin's actual value (NAV).</li>
+                <li>• You own ETF shares, not direct Bitcoin – no private keys needed.</li>
             </ul>
+            <p class="text-lg mt-4">Result: You get Bitcoin price exposure with the safety and convenience of traditional investments.</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Why Bitcoin ETFs Are Revolutionary for Beginners</h2>
+            <p class="text-lg mb-4">Bitcoin ETFs solved the biggest barriers to mainstream adoption:</p>
+            <ul class="space-y-4 text-lg">
+                <li>• <strong>No Crypto Exchanges Needed:</strong> Avoid complex sign-ups, KYC, and security concerns.</li>
+                <li>• <strong>Regulated & Insured:</strong> SEC oversight, audited holdings, SIPC protection (up to $500k).</li>
+                <li>• <strong>Retirement Accounts Eligible:</strong> Hold in IRAs, Roth IRAs, 401(k)s – tax-advantaged growth.</li>
+                <li>• <strong>No Wallet Management:</strong> No risk of losing seed phrases or private keys.</li>
+                <li>• <strong>Familiar Process:</strong> Buy/sell like any stock through your existing broker.</li>
+                <li>• <strong>Institutional Backing:</strong> Managed by world's largest asset managers (BlackRock, Fidelity, Vanguard).</li>
+            </ul>
+            <div class="highlight">
+                <strong>2026 Update:</strong> Bitcoin ETFs are now available in most major retirement plans and robo-advisors.
+            </div>
         </div>
 
         <div class="card mb-8">
@@ -98,54 +206,215 @@
                             <th>Factor</th>
                             <th>Bitcoin ETF</th>
                             <th>Direct Bitcoin</th>
+                            <th>Best For</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Ease of Use</td><td>Very Easy (stock-like)</td><td>Moderate (exchanges/wallets)</td></tr>
-                        <tr><td>Regulation</td><td>High (SEC)</td><td>Lower</td></tr>
-                        <tr><td>Retirement Accounts</td><td>Yes</td><td>Limited/No</td></tr>
-                        <tr><td>Custody Risk</td><td>Custodian (insured)</td><td>Self-custody risk</td></tr>
-                        <tr><td>Fees</td><td>0.20-1.50% annual</td><td>Trading/spread fees</td></tr>
-                        <tr><td>Direct Use (payments, DeFi)</td><td>No</td><td>Yes</td></tr>
-                        </tbody>
+                        <tr>
+                            <td>Ease of Use</td>
+                            <td>Very Easy (stock-like)</td>
+                            <td>Moderate (exchanges/wallets)</td>
+                            <td>ETF</td>
+                        </tr>
+                        <tr>
+                            <td>Regulation & Safety</td>
+                            <td>High (SEC, insured custody)</td>
+                            <td>Variable (exchange-dependent)</td>
+                            <td>ETF</td>
+                        </tr>
+                        <tr>
+                            <td>Retirement Accounts</td>
+                            <td>Yes (IRA, 401(k), Roth)</td>
+                            <td>Limited or No</td>
+                            <td>ETF</td>
+                        </tr>
+                        <tr>
+                            <td>Custody Risk</td>
+                            <td>Institutional custodian</td>
+                            <td>Self-custody ("not your keys...")</td>
+                            <td>ETF (for most)</td>
+                        </tr>
+                        <tr>
+                            <td>Fees</td>
+                            <td>0.15–0.30% annual</td>
+                            <td>Trading spreads + withdrawal fees</td>
+                            <td>Similar</td>
+                        </tr>
+                        <tr>
+                            <td>Direct Utility</td>
+                            <td>No (can't spend/send)</td>
+                            <td>Yes (payments, DeFi, staking)</td>
+                            <td>Direct</td>
+                        </tr>
+                        <tr>
+                            <td>Tax Reporting</td>
+                            <td>Simple 1099-B from broker</td>
+                            <td>Complex tracking per transaction</td>
+                            <td>ETF</td>
+                        </tr>
+                        <tr>
+                            <td>Privacy</td>
+                            <td>Broker KYC required</td>
+                            <td>Pseudonymous possible</td>
+                            <td>Direct</td>
+                        </tr>
+                    </tbody>
                 </table>
+            </div>
+            <p class="text-lg mt-4"><strong>Conclusion for Beginners:</strong> Bitcoin ETFs are generally safer, simpler, and more tax-efficient than direct ownership.</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Top Bitcoin ETFs in 2026</h2>
+            <p class="text-lg mb-4">The market has consolidated around a few dominant players. As of January 01, 2026:</p>
+            <ul class="space-y-4 text-lg">
+                <li><strong>IBIT – iShares Bitcoin Trust (BlackRock)</strong><br>Largest by AUM (~$67B), best liquidity, strong institutional flows.</li>
+                <li><strong>FBTC – Fidelity Wise Origin Bitcoin Fund</strong><br>Excellent customer service, competitive fees, popular retail choice.</li>
+                <li><strong>BTC – Grayscale Bitcoin Mini Trust</strong><br>Lowest fee (0.15%), ideal for cost-conscious investors.</li>
+                <li><strong>BITB – Bitwise Bitcoin ETF</strong><br>Transparent reporting, low fees, crypto-native issuer.</li>
+                <li><strong>ARKB – ARK 21Shares Bitcoin ETF</strong><br>Innovative partnership, good liquidity.</li>
+            </ul>
+            <p class="text-lg mt-4">Total Bitcoin ETF category AUM exceeds $150B in 2026 – larger than many traditional asset classes.</p>
+            <div class="highlight">
+                <strong>2026 Trend:</strong> Fee compression continues – average expense ratio now ~0.22% (down from 0.30% in 2024).
             </div>
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Top Bitcoin ETFs (December 2025)</h2>
-            <p class="text-lg">Leading funds include IBIT (BlackRock – largest), FBTC (Fidelity), ARKB (low fees), and more. Total category AUM exceeds $120B+.</p>
-            <p class="mt-4"><a href="/frontend/bitcoin-etfs.html" class="text-var(--accent-color) underline">View Full Bitcoin ETFs Directory →</a></p>
+            <h2 class="text-2xl font-semibold mb-4">How to Get Started in 2026</h2>
+            <ol class="space-y-6 text-lg">
+                <li>
+                    <strong>Open or Use a Brokerage Account</strong>
+                    <p>All major brokers support Bitcoin ETFs: Fidelity, Schwab, Vanguard, Robinhood, Interactive Brokers, eToro.</p>
+                </li>
+                <li>
+                    <strong>Fund Your Account</strong>
+                    <p>Transfer money via ACH (usually free and instant at major brokers).</p>
+                </li>
+                <li>
+                    <strong>Research & Choose Your ETF</strong>
+                    <p>Compare fees, AUM, liquidity, and issuer reputation. Start with IBIT or BTC Mini for most beginners.</p>
+                </li>
+                <li>
+                    <strong>Place Your Order</strong>
+                    <p>Search ticker → Buy → Market or limit order → Confirm.</p>
+                </li>
+                <li>
+                    <strong>Consider Account Type</strong>
+                    <p>Roth IRA for tax-free growth; Traditional IRA for current tax deduction; Taxable for flexibility.</p>
+                </li>
+            </ol>
+            <p class="text-lg mt-4"><a href="/frontend/how-to-buy-crypto-etfs.html" class="text-[var(--accent)] underline font-semibold">Detailed Step-by-Step Buying Guide →</a></p>
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Getting Started</h2>
+            <h2 class="text-2xl font-semibold mb-4">Investment Strategies for Beginners</h2>
             <ul class="space-y-4 text-lg">
-                <li>1. Open/fund a brokerage account.</li>
-                <li>2. Search for tickers like "IBIT" or "FBTC".</li>
-                <li>3. Research fees, AUM, and liquidity.</li>
-                <li>4. Start small and consider dollar-cost averaging.</li>
-                <li>5. Read our <a href="/frontend/how-to-buy-crypto-etfs.html" class="text-var(--accent-color) underline">How to Buy Guide</a>.</li>
+                <li><strong>Dollar-Cost Averaging (DCA):</strong> Invest fixed amount weekly/monthly – reduces timing risk.</li>
+                <li><strong>Long-Term Holding:</strong> Bitcoin has historically rewarded patience (despite volatility).</li>
+                <li><strong>Portfolio Allocation:</strong> Most experts suggest 1–10% in Bitcoin ETFs (depending on risk tolerance).</li>
+                <li><strong>Rebalance Annually:</strong> Maintain target allocation as values change.</li>
+                <li><strong>Avoid Emotional Trading:</strong> Don’t sell during dips or buy during extreme hype.</li>
             </ul>
         </div>
 
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Common Beginner Questions (FAQ)</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">Do Bitcoin ETFs pay dividends?</div>
+                    <div class="faq-answer">No. Spot Bitcoin ETFs currently pay no dividends (Bitcoin generates no yield). Some future products may include lending/staking income.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I hold Bitcoin ETFs in my IRA?</div>
+                    <div class="faq-answer">Yes! Most major brokers (Fidelity, Vanguard, Schwab) allow Bitcoin ETFs in Traditional and Roth IRAs – perfect for tax-advantaged growth.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are Bitcoin ETFs safe?</div>
+                    <div class="faq-answer">Much safer than direct ownership for most investors – regulated, insured custody, no private key risk. But Bitcoin price remains highly volatile.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What are the fees?</div>
+                    <div class="faq-answer">Expense ratios range from 0.15% (BTC Mini) to 0.30% for major funds – very competitive with traditional ETFs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I lose all my money?</div>
+                    <div class="faq-answer">Only if Bitcoin goes to $0 (extremely unlikely). However, 50–80% drawdowns have occurred historically.</div>
+                </div>
+            </div>
+        </div>
+
         <div class="card mb-8 text-center">
-            <p class="text-lg">More: <a href="/frontend/crypto-etf-risks.html" class="text-var(--accent-color) underline">Risks Guide</a> | <a href="/frontend/guides.html" class="text-var(--accent-color) underline">All Guides →</a></p>
+            <p class="text-lg">Next Steps:</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-4">
+                <a href="/frontend/bitcoin-etfs.html" class="btn">Full Bitcoin ETFs Directory</a>
+                <a href="/frontend/how-to-buy-crypto-etfs.html" class="btn">How to Buy Guide</a>
+                <a href="/frontend/crypto-etf-risks.html" class="btn">Risks Guide</a>
+                <a href="/frontend/crypto-etf-taxes.html" class="btn">Taxes Guide</a>
+                <a href="/frontend/guides.html" class="btn">All Guides</a>
+            </div>
         </div>
 
         <p class="disclaimer">
-            For educational purposes only. Bitcoin ETFs are volatile and can result in substantial losses. Not investment advice – consult a financial professional.
+            This guide is for educational purposes only and is not financial advice. Bitcoin and Bitcoin ETFs are highly volatile investments with risk of substantial loss, including total loss of principal. Past performance is not indicative of future results. Always conduct thorough research and consult qualified financial and tax professionals before investing.
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12">
-            <!-- Policy buttons, copyright, disclaimer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme apply, particles, modals
+        // Theme switcher
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
