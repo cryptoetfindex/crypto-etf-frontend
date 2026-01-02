@@ -151,7 +151,7 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis (up to 12 recommended)</h2>
-            <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically — works with 1 or more ETFs.</p>
+            <p class="mb-4">Check any ETFs to include them in the analysis. Analysis updates automatically — works with 1 or more ETFs.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 <!-- All ETFs - none pre-selected -->
@@ -251,7 +251,7 @@
 
         <div class="metrics-grid">
             <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Select 1+ ETF</p></div>
-            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Select 1+ ETF</p></div>
+            <div class="metric-card"><h3>Average Beta (vs First Selected)</h3><p id="avg-beta" class="text-2xl font-bold">Select 1+ ETF</p></div>
             <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Select 1+ ETF</p></div>
             <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Select 1+ ETF</p></div>
         </div>
@@ -355,20 +355,35 @@
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
 
-        // Custom math functions
+        // Robust custom math functions using mathjs primitives
+        function mean(arr) {
+            return math.mean(arr);
+        }
+        function std(arr) {
+            return math.std(arr);
+        }
+        function variance(arr) {
+            return math.variance(arr);
+        }
         function covariance(a, b) {
-            const meanA = math.mean(a);
-            const meanB = math.mean(b);
-            return math.mean(math.dotMultiply(math.subtract(a, meanA), math.subtract(b, meanB)));
+            const meanA = mean(a);
+            const meanB = mean(b);
+            const n = a.length;
+            let sum = 0;
+            for (let i = 0; i < n; i++) {
+                sum += (a[i] - meanA) * (b[i] - meanB);
+            }
+            return sum / n;
         }
         function correlation(a, b) {
             const cov = covariance(a, b);
-            const stdA = math.std(a);
-            const stdB = math.std(b);
-            return stdA === 0 || stdB === 0 ? 0 : cov / (stdA * stdB);
+            const stdA = std(a);
+            const stdB = std(b);
+            if (stdA === 0 || stdB === 0) return 0;
+            return cov / (stdA * stdB);
         }
         function beta(a, b) {
-            return covariance(a, b) / math.variance(b);
+            return covariance(a, b) / variance(b);
         }
 
         function updateTagsAndAnalysis() {
@@ -378,16 +393,19 @@
             const tagsContainer = document.getElementById('selected-tags');
             tagsContainer.innerHTML = '';
             selected.forEach(ticker => {
-                const label = document.querySelector(`label input[value="${ticker}"]`).parentNode;
-                const displayName = label.textContent.trim();
+                const input = document.querySelector(`input[value="${ticker}"]`);
+                if (!input) return;
+                const labelText = input.parentNode.textContent.trim();
                 const tag = document.createElement('div');
                 tag.className = 'tag';
-                tag.innerHTML = `${displayName} <button data-ticker="${ticker}">×</button>`;
+                tag.innerHTML = `${labelText} <button data-ticker="${ticker}">×</button>`;
                 tagsContainer.appendChild(tag);
             });
+
             document.querySelectorAll('.tag button').forEach(btn => {
                 btn.onclick = () => {
-                    document.querySelector(`input[value="${btn.dataset.ticker}"]`).checked = false;
+                    const cb = document.querySelector(`input[value="${btn.dataset.ticker}"]`);
+                    if (cb) cb.checked = false;
                     updateTagsAndAnalysis();
                 };
             });
@@ -396,13 +414,21 @@
         }
 
         function runAnalysis(selected) {
-            // Always run — even with 1 ETF
             const n = selected.length;
+            if (n === 0) {
+                document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
+                    .forEach(el => el.textContent = 'Select 1+ ETF');
+                document.getElementById('ai-optimization').innerHTML = 'Select 1+ ETF to get AI insights.';
+                [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
+                heatmapChart = trendChart = monteCarloChart = null;
+                return;
+            }
+
             const esgAdjust = document.getElementById('esg-adjust').checked;
             const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS['IBIT']);
 
-            // Correlation Matrix
-            const corrMatrix = Array(n).fill().map(() => Array(n).fill(1)); // default to 1 (self-correlation)
+            // Build correlation matrix
+            const corrMatrix = Array(n).fill().map(() => Array(n).fill(1));
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
                     let corr = correlation(returnsData[i], returnsData[j]);
@@ -414,6 +440,7 @@
                         else if (esgI === 'high' || esgJ === 'high') adj = 0.1;
                         corr *= (1 - adj);
                     }
+                    corr = Math.max(-1, Math.min(1, corr)); // clamp
                     corr = parseFloat(corr.toFixed(3));
                     corrMatrix[i][j] = corr;
                     corrMatrix[j][i] = corr;
@@ -421,25 +448,30 @@
             }
 
             // Metrics
+            const refData = returnsData[0];
+            const weights = Array(n).fill(1/n);
+            const portReturns = returnsData[0].map((_, d) =>
+                returnsData.reduce((sum, series, i) => sum + series[d] * weights[i], 0)
+            );
+            const portVol = std(portReturns) * Math.sqrt(252) * 100;
+
             if (n === 1) {
                 document.getElementById('avg-correlation').textContent = '1.00';
                 document.getElementById('avg-beta').textContent = '1.00';
-                document.getElementById('avg-covariance').textContent = math.variance(returnsData[0]).toFixed(6);
-                const vol = math.std(returnsData[0]) * Math.sqrt(252) * 100;
-                document.getElementById('portfolio-vol').textContent = vol.toFixed(2) + '%';
+                document.getElementById('avg-covariance').textContent = variance(returnsData[0]).toFixed(6);
+                document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
             } else {
-                const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
-                const avgCorr = math.mean(flat).toFixed(3);
-                const ref = returnsData[0];
-                const betas = returnsData.map(r => beta(r, ref));
+                const flatOffDiag = [];
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n; j++) {
+                        if (i !== j) flatOffDiag.push(corrMatrix[i][j]);
+                    }
+                }
+                const avgCorr = math.mean(flatOffDiag).toFixed(3);
+                const betas = returnsData.map(r => beta(r, refData));
                 const avgBeta = math.mean(betas).toFixed(3);
-                const covs = returnsData.map(r => covariance(r, ref));
+                const covs = returnsData.map(r => covariance(r, refData));
                 const avgCov = math.mean(covs).toFixed(6);
-                const weights = Array(n).fill(1 / n);
-                const portReturns = returnsData[0].map((_, d) =>
-                    returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
-                );
-                const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
 
                 document.getElementById('avg-correlation').textContent = avgCorr;
                 document.getElementById('avg-beta').textContent = avgBeta;
@@ -456,32 +488,35 @@
                         data: corrMatrix.flatMap((row, i) => row.map((v, j) => ({x: selected[j], y: selected[i], v}))),
                         backgroundColor: c => {
                             const v = c.raw.v;
-                            if (v >= 0.7) return '#ef4444';
-                            if (v >= 0.4) return '#f59e0b';
-                            return '#10b981';
+                            return v >= 0.7 ? '#ef4444' : v >= 0.4 ? '#f59e0b' : '#10b981';
                         },
-                        width: ({chart}) => (chart.chartArea?.width || 400) / n - 1,
-                        height: ({chart}) => (chart.chartArea?.height || 400) / n - 1
+                        width: ({chart}) => (chart.chartArea?.width || 400) / n - 2,
+                        height: ({chart}) => (chart.chartArea?.height || 400) / n - 2
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { x: {type: 'category', labels: selected, position: 'top'}, y: {type: 'category', labels: selected.reverse()} },
-                    plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
+                    scales: {
+                        x: { type: 'category', labels: selected, position: 'top' },
+                        y: { type: 'category', labels: selected.reverse() }
+                    },
+                    plugins: {
+                        tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } },
+                        legend: { display: false }
+                    }
                 }
             });
 
-            // Historical Trend
+            // Historical Trend (rolling correlation vs first selected)
             const rolling = 30;
             const trendData = {};
-            const refData = returnsData[0];
-            selected.forEach((t, i) => {
-                trendData[t] = [];
+            selected.forEach((ticker, i) => {
+                trendData[ticker] = [];
                 for (let d = rolling; d < 252; d++) {
-                    const slice = returnsData[i].slice(d - rolling, d);
-                    const refSlice = refData.slice(d - rolling, d);
-                    trendData[t].push(correlation(slice, refSlice));
+                    const sliceA = returnsData[i].slice(d - rolling, d);
+                    const sliceB = refData.slice(d - rolling, d);
+                    trendData[ticker].push(correlation(sliceA, sliceB));
                 }
             });
 
@@ -489,12 +524,13 @@
             trendChart = new Chart(document.getElementById('trendChart'), {
                 type: 'line',
                 data: {
-                    labels: Array(252 - rolling).fill().map((_, i) => `Day ${i + rolling + 1}`),
-                    datasets: Object.entries(trendData).map(([t, data], i) => ({
-                        label: t,
-                        data,
-                        borderColor: ['#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#a78bfa'][i % 6],
-                        tension: 0.3
+                    labels: Array(252 - rolling).fill().map((_, i) => `Day ${i + 1}`),
+                    datasets: Object.entries(trendData).map(([ticker, data], idx) => ({
+                        label: ticker,
+                        data: data,
+                        borderColor: ['#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#a78bfa'][idx % 6],
+                        tension: 0.3,
+                        fill: false
                     }))
                 },
                 options: { responsive: true, maintainAspectRatio: false }
@@ -503,14 +539,13 @@
             // Monte Carlo
             const paths = 100;
             const mcValues = [];
-            const weights = Array(n).fill(1 / n);
             for (let p = 0; p < paths; p++) {
                 let value = 100;
                 for (let d = 0; d < 252; d++) {
-                    const dailyRet = selected.reduce((sum, t, i) => {
-                        const mean = math.mean(HISTORICAL_DAILY_RETURNS[t]);
-                        const std = math.std(HISTORICAL_DAILY_RETURNS[t]);
-                        return sum + (mean + std * (Math.random() - 0.5) * 2) * weights[i];
+                    const dailyRet = selected.reduce((acc, t, i) => {
+                        const mean = mean(HISTORICAL_DAILY_RETURNS[t]);
+                        const stdVal = std(HISTORICAL_DAILY_RETURNS[t]);
+                        return acc + (mean + stdVal * (Math.random() - 0.5) * 2) * weights[i];
                     }, 0);
                     value *= (1 + dailyRet);
                 }
@@ -523,45 +558,51 @@
                 data: {
                     labels: Array(252).fill().map((_, i) => `Day ${i+1}`),
                     datasets: [{
+                        label: 'Projected Portfolio Value',
                         data: mcValues,
                         borderColor: '#0ea5e9',
                         backgroundColor: 'rgba(14,165,233,0.1)',
                         fill: true
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
             });
 
             // AI Insights
-            const portVol = n === 1 
-                ? math.std(returnsData[0]) * Math.sqrt(252) * 100 
-                : math.std(portReturns) * Math.sqrt(252) * 100;
-
             document.getElementById('ai-optimization').innerHTML = `
                 <strong>AI Portfolio Insights:</strong><br>
-                Selected ETFs: ${selected.join(', ')}<br>
-                Recommended equal allocation: ${selected.map(t => `${t}: ${(100/n).toFixed(1)}%`).join(', ')}<br><br>
+                Selected ETFs: ${selected.join(', ') || 'None'}<br>
+                ${n > 0 ? `Equal allocation: ${selected.map(t => `${t}: ${(100/n).toFixed(1)}%`).join(', ')}<br>` : ''}
                 Projected annualized volatility: ${portVol.toFixed(1)}%<br>
-                ${esgAdjust ? 'ESG adjustment applied (high-ESG pairs reduced by 10–20%)' : 'No ESG adjustment'}
+                ${esgAdjust ? 'ESG adjustment applied' : 'No ESG adjustment'}
             `;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', saved);
-            document.getElementById('theme-select').value = saved;
-
+            // Theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-select').value = savedTheme;
             document.getElementById('theme-select').addEventListener('change', e => {
                 const t = e.target.value;
                 document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
                 localStorage.setItem('theme', t);
             });
 
-            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateTagsAndAnalysis));
+            // Listeners
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => 
+                cb.addEventListener('change', updateTagsAndAnalysis)
+            );
             document.getElementById('esg-adjust').addEventListener('change', updateTagsAndAnalysis);
 
-            runAnalysis([]); // Initial clean state
+            // Initial state
+            runAnalysis([]);
 
+            // Particles
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
