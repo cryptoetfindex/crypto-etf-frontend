@@ -71,7 +71,6 @@
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
-            text-decoration: none;
             display: inline-block;
             transition: all 0.2s;
             cursor: pointer;
@@ -157,12 +156,14 @@
             </select>
         </div>
     </nav>
+
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
             <p class="text-xl max-w-4xl mx-auto">The most advanced correlation analyzer tool for crypto ETFs: Select funds, calculate correlations, beta, covariance, visualize heatmaps, historical trends, Monte Carlo projections, AI portfolio optimization, ESG-adjusted correlations, and more forward-thinking features.</p>
         </header>
+
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis</h2>
             <p class="mb-4">Choose up to 10 ETFs. Analysis updates automatically when you change selections.</p>
@@ -236,7 +237,7 @@
             updateCharts();
         }
 
-        const ETF_LIST = [ /* exact same array as before - unchanged */ 
+        const ETF_LIST = [
             {group: "Bitcoin Spot ETFs", options: [{value: "IBIT", label: "IBIT - iShares Bitcoin Trust"},{value: "FBTC", label: "FBTC - Fidelity Wise Origin Bitcoin"},{value: "GBTC", label: "GBTC - Grayscale Bitcoin Trust"},{value: "BTC", label: "BTC - Grayscale Bitcoin Mini Trust"},{value: "BITB", label: "BITB - Bitwise Bitcoin ETF"},{value: "ARKB", label: "ARKB - ARK 21Shares Bitcoin"},{value: "HODL", label: "HODL - VanEck Bitcoin"},{value: "BTCO", label: "BTCO - Invesco Galaxy Bitcoin"},{value: "EZBC", label: "EZBC - Franklin Bitcoin"},{value: "BRRR", label: "BRRR - Valkyrie Bitcoin"},{value: "BTCW", label: "BTCW - WisdomTree Bitcoin"}]},
             {group: "Ethereum Spot ETFs", options: [{value: "ETHA", label: "ETHA - iShares Ethereum Trust"},{value: "FETH", label: "FETH - Fidelity Ethereum Fund"},{value: "ETHE", label: "ETHE - Grayscale Ethereum Trust"},{value: "ETH", label: "ETH - Grayscale Ethereum Mini Trust"},{value: "ETHW", label: "ETHW - Bitwise Ethereum ETF"},{value: "ETHV", label: "ETHV - VanEck Ethereum ETF"},{value: "QETH", label: "QETH - Invesco Galaxy Ethereum"}]},
             {group: "XRP Spot ETFs", options: [{value: "XRPC", label: "XRPC - Canary XRP ETF"},{value: "XRP", label: "XRP - Bitwise XRP ETF"},{value: "XRPZ", label: "XRPZ - Franklin XRP ETF"},{value: "XXRP", label: "XXRP - Teucrium 2x Long XRP"},{value: "XRPI", label: "XRPI - Volatility Shares XRP"},{value: "XRPT", label: "XRPT - Volatility Shares XRP 2X"},{value: "XRPR", label: "XRPR - REX-Osprey XRP"},{value: "UXRP", label: "UXRP - ProShares Ultra XRP"},{value: "XRPM", label: "XRPM - Amplify XRP 3% Monthly"},{value: "XRPK", label: "XRPK - T-REX 2X Long XRP"},{value: "TOXR", label: "TOXR - 21Shares XRP ETF"}]},
@@ -323,10 +324,15 @@
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
 
-            addEtfSelector(); // initial one
+            // Create the first ETF selector immediately
+            addEtfSelector();
 
             document.getElementById('add-etf').addEventListener('click', () => {
-                if (document.querySelectorAll('.etf-select').length < 10) addEtfSelector();
+                if (document.querySelectorAll('.etf-select').length < 10) {
+                    addEtfSelector();
+                } else {
+                    alert('Maximum 10 ETFs allowed.');
+                }
             });
 
             document.getElementById('etf-selectors').addEventListener('change', runAnalysis);
@@ -404,15 +410,17 @@
                 return;
             }
 
-            const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS.IBIT);
+            // Fixed: use bracket notation for string keys
+            const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS['IBIT']);
 
-            // Correlation matrix
             const n = selected.length;
             const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
+
             for (let i = 0; i < n; i++) {
                 for (let j = 0; j < n; j++) {
-                    if (i === j) corrMatrix[i][j] = 1;
-                    else {
+                    if (i === j) {
+                        corrMatrix[i][j] = 1;
+                    } else {
                         let corr = math.correlation(returnsData[i], returnsData[j]);
                         if (esgAdjust) {
                             const esgI = ESG_RATINGS[selected[i]] || 'medium';
@@ -427,19 +435,20 @@
                 }
             }
 
-            // Metrics
             const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
             const avgCorr = math.mean(flat).toFixed(3);
 
             const btcIdx = selected.indexOf('IBIT');
             const ref = btcIdx !== -1 ? returnsData[btcIdx] : returnsData[0];
+
             const betas = returnsData.map(r => math.beta(r, ref));
             const avgBeta = math.mean(betas).toFixed(3);
+
             const covs = returnsData.map(r => math.covariance(r, ref));
             const avgCov = math.mean(covs).toFixed(6);
 
             const weights = Array(n).fill(1/n);
-            const portReturns = returnsData[0].map((_, d) => 
+            const portReturns = returnsData[0].map((_, d) =>
                 returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
             );
             const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
@@ -475,14 +484,14 @@
                 }
             });
 
-            // Trend chart (30-day rolling vs BTC)
+            // Historical Trend
             const rolling = 30;
             const trendData = {};
             selected.forEach((t, i) => {
                 trendData[t] = [];
                 for (let d = rolling; d < 252; d++) {
-                    const slice = returnsData[i].slice(d-rolling, d);
-                    const refSlice = ref.slice(d-rolling, d);
+                    const slice = returnsData[i].slice(d - rolling, d);
+                    const refSlice = ref.slice(d - rolling, d);
                     trendData[t].push(math.correlation(slice, refSlice));
                 }
             });
@@ -534,7 +543,7 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // AI insights
+            // AI Insights
             document.getElementById('ai-optimization').innerHTML = `
                 <strong>AI Portfolio Optimization (Minimum Variance Demo):</strong><br>
                 Recommended equal weights:<br>
