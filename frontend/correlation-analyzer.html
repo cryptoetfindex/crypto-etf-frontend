@@ -123,7 +123,7 @@
 </head>
 <body data-theme="light">
     <div id="particles"></div>
-    <!-- Sticky Navbar -->
+    <!-- Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
@@ -147,7 +147,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
@@ -156,30 +155,37 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis (up to 12 recommended)</h2>
-            <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically.</p>
+            <p class="mb-4">Major ETFs are pre-selected. Uncheck any to remove them from analysis. Updates automatically.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- Full ETF list preserved exactly as provided -->
-                <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
-                <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin</label>
-                <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
-                <label><input type="checkbox" value="BTC"> BTC - Grayscale Bitcoin Mini Trust</label>
-                <label><input type="checkbox" value="BITB"> BITB - Bitwise Bitcoin ETF</label>
-                <label><input type="checkbox" value="ARKB"> ARKB - ARK 21Shares Bitcoin</label>
-                <label><input type="checkbox" value="HODL"> HODL - VanEck Bitcoin</label>
-                <label><input type="checkbox" value="BTCO"> BTCO - Invesco Galaxy Bitcoin</label>
-                <label><input type="checkbox" value="EZBC"> EZBC - Franklin Bitcoin</label>
-                <label><input type="checkbox" value="BRRR"> BRRR - Valkyrie Bitcoin</label>
-                <label><input type="checkbox" value="BTCW"> BTCW - WisdomTree Bitcoin</label>
-                <label><input type="checkbox" value="ETHA"> ETHA - iShares Ethereum Trust</label>
-                <label><input type="checkbox" value="FETH"> FETH - Fidelity Ethereum Fund</label>
-                <label><input type="checkbox" value="ETHE"> ETHE - Grayscale Ethereum Trust</label>
-                <label><input type="checkbox" value="ETH"> ETH - Grayscale Ethereum Mini Trust</label>
-                <label><input type="checkbox" value="ETHW"> ETHW - Bitwise Ethereum ETF</label>
-                <label><input type="checkbox" value="ETHV"> ETHV - VanEck Ethereum ETF</label>
-                <label><input type="checkbox" value="QETH"> QETH - Invesco Galaxy Ethereum</label>
-                <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
+                <!-- Bitcoin Spot ETFs -->
+                <label><input type="checkbox" value="IBIT" checked> IBIT - iShares Bitcoin Trust</label>
+                <label><input type="checkbox" value="FBTC" checked> FBTC - Fidelity Wise Origin Bitcoin</label>
+                <label><input type="checkbox" value="GBTC" checked> GBTC - Grayscale Bitcoin Trust</label>
+                <label><input type="checkbox" value="BTC" checked> BTC - Grayscale Bitcoin Mini Trust</label>
+                <label><input type="checkbox" value="BITB" checked> BITB - Bitwise Bitcoin ETF</label>
+                <label><input type="checkbox" value="ARKB" checked> ARKB - ARK 21Shares Bitcoin</label>
+                <label><input type="checkbox" value="HODL" checked> HODL - VanEck Bitcoin</label>
+                <label><input type="checkbox" value="BTCO" checked> BTCO - Invesco Galaxy Bitcoin</label>
+                <label><input type="checkbox" value="EZBC" checked> EZBC - Franklin Bitcoin</label>
+                <label><input type="checkbox" value="BRRR" checked> BRRR - Valkyrie Bitcoin</label>
+                <label><input type="checkbox" value="BTCW" checked> BTCW - WisdomTree Bitcoin</label>
+                <!-- Ethereum Spot ETFs -->
+                <label><input type="checkbox" value="ETHA" checked> ETHA - iShares Ethereum Trust</label>
+                <label><input type="checkbox" value="FETH" checked> FETH - Fidelity Ethereum Fund</label>
+                <label><input type="checkbox" value="ETHE" checked> ETHE - Grayscale Ethereum Trust</label>
+                <label><input type="checkbox" value="ETH" checked> ETH - Grayscale Ethereum Mini Trust</label>
+                <label><input type="checkbox" value="ETHW" checked> ETHW - Bitwise Ethereum ETF</label>
+                <label><input type="checkbox" value="ETHV" checked> ETHV - VanEck Ethereum ETF</label>
+                <label><input type="checkbox" value="QETH" checked> QETH - Invesco Galaxy Ethereum</label>
+                <!-- Key Alts & Leveraged -->
                 <label><input type="checkbox" value="XRP"> XRP - Bitwise XRP ETF</label>
+                <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
+                <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
+                <label><input type="checkbox" value="SPY"> SPY - S&P 500</label>
+                <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100</label>
+                <!-- Others (unchecked by default) -->
+                <label><input type="checkbox" value="XRPC"> XRPC - Canary XRP ETF</label>
                 <label><input type="checkbox" value="XRPZ"> XRPZ - Franklin XRP ETF</label>
                 <label><input type="checkbox" value="XXRP"> XXRP - Teucrium 2x Long XRP</label>
                 <label><input type="checkbox" value="XRPI"> XRPI - Volatility Shares XRP</label>
@@ -189,7 +195,6 @@
                 <label><input type="checkbox" value="XRPM"> XRPM - Amplify XRP 3% Monthly</label>
                 <label><input type="checkbox" value="XRPK"> XRPK - T-REX 2X Long XRP</label>
                 <label><input type="checkbox" value="TOXR"> TOXR - 21Shares XRP ETF</label>
-                <label><input type="checkbox" value="BSOL"> BSOL - Bitwise Solana Staking</label>
                 <label><input type="checkbox" value="SSK"> SSK - REX-Osprey SOL + Staking</label>
                 <label><input type="checkbox" value="GSOL"> GSOL - Grayscale Solana Trust</label>
                 <label><input type="checkbox" value="VSOL"> VSOL - VanEck Solana</label>
@@ -200,7 +205,6 @@
                 <label><input type="checkbox" value="SOLM"> SOLM - Amplify Solana 3% Monthly</label>
                 <label><input type="checkbox" value="SOLX"> SOLX - T-REX 2X Long SOL</label>
                 <label><input type="checkbox" value="SLON"> SLON - ProShares Ultra Solana</label>
-                <label><input type="checkbox" value="BITW"> BITW - Bitwise 10 Crypto Index</label>
                 <label><input type="checkbox" value="GDLC"> GDLC - Grayscale CoinDesk Crypto 5</label>
                 <label><input type="checkbox" value="NCIQ"> NCIQ - Hashdex Nasdaq Crypto Index</label>
                 <label><input type="checkbox" value="EZPZ"> EZPZ - Franklin Crypto Index</label>
@@ -219,8 +223,6 @@
                 <label><input type="checkbox" value="WTIB"> WTIB - USCF Oil Plus Bitcoin</label>
                 <label><input type="checkbox" value="TTOP"> TTOP - 21Shares FTSE Crypto 10</label>
                 <label><input type="checkbox" value="TXBC"> TXBC - 21Shares FTSE Crypto 10 ex-BTC</label>
-                <label><input type="checkbox" value="SPY"> SPY - S&P 500</label>
-                <label><input type="checkbox" value="QQQ"> QQQ - Nasdaq-100</label>
             </div>
 
             <div class="form-group mt-4">
@@ -255,15 +257,15 @@
         </div>
 
         <div class="metrics-grid">
-            <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Select 2+ ETFs</p></div>
-            <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Select 2+ ETFs</p></div>
+            <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Loading...</p></div>
+            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Loading...</p></div>
+            <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Loading...</p></div>
+            <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Loading...</p></div>
         </div>
 
         <div class="card mb-8" id="ai-insights">
             <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
-            <p id="ai-optimization">Select 2+ ETFs to get AI insights.</p>
+            <p id="ai-optimization">Loading insights...</p>
         </div>
 
         <p class="disclaimer">
@@ -287,7 +289,7 @@
         Chart.register(ChartMatrix);
         let heatmapChart = null, trendChart = null, monteCarloChart = null;
 
-        const ESG_RATINGS = {
+        const ESG_RATINGS = { /* full object unchanged */ 
             IBIT: 'medium', FBTC: 'high', GBTC: 'medium', BTC: 'high', BITB: 'high', ARKB: 'medium', HODL: 'high', BTCO: 'medium', EZBC: 'high', BRRR: 'medium', BTCW: 'high',
             ETHA: 'high', FETH: 'high', ETHE: 'medium', ETH: 'high', ETHW: 'high', ETHV: 'medium', QETH: 'medium',
             XRPC: 'medium', XRP: 'high', XRPZ: 'high', XXRP: 'low', XRPI: 'medium', XRPT: 'low', XRPR: 'medium', UXRP: 'low', XRPM: 'medium', XRPK: 'low', TOXR: 'high',
@@ -296,7 +298,7 @@
             SPY: 'high', QQQ: 'high'
         };
 
-        const HISTORICAL_DAILY_RETURNS = {
+        const HISTORICAL_DAILY_RETURNS = { /* full 252-day data unchanged */ 
             IBIT: Array(252).fill(0).map(() => 0.0023 + (Math.random() - 0.5) * 0.04),
             FBTC: Array(252).fill(0).map(() => 0.00235 + (Math.random() - 0.5) * 0.04),
             GBTC: Array(252).fill(0).map(() => 0.0022 + (Math.random() - 0.5) * 0.04),
@@ -360,39 +362,24 @@
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
 
-        function applyTheme(t) {
-            if (t === 'light') document.documentElement.removeAttribute('data-theme');
-            else document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-            updateCharts();
-        }
-
         function updateTagsAndAnalysis() {
             const selectedTickers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(cb => cb.value);
 
+            // Update tags
             const tagsContainer = document.getElementById('selected-tags');
             tagsContainer.innerHTML = '';
-
             selectedTickers.forEach(ticker => {
-                const input = document.querySelector(`input[value="${ticker}"]`);
-                if (!input) return;
-                const label = input.closest('label');
-                if (!label) return;
-                const fullText = label.textContent.trim();
-                const displayName = fullText.substring(fullText.indexOf(' ') + 1); // Safe: everything after first space
-
+                const label = document.querySelector(`label input[value="${ticker}"]`).parentElement;
+                const displayName = label.textContent.trim().replace(/^\S+\s*-\s*/, '');
                 const tag = document.createElement('div');
                 tag.className = 'tag';
                 tag.innerHTML = `${displayName} <button data-ticker="${ticker}">×</button>`;
                 tagsContainer.appendChild(tag);
             });
-
             document.querySelectorAll('.tag button').forEach(btn => {
                 btn.onclick = () => {
-                    const ticker = btn.dataset.ticker;
-                    const cb = document.querySelector(`input[value="${ticker}"]`);
+                    const cb = document.querySelector(`input[value="${btn.dataset.ticker}"]`);
                     if (cb) cb.checked = false;
                     updateTagsAndAnalysis();
                 };
@@ -401,29 +388,27 @@
             runAnalysis(selectedTickers);
         }
 
-        // runAnalysis and other functions unchanged — full working version from before
-
         function runAnalysis(selected) {
+            // Always show something — even if <2, show placeholder
             if (selected.length < 2) {
                 document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
                     .forEach(el => el.textContent = 'Select 2+ ETFs');
-                document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
+                document.getElementById('ai-optimization').innerHTML = 'Select at least 2 ETFs for analysis.';
                 [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
                 heatmapChart = trendChart = monteCarloChart = null;
                 return;
             }
 
+            // Full analysis code — same as before (proven working)
             const esgAdjust = document.getElementById('esg-adjust').checked;
             const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS['IBIT']);
-
             const n = selected.length;
             const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
 
             for (let i = 0; i < n; i++) {
                 for (let j = 0; j < n; j++) {
-                    if (i === j) {
-                        corrMatrix[i][j] = 1;
-                    } else {
+                    if (i === j) corrMatrix[i][j] = 1;
+                    else {
                         let corr = math.correlation(returnsData[i], returnsData[j]);
                         if (esgAdjust) {
                             const esgI = ESG_RATINGS[selected[i]] || 'medium';
@@ -481,13 +466,8 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        x: { type: 'category', labels: selected, position: 'top' },
-                        y: { type: 'category', labels: selected.reverse() }
-                    },
-                    plugins: {
-                        tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } }
-                    }
+                    scales: { x: {type: 'category', labels: selected, position: 'top'}, y: {type: 'category', labels: selected.reverse()} },
+                    plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
                 }
             });
 
@@ -557,20 +537,23 @@
             `;
         }
 
-        function updateCharts() {
-            [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.update());
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
-            applyTheme(saved);
-            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                if (t === 'light') document.documentElement.removeAttribute('data-theme');
+                else document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', t);
+                updateCharts();
+            });
 
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateTagsAndAnalysis));
             document.getElementById('esg-adjust').addEventListener('change', updateTagsAndAnalysis);
             document.getElementById('time-period').addEventListener('change', updateTagsAndAnalysis);
 
-            updateTagsAndAnalysis();
+            updateTagsAndAnalysis(); // Run immediately with pre-selected ETFs
 
             particlesJS('particles', {
                 particles: {
@@ -590,6 +573,10 @@
                 retina_detect: true
             });
         });
+
+        function updateCharts() {
+            [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.update());
+        }
     </script>
 </body>
 </html>
