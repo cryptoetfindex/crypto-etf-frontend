@@ -8,10 +8,10 @@
     <title>Crypto ETF Correlation Analyzer 2026 - Advanced Fintech Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
+    <!-- Chart.js v4 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- Matrix plugin - CORRECT PATH -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.js"></script>
+    <!-- Matrix plugin v1.1.0 - THE ONLY WORKING VERSION -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -265,7 +265,9 @@
     </div>
 
     <script>
+        // Register matrix plugin - this version exposes ChartMatrix globally
         Chart.register(ChartMatrix);
+
         let heatmapChart = null, trendChart = null, monteCarloChart = null;
 
         const ESG_RATINGS = {
@@ -403,7 +405,11 @@
                 document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
             } else {
                 const flatOffDiag = [];
-                for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (i !== j) flatOffDiag.push(corrMatrix[i][j]);
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n; j++) {
+                        if (i !== j) flatOffDiag.push(corrMatrix[i][j]);
+                    }
+                }
                 const avgCorr = mean(flatOffDiag).toFixed(3);
                 const betas = returnsData.map(r => beta(r, refData));
                 const avgBeta = mean(betas).toFixed(3);
