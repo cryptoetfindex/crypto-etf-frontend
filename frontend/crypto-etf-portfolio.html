@@ -5,62 +5,128 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adding Crypto ETFs to Your Portfolio 2025 - Allocation Guide</title>
-    <meta name="description" content="Practical guide to incorporating spot crypto ETFs into your investment portfolio. Suggested allocation percentages, diversification strategies, rebalancing tips, and risk management for 2025.">
-    <meta name="keywords" content="crypto etf portfolio allocation 2025, how much crypto in portfolio, bitcoin etf allocation, ethereum etf diversification">
+    <title>Adding Crypto ETFs to Your Portfolio 2026 - In-Depth Allocation Guide</title>
+    <meta name="description" content="Comprehensive guide to incorporating spot crypto ETFs into your investment portfolio in 2026. Detailed allocation strategies, diversification approaches, rebalancing techniques, and risk management for Bitcoin, Ethereum, XRP, Solana, and multi-asset funds.">
+    <meta name="keywords" content="crypto etf portfolio allocation 2026, spot crypto etfs diversification, bitcoin etf allocation, ethereum xrp solana etf portfolio, rebalancing crypto etfs">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Adding Crypto ETFs to Your Portfolio 2025">
-    <meta property="og:description" content="Suggested allocation strategies, diversification ideas, and rebalancing tips for including spot crypto ETFs in your portfolio.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/crypto-etf-portfolio.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/crypto-etf-portfolio.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Adding Crypto ETFs to Your Portfolio 2026 - In-Depth Guide">
+    <meta property="og:description" content="Expert allocation strategies, diversification ideas, rebalancing tips, and risk considerations for spot crypto ETFs in 2026.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/crypto-etf-portfolio.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/crypto-etf-portfolio.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select, table, .disclaimer etc. */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--accent-color); }
-        th { background: rgba(0, 221, 235, 0.1); color: var(--accent-color); }
-        .allocation { font-weight: bold; color: var(--accent-color); }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+        }
+        .allocation { font-weight: bold; color: var(--accent); }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .highlight {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="particles"></div>
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="text-var(--accent-color) hover:underline">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="text-[var(--accent)] hover:underline">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
@@ -68,110 +134,246 @@
     <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Adding Crypto ETFs to Your Portfolio 2025</h1>
-            <p class="text-xl max-w-4xl mx-auto">Suggested allocation percentages, diversification strategies, rebalancing tips, and risk considerations for including spot crypto ETFs.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Adding Crypto ETFs to Your Portfolio 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">The ultimate guide to incorporating spot crypto ETFs (Bitcoin, Ethereum, XRP, Solana, multi-asset) into your investment portfolio with expert allocation strategies, diversification approaches, rebalancing techniques, and risk management as of January 01, 2026.</p>
         </header>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">General Allocation Guidelines</h2>
+            <h2 class="text-2xl font-semibold mb-4">Why Include Crypto ETFs in Your Portfolio?</h2>
+            <p class="text-lg mb-4">Crypto ETFs have become a mainstream asset class, offering exposure to digital assets with the convenience and regulation of traditional securities. Key reasons to consider them in 2026:</p>
             <ul class="space-y-4 text-lg">
-                <li>• <strong>Conservative Investors:</strong> 1–5% of total portfolio in crypto ETFs</li>
-                <li>• <strong>Moderate Risk Tolerance:</strong> 5–10%</li>
-                <li>• <strong>Aggressive/Growth-Focused:</strong> 10–20% (or more, with full understanding of volatility)</li>
-                <li>• <strong>Never allocate more than you can afford to lose</strong> – crypto remains highly volatile even in ETF form.</li>
+                <li>• <strong>Portfolio Diversification:</strong> Cryptocurrencies have low correlation with stocks and bonds, enhancing risk-adjusted returns.</li>[](https://www.cnbc.com/2025/12/21/crypto-investment-risk-market-diversification.html)
+                <li>• <strong>Institutional Adoption:</strong> Over 68% of institutional investors now allocate to crypto ETFs, with AUM projected to exceed $400B by year-end 2026.</li>[](https://finance.yahoo.com/news/crypto-etfs-2026-expect-bitcoin-150626003.html)
+                <li>• <strong>Inflation Hedge:</strong> Bitcoin is often viewed as "digital gold" with a fixed supply, potentially protecting against inflation.</li>[](https://www.schwab.com/learn/story/crypto-etf-approval)
+                <li>• <strong>Growth Potential:</strong> Altcoins like Solana and XRP are gaining traction for their blockchain utility, driving inflows.</li>[](https://www.ainvest.com/news/xrp-solana-etfs-outperforming-bitcoin-ethereum-capital-inflows-2512/)
+                <li>• <strong>Accessibility:</strong> Available through major brokers (Fidelity, Vanguard) and retirement accounts, making crypto investing seamless.</li>[](https://www.ainvest.com/news/2026-crypto-etf-revolution-institutional-adoption-regulatory-clarity-driving-bull-market-2512/)
             </ul>
+            <div class="highlight">
+                <strong>2026 Context:</strong> Spot crypto ETFs absorbed over 100% of Bitcoin, Ethereum, and Solana’s new supply in 2025, creating scarcity-driven price potential.[](https://finance.yahoo.com/news/crypto-etfs-2026-expect-bitcoin-150626003.html)
+            </div>
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Sample Portfolio Allocations (2025)</h2>
+            <h2 class="text-2xl font-semibold mb-4">General Allocation Guidelines</h2>
+            <p class="text-lg mb-4">Crypto ETFs remain high-risk, high-reward assets. Suggested allocations depend on risk tolerance, age, and financial goals:</p>
+            <ul class="space-y-4 text-lg">
+                <li>• <strong>Conservative (Low Risk):</strong> 1–5% – Older investors or those prioritizing capital preservation.</li>
+                <li>• <strong>Moderate (Balanced):</strong> 5–10% – Middle-aged or diversified investors seeking growth.</li>
+                <li>• <strong>Aggressive (High Risk):</strong> 10–20% – Younger investors or those bullish on crypto.</li>
+                <li>• <strong>Speculative (Crypto Bull):</strong> 20–30% – High conviction, high risk tolerance, prepared for significant volatility.</li>
+                <li>• <strong>Critical Rule:</strong> Never allocate more than you can afford to lose – crypto can experience 50%+ drawdowns.</li>
+            </ul>
+            <p class="text-lg mt-4">These are starting points. Adjust based on your total portfolio size, income, and investment horizon.</p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Sample Portfolio Allocations (2026)</h2>
+            <p class="text-lg mb-4">Below are illustrative allocations across investor profiles, incorporating Bitcoin, Ethereum, XRP, Solana, and multi-asset ETFs:</p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
-                            <th>Investor Profile</th>
-                            <th>Total Crypto Allocation</th>
+                            <th>Profile</th>
+                            <th>Total Crypto</th>
                             <th>Bitcoin ETFs</th>
                             <th>Ethereum ETFs</th>
-                            <th>Emerging/Multi-Asset</th>
+                            <th>XRP ETFs</th>
+                            <th>Solana ETFs</th>
+                            <th>Multi-Asset</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Conservative</td>
                             <td>3–5%</td>
-                            <td class="allocation">70–80%</td>
-                            <td class="allocation">20–30%</td>
+                            <td class="allocation">70%</td>
+                            <td class="allocation">20%</td>
+                            <td>5%</td>
+                            <td>5%</td>
                             <td>0%</td>
                         </tr>
                         <tr>
                             <td>Balanced</td>
                             <td>8–12%</td>
-                            <td class="allocation">60%</td>
-                            <td class="allocation">30%</td>
+                            <td class="allocation">50%</td>
+                            <td class="allocation">25%</td>
                             <td>10%</td>
+                            <td>10%</td>
+                            <td>5%</td>
                         </tr>
                         <tr>
                             <td>Growth-Oriented</td>
                             <td>15–20%</td>
-                            <td class="allocation">50%</td>
-                            <td class="allocation">35%</td>
+                            <td class="allocation">40%</td>
+                            <td class="allocation">25%</td>
                             <td>15%</td>
+                            <td>15%</td>
+                            <td>5%</td>
                         </tr>
                         <tr>
-                            <td>High-Risk / Crypto Bull</td>
-                            <td>25%+</td>
-                            <td class="allocation">40–50%</td>
-                            <td class="allocation">30–40%</td>
-                            <td>20%+</td>
+                            <td>Speculative</td>
+                            <td>25–30%</td>
+                            <td class="allocation">30%</td>
+                            <td class="allocation">20%</td>
+                            <td>20%</td>
+                            <td>20%</td>
+                            <td>10%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4">These are illustrative examples only. Adjust based on your risk tolerance, age, goals, and market conditions.</p>
+            <p class="text-sm mt-4">Example ETFs: Bitcoin (IBIT, BTC Mini), Ethereum (ETHA, ETH Mini), XRP (XRPC, XRP), Solana (BSOL, VSOL), Multi-Asset (TTOP, GDLC). Allocations are illustrative and should be tailored.</p>[](https://money.usnews.com/investing/articles/best-cryptocurrency-etfs-to-buy)
         </div>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Diversification Strategies</h2>
+            <p class="text-lg mb-4">Effective diversification reduces concentration risk while capturing crypto’s growth potential. Key approaches for 2026:</p>
             <ul class="space-y-4 text-lg">
-                <li>• <strong>Core-Satellite Approach:</strong> Majority in Bitcoin ETFs (core) + smaller positions in Ethereum and emerging (satellite).</li>
-                <li>• <strong>Multi-Asset Baskets:</strong> Use funds like GDLC or EZPZ for instant diversification across BTC, ETH, XRP, SOL.</li>
-                <li>• <strong>Low-Fee Focus:</strong> Prioritize funds like ETH Mini (0.15%) or BITB (0.20%) to minimize drag.</li>
-                <li>• <strong>Geographic & Sector Balance:</strong> Pair with traditional stocks, bonds, and international assets.</li>
+                <li>
+                    <strong>Core-Satellite Model</strong>
+                    <p>Core: 50–70% in stable Bitcoin ETFs (IBIT, FBTC) for lower volatility. Satellite: 30–50% in Ethereum, XRP, Solana, or multi-asset ETFs (GDLC, TTOP) for higher growth potential.</p>
+                </li>
+                <li>
+                    <strong>Multi-Asset Index ETFs</strong>
+                    <p>Funds like Grayscale CoinDesk Crypto 5 ETF (GDLC: 75% BTC, 15% ETH, 5% XRP, 3% SOL) or 21Shares FTSE Crypto 10 (TTOP) provide instant diversification across top assets.</p>[](https://cryptorank.io/news/feed/36558-crypto-index-etfs-will-dominate-2026-because-wealth-managers-can-no-longer-handle-a-specific-due-diligence-burden)
+                </li>
+                <li>
+                    <strong>Altcoin Exposure</strong>
+                    <p>XRP and Solana ETFs (XRPC, BSOL) have seen $1.18B and $674M in inflows, respectively, reflecting strong utility-driven demand (e.g., XRP for payments, Solana for DeFi). Allocate 10–20% for aggressive portfolios.</p>[](https://www.ainvest.com/news/xrp-solana-etfs-outperforming-bitcoin-ethereum-capital-inflows-2512/)
+                </li>
+                <li>
+                    <strong>Low-Fee Optimization</strong>
+                    <p>Prioritize funds with expense ratios under 0.30% (e.g., BTC Mini at 0.15%, BITB at 0.20%) to minimize drag over time.</p>
+                </li>
+                <li>
+                    <strong>Traditional Asset Balance</strong>
+                    <p>Pair crypto ETFs with equities (SPY, VTI), bonds (BND), and alternatives (gold, real estate) to reduce overall portfolio volatility. Crypto’s correlation with equities is ~0.4–0.6, offering diversification benefits.</p>[](https://www.cnbc.com/2025/12/21/crypto-investment-risk-market-diversification.html)
+                </li>
             </ul>
+            <div class="highlight">
+                <strong>2026 Trend:</strong> Index ETFs like GDLC and TTOP are gaining traction, with Bloomberg estimating 2–10% of 2026 inflows going to diversified baskets.[](https://www.ainvest.com/news/shift-crypto-index-etfs-2026-2512/)
+            </div>
         </div>
 
         <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Rebalancing Tips</h2>
+            <h2 class="text-2xl font-semibold mb-4">Rebalancing Strategies</h2>
+            <p class="text-lg mb-4">Crypto’s volatility requires disciplined rebalancing to maintain target allocations:</p>
             <ul class="space-y-4 text-lg">
-                <li>• Rebalance quarterly or annually to maintain target allocations.</li>
-                <li>• Use dollar-cost averaging (DCA) for new contributions.</li>
-                <li>• Consider tax implications – harvest losses in taxable accounts when possible.</li>
-                <li>• Monitor for major shifts (e.g., if crypto exceeds 25% due to outperformance, trim back).</li>
+                <li>
+                    <strong>Frequency</strong>
+                    <p>Rebalance quarterly or semi-annually to avoid over-trading and tax events. Annual rebalancing suits conservative investors.</p>
+                </li>
+                <li>
+                    <strong>Threshold-Based</strong>
+                    <p>Rebalance when crypto allocation deviates by 5% or more (e.g., if 10% target grows to 15% after a rally).</p>
+                </li>
+                <li>
+                    <strong>Dollar-Cost Averaging (DCA)</strong>
+                    <p>Add new capital monthly or quarterly to smooth entry points, reducing timing risk.</p>[](https://www.cnbc.com/2025/12/21/crypto-investment-risk-market-diversification.html)
+                </li>
+                <li>
+                    <strong>Tax Optimization</strong>
+                    <p>In taxable accounts, harvest losses during dips (no wash-sale rule applies) and prioritize long-term gains (>1 year). Use Roth IRAs to avoid tax events.</p>
+                </li>
+                <li>
+                    <strong>Profit-Taking Rules</strong>
+                    <p>Set rules to trim positions after significant gains (e.g., sell 20% if crypto doubles) to lock in returns.</p>
+                </li>
+            </ul>
+            <div class="highlight">
+                <strong>2026 Insight:</strong> Year-end 2025 saw $782M outflows from Bitcoin ETFs due to rebalancing, highlighting the importance of disciplined allocation.[](https://bitcoinethereumnews.com/crypto/crypto-etfs-see-major-weekly-inflows-and-outflows/)
+            </div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Risk Management Considerations</h2>
+            <p class="text-lg mb-4">Crypto ETFs are volatile and require careful risk management:</p>
+            <ul class="space-y-4 text-lg">
+                <li>• <strong>Volatility Awareness:</strong> Bitcoin dropped 55% peak-to-trough in 2025; altcoins like Solana fell 55%. Expect similar swings.</li>[](https://www.cnbc.com/2025/12/21/crypto-investment-risk-market-diversification.html)[](https://www.ainvest.com/news/crypto-etf-portfolio-diversification-bitcoin-outflows-strategic-reallocation-solana-xrp-etfs-2512/)
+                <li>• <strong>Position Sizing:</strong> Keep crypto as a small portfolio slice to limit drawdowns.</li>
+                <li>• <strong>Avoid Leverage:</strong> Leveraged ETFs (e.g., XRPK, SOLX) can amplify losses significantly.</li>
+                <li>• <strong>Monitor Regulatory Risks:</strong> Policy changes could impact altcoin ETFs (XRP, SOL) more than Bitcoin.</li>[](https://www.ainvest.com/news/xrp-solana-etfs-outperforming-bitcoin-ethereum-capital-inflows-2512/)
+                <li>• <strong>Stay Informed:</strong> Track ETF flows (e.g., XRP’s $1.18B inflows vs BTC’s $2.8B outflows in late 2025) to gauge sentiment.</li>[](https://finance.yahoo.com/news/crypto-etfs-2026-expect-bitcoin-150626003.html)
+            </ul>
+            <p class="text-lg mt-4"><a href="/frontend/crypto-etf-risks.html" class="text-[var(--accent)] underline font-semibold">Full Risks Guide →</a></p>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Practical Tips for 2026</h2>
+            <ul class="space-y-4 text-lg">
+                <li>• <strong>Start Small:</strong> Begin with $100–$500 in a low-fee Bitcoin ETF (BTC Mini).</li>
+                <li>• <strong>Use Trusted Brokers:</strong> Fidelity, Schwab, Vanguard offer robust platforms and SIPC insurance.</li>
+                <li>• <strong>Leverage Tools:</strong> Use our <a href="/frontend/roi-calculator.html" class="text-[var(--accent)] underline">ROI Calculator</a> to model returns.</li>
+                <li>• <strong>Retirement Accounts:</strong> Roth IRAs are ideal for tax-free crypto growth.</li>
+                <li>• <strong>Stay Disciplined:</strong> Avoid FOMO buying during rallies or panic selling during dips.</li>
             </ul>
         </div>
 
         <div class="card mb-8 text-center">
-            <p class="text-lg">Related resources:</p>
+            <p class="text-lg">Related Resources:</p>
             <div class="flex flex-wrap justify-center gap-4 mt-4">
-                <a href="/frontend/bitcoin-vs-ethereum-etfs.html" class="policy-btn">BTC vs ETH Comparison</a>
-                <a href="/frontend/crypto-etf-risks.html" class="policy-btn">Risks Guide</a>
-                <a href="/frontend/guides.html" class="policy-btn">All Guides →</a>
+                <a href="/frontend/bitcoin-etfs.html" class="btn">Bitcoin ETFs Directory</a>
+                <a href="/frontend/ethereum-etfs.html" class="btn">Ethereum ETFs Directory</a>
+                <a href="/frontend/other-crypto-etfs.html" class="btn">XRP, Solana & Multi-Asset ETFs</a>
+                <a href="/frontend/crypto-etf-taxes.html" class="btn">Taxes Guide</a>
+                <a href="/frontend/crypto-etf-risks.html" class="btn">Risks Guide</a>
+                <a href="/frontend/guides.html" class="btn">All Guides</a>
             </div>
         </div>
 
         <p class="disclaimer">
-            This guide is for educational purposes only and is not personalized financial advice. Portfolio allocation should be based on your individual circumstances, risk tolerance, and consultation with a qualified financial advisor.
+            This guide is for educational purposes only and is not personalized financial advice. Crypto ETFs are highly volatile and carry significant risk of loss, including total loss of principal. Portfolio allocation should be based on your individual circumstances, risk tolerance, and consultation with a qualified financial advisor. Past performance is not indicative of future results.
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12">
-            <!-- Policy buttons, copyright, disclaimer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme apply, particles, modals
+        // Theme switcher
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
