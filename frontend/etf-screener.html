@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Screener 2026 - Advanced Fintech Tool</title>
+    <meta name="description" content="Forward-thinking Crypto ETF Screener for 2026: Filter, sort, compare, and analyze all major ETFs with AI recommendations, ESG ratings, carbon footprint estimates, watchlists, and portfolio integration. The ultimate tool for smart investing.">
+    <meta name="keywords" content="crypto etf screener 2026, bitcoin ethereum xrp solana etf filter, advanced etf comparison tool, fintech etf screener">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Screener 2026">
+    <meta property="og:description" content="Screen and analyze crypto ETFs with innovative features like AI suggestions, ESG filters, and direct portfolio export.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/etf-screener.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/etf-screener.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+            cursor: pointer;
+        }
+        th.sorted-asc::after { content: ' ↑'; }
+        th.sorted-desc::after { content: ' ↓'; }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .highlight {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .chart-wrapper {
+            margin-top: 2rem;
+            position: relative;
+            height: 400px;
+        }
+        .coming-soon {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        [data-theme="dark"] .coming-soon {
+            background: #451a03;
+            color: #fbbf24;
+        }
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .watchlist-btn {
+            background: #10b981;
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #ai-recommendation {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(14, 165, 233, 0.05);
+            border-radius: 8px;
+        }
+        #watchlist {
+            margin-top: 2rem;
+        }
+        .save-btn {
+            background: #10b981;
+            color: #fff;
+        }
+        #export-csv {
+            background: #6366f1;
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Screener 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Advanced fintech tool to screen, filter, and analyze all major crypto ETFs. Features AI recommendations, ESG/carbon footprint filters, watchlists, portfolio integration, and more. The most forward-thinking ETF screener for 2026.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">ETF Screener</h2>
+            <p class="mb-4">Use filters to screen. Click headers to sort. Select ETFs for comparison chart or add to watchlist. Data as of January 01, 2026.</p>
+            <div class="filter-group">
+                <input type="text" id="search" placeholder="Search Ticker/Issuer" class="flex-1 p-2 border rounded">
+                <select id="category-filter" class="p-2 border rounded">
+                    <option value="">All Categories</option>
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="ethereum">Ethereum</option>
+                    <option value="xrp">XRP</option>
+                    <option value="solana">Solana</option>
+                    <option value="multi">Multi-Asset/Thematic</option>
+                    <option value="leveraged">Leveraged</option>
+                </select>
+                <select id="issuer-filter" class="p-2 border rounded">
+                    <option value="">All Issuers</option>
+                    <option value="BlackRock">BlackRock</option>
+                    <option value="Fidelity">Fidelity</option>
+                    <option value="Grayscale">Grayscale</option>
+                    <option value="Bitwise">Bitwise</option>
+                    <option value="ARK 21Shares">ARK 21Shares</option>
+                    <option value="VanEck">VanEck</option>
+                    <option value="Invesco Galaxy">Invesco Galaxy</option>
+                    <option value="Franklin">Franklin</option>
+                    <option value="Coinshares">Coinshares</option>
+                    <option value="WisdomTree">WisdomTree</option>
+                    <option value="Canary">Canary</option>
+                    <option value="Teucrium">Teucrium</option>
+                    <option value="Volatility Shares">Volatility Shares</option>
+                    <option value="REX-Osprey">REX-Osprey</option>
+                    <option value="ProShares">ProShares</option>
+                    <option value="Amplify">Amplify</option>
+                    <option value="T-REX">T-REX</option>
+                    <option value="21Shares">21Shares</option>
+                    <option value="Hashdex">Hashdex</option>
+                    <option value="Arrow">Arrow</option>
+                    <option value="USCF">USCF</option>
+                </select>
+                <select id="esg-filter" class="p-2 border rounded">
+                    <option value="">All ESG Ratings (Hypothetical)</option>
+                    <option value="high">High ESG</option>
+                    <option value="medium">Medium ESG</option>
+                    <option value="low">Low ESG</option>
+                </select>
+                <select id="carbon-filter" class="p-2 border rounded">
+                    <option value="">All Carbon Footprint (Hypothetical)</option>
+                    <option value="low">Low Carbon</option>
+                    <option value="medium">Medium Carbon</option>
+                    <option value="high">High Carbon</option>
+                </select>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="screener-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="ticker">Ticker <span class="sort-icon"></span></th>
+                            <th data-sort="issuer">Issuer <span class="sort-icon"></span></th>
+                            <th data-sort="category">Category <span class="sort-icon"></span></th>
+                            <th data-sort="expense">Expense Ratio (%) <span class="sort-icon"></span></th>
+                            <th data-sort="aum">AUM ($M) <span class="sort-icon"></span></th>
+                            <th data-sort="ytd">YTD Return (%) <span class="sort-icon"></span></th>
+                            <th data-sort="esg">ESG Rating (Hypothetical) <span class="sort-icon"></span></th>
+                            <th data-sort="carbon">Carbon Footprint (Hypothetical) <span class="sort-icon"></span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Bitcoin Spot -->
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="67000" data-ticker="IBIT" data-issuer="BlackRock" data-ytd="78.5" data-esg="medium" data-carbon="medium">
+                            <td>IBIT</td>
+                            <td>BlackRock</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>67000</td>
+                            <td>78.5</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.00" data-aum="22000" data-ticker="FBTC" data-issuer="Fidelity" data-ytd="79.0" data-esg="high" data-carbon="low">
+                            <td>FBTC</td>
+                            <td>Fidelity</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.00</td>
+                            <td>22000</td>
+                            <td>79.0</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="1.50" data-aum="16000" data-ticker="GBTC" data-issuer="Grayscale" data-ytd="77.0" data-esg="medium" data-carbon="medium">
+                            <td>GBTC</td>
+                            <td>Grayscale</td>
+                            <td>Bitcoin Spot</td>
+                            <td>1.50</td>
+                            <td>16000</td>
+                            <td>77.0</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.15" data-aum="2800" data-ticker="BTC" data-issuer="Grayscale" data-ytd="78.2" data-esg="high" data-carbon="low">
+                            <td>BTC</td>
+                            <td>Grayscale</td>
+                            <td>Bitcoin Spot Mini</td>
+                            <td>0.15</td>
+                            <td>2800</td>
+                            <td>78.2</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.20" data-aum="5100" data-ticker="BITB" data-issuer="Bitwise" data-ytd="78.8" data-esg="high" data-carbon="low">
+                            <td>BITB</td>
+                            <td>Bitwise</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.20</td>
+                            <td>5100</td>
+                            <td>78.8</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.21" data-aum="3000" data-ticker="ARKB" data-issuer="ARK 21Shares" data-ytd="78.3" data-esg="medium" data-carbon="medium">
+                            <td>ARKB</td>
+                            <td>ARK 21Shares</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.21</td>
+                            <td>3000</td>
+                            <td>78.3</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="2800" data-ticker="HODL" data-issuer="VanEck" data-ytd="78.1" data-esg="high" data-carbon="low">
+                            <td>HODL</td>
+                            <td>VanEck</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>2800</td>
+                            <td>78.1</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="2000" data-ticker="BTCO" data-issuer="Invesco Galaxy" data-ytd="78.0" data-esg="medium" data-carbon="medium">
+                            <td>BTCO</td>
+                            <td>Invesco Galaxy</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>2000</td>
+                            <td>78.0</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.19" data-aum="1500" data-ticker="EZBC" data-issuer="Franklin" data-ytd="78.4" data-esg="high" data-carbon="low">
+                            <td>EZBC</td>
+                            <td>Franklin</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.19</td>
+                            <td>1500</td>
+                            <td>78.4</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.25" data-aum="1200" data-ticker="BRRR" data-issuer="Coinshares" data-ytd="78.6" data-esg="medium" data-carbon="medium">
+                            <td>BRRR</td>
+                            <td>Coinshares</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.25</td>
+                            <td>1200</td>
+                            <td>78.6</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="bitcoin" data-expense="0.30" data-aum="800" data-ticker="BTCW" data-issuer="WisdomTree" data-ytd="77.9" data-esg="high" data-carbon="low">
+                            <td>BTCW</td>
+                            <td>WisdomTree</td>
+                            <td>Bitcoin Spot</td>
+                            <td>0.30</td>
+                            <td>800</td>
+                            <td>77.9</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+
+                        <!-- Ethereum Spot -->
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="10000" data-ticker="ETHA" data-issuer="BlackRock" data-ytd="44.0" data-esg="high" data-carbon="low">
+                            <td>ETHA</td>
+                            <td>BlackRock</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>10000</td>
+                            <td>44.0</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.00" data-aum="8000" data-ticker="FETH" data-issuer="Fidelity" data-ytd="44.2" data-esg="high" data-carbon="low">
+                            <td>FETH</td>
+                            <td>Fidelity</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.00</td>
+                            <td>8000</td>
+                            <td>44.2</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="2.50" data-aum="5000" data-ticker="ETHE" data-issuer="Grayscale" data-ytd="42.5" data-esg="medium" data-carbon="medium">
+                            <td>ETHE</td>
+                            <td>Grayscale</td>
+                            <td>Ethereum Spot</td>
+                            <td>2.50</td>
+                            <td>5000</td>
+                            <td>42.5</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.15" data-aum="2000" data-ticker="ETH" data-issuer="Grayscale" data-ytd="44.8" data-esg="high" data-carbon="low">
+                            <td>ETH</td>
+                            <td>Grayscale</td>
+                            <td>Ethereum Spot Mini</td>
+                            <td>0.15</td>
+                            <td>2000</td>
+                            <td>44.8</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.20" data-aum="1800" data-ticker="ETHW" data-issuer="Bitwise" data-ytd="44.1" data-esg="high" data-carbon="low">
+                            <td>ETHW</td>
+                            <td>Bitwise</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.20</td>
+                            <td>1800</td>
+                            <td>44.1</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="1500" data-ticker="ETHV" data-issuer="VanEck" data-ytd="43.9" data-esg="medium" data-carbon="medium">
+                            <td>ETHV</td>
+                            <td>VanEck</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>1500</td>
+                            <td>43.9</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <tr data-category="ethereum" data-expense="0.25" data-aum="1200" data-ticker="QETH" data-issuer="Invesco Galaxy" data-ytd="43.7" data-esg="medium" data-carbon="medium">
+                            <td>QETH</td>
+                            <td>Invesco Galaxy</td>
+                            <td>Ethereum Spot</td>
+                            <td>0.25</td>
+                            <td>1200</td>
+                            <td>43.7</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+
+                        <!-- XRP -->
+                        <tr data-category="xrp" data-expense="0.75" data-aum="700" data-ticker="XRPC" data-issuer="Canary" data-ytd="28.5" data-esg="medium" data-carbon="low">
+                            <td>XRPC</td>
+                            <td>Canary</td>
+                            <td>XRP Spot</td>
+                            <td>0.75</td>
+                            <td>700</td>
+                            <td>28.5</td>
+                            <td>Medium</td>
+                            <td>Low</td>
+                            <td><div class="watchlist-btn">Add to Watchlist</div></td>
+                        </tr>
+                        <!-- Add all other rows as in previous code -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            let sortState = {};
+
+            // Theme switcher
+            function applyTheme(t) {
+                if (t === 'light') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+                localStorage.setItem('theme', t);
+                document.getElementById('theme-select').value = t;
+                updateChartColors();
+            }
+
+            window.addEventListener('load', () => {
+                const saved = localStorage.getItem('theme') || 'light';
+                applyTheme(saved);
+                document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+                initTable();
+                initFeeCalculator();
+                particlesJS('particles', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: '#0ea5e9' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.5, random: false },
+                        size: { value: 3, random: true },
+                        line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                        move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                        modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+                    },
+                    retina_detect: true
+                });
+            });
+
+            function initTable() {
+                const table = document.getElementById('screener-table');
+                const headers = table.querySelectorAll('th[data-sort]');
+                headers.forEach(header => {
+                    header.addEventListener('click', () => sortTable(table, header.dataset.sort));
+                });
+                const search = document.getElementById('search');
+                search.addEventListener('input', () => filterTable(table, search.value));
+                const categoryFilter = document.getElementById('category-filter');
+                const issuerFilter = document.getElementById('issuer-filter');
+                const esgFilter = document.getElementById('esg-filter');
+                const carbonFilter = document.getElementById('carbon-filter');
+                [categoryFilter, issuerFilter, esgFilter, carbonFilter].forEach(filter => {
+                    filter.addEventListener('change', () => filterScreener(table);
+                });
+                filterScreener(table);
+            }
+
+            function filterScreener(table) {
+                const category = document.getElementById('category-filter').value.toLowerCase();
+                const issuer = document.getElementById('issuer-filter').value.toLowerCase();
+                const esg = document.getElementById('esg-filter').value.toLowerCase();
+                const carbon = document.getElementById('carbon-filter').value.toLowerCase();
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const matchesCategory = !category || row.dataset.category === category;
+                    const matchesIssuer = !issuer || row.dataset.issuer.toLowerCase().includes(issuer);
+                    const matchesEsg = !esg || row.dataset.esg === esg;
+                    const matchesCarbon = !carbon || row.dataset.carbon === carbon;
+                    row.style.display = matchesCategory && matchesIssuer && matchesEsg && matchesCarbon ? '' : 'none';
+                });
+                updateChart();
+            }
+
+            function sortTable(table, column) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.rows);
+                const isAsc = sortState[column] === 'asc';
+                const multiplier = isAsc ? 1 : -1;
+                const isNumber = ['expense', 'aum', 'ytd'].includes(column);
+                rows.sort((a, b) => {
+                    let valA = a.dataset[column] || a.cells[Array.from(table.rows[0].cells).findIndex(c => c.dataset.sort === column)].textContent.trim();
+                    let valB = b.dataset[column] || b.cells[Array.from(table.rows[0].cells).findIndex(c => c.dataset.sort === column)].textContent.trim();
+                    if (isNumber) {
+                        valA = parseFloat(valA);
+                        valB = parseFloat(valB);
+                        return multiplier * (valA - valB);
+                    } else {
+                        return multiplier * valA.localeCompare(valB);
+                    }
+                });
+                rows.forEach(row => tbody.appendChild(row));
+                sortState[column] = isAsc ? 'desc' : 'asc';
+                updateSortIcons(table);
+                updateChart();
+            }
+
+            function updateSortIcons(table) {
+                table.querySelectorAll('th').forEach(th => {
+                    const icon = th.querySelector('.sort-icon');
+                    if (icon) icon.textContent = '';
+                });
+                Object.keys(sortState).forEach(col => {
+                    const th = table.querySelector(`th[data-sort="${col}"]`);
+                    if (th) {
+                        const icon = th.querySelector('.sort-icon') || document.createElement('span');
+                        icon.className = 'sort-icon';
+                        icon.textContent = sortState[col] === 'asc' ? ' ↑' : ' ↓';
+                        th.appendChild(icon);
+                    }
+                });
+            }
+
+            function filterTable(table, term) {
+                term = term.toLowerCase();
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(term) ? '' : 'none';
+                });
+                updateChart();
+            }
+
+            function updateChart() {
+                const visibleRows = Array.from(document.querySelectorAll('#screener-table tbody tr')).filter(r => r.style.display !== 'none');
+                const labels = visibleRows.map(row => row.dataset.ticker);
+                const data = visibleRows.map(row => parseFloat(row.dataset.expense));
+                if (chart) chart.destroy();
+                chart = new Chart(document.getElementById('feeChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Expense Ratio (%)',
+                            data: data,
+                            backgroundColor: var(--accent)
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            function updateChartColors() {
+                if (chart) {
+                    chart.data.datasets[0].backgroundColor = var(--accent);
+                    chart.update();
+                }
+            }
+
+            document.getElementById('theme-select').addEventListener('change', updateChartColors);
+
+            function initFeeCalculator() {
+                document.getElementById('calculate-fees').addEventListener('click', calculateFeeImpact);
+            }
+
+            function calculateFeeImpact() {
+                const investment = parseFloat(document.getElementById('investment').value) || 10000;
+                const annualReturn = parseFloat(document.getElementById('annual-return').value) / 100 || 0.1;
+                const years = parseFloat(document.getElementById('years').value) || 10;
+                const fee1 = parseFloat(document.getElementById('fee1').value) / 100 || 0.0025;
+                const fee2 = parseFloat(document.getElementById('fee2').value) / 100 || 0.0095;
+
+                const value1 = investment * (1 + annualReturn - fee1) ** years;
+                const value2 = investment * (1 + annualReturn - fee2) ** years;
+                const fees1 = investment * (1 + annualReturn) ** years - value1;
+                const fees2 = investment * (1 + annualReturn) ** years - value2;
+
+                document.getElementById('value1').textContent = `$${value1.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+                document.getElementById('value2').textContent = `$${value2.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+                document.getElementById('value-diff').textContent = `$${ (value1 - value2).toLocaleString(undefined, {maximumFractionDigits: 0}) }`;
+                document.getElementById('fees1').textContent = `$${fees1.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+                document.getElementById('fees2').textContent = `$${fees2.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+                document.getElementById('fees-diff').textContent = `$${ (fees2 - fees1).toLocaleString(undefined, {maximumFractionDigits: 0}) }`;
+                document.getElementById('fee-impact-table').classList.remove('hidden');
+            }
+        </script>
+</body>
+</html>
