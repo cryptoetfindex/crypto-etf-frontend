@@ -189,51 +189,50 @@
             <button id="analyze" class="btn w-full mt-6 text-lg py-3">Run Analysis</button>
         </div>
 
-        <div id="results" class="hidden">
-            <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Correlation Heatmap</h2>
-                <div class="chart-wrapper">
-                    <canvas id="heatmapChart"></canvas>
-                </div>
+        <!-- All analysis sections are now always visible below the button -->
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Correlation Heatmap</h2>
+            <div class="chart-wrapper">
+                <canvas id="heatmapChart"></canvas>
             </div>
+        </div>
 
-            <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Historical Correlation Trend</h2>
-                <div class="chart-wrapper">
-                    <canvas id="trendChart"></canvas>
-                </div>
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Historical Correlation Trend</h2>
+            <div class="chart-wrapper">
+                <canvas id="trendChart"></canvas>
             </div>
+        </div>
 
-            <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Monte Carlo Correlation Projection</h2>
-                <div class="chart-wrapper">
-                    <canvas id="monteCarloChart"></canvas>
-                </div>
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Monte Carlo Correlation Projection</h2>
+            <div class="chart-wrapper">
+                <canvas id="monteCarloChart"></canvas>
             </div>
+        </div>
 
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <h3>Average Correlation</h3>
-                    <p id="avg-correlation" class="text-2xl font-bold">Calculating...</p>
-                </div>
-                <div class="metric-card">
-                    <h3>Average Beta (vs BTC)</h3>
-                    <p id="avg-beta" class="text-2xl font-bold">Calculating...</p>
-                </div>
-                <div class="metric-card">
-                    <h3>Average Covariance</h3>
-                    <p id="avg-covariance" class="text-2xl font-bold">Calculating...</p>
-                </div>
-                <div class="metric-card">
-                    <h3>Portfolio Volatility</h3>
-                    <p id="portfolio-vol" class="text-2xl font-bold">Calculating...</p>
-                </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Average Correlation</h3>
+                <p id="avg-correlation" class="text-2xl font-bold">Select ETFs and run analysis</p>
             </div>
+            <div class="metric-card">
+                <h3>Average Beta (vs BTC)</h3>
+                <p id="avg-beta" class="text-2xl font-bold">Select ETFs and run analysis</p>
+            </div>
+            <div class="metric-card">
+                <h3>Average Covariance</h3>
+                <p id="avg-covariance" class="text-2xl font-bold">Select ETFs and run analysis</p>
+            </div>
+            <div class="metric-card">
+                <h3>Portfolio Volatility</h3>
+                <p id="portfolio-vol" class="text-2xl font-bold">Select ETFs and run analysis</p>
+            </div>
+        </div>
 
-            <div class="card mb-8" id="ai-insights">
-                <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
-                <p id="ai-optimization">Calculating optimal weights...</p>
-            </div>
+        <div class="card mb-8" id="ai-insights">
+            <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
+            <p id="ai-optimization">Select ETFs and run analysis to get AI insights.</p>
         </div>
 
         <p class="disclaimer">
@@ -367,19 +366,6 @@
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
 
-        // Theme switcher
-        function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-            updateCharts();
-        }
-
-        // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
@@ -587,8 +573,8 @@
             `;
             document.getElementById('ai-optimization').innerHTML = aiText;
 
-            document.getElementById('results').classList.remove('hidden');
-            window.scrollTo({ top: document.getElementById('results').offsetTop - 100, behavior: 'smooth' });
+            // No hidden results - everything is always visible
+            window.scrollTo({ top: document.querySelector('.chart-wrapper').offsetTop - 100, behavior: 'smooth' });
         }
 
         function updateCharts() {
