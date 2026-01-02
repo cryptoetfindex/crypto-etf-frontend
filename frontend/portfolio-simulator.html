@@ -74,6 +74,7 @@
             text-decoration: none;
             display: inline-block;
             transition: all 0.2s;
+            cursor: pointer;
         }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .form-group {
@@ -91,6 +92,7 @@
             border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--card);
+            color: var(--text);
         }
         .remove-btn {
             background: #ef4444;
@@ -98,6 +100,8 @@
             padding: 0.5rem 0.75rem;
             border-radius: 8px;
             cursor: pointer;
+            text-align: center;
+            min-width: 80px;
         }
         .chart-wrapper {
             margin-top: 2rem;
@@ -136,6 +140,10 @@
             background: #451a03;
             color: #fbbf24;
         }
+        #allocation-error {
+            color: #ef4444;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -169,173 +177,90 @@
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Portfolio Simulator 2026</h1>
-            <p class="text-xl max-w-4xl mx-auto">Build, simulate, and analyze crypto ETF portfolios with historical data, risk metrics, Monte Carlo projections, Sharpe ratio, max drawdown, VaR, and more. Forward-thinking fintech tool for strategic planning. Coming soon: Live pricing integration.</p>
+            <p class="text-xl max-w-4xl mx-auto">Build, simulate, and analyze crypto ETF portfolios with historical data, risk metrics, Monte Carlo projections, and more. Forward-thinking fintech tool for strategic planning. Coming soon: Live pricing integration.</p>
         </header>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Portfolio Builder</h2>
             <div class="form-group">
                 <label for="investment-amount">Initial Investment Amount ($)</label>
-                <input type="number" id="investment-amount" value="10000" min="100" class="w-full p-2 border rounded">
+                <input type="number" id="investment-amount" value="10000" min="100" class="w-full">
             </div>
             <div class="form-group">
-                <label>Start Date</label>
-                <input type="date" id="start-date" value="2025-01-01" class="w-full p-2 border rounded">
-            </div>
-            <div class="form-group">
-                <label>End Date</label>
-                <input type="date" id="end-date" value="2026-01-01" class="w-full p-2 border rounded">
-            </div>
-            <div id="allocations">
-                <div class="allocation-row">
-                    <select class="etf-select">
-                        <option value="">Select ETF</option>
-                        <!-- Bitcoin -->
-                        <optgroup label="Bitcoin Spot ETFs">
-                            <option value="IBIT">IBIT - iShares Bitcoin Trust</option>
-                            <option value="FBTC">FBTC - Fidelity Wise Origin</option>
-                            <option value="GBTC">GBTC - Grayscale Bitcoin Trust</option>
-                            <option value="BTC">BTC - Grayscale Bitcoin Mini Trust</option>
-                            <option value="BITB">BITB - Bitwise Bitcoin ETF</option>
-                            <option value="ARKB">ARKB - ARK 21Shares Bitcoin</option>
-                            <option value="HODL">HODL - VanEck Bitcoin</option>
-                            <option value="BTCO">BTCO - Invesco Galaxy Bitcoin</option>
-                            <option value="EZBC">EZBC - Franklin Bitcoin</option>
-                            <option value="BRRR">BRRR - Coinshares Bitcoin</option>
-                            <option value="BTCW">BTCW - WisdomTree Bitcoin</option>
-                        </optgroup>
-                        <!-- Ethereum -->
-                        <optgroup label="Ethereum Spot ETFs">
-                            <option value="ETHA">ETHA - iShares Ethereum Trust</option>
-                            <option value="FETH">FETH - Fidelity Ethereum Fund</option>
-                            <option value="ETHE">ETHE - Grayscale Ethereum Trust</option>
-                            <option value="ETH">ETH - Grayscale Ethereum Mini Trust</option>
-                            <option value="ETHW">ETHW - Bitwise Ethereum ETF</option>
-                            <option value="ETHV">ETHV - VanEck Ethereum ETF</option>
-                            <option value="QETH">QETH - Invesco Galaxy Ethereum</option>
-                        </optgroup>
-                        <!-- XRP -->
-                        <optgroup label="XRP Spot ETFs">
-                            <option value="XRPC">XRPC - Canary XRP ETF</option>
-                            <option value="XRP">XRP - Bitwise XRP ETF</option>
-                            <option value="XRPZ">XRPZ - Franklin XRP ETF</option>
-                            <option value="XXRP">XXRP - Teucrium 2x Long XRP</option>
-                            <option value="XRPI">XRPI - Volatility Shares XRP</option>
-                            <option value="XRPT">XRPT - Volatility Shares XRP 2X</option>
-                            <option value="XRPR">XRPR - REX-Osprey XRP</option>
-                            <option value="UXRP">UXRP - ProShares Ultra XRP</option>
-                            <option value="XRPM">XRPM - Amplify XRP 3% Monthly</option>
-                            <option value="XRPK">XRPK - T-REX 2X Long XRP</option>
-                            <option value="TOXR">TOXR - 21Shares XRP ETF</option>
-                        </optgroup>
-                        <!-- Solana -->
-                        <optgroup label="Solana Spot & Staking ETFs">
-                            <option value="BSOL">BSOL - Bitwise Solana Staking</option>
-                            <option value="SSK">SSK - REX-Osprey SOL + Staking</option>
-                            <option value="GSOL">GSOL - Grayscale Solana Trust</option>
-                            <option value="VSOL">VSOL - VanEck Solana</option>
-                            <option value="TSOL">TSOL - 21Shares Solana</option>
-                            <option value="QSOL">QSOL - Invesco Galaxy Solana</option>
-                            <option value="SOEZ">SOEZ - Franklin Solana</option>
-                            <option value="SOLC">SOLC - Canary Marinade Solana</option>
-                            <option value="SOLM">SOLM - Amplify Solana 3% Monthly</option>
-                            <option value="SOLX">SOLX - T-REX 2X Long SOL</option>
-                            <option value="SLON">SLON - ProShares Ultra Solana</option>
-                        </optgroup>
-                        <!-- Other -->
-                        <optgroup label="Other Altcoin & Thematic">
-                            <option value="BITW">BITW - Bitwise 10 Crypto Index</option>
-                            <option value="GDLC">GDLC - Grayscale CoinDesk Crypto 5</option>
-                            <option value="NCIQ">NCIQ - Hashdex Nasdaq Crypto Index</option>
-                            <option value="EZPZ">EZPZ - Franklin Crypto Index</option>
-                            <option value="GLNK">GLNK - Grayscale Chainlink Trust</option>
-                            <option value="HBR">HBR - Canary HBAR ETF</option>
-                            <option value="LTCC">LTCC - Canary Litecoin ETF</option>
-                            <option value="DOJE">DOJE - REX-Osprey DOGE ETF</option>
-                            <option value="BWOW">BWOW - Bitwise Dogecoin ETF</option>
-                            <option value="GDOG">GDOG - Grayscale Dogecoin Trust</option>
-                            <option value="TXXD">TXXD - 21Shares 2x Long Dogecoin</option>
-                            <option value="TXXS">TXXS - 21Shares 2x Long Sui</option>
-                            <option value="DIME">DIME - CoinShares Altcoins ETF</option>
-                            <option value="STBQ">STBQ - Amplify Stablecoin Technology</option>
-                            <option value="TKNQ">TKNQ - Amplify Tokenization Technology</option>
-                            <option value="ORO">ORO - Arrow Valtoro (Gold + BTC)</option>
-                            <option value="WTIB">WTIB - USCF Oil Plus Bitcoin</option>
-                            <option value="TTOP">TTOP - 21Shares FTSE Crypto 10</option>
-                            <option value="TXBC">TXBC - 21Shares FTSE Crypto 10 ex-BTC</option>
-                        </optgroup>
-                        <optgroup label="Benchmarks">
-                            <option value="SPY">SPY - S&P 500</option>
-                            <option value="QQQ">QQQ - Nasdaq-100</option>
-                        </optgroup>
-                    </select>
-                    <input type="number" class="allocation-pct" placeholder="%" min="0" max="100" step="0.1" value="0">
-                    <div class="remove-btn">Remove</div>
+                <label>Simulation Period</label>
+                <div class="flex gap-4">
+                    <input type="date" id="start-date" value="2025-01-01" class="flex-1">
+                    <input type="date" id="end-date" value="2026-01-01" class="flex-1">
                 </div>
             </div>
-            <button id="add-allocation" class="btn mt-2">Add Another ETF</button>
-            <button id="simulate" class="btn w-full mt-4 text-lg py-3">Run Simulation</button>
-            <p id="allocation-error" class="text-red-500 mt-2 hidden">Allocations must sum to 100%.</p>
+            <div id="allocations"></div>
+            <button id="add-allocation" class="btn mt-4">Add Another ETF</button>
+            <p id="allocation-error" class="hidden mt-2">Allocations must sum to 100%.</p>
+            <button id="simulate" class="btn w-full mt-6 text-lg py-3">Run Simulation</button>
         </div>
 
         <div id="results" class="hidden">
             <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Portfolio Performance Chart</h2>
+                <h2 class="text-2xl font-semibold mb-4">Portfolio Performance Over Time</h2>
                 <div class="chart-wrapper">
                     <canvas id="performanceChart"></canvas>
                 </div>
             </div>
 
             <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Allocation Pie Chart</h2>
+                <h2 class="text-2xl font-semibold mb-4">Current Allocation Breakdown</h2>
                 <div class="chart-wrapper">
                     <canvas id="pieChart"></canvas>
                 </div>
             </div>
 
             <div class="card mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Monte Carlo Projection (1000 Simulations)</h2>
+                <h2 class="text-2xl font-semibold mb-4">Monte Carlo Future Projection (1000 Simulations)</h2>
                 <div class="chart-wrapper">
                     <canvas id="monteCarloChart"></canvas>
                 </div>
-                <p class="text-sm mt-2">Projection based on historical volatility and returns (not a guarantee).</p>
+                <p class="text-sm mt-2">1000 random paths based on historical mean return and volatility. Not a prediction.</p>
             </div>
 
             <div class="metrics-grid">
                 <div class="metric-card">
                     <h3>Total Return</h3>
-                    <p id="total-return" class="text-2xl font-bold">0%</p>
+                    <p id="total-return" class="text-2xl font-bold text-[var(--accent)]">Calculating...</p>
                 </div>
                 <div class="metric-card">
                     <h3>Annualized Return</h3>
-                    <p id="annualized-return" class="text-2xl font-bold">0%</p>
+                    <p id="annualized-return" class="text-2xl font-bold text-[var(--accent)]">Calculating...</p>
                 </div>
                 <div class="metric-card">
                     <h3>Sharpe Ratio</h3>
-                    <p id="sharpe-ratio" class="text-2xl font-bold">0</p>
+                    <p id="sharpe-ratio" class="text-2xl font-bold text-[var(--accent)]">Calculating...</p>
                 </div>
                 <div class="metric-card">
                     <h3>Max Drawdown</h3>
-                    <p id="max-drawdown" class="text-2xl font-bold">0%</p>
+                    <p id="max-drawdown" class="text-2xl font-bold text-red-600">Calculating...</p>
                 </div>
                 <div class="metric-card">
-                    <h3>Volatility (Annualized)</h3>
-                    <p id="volatility" class="text-2xl font-bold">0%</p>
+                    <h3>Annual Volatility</h3>
+                    <p id="volatility" class="text-2xl font-bold text-[var(--accent)]">Calculating...</p>
                 </div>
                 <div class="metric-card">
-                    <h3>Value at Risk (VaR 95%)</h3>
-                    <p id="var" class="text-2xl font-bold">$0</p>
+                    <h3>95% VaR (Daily)</h3>
+                    <p id="var" class="text-2xl font-bold text-red-600">Calculating...</p>
                 </div>
             </div>
 
             <div class="coming-soon mt-8">
-                Coming Soon: Live Pricing Simulator – Real-time portfolio tracking with API integration.
+                Coming Soon: Live Pricing Simulator – Real-time portfolio tracking with automatic rebalancing alerts and API integration.
             </div>
+        </div>
+
+        <div class="card mt-12">
+            <p class="text-center">Start by adding ETFs above and clicking "Run Simulation". Use realistic historical assumptions for 2025–2026 performance.</p>
         </div>
     </div>
 
     <p class="disclaimer">
-        This simulator uses historical data for educational purposes only. Past performance is not indicative of future results. No financial advice – consult professionals.
+        This simulator uses historical and simulated data for educational purposes only. Past performance is not indicative of future results. No financial advice – consult professionals.
     </p>
 
     <!-- Footer -->
@@ -351,174 +276,328 @@
     </footer>
 
     <script>
-        const HISTORICAL_DATA = {
-            // Simulated daily returns for 2025 (252 trading days, approx)
-            IBIT: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02), // Mean 1% daily vol
-            // ... Add similar for ALL ETFs from the list (simulated for demo)
-            FBTC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            // To keep code short, assume all ETFs have similar structure
-            // In production, load real historical data
-            SPY: Array.from({length: 252}, () => Math.random() * 0.01 - 0.005), // Lower vol for benchmarks
-            QQQ: Array.from({length: 252}, () => Math.random() * 0.015 - 0.0075)
+        // Full list of ETFs (same as in dropdown)
+        const ETF_OPTIONS = `
+            <option value="">Select ETF</option>
+            <optgroup label="Bitcoin Spot ETFs">
+                <option value="IBIT">IBIT - iShares Bitcoin Trust</option>
+                <option value="FBTC">FBTC - Fidelity Wise Origin</option>
+                <option value="GBTC">GBTC - Grayscale Bitcoin Trust</option>
+                <option value="BTC">BTC - Grayscale Bitcoin Mini Trust</option>
+                <option value="BITB">BITB - Bitwise Bitcoin ETF</option>
+                <option value="ARKB">ARKB - ARK 21Shares Bitcoin</option>
+                <option value="HODL">HODL - VanEck Bitcoin</option>
+                <option value="BTCO">BTCO - Invesco Galaxy Bitcoin</option>
+                <option value="EZBC">EZBC - Franklin Bitcoin</option>
+                <option value="BRRR">BRRR - Coinshares Bitcoin</option>
+                <option value="BTCW">BTCW - WisdomTree Bitcoin</option>
+            </optgroup>
+            <optgroup label="Ethereum Spot ETFs">
+                <option value="ETHA">ETHA - iShares Ethereum Trust</option>
+                <option value="FETH">FETH - Fidelity Ethereum Fund</option>
+                <option value="ETHE">ETHE - Grayscale Ethereum Trust</option>
+                <option value="ETH">ETH - Grayscale Ethereum Mini Trust</option>
+                <option value="ETHW">ETHW - Bitwise Ethereum ETF</option>
+                <option value="ETHV">ETHV - VanEck Ethereum ETF</option>
+                <option value="QETH">QETH - Invesco Galaxy Ethereum</option>
+            </optgroup>
+            <optgroup label="XRP Spot ETFs">
+                <option value="XRPC">XRPC - Canary XRP ETF</option>
+                <option value="XRP">XRP - Bitwise XRP ETF</option>
+                <option value="XRPZ">XRPZ - Franklin XRP ETF</option>
+                <option value="XXRP">XXRP - Teucrium 2x Long XRP</option>
+                <option value="XRPI">XRPI - Volatility Shares XRP</option>
+                <option value="XRPT">XRPT - Volatility Shares XRP 2X</option>
+                <option value="XRPR">XRPR - REX-Osprey XRP</option>
+                <option value="UXRP">UXRP - ProShares Ultra XRP</option>
+                <option value="XRPM">XRPM - Amplify XRP 3% Monthly</option>
+                <option value="XRPK">XRPK - T-REX 2X Long XRP</option>
+                <option value="TOXR">TOXR - 21Shares XRP ETF</option>
+            </optgroup>
+            <optgroup label="Solana Spot & Staking ETFs">
+                <option value="BSOL">BSOL - Bitwise Solana Staking</option>
+                <option value="SSK">SSK - REX-Osprey SOL + Staking</option>
+                <option value="GSOL">GSOL - Grayscale Solana Trust</option>
+                <option value="VSOL">VSOL - VanEck Solana</option>
+                <option value="TSOL">TSOL - 21Shares Solana</option>
+                <option value="QSOL">QSOL - Invesco Galaxy Solana</option>
+                <option value="SOEZ">SOEZ - Franklin Solana</option>
+                <option value="SOLC">SOLC - Canary Marinade Solana</option>
+                <option value="SOLM">SOLM - Amplify Solana 3% Monthly</option>
+                <option value="SOLX">SOLX - T-REX 2X Long SOL</option>
+                <option value="SLON">SLON - ProShares Ultra Solana</option>
+            </optgroup>
+            <optgroup label="Other Altcoin & Thematic">
+                <option value="BITW">BITW - Bitwise 10 Crypto Index</option>
+                <option value="GDLC">GDLC - Grayscale CoinDesk Crypto 5</option>
+                <option value="NCIQ">NCIQ - Hashdex Nasdaq Crypto Index</option>
+                <option value="EZPZ">EZPZ - Franklin Crypto Index</option>
+                <option value="GLNK">GLNK - Grayscale Chainlink Trust</option>
+                <option value="HBR">HBR - Canary HBAR ETF</option>
+                <option value="LTCC">LTCC - Canary Litecoin ETF</option>
+                <option value="DOJE">DOJE - REX-Osprey DOGE ETF</option>
+                <option value="BWOW">BWOW - Bitwise Dogecoin ETF</option>
+                <option value="GDOG">GDOG - Grayscale Dogecoin Trust</option>
+                <option value="TXXD">TXXD - 21Shares 2x Long Dogecoin</option>
+                <option value="TXXS">TXXS - 21Shares 2x Long Sui</option>
+                <option value="DIME">DIME - CoinShares Altcoins ETF</option>
+                <option value="STBQ">STBQ - Amplify Stablecoin Technology</option>
+                <option value="TKNQ">TKNQ - Amplify Tokenization Technology</option>
+                <option value="ORO">ORO - Arrow Valtoro (Gold + BTC)</option>
+                <option value="WTIB">WTIB - USCF Oil Plus Bitcoin</option>
+                <option value="TTOP">TTOP - 21Shares FTSE Crypto 10</option>
+                <option value="TXBC">TXBC - 21Shares FTSE Crypto 10 ex-BTC</option>
+            </optgroup>
+            <optgroup label="Benchmarks">
+                <option value="SPY">SPY - S&P 500</option>
+                <option value="QQQ">QQQ - Nasdaq-100</option>
+            </optgroup>
+        `;
+
+        // Simulated historical daily returns (252 days) for demonstration
+        const HISTORICAL_DAILY_RETURNS = {
+            // Bitcoin ETFs ~78% total return 2025 → ~0.23% avg daily
+            IBIT: Array(252).fill(0.0023),
+            FBTC: Array(252).fill(0.00235),
+            GBTC: Array(252).fill(0.0022),
+            BTC: Array(252).fill(0.00232),
+            BITB: Array(252).fill(0.00234),
+            ARKB: Array(252).fill(0.00231),
+            HODL: Array(252).fill(0.00229),
+            BTCO: Array(252).fill(0.00228),
+            EZBC: Array(252).fill(0.00233),
+            BRRR: Array(252).fill(0.00236),
+            BTCW: Array(252).fill(0.00227),
+
+            // Ethereum ETFs ~44% → ~0.14% daily
+            ETHA: Array(252).fill(0.0014),
+            FETH: Array(252).fill(0.00142),
+            ETHE: Array(252).fill(0.0013),
+            ETH: Array(252).fill(0.00145),
+            ETHW: Array(252).fill(0.00141),
+            ETHV: Array(252).fill(0.00139),
+            QETH: Array(252).fill(0.00138),
+
+            // XRP ~28% → ~0.1% daily
+            XRPC: Array(252).fill(0.0010),
+            XRP: Array(252).fill(0.00105),
+            TOXR: Array(252).fill(0.00098),
+
+            // Solana ~28%
+            BSOL: Array(252).fill(0.0011),
+            VSOL: Array(252).fill(0.0010),
+
+            // Multi-Asset ~45%
+            GDLC: Array(252).fill(0.0015),
+            TTOP: Array(252).fill(0.00155),
+
+            // Benchmarks
+            SPY: Array(252).fill(0.0004), // ~12% annual
+            QQQ: Array(252).fill(0.0006)  // ~18% annual
         };
 
-        let allocations = [];
+        // Add volatility to make charts interesting
+        Object.keys(HISTORICAL_DAILY_RETURNS).forEach(key => {
+            HISTORICAL_DAILY_RETURNS[key] = HISTORICAL_DAILY_RETURNS[key].map(r => r + (Math.random() - 0.5) * 0.04);
+        });
 
-        document.getElementById('add-allocation').addEventListener('click', () => {
+        let charts = {};
+
+        function addAllocationRow() {
+            const container = document.getElementById('allocations');
             const row = document.createElement('div');
             row.className = 'allocation-row';
             row.innerHTML = `
-                <select class="etf-select">
-                    <option value="">Select ETF</option>
-                    <!-- Same options as in the HTML -->
-                </select>
-                <input type="number" class="allocation-pct" placeholder="%" min="0" max="100" step="0.1" value="0">
+                <select class="etf-select">${ETF_OPTIONS}</select>
+                <input type="number" class="allocation-pct" placeholder="Allocation %" min="0" max="100" step="0.1">
                 <div class="remove-btn">Remove</div>
             `;
-            document.getElementById('allocations').appendChild(row);
-            row.querySelector('.remove-btn').addEventListener('click', () => row.remove());
-        });
+            container.appendChild(row);
 
-        document.getElementById('simulate').addEventListener('click', simulatePortfolio);
+            row.querySelector('.remove-btn').addEventListener('click', () => {
+                row.remove();
+            });
+        }
 
-        function simulatePortfolio() {
-            const amount = parseFloat(document.getElementById('investment-amount').value);
+        document.getElementById('add-allocation').addEventListener('click', addAllocationRow);
+
+        document.getElementById('simulate').addEventListener('click', () => {
+            const amount = parseFloat(document.getElementById('investment-amount').value) || 10000;
             const startDate = new Date(document.getElementById('start-date').value);
             const endDate = new Date(document.getElementById('end-date').value);
-            if (isNaN(amount) || !startDate || !endDate) {
-                alert('Please fill all fields.');
-                return;
-            }
 
-            allocations = Array.from(document.querySelectorAll('.allocation-row')).map(row => ({
-                etf: row.querySelector('.etf-select').value,
-                pct: parseFloat(row.querySelector('.allocation-pct').value) / 100
-            })).filter(a => a.etf && a.pct > 0);
+            const days = Math.max(1, Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)));
 
-            const totalPct = allocations.reduce((sum, a) => sum + a.pct, 0);
-            if (Math.abs(totalPct - 1) > 0.01) {
+            const rows = document.querySelectorAll('.allocation-row');
+            const allocations = [];
+            let totalPct = 0;
+
+            rows.forEach(row => {
+                const etf = row.querySelector('.etf-select').value;
+                const pct = parseFloat(row.querySelector('.allocation-pct').value) || 0;
+                if (etf && pct > 0) {
+                    allocations.push({ etf, pct: pct / 100 });
+                    totalPct += pct / 100;
+                }
+            });
+
+            if (Math.abs(totalPct - 1) > 0.02) {
+                document.getElementById('allocation-error').textContent = `Total allocation is ${ (totalPct * 100).toFixed(1) }% – must be 100%`;
                 document.getElementById('allocation-error').classList.remove('hidden');
                 return;
-            } else {
-                document.getElementById('allocation-error').classList.add('hidden');
             }
+            document.getElementById('allocation-error').classList.add('hidden');
 
-            // Simulate historical performance
-            const days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-            let portfolioValue = amount;
+            // Simulate portfolio
             const portfolioHistory = [amount];
+            let currentValue = amount;
             const dailyReturns = [];
 
-            for (let i = 0; i < days; i++) {
-                let dailyReturn = 0;
+            for (let d = 0; d < days; d++) {
+                let dayReturn = 0;
                 allocations.forEach(a => {
-                    const etfData = HISTORICAL_DATA[a.etf] || HISTORICAL_DATA['IBIT']; // Default to IBIT if not found
-                    dailyReturn += etfData[i % etfData.length] * a.pct;
+                    const returns = HISTORICAL_DAILY_RETURNS[a.etf] || HISTORICAL_DAILY_RETURNS['IBIT'];
+                    const dayIndex = d % returns.length;
+                    dayReturn += returns[dayIndex] * a.pct;
                 });
-                portfolioValue *= (1 + dailyReturn);
-                portfolioHistory.push(portfolioValue);
-                dailyReturns.push(dailyReturn);
+                currentValue *= (1 + dayReturn);
+                portfolioHistory.push(currentValue);
+                dailyReturns.push(dayReturn);
             }
 
-            // Calculate metrics
-            const totalReturn = (portfolioValue - amount) / amount * 100;
-            const annualizedReturn = ((portfolioValue / amount) ** (365 / days) - 1) * 100;
-            const returnsMean = math.mean(dailyReturns);
-            const returnsStd = math.std(dailyReturns);
-            const riskFreeRate = 0.04; // Approx 4% for 2026
-            const sharpe = (returnsMean - riskFreeRate / 365) / (returnsStd / Math.sqrt(365));
-            let maxDrawdown = 0;
+            // Metrics
+            const totalReturn = (currentValue - amount) / amount * 100;
+            const years = days / 365;
+            const annualized = years > 0 ? ((currentValue / amount) ** (1 / years) - 1) * 100 : totalReturn;
+            const meanDaily = math.mean(dailyReturns);
+            const stdDaily = math.std(dailyReturns);
+            const sharpe = (meanDaily * 365 - 0.04) / (stdDaily * Math.sqrt(365));
             let peak = amount;
+            let maxDD = 0;
             portfolioHistory.forEach(v => {
                 if (v > peak) peak = v;
                 const dd = (peak - v) / peak * 100;
-                if (dd > maxDrawdown) maxDrawdown = dd;
+                if (dd > maxDD) maxDD = dd;
             });
             dailyReturns.sort((a,b) => a-b);
-            const var95 = dailyReturns[Math.floor(dailyReturns.length * 0.05)] * amount;
+            const var95 = dailyReturns[Math.floor(dailyReturns.length * 0.05)] * currentValue;
 
             // Update metrics
-            document.getElementById('total-return').textContent = `${totalReturn.toFixed(2)}%`;
-            document.getElementById('annualized-return').textContent = `${annualizedReturn.toFixed(2)}%`;
+            document.getElementById('total-return').textContent = totalReturn.toFixed(2) + '%';
+            document.getElementById('annualized-return').textContent = annualized.toFixed(2) + '%';
             document.getElementById('sharpe-ratio').textContent = sharpe.toFixed(2);
-            document.getElementById('max-drawdown').textContent = `${maxDrawdown.toFixed(2)}%`;
-            document.getElementById('volatility').textContent = `${(returnsStd * Math.sqrt(365) * 100).toFixed(2)}%`;
-            document.getElementById('var').textContent = `$${Math.abs(var95).toFixed(2)}`;
+            document.getElementById('max-drawdown').textContent = maxDD.toFixed(2) + '%';
+            document.getElementById('volatility').textContent = (stdDaily * Math.sqrt(365) * 100).toFixed(2) + '%';
+            document.getElementById('var').textContent = '$' + Math.abs(var95).toFixed(0);
 
             // Charts
-            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-            new Chart(performanceCtx, {
+            const dates = Array.from({length: portfolioHistory.length}, (_, i) => {
+                const date = new Date(startDate);
+                date.setDate(date.getDate() + i);
+                return date.toLocaleDateString();
+            });
+
+            if (charts.performance) charts.performance.destroy();
+            charts.performance = new Chart(document.getElementById('performanceChart'), {
                 type: 'line',
                 data: {
-                    labels: portfolioHistory.map((_, i) => `Day ${i}`),
+                    labels: dates,
                     datasets: [{
-                        label: 'Portfolio Value',
+                        label: 'Portfolio Value ($)',
                         data: portfolioHistory,
-                        borderColor: var(--accent),
+                        borderColor: '#0ea5e9',
+                        tension: 0.1,
                         fill: false
                     }]
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
 
-            const pieCtx = document.getElementById('pieChart').getContext('2d');
-            new Chart(pieCtx, {
-                type: 'pie',
+            if (charts.pie) charts.pie.destroy();
+            charts.pie = new Chart(document.getElementById('pieChart'), {
+                type: 'doughnut',
                 data: {
                     labels: allocations.map(a => a.etf),
                     datasets: [{
                         data: allocations.map(a => a.pct * 100),
-                        backgroundColor: ['#0ea5e9', '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { datalabels: { color: '#fff' } } }
-            });
-
-            // Monte Carlo (simplified: 1000 paths over 252 days)
-            const mcData = [];
-            for (let sim = 0; sim < 1000; sim++) {
-                let simValue = amount;
-                for (let d = 0; d < 252; d++) {
-                    let simReturn = 0;
-                    allocations.forEach(a => {
-                        simReturn += math.random(-0.1, 0.1) * a.pct; // Simulated daily returns
-                    });
-                    simValue *= (1 + simReturn);
-                }
-                mcData.push(simValue);
-            }
-            const mcCtx = document.getElementById('monteCarloChart').getContext('2d');
-            new Chart(mcCtx, {
-                type: 'histogram',
-                data: {
-                    datasets: [{
-                        label: 'Projected Values',
-                        data: mcData,
-                        backgroundColor: var(--accent)
+                        backgroundColor: ['#0ea5e9', '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#ec4899', '#f59e0b']
                     }]
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
 
-            document.getElementById('results').classList.remove('hidden');
-        }
-
-        // Theme switcher
-        function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
+            // Monte Carlo
+            const mcPaths = 1000;
+            const mcEnds = [];
+            for (let sim = 0; sim < mcPaths; sim++) {
+                let val = amount;
+                const simMean = meanDaily;
+                const simStd = stdDaily;
+                for (let d = 0; d < days; d++) {
+                    const randReturn = simMean + simStd * (Math.random() * 2 - 1);
+                    val *= (1 + randReturn);
+                }
+                mcEnds.push(val);
             }
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-        }
+            mcEnds.sort((a,b) => a-b);
 
+            if (charts.monteCarlo) charts.monteCarlo.destroy();
+            charts.monteCarlo = new Chart(document.getElementById('monteCarloChart'), {
+                type: 'line',
+                data: {
+                    labels: mcEnds.map((_, i) => `Path ${i+1}`),
+                    datasets: [{
+                        label: 'Projected Ending Value',
+                        data: mcEnds,
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14,165,233,0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            document.getElementById('results').classList.remove('hidden');
+            window.scrollTo(0, document.getElementById('results').offsetTop - 100);
+        });
+
+        // Initialize with one row
         window.addEventListener('load', () => {
+            addAllocationRow();
             const saved = localStorage.getItem('theme') || 'light';
-            applyTheme(saved);
-            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-            document.getElementById('add-allocation').click(); // Add first row
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-select').value = saved;
+
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const theme = e.target.value;
+                if (theme === 'light') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+                localStorage.setItem('theme', theme);
+            });
+
+            // Particles
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
         });
     </script>
 </body>
