@@ -77,9 +77,6 @@
             cursor: pointer;
         }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
         .select-group {
             display: flex;
             gap: 1rem;
@@ -184,50 +181,36 @@
                 ESG-Adjusted Correlations (Hypothetical - reduces correlation for high-ESG funds)
             </label>
         </div>
-        <!-- All analysis sections always visible -->
+
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Correlation Heatmap</h2>
-            <div class="chart-wrapper">
-                <canvas id="heatmapChart"></canvas>
-            </div>
+            <div class="chart-wrapper"><canvas id="heatmapChart"></canvas></div>
         </div>
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Historical Correlation Trend</h2>
-            <div class="chart-wrapper">
-                <canvas id="trendChart"></canvas>
-            </div>
+            <div class="chart-wrapper"><canvas id="trendChart"></canvas></div>
         </div>
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Monte Carlo Correlation Projection</h2>
-            <div class="chart-wrapper">
-                <canvas id="monteCarloChart"></canvas>
-            </div>
+            <div class="chart-wrapper"><canvas id="monteCarloChart"></canvas></div>
         </div>
+
         <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>Average Correlation</h3>
-                <p id="avg-correlation" class="text-2xl font-bold">Select 2+ ETFs</p>
-            </div>
-            <div class="metric-card">
-                <h3>Average Beta (vs BTC)</h3>
-                <p id="avg-beta" class="text-2xl font-bold">Select 2+ ETFs</p>
-            </div>
-            <div class="metric-card">
-                <h3>Average Covariance</h3>
-                <p id="avg-covariance" class="text-2xl font-bold">Select 2+ ETFs</p>
-            </div>
-            <div class="metric-card">
-                <h3>Portfolio Volatility</h3>
-                <p id="portfolio-vol" class="text-2xl font-bold">Select 2+ ETFs</p>
-            </div>
+            <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Select 2+ ETFs</p></div>
+            <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Select 2+ ETFs</p></div>
+            <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Select 2+ ETFs</p></div>
+            <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Select 2+ ETFs</p></div>
         </div>
+
         <div class="card mb-8" id="ai-insights">
             <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
             <p id="ai-optimization">Select 2+ ETFs to get AI insights.</p>
         </div>
+
         <p class="disclaimer">
             This tool uses historical and simulated data for educational purposes only. Not financial advice. Crypto investments are volatile and carry substantial risk.
         </p>
+
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -240,128 +223,135 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
-    <script>
-        // Register matrix plugin
-        Chart.register(ChartMatrix);
-        let heatmapChart = null;
-        let trendChart = null;
-        let monteCarloChart = null;
 
-        // Theme switcher
+    <script>
+        Chart.register(ChartMatrix);
+        let heatmapChart = null, trendChart = null, monteCarloChart = null;
+
         function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
+            if (t === 'light') document.documentElement.removeAttribute('data-theme');
+            else document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', t);
             document.getElementById('theme-select').value = t;
             updateCharts();
         }
 
-        // Complete ETF list
-        const ETF_LIST = [
-            {group: "Bitcoin Spot ETFs", options: [
-                {value: "IBIT", label: "IBIT - iShares Bitcoin Trust"},
-                {value: "FBTC", label: "FBTC - Fidelity Wise Origin Bitcoin"},
-                {value: "GBTC", label: "GBTC - Grayscale Bitcoin Trust"},
-                {value: "BTC", label: "BTC - Grayscale Bitcoin Mini Trust"},
-                {value: "BITB", label: "BITB - Bitwise Bitcoin ETF"},
-                {value: "ARKB", label: "ARKB - ARK 21Shares Bitcoin"},
-                {value: "HODL", label: "HODL - VanEck Bitcoin"},
-                {value: "BTCO", label: "BTCO - Invesco Galaxy Bitcoin"},
-                {value: "EZBC", label: "EZBC - Franklin Bitcoin"},
-                {value: "BRRR", label: "BRRR - Valkyrie Bitcoin"},
-                {value: "BTCW", label: "BTCW - WisdomTree Bitcoin"}
-            ]},
-            {group: "Ethereum Spot ETFs", options: [
-                {value: "ETHA", label: "ETHA - iShares Ethereum Trust"},
-                {value: "FETH", label: "FETH - Fidelity Ethereum Fund"},
-                {value: "ETHE", label: "ETHE - Grayscale Ethereum Trust"},
-                {value: "ETH", label: "ETH - Grayscale Ethereum Mini Trust"},
-                {value: "ETHW", label: "ETHW - Bitwise Ethereum ETF"},
-                {value: "ETHV", label: "ETHV - VanEck Ethereum ETF"},
-                {value: "QETH", label: "QETH - Invesco Galaxy Ethereum"}
-            ]},
-            {group: "XRP Spot ETFs", options: [
-                {value: "XRPC", label: "XRPC - Canary XRP ETF"},
-                {value: "XRP", label: "XRP - Bitwise XRP ETF"},
-                {value: "XRPZ", label: "XRPZ - Franklin XRP ETF"},
-                {value: "XXRP", label: "XXRP - Teucrium 2x Long XRP"},
-                {value: "XRPI", label: "XRPI - Volatility Shares XRP"},
-                {value: "XRPT", label: "XRPT - Volatility Shares XRP 2X"},
-                {value: "XRPR", label: "XRPR - REX-Osprey XRP"},
-                {value: "UXRP", label: "UXRP - ProShares Ultra XRP"},
-                {value: "XRPM", label: "XRPM - Amplify XRP 3% Monthly"},
-                {value: "XRPK", label: "XRPK - T-REX 2X Long XRP"},
-                {value: "TOXR", label: "TOXR - 21Shares XRP ETF"}
-            ]},
-            {group: "Solana Spot & Staking ETFs", options: [
-                {value: "BSOL", label: "BSOL - Bitwise Solana Staking"},
-                {value: "SSK", label: "SSK - REX-Osprey SOL + Staking"},
-                {value: "GSOL", label: "GSOL - Grayscale Solana Trust"},
-                {value: "VSOL", label: "VSOL - VanEck Solana"},
-                {value: "TSOL", label: "TSOL - 21Shares Solana"},
-                {value: "QSOL", label: "QSOL - Invesco Galaxy Solana"},
-                {value: "SOEZ", label: "SOEZ - Franklin Solana"},
-                {value: "SOLC", label: "SOLC - Canary Marinade Solana"},
-                {value: "SOLM", label: "SOLM - Amplify Solana 3% Monthly"},
-                {value: "SOLX", label: "SOLX - T-REX 2X Long SOL"},
-                {value: "SLON", label: "SLON - ProShares Ultra Solana"}
-            ]},
-            {group: "Other Altcoin & Thematic ETFs", options: [
-                {value: "BITW", label: "BITW - Bitwise 10 Crypto Index"},
-                {value: "GDLC", label: "GDLC - Grayscale CoinDesk Crypto 5"},
-                {value: "NCIQ", label: "NCIQ - Hashdex Nasdaq Crypto Index"},
-                {value: "EZPZ", label: "EZPZ - Franklin Crypto Index"},
-                {value: "GLNK", label: "GLNK - Grayscale Chainlink Trust"},
-                {value: "HBR", label: "HBR - Canary HBAR ETF"},
-                {value: "LTCC", label: "LTCC - Canary Litecoin ETF"},
-                {value: "DOJE", label: "DOJE - REX-Osprey DOGE ETF"},
-                {value: "BWOW", label: "BWOW - Bitwise Dogecoin ETF"},
-                {value: "GDOG", label: "GDOG - Grayscale Dogecoin Trust"},
-                {value: "TXXD", label: "TXXD - 21Shares 2x Long Dogecoin"},
-                {value: "TXXS", label: "TXXS - 21Shares 2x Long Sui"},
-                {value: "DIME", label: "DIME - CoinShares Altcoins ETF"},
-                {value: "STBQ", label: "STBQ - Amplify Stablecoin Technology"},
-                {value: "TKNQ", label: "TKNQ - Amplify Tokenization Technology"},
-                {value: "ORO", label: "ORO - Arrow Valtoro (Gold + BTC)"},
-                {value: "WTIB", label: "WTIB - USCF Oil Plus Bitcoin"},
-                {value: "TTOP", label: "TTOP - 21Shares FTSE Crypto 10"},
-                {value: "TXBC", label: "TXBC - 21Shares FTSE Crypto 10 ex-BTC"}
-            ]},
-            {group: "Benchmarks", options: [
-                {value: "SPY", label: "SPY - S&P 500"},
-                {value: "QQQ", label: "QQQ - Nasdaq-100"}
-            ]}
+        const ETF_LIST = [ /* exact same array as before - unchanged */ 
+            {group: "Bitcoin Spot ETFs", options: [{value: "IBIT", label: "IBIT - iShares Bitcoin Trust"},{value: "FBTC", label: "FBTC - Fidelity Wise Origin Bitcoin"},{value: "GBTC", label: "GBTC - Grayscale Bitcoin Trust"},{value: "BTC", label: "BTC - Grayscale Bitcoin Mini Trust"},{value: "BITB", label: "BITB - Bitwise Bitcoin ETF"},{value: "ARKB", label: "ARKB - ARK 21Shares Bitcoin"},{value: "HODL", label: "HODL - VanEck Bitcoin"},{value: "BTCO", label: "BTCO - Invesco Galaxy Bitcoin"},{value: "EZBC", label: "EZBC - Franklin Bitcoin"},{value: "BRRR", label: "BRRR - Valkyrie Bitcoin"},{value: "BTCW", label: "BTCW - WisdomTree Bitcoin"}]},
+            {group: "Ethereum Spot ETFs", options: [{value: "ETHA", label: "ETHA - iShares Ethereum Trust"},{value: "FETH", label: "FETH - Fidelity Ethereum Fund"},{value: "ETHE", label: "ETHE - Grayscale Ethereum Trust"},{value: "ETH", label: "ETH - Grayscale Ethereum Mini Trust"},{value: "ETHW", label: "ETHW - Bitwise Ethereum ETF"},{value: "ETHV", label: "ETHV - VanEck Ethereum ETF"},{value: "QETH", label: "QETH - Invesco Galaxy Ethereum"}]},
+            {group: "XRP Spot ETFs", options: [{value: "XRPC", label: "XRPC - Canary XRP ETF"},{value: "XRP", label: "XRP - Bitwise XRP ETF"},{value: "XRPZ", label: "XRPZ - Franklin XRP ETF"},{value: "XXRP", label: "XXRP - Teucrium 2x Long XRP"},{value: "XRPI", label: "XRPI - Volatility Shares XRP"},{value: "XRPT", label: "XRPT - Volatility Shares XRP 2X"},{value: "XRPR", label: "XRPR - REX-Osprey XRP"},{value: "UXRP", label: "UXRP - ProShares Ultra XRP"},{value: "XRPM", label: "XRPM - Amplify XRP 3% Monthly"},{value: "XRPK", label: "XRPK - T-REX 2X Long XRP"},{value: "TOXR", label: "TOXR - 21Shares XRP ETF"}]},
+            {group: "Solana Spot & Staking ETFs", options: [{value: "BSOL", label: "BSOL - Bitwise Solana Staking"},{value: "SSK", label: "SSK - REX-Osprey SOL + Staking"},{value: "GSOL", label: "GSOL - Grayscale Solana Trust"},{value: "VSOL", label: "VSOL - VanEck Solana"},{value: "TSOL", label: "TSOL - 21Shares Solana"},{value: "QSOL", label: "QSOL - Invesco Galaxy Solana"},{value: "SOEZ", label: "SOEZ - Franklin Solana"},{value: "SOLC", label: "SOLC - Canary Marinade Solana"},{value: "SOLM", label: "SOLM - Amplify Solana 3% Monthly"},{value: "SOLX", label: "SOLX - T-REX 2X Long SOL"},{value: "SLON", label: "SLON - ProShares Ultra Solana"}]},
+            {group: "Other Altcoin & Thematic ETFs", options: [{value: "BITW", label: "BITW - Bitwise 10 Crypto Index"},{value: "GDLC", label: "GDLC - Grayscale CoinDesk Crypto 5"},{value: "NCIQ", label: "NCIQ - Hashdex Nasdaq Crypto Index"},{value: "EZPZ", label: "EZPZ - Franklin Crypto Index"},{value: "GLNK", label: "GLNK - Grayscale Chainlink Trust"},{value: "HBR", label: "HBR - Canary HBAR ETF"},{value: "LTCC", label: "LTCC - Canary Litecoin ETF"},{value: "DOJE", label: "DOJE - REX-Osprey DOGE ETF"},{value: "BWOW", label: "BWOW - Bitwise Dogecoin ETF"},{value: "GDOG", label: "GDOG - Grayscale Dogecoin Trust"},{value: "TXXD", label: "TXXD - 21Shares 2x Long Dogecoin"},{value: "TXXS", label: "TXXS - 21Shares 2x Long Sui"},{value: "DIME", label: "DIME - CoinShares Altcoins ETF"},{value: "STBQ", label: "STBQ - Amplify Stablecoin Technology"},{value: "TKNQ", label: "TKNQ - Amplify Tokenization Technology"},{value: "ORO", label: "ORO - Arrow Valtoro (Gold + BTC)"},{value: "WTIB", label: "WTIB - USCF Oil Plus Bitcoin"},{value: "TTOP", label: "TTOP - 21Shares FTSE Crypto 10"},{value: "TXBC", label: "TXBC - 21Shares FTSE Crypto 10 ex-BTC"}]},
+            {group: "Benchmarks", options: [{value: "SPY", label: "SPY - S&P 500"},{value: "QQQ", label: "QQQ - Nasdaq-100"}]}
         ];
 
-        // ESG ratings (hypothetical)
-        const ESG_RATINGS = { /* unchanged - same as before */ };
+        const ESG_RATINGS = {
+            IBIT: 'medium', FBTC: 'high', GBTC: 'medium', BTC: 'high', BITB: 'high', ARKB: 'medium', HODL: 'high', BTCO: 'medium', EZBC: 'high', BRRR: 'medium', BTCW: 'high',
+            ETHA: 'high', FETH: 'high', ETHE: 'medium', ETH: 'high', ETHW: 'high', ETHV: 'medium', QETH: 'medium',
+            XRPC: 'medium', XRP: 'high', XRPZ: 'high', XXRP: 'low', XRPI: 'medium', XRPT: 'low', XRPR: 'medium', UXRP: 'low', XRPM: 'medium', XRPK: 'low', TOXR: 'high',
+            BSOL: 'high', SSK: 'medium', GSOL: 'medium', VSOL: 'high', TSOL: 'medium', QSOL: 'medium', SOEZ: 'high', SOLC: 'medium', SOLM: 'low', SOLX: 'low', SLON: 'low',
+            BITW: 'high', GDLC: 'medium', NCIQ: 'high', EZPZ: 'high', GLNK: 'medium', HBR: 'high', LTCC: 'medium', DOJE: 'low', BWOW: 'low', GDOG: 'low', TXXD: 'low', TXXS: 'low', DIME: 'medium', STBQ: 'high', TKNQ: 'high', ORO: 'medium', WTIB: 'low', TTOP: 'high', TXBC: 'high',
+            SPY: 'high', QQQ: 'high'
+        };
 
-        // HISTORICAL_DAILY_RETURNS (unchanged - same simulated data as before)
-        const HISTORICAL_DAILY_RETURNS = { /* unchanged - your full object here */ };
+        const HISTORICAL_DAILY_RETURNS = {
+            IBIT: Array(252).fill(0).map(() => 0.0023 + (Math.random() - 0.5) * 0.04),
+            FBTC: Array(252).fill(0).map(() => 0.00235 + (Math.random() - 0.5) * 0.04),
+            GBTC: Array(252).fill(0).map(() => 0.0022 + (Math.random() - 0.5) * 0.04),
+            BTC: Array(252).fill(0).map(() => 0.00232 + (Math.random() - 0.5) * 0.04),
+            BITB: Array(252).fill(0).map(() => 0.00234 + (Math.random() - 0.5) * 0.04),
+            ARKB: Array(252).fill(0).map(() => 0.00231 + (Math.random() - 0.5) * 0.04),
+            HODL: Array(252).fill(0).map(() => 0.00229 + (Math.random() - 0.5) * 0.04),
+            BTCO: Array(252).fill(0).map(() => 0.00228 + (Math.random() - 0.5) * 0.04),
+            EZBC: Array(252).fill(0).map(() => 0.00233 + (Math.random() - 0.5) * 0.04),
+            BRRR: Array(252).fill(0).map(() => 0.00236 + (Math.random() - 0.5) * 0.04),
+            BTCW: Array(252).fill(0).map(() => 0.00227 + (Math.random() - 0.5) * 0.04),
+            ETHA: Array(252).fill(0).map(() => 0.0014 + (Math.random() - 0.5) * 0.035),
+            FETH: Array(252).fill(0).map(() => 0.00142 + (Math.random() - 0.5) * 0.035),
+            ETHE: Array(252).fill(0).map(() => 0.0013 + (Math.random() - 0.5) * 0.035),
+            ETH: Array(252).fill(0).map(() => 0.00145 + (Math.random() - 0.5) * 0.035),
+            ETHW: Array(252).fill(0).map(() => 0.00141 + (Math.random() - 0.5) * 0.035),
+            ETHV: Array(252).fill(0).map(() => 0.00139 + (Math.random() - 0.5) * 0.035),
+            QETH: Array(252).fill(0).map(() => 0.00138 + (Math.random() - 0.5) * 0.035),
+            XRPC: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            XRP: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
+            XRPZ: Array(252).fill(0).map(() => 0.00098 + (Math.random() - 0.5) * 0.05),
+            XXRP: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            XRPI: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            XRPT: Array(252).fill(0).map(() => 0.0021 + (Math.random() - 0.5) * 0.1),
+            XRPR: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            UXRP: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            XRPM: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            XRPK: Array(252).fill(0).map(() => 0.0021 + (Math.random() - 0.5) * 0.1),
+            TOXR: Array(252).fill(0).map(() => 0.00095 + (Math.random() - 0.5) * 0.05),
+            BSOL: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            SSK: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            GSOL: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            VSOL: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            TSOL: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
+            QSOL: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOEZ: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOLC: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            SOLM: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOLX: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            SLON: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            BITW: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            GDLC: Array(252).fill(0).map(() => 0.0016 + (Math.random() - 0.5) * 0.04),
+            NCIQ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            EZPZ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            GLNK: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            HBR: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            LTCC: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            DOJE: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            BWOW: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            GDOG: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            TXXD: Array(252).fill(0).map(() => 0.0040 + (Math.random() - 0.5) * 0.2),
+            TXXS: Array(252).fill(0).map(() => 0.0040 + (Math.random() - 0.5) * 0.2),
+            DIME: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.045),
+            STBQ: Array(252).fill(0).map(() => 0.0005 + (Math.random() - 0.5) * 0.01),
+            TKNQ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            ORO: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.03),
+            WTIB: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            TTOP: Array(252).fill(0).map(() => 0.00155 + (Math.random() - 0.5) * 0.04),
+            TXBC: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.045),
+            SPY: Array(252).fill(0).map(() => 0.0004 + (Math.random() - 0.5) * 0.01),
+            QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
 
-            // Create first selector
-            addEtfSelector();
+            addEtfSelector(); // initial one
 
             document.getElementById('add-etf').addEventListener('click', () => {
                 if (document.querySelectorAll('.etf-select').length < 10) addEtfSelector();
             });
 
-            // Listen for any changes
             document.getElementById('etf-selectors').addEventListener('change', runAnalysis);
             document.getElementById('esg-adjust').addEventListener('change', runAnalysis);
             document.getElementById('time-period').addEventListener('change', runAnalysis);
 
             runAnalysis();
 
-            particlesJS('particles', { /* your particles config - unchanged */ });
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
         });
 
         function createSelectOptions() {
@@ -378,31 +368,185 @@
 
         function addEtfSelector() {
             const container = document.getElementById('etf-selectors');
-            const selector = document.createElement('div');
-            selector.className = 'select-group';
-            selector.innerHTML = `
+            const div = document.createElement('div');
+            div.className = 'select-group';
+            div.innerHTML = `
                 <select class="etf-select">${createSelectOptions()}</select>
                 <button class="remove-btn">Remove</button>
             `;
-            container.appendChild(selector);
+            container.appendChild(div);
 
-            selector.querySelector('.remove-btn').addEventListener('click', () => {
+            div.querySelector('.remove-btn').addEventListener('click', () => {
                 if (container.children.length > 1) {
-                    selector.remove();
+                    div.remove();
                     runAnalysis();
                 } else {
                     alert('At least one ETF is required.');
                 }
             });
 
-            selector.querySelector('.etf-select').addEventListener('change', runAnalysis);
+            div.querySelector('.etf-select').addEventListener('change', runAnalysis);
         }
 
-        // runAnalysis(), updateCharts() functions remain identical to your working version
-        // (with the same calculations, charts, metrics, and AI insights)
+        function runAnalysis() {
+            const selects = document.querySelectorAll('.etf-select');
+            const selected = Array.from(selects).map(s => s.value).filter(v => v);
 
-        function runAnalysis() { /* your full runAnalysis code - unchanged */ }
-        function updateCharts() { /* your updateCharts code - unchanged */ }
+            const esgAdjust = document.getElementById('esg-adjust').checked;
+
+            if (selected.length < 2) {
+                ['avg-correlation','avg-beta','avg-covariance','portfolio-vol'].forEach(id => {
+                    document.getElementById(id).textContent = 'Select 2+ ETFs';
+                });
+                document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
+                [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
+                heatmapChart = trendChart = monteCarloChart = null;
+                return;
+            }
+
+            const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS.IBIT);
+
+            // Correlation matrix
+            const n = selected.length;
+            const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (i === j) corrMatrix[i][j] = 1;
+                    else {
+                        let corr = math.correlation(returnsData[i], returnsData[j]);
+                        if (esgAdjust) {
+                            const esgI = ESG_RATINGS[selected[i]] || 'medium';
+                            const esgJ = ESG_RATINGS[selected[j]] || 'medium';
+                            let adj = 0;
+                            if (esgI === 'high' && esgJ === 'high') adj = 0.2;
+                            else if (esgI === 'high' || esgJ === 'high') adj = 0.1;
+                            corr = corr * (1 - adj);
+                        }
+                        corrMatrix[i][j] = parseFloat(corr.toFixed(3));
+                    }
+                }
+            }
+
+            // Metrics
+            const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
+            const avgCorr = math.mean(flat).toFixed(3);
+
+            const btcIdx = selected.indexOf('IBIT');
+            const ref = btcIdx !== -1 ? returnsData[btcIdx] : returnsData[0];
+            const betas = returnsData.map(r => math.beta(r, ref));
+            const avgBeta = math.mean(betas).toFixed(3);
+            const covs = returnsData.map(r => math.covariance(r, ref));
+            const avgCov = math.mean(covs).toFixed(6);
+
+            const weights = Array(n).fill(1/n);
+            const portReturns = returnsData[0].map((_, d) => 
+                returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
+            );
+            const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
+
+            document.getElementById('avg-correlation').textContent = avgCorr;
+            document.getElementById('avg-beta').textContent = avgBeta;
+            document.getElementById('avg-covariance').textContent = avgCov;
+            document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
+
+            // Heatmap
+            if (heatmapChart) heatmapChart.destroy();
+            heatmapChart = new Chart(document.getElementById('heatmapChart'), {
+                type: 'matrix',
+                data: {
+                    datasets: [{
+                        label: 'Correlation',
+                        data: corrMatrix.flatMap((row, i) => row.map((v, j) => ({x: selected[j], y: selected[i], v}))),
+                        backgroundColor: c => {
+                            const v = c.raw.v;
+                            if (v >= 0.7) return '#ef4444';
+                            if (v >= 0.4) return '#f59e0b';
+                            return '#10b981';
+                        },
+                        width: ({chart}) => (chart.chartArea?.width || 400) / n - 1,
+                        height: ({chart}) => (chart.chartArea?.height || 400) / n - 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { x: {type: 'category', labels: selected, position: 'top'}, y: {type: 'category', labels: selected.reverse()} },
+                    plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
+                }
+            });
+
+            // Trend chart (30-day rolling vs BTC)
+            const rolling = 30;
+            const trendData = {};
+            selected.forEach((t, i) => {
+                trendData[t] = [];
+                for (let d = rolling; d < 252; d++) {
+                    const slice = returnsData[i].slice(d-rolling, d);
+                    const refSlice = ref.slice(d-rolling, d);
+                    trendData[t].push(math.correlation(slice, refSlice));
+                }
+            });
+
+            if (trendChart) trendChart.destroy();
+            trendChart = new Chart(document.getElementById('trendChart'), {
+                type: 'line',
+                data: {
+                    labels: Array(252 - rolling).fill().map((_, i) => `Day ${i + rolling + 1}`),
+                    datasets: Object.entries(trendData).map(([t, data], i) => ({
+                        label: t,
+                        data,
+                        borderColor: ['#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6'][i % 5],
+                        tension: 0.3
+                    }))
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Monte Carlo
+            const paths = 100;
+            const mcValues = [];
+            for (let p = 0; p < paths; p++) {
+                let value = 100;
+                for (let d = 0; d < 252; d++) {
+                    const dailyRet = selected.reduce((sum, t, i) => {
+                        const mean = math.mean(HISTORICAL_DAILY_RETURNS[t]);
+                        const std = math.std(HISTORICAL_DAILY_RETURNS[t]);
+                        return sum + (mean + std * (Math.random() - 0.5) * 2) * weights[i];
+                    }, 0);
+                    value *= (1 + dailyRet);
+                }
+                mcValues.push(value);
+            }
+
+            if (monteCarloChart) monteCarloChart.destroy();
+            monteCarloChart = new Chart(document.getElementById('monteCarloChart'), {
+                type: 'line',
+                data: {
+                    labels: Array(252).fill().map((_, i) => `Day ${i+1}`),
+                    datasets: [{
+                        label: 'Projected Value',
+                        data: mcValues,
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14,165,233,0.1)',
+                        fill: true
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // AI insights
+            document.getElementById('ai-optimization').innerHTML = `
+                <strong>AI Portfolio Optimization (Minimum Variance Demo):</strong><br>
+                Recommended equal weights:<br>
+                ${selected.map(t => `${t}: ${(100/n).toFixed(1)}%`).join('<br>')}<br><br>
+                Projected annualized volatility: ${portVol.toFixed(1)}%<br>
+                ESG adjustment ${esgAdjust ? 'applied' : 'not applied'} – high-ESG pairs reduce correlation by 10–20%.
+            `;
+        }
+
+        function updateCharts() {
+            [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.update());
+        }
     </script>
 </body>
 </html>
