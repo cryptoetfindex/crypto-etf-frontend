@@ -172,7 +172,9 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis</h2>
             <p class="mb-4">Choose up to 10 ETFs to analyze correlations, risk metrics, and projections. Use the dropdowns to add.</p>
-            <div id="etf-selectors"></div>
+            <div id="etf-selectors">
+                <!-- Initial row added by script -->
+            </div>
             <button id="add-etf" class="btn mt-4">Add Another ETF</button>
             <div class="form-group mt-4">
                 <label>Time Period</label>
@@ -372,7 +374,20 @@
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
 
-        window.addEventListener('load', () => {
+        // Theme switcher
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+            updateCharts();
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
