@@ -123,7 +123,7 @@
 </head>
 <body data-theme="light">
     <div id="particles"></div>
-    <!-- Navbar (unchanged) -->
+    <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
@@ -147,6 +147,7 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
@@ -158,7 +159,7 @@
             <p class="mb-4">Check the ETFs you want to analyze. Analysis updates automatically.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <!-- Full list of ETFs - all preserved -->
+                <!-- Full ETF list preserved exactly as provided -->
                 <label><input type="checkbox" value="IBIT"> IBIT - iShares Bitcoin Trust</label>
                 <label><input type="checkbox" value="FBTC"> FBTC - Fidelity Wise Origin Bitcoin</label>
                 <label><input type="checkbox" value="GBTC"> GBTC - Grayscale Bitcoin Trust</label>
@@ -375,9 +376,12 @@
             tagsContainer.innerHTML = '';
 
             selectedTickers.forEach(ticker => {
-                const labelEl = document.querySelector(`label input[value="${ticker}"]`).parentElement;
-                const fullLabel = labelEl.textContent.trim();
-                const displayName = fullLabel.replace(/^[^-]*-\s*/, ''); // Remove "TICKER - " part safely
+                const input = document.querySelector(`input[value="${ticker}"]`);
+                if (!input) return;
+                const label = input.closest('label');
+                if (!label) return;
+                const fullText = label.textContent.trim();
+                const displayName = fullText.substring(fullText.indexOf(' ') + 1); // Safe: everything after first space
 
                 const tag = document.createElement('div');
                 tag.className = 'tag';
@@ -396,6 +400,8 @@
 
             runAnalysis(selectedTickers);
         }
+
+        // runAnalysis and other functions unchanged — full working version from before
 
         function runAnalysis(selected) {
             if (selected.length < 2) {
@@ -455,7 +461,6 @@
             document.getElementById('avg-covariance').textContent = avgCov;
             document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
 
-            // Heatmap
             if (heatmapChart) heatmapChart.destroy();
             heatmapChart = new Chart(document.getElementById('heatmapChart'), {
                 type: 'matrix',
@@ -486,7 +491,6 @@
                 }
             });
 
-            // Historical Trend
             const rolling = 30;
             const trendData = {};
             selected.forEach((t, i) => {
@@ -513,7 +517,6 @@
                 options: { responsive: true, maintainAspectRatio: false }
             });
 
-            // Monte Carlo
             const paths = 100;
             const mcValues = [];
             for (let p = 0; p < paths; p++) {
@@ -545,7 +548,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // AI Insights
             document.getElementById('ai-optimization').innerHTML = `
                 <strong>AI Portfolio Optimization (Minimum Variance Demo):</strong><br>
                 Recommended equal weights:<br>
