@@ -340,7 +340,6 @@
             EZBC: Array(252).fill(0).map(() => 0.00233 + (Math.random() - 0.5) * 0.04),
             BRRR: Array(252).fill(0).map(() => 0.00236 + (Math.random() - 0.5) * 0.04),
             BTCW: Array(252).fill(0).map(() => 0.00227 + (Math.random() - 0.5) * 0.04),
-
             // Ethereum ETFs ~44% YTD → ~0.14% daily
             ETHA: Array(252).fill(0).map(() => 0.0014 + (Math.random() - 0.5) * 0.035),
             FETH: Array(252).fill(0).map(() => 0.00142 + (Math.random() - 0.5) * 0.035),
@@ -349,24 +348,20 @@
             ETHW: Array(252).fill(0).map(() => 0.00141 + (Math.random() - 0.5) * 0.035),
             ETHV: Array(252).fill(0).map(() => 0.00139 + (Math.random() - 0.5) * 0.035),
             QETH: Array(252).fill(0).map(() => 0.00138 + (Math.random() - 0.5) * 0.035),
-
             // XRP ~28% YTD → ~0.1% daily
             XRPC: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
             XRP: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
             XRPZ: Array(252).fill(0).map(() => 0.00098 + (Math.random() - 0.5) * 0.05),
             TOXR: Array(252).fill(0).map(() => 0.00095 + (Math.random() - 0.5) * 0.05),
-
             // Solana ~28% YTD
             BSOL: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
             VSOL: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
             TSOL: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
-
             // Multi-Asset ~45% average
             TTOP: Array(252).fill(0).map(() => 0.00155 + (Math.random() - 0.5) * 0.04),
             TXBC: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.045),
             GDLC: Array(252).fill(0).map(() => 0.0016 + (Math.random() - 0.5) * 0.04),
             BITW: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
-
             // Benchmarks
             SPY: Array(252).fill(0).map(() => 0.0004 + (Math.random() - 0.5) * 0.01),
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
@@ -389,15 +384,9 @@
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-
-            // Add first ETF selector
-            addEtfSelector();
-
-            // Attach event listeners
+            addEtfSelector(); // Add first selector
             document.getElementById('add-etf').addEventListener('click', addEtfSelector);
             document.getElementById('analyze').addEventListener('click', runAnalysis);
-
-            // Particles
             particlesJS('particles', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -436,14 +425,10 @@
         }
 
         function runAnalysis() {
-            console.log('Run Analysis clicked'); // Debug
-
             const selectors = document.querySelectorAll('.etf-select');
             const selected = Array.from(selectors)
                 .map(s => s.value)
                 .filter(v => v && v !== '');
-
-            console.log('Selected ETFs:', selected); // Debug
 
             if (selected.length < 2) {
                 alert('Please select at least 2 ETFs to analyze correlations.');
