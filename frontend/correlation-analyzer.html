@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -171,9 +172,7 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis</h2>
             <p class="mb-4">Choose up to 10 ETFs to analyze correlations, risk metrics, and projections. Use the dropdowns to add.</p>
-            <div id="etf-selectors">
-                <!-- Initial row will be added by script -->
-            </div>
+            <div id="etf-selectors"></div>
             <button id="add-etf" class="btn mt-4">Add Another ETF</button>
             <div class="form-group mt-4">
                 <label>Time Period</label>
@@ -419,7 +418,9 @@
 
         function runAnalysis() {
             const selectors = document.querySelectorAll('.etf-select');
-            const selected = Array.from(selectors).map(s => s.value).filter(v => v);
+            const selected = Array.from(selectors)
+                .map(s => s.value)
+                .filter(v => v && v !== '');
 
             if (selected.length < 2) {
                 alert('Please select at least 2 ETFs to analyze correlations.');
@@ -459,7 +460,7 @@
             const flatCorrs = correlationMatrix.flat().filter((v, i) => i % (n + 1) !== 0);
             const avgCorr = math.mean(flatCorrs).toFixed(3);
 
-            const btcIndex = selected.findIndex(t => HISTORICAL_DAILY_RETURNS[t] === HISTORICAL_DAILY_RETURNS['IBIT']);
+            const btcIndex = selected.findIndex(t => t === 'IBIT');
             const reference = btcIndex !== -1 ? returnsData[btcIndex] : returnsData[0];
             const betas = returnsData.map(r => math.beta(r, reference).toFixed(3));
             const avgBeta = math.mean(betas).toFixed(3);
