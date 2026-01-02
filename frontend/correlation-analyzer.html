@@ -184,6 +184,7 @@
                     <option value="since-inception">Since Inception</option>
                 </select>
             </div>
+            <label><input type="checkbox" id="esg-adjust" class="mr-2">ESG-Adjusted Correlations (Hypothetical)</label>
             <button id="analyze" class="btn w-full mt-4 text-lg py-3">Run Analysis</button>
         </div>
 
@@ -252,6 +253,9 @@
     </div>
 
     <script>
+        let sortState = {};
+        let heatmapChart, trendChart, monteCarloChart;
+
         // Theme switcher
         function applyTheme(t) {
             if (t === 'light') {
@@ -268,7 +272,7 @@
             const saved = localStorage.getItem('theme') || 'light';
             applyTheme(saved);
             document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-            initTool();
+            addEtfSelector(); // Add first selector
             particlesJS('particles', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -288,115 +292,137 @@
             });
         });
 
-        // Simulated historical daily returns (252 days for 1 year)
-        const HISTORICAL_RETURNS = {
-            IBIT: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02), // Bitcoin vol
-            FBTC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            GBTC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            BTC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            BITB: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            ARKB: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            HODL: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            BTCO: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            EZBC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            BRRR: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            BTCW: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
+        // ETF Dropdown Options
+        const ETF_OPTIONS = `
+            <option value="">Select ETF</option>
+            <optgroup label="Bitcoin Spot ETFs">
+                <option value="IBIT">IBIT - iShares Bitcoin Trust</option>
+                <option value="FBTC">FBTC - Fidelity Wise Origin</option>
+                <option value="GBTC">GBTC - Grayscale Bitcoin Trust</option>
+                <option value="BTC">BTC - Grayscale Bitcoin Mini Trust</option>
+                <option value="BITB">BITB - Bitwise Bitcoin ETF</option>
+                <option value="ARKB">ARKB - ARK 21Shares Bitcoin</option>
+                <option value="HODL">HODL - VanEck Bitcoin</option>
+                <option value="BTCO">BTCO - Invesco Galaxy Bitcoin</option>
+                <option value="EZBC">EZBC - Franklin Bitcoin</option>
+                <option value="BRRR">BRRR - Coinshares Bitcoin</option>
+                <option value="BTCW">BTCW - WisdomTree Bitcoin</option>
+            </optgroup>
+            <optgroup label="Ethereum Spot ETFs">
+                <option value="ETHA">ETHA - iShares Ethereum Trust</option>
+                <option value="FETH">FETH - Fidelity Ethereum Fund</option>
+                <option value="ETHE">ETHE - Grayscale Ethereum Trust</option>
+                <option value="ETH">ETH - Grayscale Ethereum Mini Trust</option>
+                <option value="ETHW">ETHW - Bitwise Ethereum ETF</option>
+                <option value="ETHV">ETHV - VanEck Ethereum ETF</option>
+                <option value="QETH">QETH - Invesco Galaxy Ethereum</option>
+            </optgroup>
+            <optgroup label="XRP Spot ETFs">
+                <option value="XRPC">XRPC - Canary XRP ETF</option>
+                <option value="XRP">XRP - Bitwise XRP ETF</option>
+                <option value="XRPZ">XRPZ - Franklin XRP ETF</option>
+                <option value="XXRP">XXRP - Teucrium 2x Long XRP</option>
+                <option value="XRPI">XRPI - Volatility Shares XRP</option>
+                <option value="XRPT">XRPT - Volatility Shares XRP 2X</option>
+                <option value="XRPR">XRPR - REX-Osprey XRP</option>
+                <option value="UXRP">UXRP - ProShares Ultra XRP</option>
+                <option value="XRPM">XRPM - Amplify XRP 3% Monthly</option>
+                <option value="XRPK">XRPK - T-REX 2X Long XRP</option>
+                <option value="TOXR">TOXR - 21Shares XRP ETF</option>
+            </optgroup>
+            <optgroup label="Solana Spot & Staking ETFs">
+                <option value="BSOL">BSOL - Bitwise Solana Staking</option>
+                <option value="SSK">SSK - REX-Osprey SOL + Staking</option>
+                <option value="GSOL">GSOL - Grayscale Solana Trust</option>
+                <option value="VSOL">VSOL - VanEck Solana</option>
+                <option value="TSOL">TSOL - 21Shares Solana</option>
+                <option value="QSOL">QSOL - Invesco Galaxy Solana</option>
+                <option value="SOEZ">SOEZ - Franklin Solana</option>
+                <option value="SOLC">SOLC - Canary Marinade Solana</option>
+                <option value="SOLM">SOLM - Amplify Solana 3% Monthly</option>
+                <option value="SOLX">SOLX - T-REX 2X Long SOL</option>
+                <option value="SLON">SLON - ProShares Ultra Solana</option>
+            </optgroup>
+            <optgroup label="Other Altcoin & Thematic">
+                <option value="BITW">BITW - Bitwise 10 Crypto Index</option>
+                <option value="GDLC">GDLC - Grayscale CoinDesk Crypto 5</option>
+                <option value="NCIQ">NCIQ - Hashdex Nasdaq Crypto Index</option>
+                <option value="EZPZ">EZPZ - Franklin Crypto Index</option>
+                <option value="GLNK">GLNK - Grayscale Chainlink Trust</option>
+                <option value="HBR">HBR - Canary HBAR ETF</option>
+                <option value="LTCC">LTCC - Canary Litecoin ETF</option>
+                <option value="DOJE">DOJE - REX-Osprey DOGE ETF</option>
+                <option value="BWOW">BWOW - Bitwise Dogecoin ETF</option>
+                <option value="GDOG">GDOG - Grayscale Dogecoin Trust</option>
+                <option value="TXXD">TXXD - 21Shares 2x Long Dogecoin</option>
+                <option value="TXXS">TXXS - 21Shares 2x Long Sui</option>
+                <option value="DIME">DIME - CoinShares Altcoins ETF</option>
+                <option value="STBQ">STBQ - Amplify Stablecoin Technology</option>
+                <option value="TKNQ">TKNQ - Amplify Tokenization Technology</option>
+                <option value="ORO">ORO - Arrow Valtoro (Gold + BTC)</option>
+                <option value="WTIB">WTIB - USCF Oil Plus Bitcoin</option>
+                <option value="TTOP">TTOP - 21Shares FTSE Crypto 10</option>
+                <option value="TXBC">TXBC - 21Shares FTSE Crypto 10 ex-BTC</option>
+            </optgroup>
+            <optgroup label="Benchmarks">
+                <option value="SPY">SPY - S&P 500</option>
+                <option value="QQQ">QQQ - Nasdaq-100</option>
+            </optgroup>
+        `;
 
-            ETHA: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175), // Lower vol than BTC
-            FETH: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-            ETHE: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-            ETH: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-            ETHW: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-            ETHV: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-            QETH: Array.from({length: 252}, () => Math.random() * 0.035 - 0.0175),
-
-            XRPC: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025), // Higher vol altcoins
-            XRP: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            XRPZ: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            XXRP: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05), // Leveraged higher vol
-            XRPI: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            XRPT: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            XRPR: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            UXRP: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            XRPM: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            XRPK: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            TOXR: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-
-            BSOL: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            SSK: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            GSOL: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            VSOL: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            TSOL: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            QSOL: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            SOEZ: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            SOLC: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            SOLM: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            SOLX: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            SLON: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-
-            BITW: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            GDLC: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            NCIQ: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            EZPZ: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            GLNK: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            HBR: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            LTCC: Array.from({length: 252}, () => Math.random() * 0.05 - 0.025),
-            DOJE: Array.from({length: 252}, () => Math.random() * 0.06 - 0.03), // Meme higher vol
-            BWOW: Array.from({length: 252}, () => Math.random() * 0.06 - 0.03),
-            GDOG: Array.from({length: 252}, () => Math.random() * 0.06 - 0.03),
-            TXXD: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            TXXS: Array.from({length: 252}, () => Math.random() * 0.1 - 0.05),
-            DIME: Array.from({length: 252}, () => Math.random() * 0.045 - 0.0225),
-            STBQ: Array.from({length: 252}, () => Math.random() * 0.02 - 0.01), // Thematic lower vol
-            TKNQ: Array.from({length: 252}, () => Math.random() * 0.03 - 0.015),
-            ORO: Array.from({length: 252}, () => Math.random() * 0.03 - 0.015),
-            WTIB: Array.from({length: 252}, () => Math.random() * 0.03 - 0.015),
-            TTOP: Array.from({length: 252}, () => Math.random() * 0.04 - 0.02),
-            TXBC: Array.from({length: 252}, () => Math.random() * 0.045 - 0.0225),
-            SPY: Array.from({length: 252}, () => Math.random() * 0.01 - 0.005),
-            QQQ: Array.from({length: 252}, () => Math.random() * 0.015 - 0.0075)
-        };
-
-        let heatmapChart, trendChart, monteCarloChart;
+        function initTool() {
+            document.getElementById('add-etf').addEventListener('click', addEtfSelector);
+            document.getElementById('analyze').addEventListener('click', runAnalysis);
+        }
 
         function addEtfSelector() {
             const container = document.getElementById('etf-selectors');
             const selector = document.createElement('div');
             selector.className = 'select-group';
             selector.innerHTML = `
-                <select class="etf-select w-full p-2 border rounded">
-                    <option value="">Select ETF</option>
-                    <!-- Same full ETF options as in HTML -->
-                </select>
-                <div class="remove-selector btn text-red-600 mt-2">Remove</div>
+                <select class="etf-select w-full p-2 border rounded">${ETF_OPTIONS}</select>
+                <button class="remove-selector btn text-red-600 mt-2">Remove</button>
             `;
             container.appendChild(selector);
             selector.querySelector('.remove-selector').addEventListener('click', () => selector.remove());
         }
 
-        document.getElementById('add-etf').addEventListener('click', addEtfSelector);
-
-        document.getElementById('analyze').addEventListener('click', () => {
+        function runAnalysis() {
             const selectors = document.querySelectorAll('.etf-select');
             const selected = Array.from(selectors).map(s => s.value).filter(v => v);
             const period = document.getElementById('time-period').value;
+            const esgAdjust = document.getElementById('esg-adjust').checked;
 
             if (selected.length < 2) {
                 alert('Select at least 2 ETFs to analyze correlations.');
                 return;
             }
 
-            // Simulate correlations (in real, use historical data)
-            const correlations = selected.map((a, i) => selected.map((b, j) => i === j ? 1 : Math.random() * 0.6 + 0.4)); // 0.4-1.0 range
+            // Get historical returns for selected
+            const data = selected.map(etf => HISTORICAL_RETURNS[etf] || HISTORICAL_RETURNS['IBIT']);
 
-            const avgCorr = math.mean(correlations.flat().filter(v => v !== 1));
-            const betas = selected.map(a => a === 'IBIT' ? 1 : Math.random() * 0.5 + 0.8);
-            const cov = math.mean(correlations.flat()) * 0.0001 * selected.length; // Simulated
+            // Calculate correlations
+            const correlations = data.map((a, i) => data.map((b, j) => {
+                if (i === j) return 1;
+                return math.correlation(a, b).toFixed(2);
+            }));
 
-            document.getElementById('avg-correlation').textContent = avgCorr.toFixed(2);
+            // ESG adjustment (simulated: reduce correlation by 10% for high ESG)
+            if (esgAdjust) {
+                correlations.forEach((row, i) => row.forEach((val, j) => {
+                    if (i !== j) correlations[i][j] = (val * 0.9).toFixed(2);
+                }));
+            }
+
+            const avgCorr = math.mean(correlations.flat().filter(v => v != 1)).toFixed(2);
+            const betas = data.map((returns, i) => i == 0 ? 1 : math.beta(returns, data[0]).toFixed(2));
+            const cov = math.covariance(data[0], data[1] || data[0]).toFixed(4); // Simplified for two
+            const portfolioVol = math.std(data.reduce((acc, curr) => acc.map((v, k) => v + curr[k]), Array(data[0].length).fill(0)).map(v => v / data.length)) * Math.sqrt(252) * 100;
+
+            document.getElementById('avg-correlation').textContent = avgCorr;
             document.getElementById('avg-beta').textContent = math.mean(betas).toFixed(2);
-            document.getElementById('avg-covariance').textContent = cov.toFixed(4);
-            document.getElementById('portfolio-vol').textContent = (Math.sqrt(cov) * 100).toFixed(2) + '%';
+            document.getElementById('avg-covariance').textContent = cov;
+            document.getElementById('portfolio-vol').textContent = portfolioVol.toFixed(2) + '%';
 
             // Heatmap
             if (heatmapChart) heatmapChart.destroy();
@@ -405,7 +431,7 @@
                 data: {
                     datasets: [{
                         label: 'Correlation',
-                        data: correlations.flatMap((row, i) => row.map((val, j) => ({x: j, y: i, v: val}))),
+                        data: correlations.flatMap((row, i) => row.map((val, j) => ({x: selected[j], y: selected[i], v: val}))),
                         backgroundColor(c) {
                             const v = c.raw.v;
                             if (v > 0.7) return '#ef4444';
@@ -414,53 +440,58 @@
                         },
                         borderWidth: 1,
                         width: ({chart}) => (chart.chartArea || {}).width / selected.length - 1,
-                        height: ({chart}) => (chart.chartArea || {}).height / selected.length - 1
+                        height: ({chart} ) => (chart.chartArea || {}).height / selected.length - 1
                     }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, scales: { x: { type: 'category', labels: selected }, y: { type: 'category', labels: selected.reverse() } } }
             });
 
-            // Trend Chart (simulated)
+            // Trend Chart
             if (trendChart) trendChart.destroy();
             trendChart = new Chart(document.getElementById('trendChart'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: Array.from({length: data[0].length}, (_, i) => `Day ${i+1}`),
                     datasets: selected.map((etf, i) => ({
                         label: etf,
-                        data: Array(12).fill(0).map(() => Math.random() * 0.2 + 0.4),
-                        borderColor: ['#0ea5e9', '#10b981', '#f59e0b'][i % 3]
+                        data: data[i].reduce((acc, r, j) => {
+                            acc.push((acc[j-1] || 0) + r);
+                            return acc;
+                        }, []),
+                        borderColor: ['#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'][i % 5]
                     }))
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
 
-            // Monte Carlo (simulated 100 paths)
+            // Monte Carlo
+            const mcPaths = 100;
             const mcData = [];
-            for (let i = 0; i < 100; i++) {
-                mcData.push(Array(12).fill(0).reduce((acc) => acc + Math.random() * 0.1 - 0.05, 1));
+            for (let p = 0; p < mcPaths; p++) {
+                const path = Array.from({length: 252}, () => selected.reduce((acc, etf, i) => acc + (Math.random() * 0.1 - 0.05), 0) / selected.length);
+                mcData.push(path.reduce((acc, r) => acc * (1 + r), 1));
             }
             if (monteCarloChart) monteCarloChart.destroy();
             monteCarloChart = new Chart(document.getElementById('monteCarloChart'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: mcData.map((path, i) => ({
-                        label: `Path ${i+1}`,
-                        data: path,
-                        borderColor: 'rgba(14, 165, 233, 0.1)',
-                        borderWidth: 1
+                    labels: Array.from({length: 252}, (_, i) => `Day ${i+1}`),
+                    datasets: mcData.map(path => ({
+                        data: [path],
+                        borderColor: 'rgba(14,165,233,0.1)',
+                        pointRadius: 0
                     }))
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            document.getElementById('ai-optimization').innerHTML = '<p><strong>AI Suggestion:</strong> To minimize correlations, allocate 60% to BTC, 20% ETH, 10% XRP, 10% SOL for diversification.</p>';
+            document.getElementById('ai-optimization').innerHTML = '<p><strong>AI Suggestion:</strong> To minimize correlations, allocate equally across low-correlated assets like BTC and SOL. Expected portfolio vol: ' + portfolioVol.toFixed(2) + '%.</p>';
             document.getElementById('results').classList.remove('hidden');
-        });
+        }
 
-        // Add initial selectors
-        addEtfSelector();
+        function updateCharts() {
+            [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch && ch.update());
+        }
     </script>
 </body>
 </html>
