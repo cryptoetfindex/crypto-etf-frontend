@@ -5,76 +5,124 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Guides & Education Hub 2025</title>
-    <meta name="description" content="Comprehensive educational guides on crypto ETFs. Learn how to buy, understand taxes, risks, differences between spot and futures, and beginner resources for 2025.">
-    <meta name="keywords" content="crypto etf guides, how to buy crypto etfs, crypto etf taxes, spot vs futures etfs, bitcoin etf beginner guide">
+    <title>Crypto ETF Guides & Education Hub 2026</title>
+    <meta name="description" content="Comprehensive educational guides on crypto ETFs. Learn how to buy, understand taxes, risks, spot vs futures, portfolio allocation, and more for 2026.">
+    <meta name="keywords" content="crypto etf guides 2026, how to buy crypto etfs, crypto etf taxes, spot vs futures etfs, bitcoin ethereum etf beginner guide">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Guides & Education 2025">
+    <meta property="og:title" content="Crypto ETF Guides & Education 2026">
     <meta property="og:description" content="Step-by-step guides and educational resources for investing in crypto ETFs safely and informed.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/guides.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/guides.html">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/guides.html">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/guides.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Copy all styles from previous pages */
         :root {
-            --background: linear-gradient(135deg, #0d1b2a, #1b263b);
-            --text-color: #e0e1dd;
-            --card-bg: rgba(27, 38, 59, 0.9);
-            --select-bg: rgba(255, 255, 255, 0.1);
-            --accent-color: #00ddeb;
-            --shadow-color: rgba(0, 221, 235, 0.2);
-            --button-bg: #00ddeb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        /* Include all theme variations, body, #particles, .navbar, .card, .policy-btn, .theme-select etc. */
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
         .guide-card {
-            background: var(--card-bg);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px var(--shadow-color);
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .guide-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--accent);
         }
-        .disclaimer { font-size: 0.8rem; opacity: 0.8; margin-top: 2rem; text-align: center; }
+        .disclaimer {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 2rem 0;
+        }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="particles"></div>
 
     <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Hub Logo" class="h-12">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/" class="hover:text-var(--accent-color)">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-var(--accent-color)">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-var(--accent-color)">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-var(--accent-color)">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="hover:text-var(--accent-color)">Comparisons</a></li>
-                <li><a href="/frontend/guides.html" class="text-var(--accent-color) hover:underline">Guides</a></li>
-                <li><a href="/frontend/news.html" class="hover:text-var(--accent-color)">News</a></li>
-                <li><a href="/frontend/tools.html" class="hover:text-var(--accent-color)">Tools</a></li>
-                <li><a href="/frontend/about.html" class="hover:text-var(--accent-color)">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="text-[var(--accent)] hover:underline">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="theme-select">
-                <option value="normal">Normal</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
@@ -83,7 +131,7 @@
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Guides & Education Hub</h1>
-            <p class="text-xl max-w-4xl mx-auto">Step-by-step educational resources to help you understand and invest in crypto ETFs confidently in 2025. All guides are independent and informational only.</p>
+            <p class="text-xl max-w-4xl mx-auto">Step-by-step educational resources to help you understand and invest in crypto ETFs confidently in 2026. All guides are independent and informational only.</p>
         </header>
 
         <div class="guide-grid">
@@ -91,47 +139,75 @@
             <div class="guide-card">
                 <h3>How to Buy Crypto ETFs</h3>
                 <p class="mb-4">Complete beginner-friendly guide: choosing a broker, searching tickers, placing orders, and best practices.</p>
-                <a href="/frontend/how-to-buy-crypto-etfs.html" class="policy-btn">Read Guide →</a>
+                <a href="/frontend/how-to-buy-crypto-etfs.html" class="btn">Read Guide →</a>
             </div>
 
             <!-- Taxes -->
             <div class="guide-card">
-                <h3>Crypto ETF Taxes 2025</h3>
-                <p class="mb-4">What you need to know about capital gains, holding in taxable vs. retirement accounts, and reporting.</p>
-                <a href="/frontend/crypto-etf-taxes.html" class="policy-btn">Read Guide →</a>
+                <h3>Crypto ETF Taxes 2026</h3>
+                <p class="mb-4">Capital gains, holding in taxable vs. retirement accounts, reporting requirements, and tax optimization strategies.</p>
+                <a href="/frontend/crypto-etf-taxes.html" class="btn">Read Guide →</a>
             </div>
 
             <!-- Risks -->
             <div class="guide-card">
                 <h3>Risks of Crypto ETFs</h3>
-                <p class="mb-4">Volatility, regulatory changes, custodian risks, tracking errors, and how to mitigate them.</p>
-                <a href="/frontend/crypto-etf-risks.html" class="policy-btn">Read Guide →</a>
+                <p class="mb-4">Volatility, regulatory changes, custodian risks, tracking errors, premium/discount, and mitigation strategies.</p>
+                <a href="/frontend/crypto-etf-risks.html" class="btn">Read Guide →</a>
             </div>
 
             <!-- Spot vs Futures -->
             <div class="guide-card">
                 <h3>Spot vs Futures Crypto ETFs</h3>
-                <p class="mb-4">Key differences, pros/cons, and why spot ETFs are now the preferred choice for most investors.</p>
-                <a href="/frontend/spot-vs-futures-etfs.html" class="policy-btn">Read Guide →</a>
+                <p class="mb-4">Key differences, pros/cons, contango effects, and why spot ETFs are now dominant.</p>
+                <a href="/frontend/spot-vs-futures-etfs.html" class="btn">Read Guide →</a>
             </div>
 
-            <!-- Beginner Guide -->
+            <!-- Beginner Bitcoin -->
             <div class="guide-card">
                 <h3>Beginner's Guide to Bitcoin ETFs</h3>
-                <p class="mb-4">Everything new investors need: what they are, how they work, and why they're popular.</p>
-                <a href="/frontend/bitcoin-etf-beginner-guide.html" class="policy-btn">Read Guide →</a>
+                <p class="mb-4">Everything new investors need: what they are, how they work, benefits, and common questions.</p>
+                <a href="/frontend/bitcoin-etf-beginner-guide.html" class="btn">Read Guide →</a>
             </div>
 
             <!-- Portfolio Allocation -->
             <div class="guide-card">
                 <h3>Adding Crypto ETFs to Your Portfolio</h3>
-                <p class="mb-4">Suggested allocation percentages, diversification strategies, and rebalancing tips.</p>
-                <a href="/frontend/crypto-etf-portfolio.html" class="policy-btn">Read Guide →</a>
+                <p class="mb-4">Suggested allocation percentages, diversification strategies, rebalancing tips, and correlation analysis.</p>
+                <a href="/frontend/crypto-etf-portfolio.html" class="btn">Read Guide →</a>
+            </div>
+
+            <!-- Ethereum Specific -->
+            <div class="guide-card">
+                <h3>Beginner's Guide to Ethereum ETFs</h3>
+                <p class="mb-4">Understanding Ethereum exposure, future staking potential, and ecosystem differences from Bitcoin.</p>
+                <a href="/frontend/ethereum-etf-beginner-guide.html" class="btn">Read Guide →</a>
+            </div>
+
+            <!-- Altcoin ETFs -->
+            <div class="guide-card">
+                <h3>Guide to Altcoin & Thematic Crypto ETFs</h3>
+                <p class="mb-4">XRP, Solana, multi-asset baskets, leveraged, and RWA funds – risks, rewards, and suitability.</p>
+                <a href="/frontend/altcoin-etf-guide.html" class="btn">Read Guide →</a>
+            </div>
+
+            <!-- Leveraged ETFs -->
+            <div class="guide-card">
+                <h3>Leveraged & Inverse Crypto ETFs</h3>
+                <p class="mb-4">How 2x funds work, daily reset risks, compounding decay, and who should (and shouldn't) use them.</p>
+                <a href="/frontend/leveraged-crypto-etf-guide.html" class="btn">Read Guide →</a>
+            </div>
+
+            <!-- Broker Comparison -->
+            <div class="guide-card">
+                <h3>Best Brokers for Crypto ETFs</h3>
+                <p class="mb-4">Comparison of fees, availability, tools, and features across major brokerage platforms.</p>
+                <a href="/frontend/best-brokers-crypto-etfs.html" class="btn">Read Guide →</a>
             </div>
         </div>
 
         <div class="card mt-12 text-center">
-            <p class="text-lg">More guides coming soon. All content is for educational purposes only and not financial advice.</p>
+            <p class="text-lg">All guides are regularly updated. More resources coming soon!</p>
         </div>
 
         <p class="disclaimer">
@@ -139,14 +215,54 @@
         </p>
 
         <!-- Footer -->
-        <footer class="text-center mt-12">
-            <!-- Policy buttons, copyright, disclaimer -->
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
-    <!-- Modal and Scripts (copy full from index.html) -->
     <script>
-        // Full script: theme apply, particles, modals
+        // Theme switcher (light/dark only)
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            localStorage.setItem('theme', t);
+            document.getElementById('theme-select').value = t;
+        }
+
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            applyTheme(saved);
+            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+        });
+
+        // Particles.js
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0ea5e9' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
