@@ -276,7 +276,7 @@
             SPY: 'high', QQQ: 'high'
         };
 
-        // Generate correlated returns
+        // Generate correlated returns for visible data
         const baseNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.03);
         const HISTORICAL_DAILY_RETURNS = {};
 
@@ -284,11 +284,11 @@
         const btcTickers = ['IBIT', 'FBTC', 'GBTC', 'BTC', 'BITB', 'ARKB', 'HODL', 'BTCO', 'EZBC', 'BRRR', 'BTCW'];
         const btcMeans = [0.0023, 0.00235, 0.0022, 0.00232, 0.00234, 0.00231, 0.00229, 0.00228, 0.00233, 0.00236, 0.00227];
         btcTickers.forEach((ticker, idx) => {
-            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.015); // reduced unique noise
+            const uniqueNoise = Array(252).fill(0).map(() => (Math.random() - 0.5) * 0.015);
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => btcMeans[idx] + baseNoise[i] * 0.9 + uniqueNoise[i]);
         });
 
-        // Ethereum ETFs - moderate correlation to BTC
+        // Ethereum ETFs - moderate correlation
         const ethTickers = ['ETHA', 'FETH', 'ETHE', 'ETH', 'ETHW', 'ETHV', 'QETH'];
         const ethMeans = [0.0014, 0.00142, 0.0013, 0.00145, 0.00141, 0.00139, 0.00138];
         ethTickers.forEach((ticker, idx) => {
@@ -296,7 +296,7 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => ethMeans[idx] + baseNoise[i] * 0.6 + uniqueNoise[i]);
         });
 
-        // Other groups (XRP, Solana, etc.) - lower correlation
+        // Other ETFs - lower correlation
         const otherTickers = ['XRPC','XRP','XRPZ','XXRP','XRPI','XRPT','XRPR','UXRP','XRPM','XRPK','TOXR',
                               'BSOL','SSK','GSOL','VSOL','TSOL','QSOL','SOEZ','SOLC','SOLM','SOLX','SLON',
                               'BITW','GDLC','NCIQ','EZPZ','GLNK','HBR','LTCC','DOJE','BWOW','GDOG','TXXD','TXXS',
@@ -307,10 +307,19 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => mean + baseNoise[i] * 0.3 + uniqueNoise[i]);
         });
 
-        // Custom math functions
-        function mean(arr) { return math.mean(arr); }
-        function std(arr) { return math.std(arr); }
-        function variance(arr) { return math.variance(arr); }
+        // Custom math functions (using pure JS for reliability)
+        function mean(arr) {
+            return arr.reduce((sum, val) => sum + val, 0) / arr.length;
+        }
+        function std(arr) {
+            const m = mean(arr);
+            const variance = arr.reduce((sum, val) => sum + Math.pow(val - m, 2), 0) / arr.length;
+            return Math.sqrt(variance);
+        }
+        function variance(arr) {
+            const m = mean(arr);
+            return arr.reduce((sum, val) => sum + Math.pow(val - m, 2), 0) / arr.length;
+        }
         function covariance(a, b) {
             const meanA = mean(a);
             const meanB = mean(b);
