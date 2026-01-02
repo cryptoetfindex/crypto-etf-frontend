@@ -8,10 +8,10 @@
     <title>Crypto ETF Correlation Analyzer 2026 - Advanced Fintech Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FIXED: Use compatible version of matrix plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Matrix plugin - CORRECT PATH -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -305,7 +305,7 @@
             HISTORICAL_DAILY_RETURNS[ticker] = Array(252).fill(0).map((_, i) => mean + baseNoise[i] * 0.3 + uniqueNoise[i]);
         });
 
-        // Pure JS math (no mathjs needed)
+        // Pure JS math functions
         function mean(arr) {
             return arr.reduce((s, v) => s + v, 0) / arr.length;
         }
@@ -403,11 +403,7 @@
                 document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
             } else {
                 const flatOffDiag = [];
-                for (let i = 0; i < n; i++) {
-                    for (let j = 0; j < n; j++) {
-                        if (i !== j) flatOffDiag.push(corrMatrix[i][j]);
-                    }
-                }
+                for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (i !== j) flatOffDiag.push(corrMatrix[i][j]);
                 const avgCorr = mean(flatOffDiag).toFixed(3);
                 const betas = returnsData.map(r => beta(r, refData));
                 const avgBeta = mean(betas).toFixed(3);
