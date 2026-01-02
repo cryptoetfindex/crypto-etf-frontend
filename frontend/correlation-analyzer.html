@@ -123,7 +123,7 @@
 </head>
 <body data-theme="light">
     <div id="particles"></div>
-    <!-- Navbar -->
+    <!-- Sticky Navbar -->
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
@@ -146,17 +146,14 @@
             </select>
         </div>
     </nav>
-
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Correlation Analyzer 2026</h1>
             <p class="text-xl max-w-4xl mx-auto">The most advanced correlation analyzer tool for crypto ETFs: Select funds, calculate correlations, beta, covariance, visualize heatmaps, historical trends, Monte Carlo projections, AI portfolio optimization, ESG-adjusted correlations, and more forward-thinking features.</p>
         </header>
-
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Select ETFs for Analysis (up to 12 recommended)</h2>
             <p class="mb-4">Major ETFs are pre-selected. Uncheck any to remove them from analysis. Updates automatically.</p>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 <!-- Bitcoin Spot ETFs -->
                 <label><input type="checkbox" value="IBIT" checked> IBIT - iShares Bitcoin Trust</label>
@@ -224,7 +221,6 @@
                 <label><input type="checkbox" value="TTOP"> TTOP - 21Shares FTSE Crypto 10</label>
                 <label><input type="checkbox" value="TXBC"> TXBC - 21Shares FTSE Crypto 10 ex-BTC</label>
             </div>
-
             <div class="form-group mt-4">
                 <label>Time Period (affects historical trend chart)</label>
                 <select id="time-period" class="w-full p-2 border rounded">
@@ -233,15 +229,12 @@
                     <option value="since-inception">Since Inception</option>
                 </select>
             </div>
-
             <label class="block mt-4">
                 <input type="checkbox" id="esg-adjust" class="mr-2">
                 ESG-Adjusted Correlations (Hypothetical - reduces correlation for high-ESG funds)
             </label>
-
             <div id="selected-tags" class="selected-tags"></div>
         </div>
-
         <!-- Charts & Metrics -->
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">Correlation Heatmap</h2>
@@ -255,23 +248,19 @@
             <h2 class="text-2xl font-semibold mb-4">Monte Carlo Correlation Projection</h2>
             <div class="chart-wrapper"><canvas id="monteCarloChart"></canvas></div>
         </div>
-
         <div class="metrics-grid">
             <div class="metric-card"><h3>Average Correlation</h3><p id="avg-correlation" class="text-2xl font-bold">Loading...</p></div>
             <div class="metric-card"><h3>Average Beta (vs BTC)</h3><p id="avg-beta" class="text-2xl font-bold">Loading...</p></div>
             <div class="metric-card"><h3>Average Covariance</h3><p id="avg-covariance" class="text-2xl font-bold">Loading...</p></div>
             <div class="metric-card"><h3>Portfolio Volatility</h3><p id="portfolio-vol" class="text-2xl font-bold">Loading...</p></div>
         </div>
-
         <div class="card mb-8" id="ai-insights">
             <h2 class="text-2xl font-semibold mb-4">AI Portfolio Optimization</h2>
             <p id="ai-optimization">Loading insights...</p>
         </div>
-
         <p class="disclaimer">
             This tool uses historical and simulated data for educational purposes only. Not financial advice. Crypto investments are volatile and carry substantial risk.
         </p>
-
         <!-- Footer -->
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -284,12 +273,10 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
-
     <script>
         Chart.register(ChartMatrix);
         let heatmapChart = null, trendChart = null, monteCarloChart = null;
-
-        const ESG_RATINGS = { /* full object unchanged */ 
+        const ESG_RATINGS = { /* full object unchanged */
             IBIT: 'medium', FBTC: 'high', GBTC: 'medium', BTC: 'high', BITB: 'high', ARKB: 'medium', HODL: 'high', BTCO: 'medium', EZBC: 'high', BRRR: 'medium', BTCW: 'high',
             ETHA: 'high', FETH: 'high', ETHE: 'medium', ETH: 'high', ETHW: 'high', ETHV: 'medium', QETH: 'medium',
             XRPC: 'medium', XRP: 'high', XRPZ: 'high', XXRP: 'low', XRPI: 'medium', XRPT: 'low', XRPR: 'medium', UXRP: 'low', XRPM: 'medium', XRPK: 'low', TOXR: 'high',
@@ -297,8 +284,7 @@
             BITW: 'high', GDLC: 'medium', NCIQ: 'high', EZPZ: 'high', GLNK: 'medium', HBR: 'high', LTCC: 'medium', DOJE: 'low', BWOW: 'low', GDOG: 'low', TXXD: 'low', TXXS: 'low', DIME: 'medium', STBQ: 'high', TKNQ: 'high', ORO: 'medium', WTIB: 'low', TTOP: 'high', TXBC: 'high',
             SPY: 'high', QQQ: 'high'
         };
-
-        const HISTORICAL_DAILY_RETURNS = { /* full 252-day data unchanged */ 
+        const HISTORICAL_DAILY_RETURNS = { /* full 252-day data unchanged */
             IBIT: Array(252).fill(0).map(() => 0.0023 + (Math.random() - 0.5) * 0.04),
             FBTC: Array(252).fill(0).map(() => 0.00235 + (Math.random() - 0.5) * 0.04),
             GBTC: Array(252).fill(0).map(() => 0.0022 + (Math.random() - 0.5) * 0.04),
@@ -363,48 +349,38 @@
         };
 
         function updateTagsAndAnalysis() {
-            const selectedTickers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(cb => cb.value);
-
-            // Update tags
+            const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
             const tagsContainer = document.getElementById('selected-tags');
             tagsContainer.innerHTML = '';
-            selectedTickers.forEach(ticker => {
-                const label = document.querySelector(`label input[value="${ticker}"]`).parentElement;
-                const displayName = label.textContent.trim().replace(/^\S+\s*-\s*/, '');
+            selected.forEach(ticker => {
+                const label = document.querySelector(`label input[value="${ticker}"]`).parentNode.textContent.trim();
                 const tag = document.createElement('div');
                 tag.className = 'tag';
-                tag.innerHTML = `${displayName} <button data-ticker="${ticker}">×</button>`;
+                tag.innerHTML = `${label} <button data-key="${ticker}">×</button>`;
                 tagsContainer.appendChild(tag);
             });
             document.querySelectorAll('.tag button').forEach(btn => {
                 btn.onclick = () => {
-                    const cb = document.querySelector(`input[value="${btn.dataset.ticker}"]`);
-                    if (cb) cb.checked = false;
+                    document.querySelector(`input[value="${btn.dataset.key}"]`).checked = false;
                     updateTagsAndAnalysis();
                 };
             });
-
-            runAnalysis(selectedTickers);
+            runAnalysis(selected);
         }
-
         function runAnalysis(selected) {
-            // Always show something — even if <2, show placeholder
             if (selected.length < 2) {
-                document.querySelectorAll('#avg-correlation, #avg-beta, #avg-covariance, #portfolio-vol')
-                    .forEach(el => el.textContent = 'Select 2+ ETFs');
-                document.getElementById('ai-optimization').innerHTML = 'Select at least 2 ETFs for analysis.';
+                ['avg-correlation', 'avg-beta', 'avg-covariance', 'portfolio-vol'].forEach(id => {
+                    document.getElementById(id).textContent = 'Select 2+ ETFs';
+                });
+                document.getElementById('ai-optimization').innerHTML = 'Select 2+ ETFs to get AI insights.';
                 [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.destroy());
                 heatmapChart = trendChart = monteCarloChart = null;
                 return;
             }
-
-            // Full analysis code — same as before (proven working)
             const esgAdjust = document.getElementById('esg-adjust').checked;
             const returnsData = selected.map(t => HISTORICAL_DAILY_RETURNS[t] || HISTORICAL_DAILY_RETURNS['IBIT']);
             const n = selected.length;
             const corrMatrix = Array(n).fill().map(() => Array(n).fill(0));
-
             for (let i = 0; i < n; i++) {
                 for (let j = 0; j < n; j++) {
                     if (i === j) corrMatrix[i][j] = 1;
@@ -422,30 +398,23 @@
                     }
                 }
             }
-
             const flat = corrMatrix.flat().filter((_, idx) => idx % (n + 1) !== 0);
             const avgCorr = math.mean(flat).toFixed(3);
-
             const btcIdx = selected.indexOf('IBIT');
             const ref = btcIdx !== -1 ? returnsData[btcIdx] : returnsData[0];
-
             const betas = returnsData.map(r => math.beta(r, ref));
             const avgBeta = math.mean(betas).toFixed(3);
-
             const covs = returnsData.map(r => math.covariance(r, ref));
             const avgCov = math.mean(covs).toFixed(6);
-
             const weights = Array(n).fill(1 / n);
             const portReturns = returnsData[0].map((_, d) =>
                 returnsData.reduce((sum, ret, i) => sum + ret[d] * weights[i], 0)
             );
             const portVol = math.std(portReturns) * Math.sqrt(252) * 100;
-
             document.getElementById('avg-correlation').textContent = avgCorr;
             document.getElementById('avg-beta').textContent = avgBeta;
             document.getElementById('avg-covariance').textContent = avgCov;
             document.getElementById('portfolio-vol').textContent = portVol.toFixed(2) + '%';
-
             if (heatmapChart) heatmapChart.destroy();
             heatmapChart = new Chart(document.getElementById('heatmapChart'), {
                 type: 'matrix',
@@ -470,7 +439,6 @@
                     plugins: { tooltip: { callbacks: { label: ctx => `Correlation: ${ctx.raw.v.toFixed(3)}` } } }
                 }
             });
-
             const rolling = 30;
             const trendData = {};
             selected.forEach((t, i) => {
@@ -481,7 +449,6 @@
                     trendData[t].push(math.correlation(slice, refSlice));
                 }
             });
-
             if (trendChart) trendChart.destroy();
             trendChart = new Chart(document.getElementById('trendChart'), {
                 type: 'line',
@@ -496,7 +463,6 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
-
             const paths = 100;
             const mcValues = [];
             for (let p = 0; p < paths; p++) {
@@ -511,7 +477,6 @@
                 }
                 mcValues.push(value);
             }
-
             if (monteCarloChart) monteCarloChart.destroy();
             monteCarloChart = new Chart(document.getElementById('monteCarloChart'), {
                 type: 'line',
@@ -527,7 +492,6 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
-
             document.getElementById('ai-optimization').innerHTML = `
                 <strong>AI Portfolio Optimization (Minimum Variance Demo):</strong><br>
                 Recommended equal weights:<br>
@@ -536,7 +500,6 @@
                 ESG adjustment ${esgAdjust ? 'applied' : 'not applied'} – high-ESG pairs reduce correlation by 10–20%.
             `;
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', saved);
@@ -548,13 +511,10 @@
                 localStorage.setItem('theme', t);
                 updateCharts();
             });
-
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateTagsAndAnalysis));
             document.getElementById('esg-adjust').addEventListener('change', updateTagsAndAnalysis);
             document.getElementById('time-period').addEventListener('change', updateTagsAndAnalysis);
-
             updateTagsAndAnalysis(); // Run immediately with pre-selected ETFs
-
             particlesJS('particles', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -573,7 +533,6 @@
                 retina_detect: true
             });
         });
-
         function updateCharts() {
             [heatmapChart, trendChart, monteCarloChart].forEach(ch => ch?.update());
         }
