@@ -252,7 +252,7 @@
     </div>
 
     <script>
-        // Register the matrix controller
+        // Register matrix plugin
         Chart.register(ChartMatrix);
 
         let heatmapChart = null;
@@ -271,12 +271,12 @@
             updateCharts();
         }
 
-        // Full ETF dropdown options
+        // Complete ETF list with all crypto ETFs (expanded from site)
         const ETF_OPTIONS = `
             <option value="">Select ETF</option>
             <optgroup label="Bitcoin Spot ETFs">
                 <option value="IBIT">IBIT - iShares Bitcoin Trust</option>
-                <option value="FBTC">FBTC - Fidelity Wise Origin</option>
+                <option value="FBTC">FBTC - Fidelity Wise Origin Bitcoin</option>
                 <option value="GBTC">GBTC - Grayscale Bitcoin Trust</option>
                 <option value="BTC">BTC - Grayscale Bitcoin Mini Trust</option>
                 <option value="BITB">BITB - Bitwise Bitcoin ETF</option>
@@ -284,7 +284,7 @@
                 <option value="HODL">HODL - VanEck Bitcoin</option>
                 <option value="BTCO">BTCO - Invesco Galaxy Bitcoin</option>
                 <option value="EZBC">EZBC - Franklin Bitcoin</option>
-                <option value="BRRR">BRRR - Coinshares Bitcoin</option>
+                <option value="BRRR">BRRR - Valkyrie Bitcoin</option>
                 <option value="BTCW">BTCW - WisdomTree Bitcoin</option>
             </optgroup>
             <optgroup label="Ethereum Spot ETFs">
@@ -300,18 +300,48 @@
                 <option value="XRPC">XRPC - Canary XRP ETF</option>
                 <option value="XRP">XRP - Bitwise XRP ETF</option>
                 <option value="XRPZ">XRPZ - Franklin XRP ETF</option>
+                <option value="XXRP">XXRP - Teucrium 2x Long XRP</option>
+                <option value="XRPI">XRPI - Volatility Shares XRP</option>
+                <option value="XRPT">XRPT - Volatility Shares XRP 2X</option>
+                <option value="XRPR">XRPR - REX-Osprey XRP</option>
+                <option value="UXRP">UXRP - ProShares Ultra XRP</option>
+                <option value="XRPM">XRPM - Amplify XRP 3% Monthly</option>
+                <option value="XRPK">XRPK - T-REX 2X Long XRP</option>
                 <option value="TOXR">TOXR - 21Shares XRP ETF</option>
             </optgroup>
             <optgroup label="Solana Spot & Staking ETFs">
                 <option value="BSOL">BSOL - Bitwise Solana Staking</option>
+                <option value="SSK">SSK - REX-Osprey SOL + Staking</option>
+                <option value="GSOL">GSOL - Grayscale Solana Trust</option>
                 <option value="VSOL">VSOL - VanEck Solana</option>
                 <option value="TSOL">TSOL - 21Shares Solana</option>
+                <option value="QSOL">QSOL - Invesco Galaxy Solana</option>
+                <option value="SOEZ">SOEZ - Franklin Solana</option>
+                <option value="SOLC">SOLC - Canary Marinade Solana</option>
+                <option value="SOLM">SOLM - Amplify Solana 3% Monthly</option>
+                <option value="SOLX">SOLX - T-REX 2X Long SOL</option>
+                <option value="SLON">SLON - ProShares Ultra Solana</option>
             </optgroup>
-            <optgroup label="Multi-Asset & Thematic">
+            <optgroup label="Other Altcoin & Thematic ETFs">
+                <option value="BITW">BITW - Bitwise 10 Crypto Index</option>
+                <option value="GDLC">GDLC - Grayscale CoinDesk Crypto 5</option>
+                <option value="NCIQ">NCIQ - Hashdex Nasdaq Crypto Index</option>
+                <option value="EZPZ">EZPZ - Franklin Crypto Index</option>
+                <option value="GLNK">GLNK - Grayscale Chainlink Trust</option>
+                <option value="HBR">HBR - Canary HBAR ETF</option>
+                <option value="LTCC">LTCC - Canary Litecoin ETF</option>
+                <option value="DOJE">DOJE - REX-Osprey DOGE ETF</option>
+                <option value="BWOW">BWOW - Bitwise Dogecoin ETF</option>
+                <option value="GDOG">GDOG - Grayscale Dogecoin Trust</option>
+                <option value="TXXD">TXXD - 21Shares 2x Long Dogecoin</option>
+                <option value="TXXS">TXXS - 21Shares 2x Long Sui</option>
+                <option value="DIME">DIME - CoinShares Altcoins ETF</option>
+                <option value="STBQ">STBQ - Amplify Stablecoin Technology</option>
+                <option value="TKNQ">TKNQ - Amplify Tokenization Technology</option>
+                <option value="ORO">ORO - Arrow Valtoro (Gold + BTC)</option>
+                <option value="WTIB">WTIB - USCF Oil Plus Bitcoin</option>
                 <option value="TTOP">TTOP - 21Shares FTSE Crypto 10</option>
                 <option value="TXBC">TXBC - 21Shares FTSE Crypto 10 ex-BTC</option>
-                <option value="GDLC">GDLC - Grayscale CoinDesk Crypto 5</option>
-                <option value="BITW">BITW - Bitwise 10 Crypto Index</option>
             </optgroup>
             <optgroup label="Benchmarks">
                 <option value="SPY">SPY - S&P 500</option>
@@ -323,9 +353,9 @@
         const ESG_RATINGS = {
             IBIT: 'medium', FBTC: 'high', GBTC: 'medium', BTC: 'high', BITB: 'high', ARKB: 'medium', HODL: 'high', BTCO: 'medium', EZBC: 'high', BRRR: 'medium', BTCW: 'high',
             ETHA: 'high', FETH: 'high', ETHE: 'medium', ETH: 'high', ETHW: 'high', ETHV: 'medium', QETH: 'medium',
-            XRPC: 'medium', XRP: 'high', XRPZ: 'high', TOXR: 'high',
-            BSOL: 'high', VSOL: 'high', TSOL: 'medium',
-            TTOP: 'high', TXBC: 'high', GDLC: 'medium', BITW: 'high',
+            XRPC: 'medium', XRP: 'high', XRPZ: 'high', XXRP: 'low', XRPI: 'medium', XRPT: 'low', XRPR: 'medium', UXRP: 'low', XRPM: 'medium', XRPK: 'low', TOXR: 'high',
+            BSOL: 'high', SSK: 'medium', GSOL: 'medium', VSOL: 'high', TSOL: 'medium', QSOL: 'medium', SOEZ: 'high', SOLC: 'medium', SOLM: 'low', SOLX: 'low', SLON: 'low',
+            BITW: 'high', GDLC: 'medium', NCIQ: 'high', EZPZ: 'high', GLNK: 'medium', HBR: 'high', LTCC: 'medium', DOJE: 'low', BWOW: 'low', GDOG: 'low', TXXD: 'low', TXXS: 'low', DIME: 'medium', STBQ: 'high', TKNQ: 'high', ORO: 'medium', WTIB: 'low', TTOP: 'high', TXBC: 'high',
             SPY: 'high', QQQ: 'high'
         };
 
@@ -352,14 +382,44 @@
             XRPC: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
             XRP: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
             XRPZ: Array(252).fill(0).map(() => 0.00098 + (Math.random() - 0.5) * 0.05),
+            XXRP: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            XRPI: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            XRPT: Array(252).fill(0).map(() => 0.0021 + (Math.random() - 0.5) * 0.1),
+            XRPR: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            UXRP: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            XRPM: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            XRPK: Array(252).fill(0).map(() => 0.0021 + (Math.random() - 0.5) * 0.1),
             TOXR: Array(252).fill(0).map(() => 0.00095 + (Math.random() - 0.5) * 0.05),
             BSOL: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            SSK: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            GSOL: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
             VSOL: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
             TSOL: Array(252).fill(0).map(() => 0.00105 + (Math.random() - 0.5) * 0.05),
+            QSOL: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOEZ: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOLC: Array(252).fill(0).map(() => 0.0011 + (Math.random() - 0.5) * 0.05),
+            SOLM: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            SOLX: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            SLON: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            BITW: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            GDLC: Array(252).fill(0).map(() => 0.0016 + (Math.random() - 0.5) * 0.04),
+            NCIQ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            EZPZ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            GLNK: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            HBR: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            LTCC: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.05),
+            DOJE: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            BWOW: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            GDOG: Array(252).fill(0).map(() => 0.0020 + (Math.random() - 0.5) * 0.1),
+            TXXD: Array(252).fill(0).map(() => 0.0040 + (Math.random() - 0.5) * 0.2),
+            TXXS: Array(252).fill(0).map(() => 0.0040 + (Math.random() - 0.5) * 0.2),
+            DIME: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.045),
+            STBQ: Array(252).fill(0).map(() => 0.0005 + (Math.random() - 0.5) * 0.01),
+            TKNQ: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
+            ORO: Array(252).fill(0).map(() => 0.0010 + (Math.random() - 0.5) * 0.03),
+            WTIB: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
             TTOP: Array(252).fill(0).map(() => 0.00155 + (Math.random() - 0.5) * 0.04),
             TXBC: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.045),
-            GDLC: Array(252).fill(0).map(() => 0.0016 + (Math.random() - 0.5) * 0.04),
-            BITW: Array(252).fill(0).map(() => 0.0015 + (Math.random() - 0.5) * 0.04),
             SPY: Array(252).fill(0).map(() => 0.0004 + (Math.random() - 0.5) * 0.01),
             QQQ: Array(252).fill(0).map(() => 0.0006 + (Math.random() - 0.5) * 0.015)
         };
