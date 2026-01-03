@@ -106,18 +106,10 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
-            <div class="flex items-center gap-4 mb-4">
-                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
-                    <option value="all">All Time</option>
-                    <option value="year">Last Year</option>
-                    <option value="month">Last Month</option>
-                    <option value="week">Last Week</option>
-                    <option value="day">Last Day</option>
-                </select>
-            </div>
             <div class="chart-wrapper">
                 <canvas id="bubbleChart"></canvas>
             </div>
+
             <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
 
             <div class="mt-6">
@@ -164,7 +156,7 @@
 
             <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
                 <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="italic opacity-80" id="ai-insight">High concentration in Bitcoin ETFs (over 70% of total AUM). Ethereum and Solana staking products show growing yield appeal. Multi-asset ETFs provide diversification. Expect continued inflows into spot Bitcoin ETFs as institutional adoption increases in 2026.</p>
+                <p class="italic opacity-80" id="ai-insight">Loading insights...</p>
             </div>
         </div>
 
@@ -284,9 +276,7 @@
 
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) {
-                bubbleChart.destroy();
-            }
+            if (bubbleChart) bubbleChart.destroy();
 
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
@@ -297,7 +287,7 @@
                 label: etf.ticker,
                 data: [{
                     x: etf.volatility,
-                    y: etf.expense || etf.yield || 0,
+                    y: etf.yield,
                     r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
                 }],
                 backgroundColor: categoryColors[etf.category] + 'cc',
@@ -320,7 +310,7 @@
                                     return [
                                         `${etf.ticker} - ${etf.name}`,
                                         `Volatility: ${context.parsed.x.toFixed(1)}%`,
-                                        `Expense Ratio: ${(etf.expense || etf.yield || 0).toFixed(2)}%`,
+                                        `Expense Ratio: ${etf.yield.toFixed(2)}%`,
                                         `AUM: $${(context.parsed.r / 5)**2.toFixed(2)}B`,
                                         `Inflow: $${(etf.inflow / 1e6).toFixed(1)}M`
                                     ];
@@ -371,12 +361,6 @@
                 localStorage.setItem('theme', t);
             });
 
-            // Time period selector (simulated)
-            document.getElementById('time-period').addEventListener('change', () => {
-                renderBubbleChart();
-                updateAIInsights();
-            });
-
             // Category toggle
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
                 renderBubbleChart();
@@ -387,7 +371,7 @@
             renderBubbleChart();
             updateAIInsights();
 
-            // Particles background
+            // Particles
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
