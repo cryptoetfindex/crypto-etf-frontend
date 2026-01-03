@@ -5,9 +5,9 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Bubble Map 2026 - AI Neural Network Visualizer</title>
-    <meta name="description" content="AI-powered bubble map visualizing correlations between crypto and traditional ETFs like a neural network. Real-time inflows/outflows, AI predictions, concentrations, and updates every 30 minutes from Yahoo Finance.">
-    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart, yahoo finance real-time inflows outflows">
+    <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
+    <meta name="description" content="AI-powered bubble map visualizing correlations between crypto and traditional ETFs like a neural network. Real-time inflows/outflows, AI predictions, concentrations, and updates every 30 minutes from data oracles.">
+    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart, real-time inflows outflows">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -138,8 +138,8 @@
 
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Bubble Map 2026 - AI Neural Network Visualizer</h1>
-            <p class="text-xl max-w-4xl mx-auto">AI-powered visualization of fintech innovations in crypto and traditional ETFs. View correlations as a neural network with connecting lines, real-time inflows/outflows as color gradients, concentrations, and AI-generated forward-looking predictions. Data updates every 30 minutes from Yahoo Finance.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index Bubble Maps AI Neural Network Visualizer</h1>
+            <p class="text-xl max-w-4xl mx-auto">AI-powered visualization of fintech innovations in crypto and traditional ETFs. View correlations as a neural network with connecting lines, real-time inflows/outflows as color gradients, concentrations, and AI-generated forward-looking predictions. Data updates every 30 minutes from data oracles.</p>
         </header>
 
         <div class="card mb-8">
@@ -391,7 +391,7 @@
                     plugins: {
                         annotation: { annotations },
                         title: { display: true, text: 'AI Neural Bubble Map - ETF Correlations Network' },
-                        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: Vol ${ctx.parsed.x.toFixed(1)}%, Yield ${ctx.parsed.y.toFixed(1)}%, AUM $${(ctx.parsed.r / 3)**2.toFixed(1)}B, Inflow $${(etf.inflow / 1e6).toFixed(1)}M, AI Pred: +${Math.random() * 20.toFixed(1)}% growth` } }
+                        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: Vol ${ctx.parsed.x.toFixed(1)}%, Yield ${ctx.parsed.y.toFixed(1)}%, AUM $${(ctx.parsed.r / 3)**2.toFixed(1)}B, Inflow $${(ctx.raw.inflow / 1e6).toFixed(1)}M, AI Pred: +${Math.random() * 20.toFixed(1)}% growth` } }
                     },
                     scales: {
                         x: { title: { display: true, text: 'Volatility (%)' }, min: 10, max: 80 },
