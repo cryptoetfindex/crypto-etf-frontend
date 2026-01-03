@@ -7,7 +7,8 @@
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Download chart.umd.min.js from https://www.chartjs.org/docs/latest/getting-started/ and place it in the same folder as this HTML file, then reference it locally -->
+    <script src="chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         html, body {
@@ -117,10 +118,10 @@
                 <li><a href="/frontend/comparisons.html">Comparisons</a></li>
                 <li><a href="/frontend/guides.html">Guides</a></li>
                 <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-blue-500 hover:underline">Tools</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
                 <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="bg-white border border-gray-300 rounded px-3 py-2 text-sm">
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
             </select>
@@ -133,16 +134,22 @@
             <p class="text-xl max-w-4xl mx-auto">AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.</p>
         </header>
 
-        <div class="card">
+        <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
-
-            <!-- Fixed, centered, responsive chart container -->
+            <div class="flex items-center gap-4 mb-4">
+                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
+                    <option value="all">All Time</option>
+                    <option value="year">Last Year</option>
+                    <option value="month">Last Month</option>
+                    <option value="week">Last Week</option>
+                    <option value="day">Last Day</option>
+                </select>
+            </div>
             <div class="chart-container">
                 <div class="chart-wrapper">
                     <canvas id="bubbleChart"></canvas>
                 </div>
             </div>
-
             <p class="text-sm opacity-70 mb-6">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -199,7 +206,7 @@
     </div>
 
     <script>
-       const ETFs = [
+         const ETFs = [
     { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, expense: 0.25, inflow: 520e6 },
     { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, expense: 0.25, inflow: 380e6 },
     { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, expense: 1.5, inflow: -120e6 },
@@ -424,3 +431,4 @@
     </script>
 </body>
 </html>
+```
