@@ -3,237 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
-    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Download chart.umd.min.js from https://www.chartjs.org/docs/latest/getting-started/ and place it in the same folder as this HTML file, then reference it locally -->
-    <script src="chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <title>Crypto ETF Bubble Map Visualizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
         }
-        [data-theme="dark"] body {
-            background: #020617;
-            color: #e2e8f0;
-        }
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        [data-theme="dark"] .navbar {
-            background: #0f172a;
-            border-bottom: 1px solid #1e293b;
-        }
-        .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        [data-theme="dark"] .card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 70vh; /* Takes 70% of viewport height */
-            min-height: 500px;
-            max-height: 800px;
-            margin: 2rem 0;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        [data-theme="dark"] .chart-container {
-            background: rgba(15, 23, 42, 0.8);
-        }
-        .chart-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 90%;
-            height: 90%;
-            transform: translate(-50%, -50%);
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         canvas {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
+            background: #fff;
+            border: 1px solid #ddd;
+            width: 100%;
+            height: 600px;
         }
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 60vh;
-                min-height: 400px;
-            }
+        h1 {
+            text-align: center;
         }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
+        p {
+            line-height: 1.6;
         }
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .disclaimer {
+            font-style: italic;
+            color: #666;
+            margin-top: 20px;
         }
     </style>
 </head>
-<body data-theme="light">
-    <div id="particles"></div>
-
-    <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
-            <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
-            </a>
-            <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
-                <li><a href="/frontend/guides.html">Guides</a></li>
-                <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
-                <li><a href="/frontend/about.html">About</a></li>
-            </ul>
-            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
-                <option value="light">Light Mode</option>
-                <option value="dark">Dark Mode</option>
-            </select>
-        </div>
-    </nav>
-
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index Bubble Maps AI Neural Network Visualizer</h1>
-            <p class="text-xl max-w-4xl mx-auto">AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.</p>
-        </header>
-
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
-            <div class="flex items-center gap-4 mb-4">
-                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
-                    <option value="all">All Time</option>
-                    <option value="year">Last Year</option>
-                    <option value="month">Last Month</option>
-                    <option value="week">Last Week</option>
-                    <option value="day">Last Day</option>
-                </select>
-            </div>
-            <div class="chart-container">
-                <div class="chart-wrapper">
-                    <canvas id="bubbleChart"></canvas>
-                </div>
-            </div>
-            <p class="text-sm opacity-70 mb-6">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">Legend</h3>
-                    <div class="space-y-1">
-                        <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>Bitcoin ETFs</div>
-                        <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Ethereum ETFs</div>
-                        <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Solana ETFs</div>
-                        <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
-                    </div>
-
-                    <h3 class="text-xl font-semibold mb-2 mt-6">Toggle Categories</h3>
-                    <div class="flex flex-wrap gap-4">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="category-toggle" data-category="Bitcoin">
-                            Bitcoin
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="category-toggle" data-category="Ethereum">
-                            Ethereum
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="category-toggle" data-category="Solana">
-                            Solana
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="category-toggle" data-category="Multi-Asset">
-                            Multi-Asset
-                        </label>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
-                    <p>This bubble map shows crypto ETFs:
-                    - <strong>Bubbles</strong>: Each bubble is an ETF. Size = AUM (larger = bigger market cap).
-                    - <strong>X-Axis</strong>: Volatility - higher right = riskier.
-                    - <strong>Y-Axis</strong>: Expense Ratio - higher up = more expensive.
-                    - <strong>Colors</strong>: By category.
-                    Toggle categories to filter the view.</p>
-
-                    <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
-                        <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                        <p class="italic opacity-80" id="ai-insight">Loading insights...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer class="text-center mt-12 pb-8 border-t border-gray-300 pt-8">
-            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
-        </footer>
+<body>
+    <div class="container">
+        <h1>Crypto ETF Bubble Map Visualizer</h1>
+        <canvas id="bubbleChart"></canvas>
+        <p class="disclaimer">Live pricing bubble map: Coming soon.</p>
+        <h2>Detailed Historical Explanation</h2>
+        <p>
+            This bubble map provides a historical snapshot of the crypto ETF landscape as of January 3, 2026, based on simulated data for educational purposes. The visualization highlights key metrics for each ETF:
+        </p>
+        <ul>
+            <li><strong>Bubble Size</strong>: Represents Assets Under Management (AUM). Larger bubbles indicate higher AUM, showing dominant players like IBIT ($67.91B) in Bitcoin, reflecting institutional interest in spot Bitcoin ETFs.</li>
+            <li><strong>X-Axis (Volatility)</strong>: Measures price volatility. Bitcoin ETFs cluster in the 20-80% range, indicating high risk, while Ethereum ETFs show moderate volatility (20-60%), and Solana/multi-asset funds are lower, suggesting relative stability.</li>
+            <li><strong>Y-Axis (Expense Ratio)</strong>: Shows annual fees. Most spot ETFs have low ratios (<0.5%), making them cost-effective, but leveraged products (e.g., ETHU at 2.67%) have higher fees due to complexity.</li>
+            <li><strong>Colors</strong>: By category – Orange for Bitcoin (dominant with 45% of total AUM), Purple for Ethereum (focused on staking yields), Green for Solana (emerging with high growth potential), Blue for Multi-Asset (diversified options).</li>
+        </ul>
+        <p>
+            Historically, Bitcoin ETFs lead with $115B+ in combined AUM, driven by inflows ($1.5B+), signaling strong investor confidence. Ethereum follows with $17B AUM and moderate inflows, benefiting from staking. Solana and multi-asset ETFs are smaller ($0.5B combined) but show innovation in staking and diversification. Overall, the market shows a Bitcoin-heavy tilt (70% AUM), with average volatility of 35% and expense of 0.8%, hinting at maturing crypto investments in 2026.
+        </p>
     </div>
 
     <script>
-         const ETFs = [
-    { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, expense: 0.25, inflow: 520e6 },
-    { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, expense: 0.25, inflow: 380e6 },
-    { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, expense: 1.5, inflow: -120e6 },
-    { ticker: "ETHA", name: "iShares Ethereum Trust ETF", category: "Ethereum", aum: 10.30e9, volatility: 23.58, expense: 0.25, inflow: 210e6 },
-    { ticker: "BTC", name: "Grayscale Bitcoin Mini Trust ETF", category: "Bitcoin", aum: 4.26e9, volatility: 39.74, expense: 0.15, inflow: 85e6 },
-    { ticker: "ARKB", name: "ARK 21Shares Bitcoin ETF", category: "Bitcoin", aum: 3.40e9, volatility: 29.79, expense: 0.21, inflow: 180e6 },
-    { ticker: "BITB", name: "Bitwise Bitcoin ETF Trust", category: "Bitcoin", aum: 3.40e9, volatility: 48.80, expense: 0.2, inflow: 140e6 },
-    { ticker: "ETHE", name: "Grayscale Ethereum Trust ETF", category: "Ethereum", aum: 2.69e9, volatility: 25.59, expense: 2.5, inflow: -45e6 },
-    { ticker: "BITO", name: "ProShares Bitcoin ETF", category: "Bitcoin", aum: 2.21e9, volatility: 12.47, expense: 0.95, inflow: 62e6 },
-    { ticker: "FETH", name: "Fidelity Ethereum Fund ETF", category: "Ethereum", aum: 2.21e9, volatility: 31.12, expense: 0.25, inflow: 165e6 },
-    { ticker: "ETH", name: "Grayscale Ethereum Mini Trust ETF", category: "Ethereum", aum: 2.17e9, volatility: 29.47, expense: 0, inflow: 68e6 },
-    { ticker: "ETHU", name: "2x Ether ETF", category: "Ethereum", aum: 1.62e9, volatility: 60.36, expense: 2.67, inflow: 48e6 },
-    { ticker: "BITX", name: "2x Bitcoin Strategy ETF", category: "Bitcoin", aum: 1.44e9, volatility: 29.18, expense: 2.38, inflow: 95e6 },
-    { ticker: "HODL", name: "VanEck Bitcoin ETF", category: "Bitcoin", aum: 1.40e9, volatility: 25.37, expense: 0, inflow: 72e6 },
-    { ticker: "BITW", name: "Bitwise 10 Crypto Index ETF", category: "Multi-Asset", aum: 1.05e9, volatility: 25.4, expense: 0.75, inflow: 62e6 },
-    { ticker: "BTCI", name: "NEOS Bitcoin High Income ETF", category: "Bitcoin", aum: 992.03e6, volatility: 20.7, expense: 0.99, inflow: 50e6 },
-    { ticker: "BITU", name: "ProShares Ultra Bitcoin ETF", category: "Bitcoin", aum: 574.45e6, volatility: 46.3, expense: 0.95, inflow: 58e6 },
-    { ticker: "BTCO", name: "Invesco Galaxy Bitcoin ETF", category: "Bitcoin", aum: 546.26e6, volatility: 23.5, expense: 0.25, inflow: 45e6 },
-    { ticker: "EZBC", name: "Franklin Bitcoin ETF", category: "Bitcoin", aum: 509.03e6, volatility: 23.6, expense: 0.29, inflow: 72e6 },
-    { ticker: "BRRR", name: "Coinshares Bitcoin ETF", category: "Bitcoin", aum: 507.40e6, volatility: 23.5, expense: 0.25, inflow: 58e6 },
-    { ticker: "BITQ", name: "Bitwise Crypto Industry Innovators ETF", category: "Multi-Asset", aum: 357.91e6, volatility: 20.5, expense: 0.85, inflow: 62e6 },
-    { ticker: "ETHW", name: "Bitwise Ethereum ETF", category: "Ethereum", aum: 342.87e6, volatility: 28.7, expense: 0, inflow: 92e6 },
-    { ticker: "ETHT", name: "ProShares Ultra Ether ETF", category: "Ethereum", aum: 328.70e6, volatility: 58.1, expense: 0.94, inflow: 48e6 },
-    { ticker: "XRPT", name: "Volatility Shares Trust XRP 2X ETF", category: "Multi-Asset", aum: 328.42e6, volatility: 36.6, expense: 0.75, inflow: 12e6 },
-    { ticker: "MSTX", name: "Defiance Daily Target 2x Long MSTR ETF", category: "Multi-Asset", aum: 292.77e6, volatility: 6.23, expense: 0, inflow: 20e6 },
-    { ticker: "FDIG", name: "Fidelity Crypto Industry and Digital Payments ETF", category: "Multi-Asset", aum: 259.96e6, volatility: 20.7, expense: 0.39, inflow: 25e6 },
-    { ticker: "STCE", name: "Schwab Crypto Thematic ETF", category: "Multi-Asset", aum: 249.32e6, volatility: 22.5, expense: 0.3, inflow: 30e6 },
+        const ETFs = [
+            { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, expense: 0.25, inflow: 520e6 },
+            { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, expense: 0.25, inflow: 380e6 },
+            { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, expense: 1.5, inflow: -120e6 },
+            { ticker: "ETHA", name: "iShares Ethereum Trust ETF", category: "Ethereum", aum: 10.30e9, volatility: 23.58, expense: 0.25, inflow: 210e6 },
+            { ticker: "BTC", name: "Grayscale Bitcoin Mini Trust ETF", category: "Bitcoin", aum: 4.26e9, volatility: 39.74, expense: 0.15, inflow: 85e6 },
+            { ticker: "ARKB", name: "ARK 21Shares Bitcoin ETF", category: "Bitcoin", aum: 3.40e9, volatility: 29.79, expense: 0.21, inflow: 180e6 },
+            { ticker: "BITB", name: "Bitwise Bitcoin ETF Trust", category: "Bitcoin", aum: 3.40e9, volatility: 48.80, expense: 0.2, inflow: 140e6 },
+            { ticker: "ETHE", name: "Grayscale Ethereum Trust ETF", category: "Ethereum", aum: 2.69e9, volatility: 25.59, expense: 2.5, inflow: -45e6 },
+            { ticker: "BITO", name: "ProShares Bitcoin ETF", category: "Bitcoin", aum: 2.21e9, volatility: 12.47, expense: 0.95, inflow: 62e6 },
+            { ticker: "FETH", name: "Fidelity Ethereum Fund ETF", category: "Ethereum", aum: 2.21e9, volatility: 31.12, expense: 0.25, inflow: 165e6 },
+            { ticker: "ETH", name: "Grayscale Ethereum Mini Trust ETF", category: "Ethereum", aum: 2.17e9, volatility: 29.47, expense: 0, inflow: 68e6 },
+            { ticker: "ETHU", name: "2x Ether ETF", category: "Ethereum", aum: 1.62e9, volatility: 60.36, expense: 2.67, inflow: 48e6 },
+            { ticker: "BITX", name: "2x Bitcoin Strategy ETF", category: "Bitcoin", aum: 1.44e9, volatility: 29.18, expense: 2.38, inflow: 95e6 },
+            { ticker: "HODL", name: "VanEck Bitcoin ETF", category: "Bitcoin", aum: 1.40e9, volatility: 25.37, expense: 0, inflow: 72e6 },
+            { ticker: "BITW", name: "Bitwise 10 Crypto Index ETF", category: "Multi-Asset", aum: 1.05e9, volatility: 25.4, expense: 0.75, inflow: 62e6 },
+            { ticker: "BTCI", name: "NEOS Bitcoin High Income ETF", category: "Bitcoin", aum: 992.03e6, volatility: 20.7, expense: 0.99, inflow: 50e6 },
+            { ticker: "BITU", name: "ProShares Ultra Bitcoin ETF", category: "Bitcoin", aum: 574.45e6, volatility: 46.3, expense: 0.95, inflow: 58e6 },
+            { ticker: "BTCO", name: "Invesco Galaxy Bitcoin ETF", category: "Bitcoin", aum: 546.26e6, volatility: 23.5, expense: 0.25, inflow: 45e6 },
+            { ticker: "EZBC", name: "Franklin Bitcoin ETF", category: "Bitcoin", aum: 509.03e6, volatility: 23.6, expense: 0.29, inflow: 72e6 },
+            { ticker: "BRRR", name: "Coinshares Bitcoin ETF", category: "Bitcoin", aum: 507.40e6, volatility: 23.5, expense: 0.25, inflow: 58e6 },
+            { ticker: "BITQ", name: "Bitwise Crypto Industry Innovators ETF", category: "Multi-Asset", aum: 357.91e6, volatility: 20.5, expense: 0.85, inflow: 62e6 },
+            { ticker: "ETHW", name: "Bitwise Ethereum ETF", category: "Ethereum", aum: 342.87e6, volatility: 28.7, expense: 0, inflow: 92e6 },
+            { ticker: "ETHT", name: "ProShares Ultra Ether ETF", category: "Ethereum", aum: 328.70e6, volatility: 58.1, expense: 0.94, inflow: 48e6 },
+            { ticker: "XRPT", name: "Volatility Shares Trust XRP 2X ETF", category: "Multi-Asset", aum: 328.42e6, volatility: 36.6, expense: 0.75, inflow: 12e6 },
+            { ticker: "MSTX", name: "Defiance Daily Target 2x Long MSTR ETF", category: "Multi-Asset", aum: 292.77e6, volatility: 6.23, expense: 0, inflow: 20e6 },
+            { ticker: "FDIG", name: "Fidelity Crypto Industry and Digital Payments ETF", category: "Multi-Asset", aum: 259.96e6, volatility: 20.7, expense: 0.39, inflow: 25e6 },
+            { ticker: "STCE", name: "Schwab Crypto Thematic ETF", category: "Multi-Asset", aum: 249.32e6, volatility: 22.5, expense: 0.3, inflow: 30e6 },
     { ticker: "WGMI", name: "CoinShares Bitcoin Mining ETF", category: "Multi-Asset", aum: 228.48e6, volatility: 13.5, expense: 0.75, inflow: 40e6 },
     { ticker: "YBTC", name: "Roundhill Bitcoin Covered Call Strategy ETF", category: "Bitcoin", aum: 225.04e6, volatility: 24.5, expense: 0.96, inflow: 50e6 },
     { ticker: "BLOX", name: "Nicholas Crypto Income ETF", category: "Multi-Asset", aum: 212.88e6, volatility: 21.1, expense: 1.03, inflow: 20e6 },
@@ -304,25 +159,20 @@
     { ticker: "STBQ", name: "Amplify Stablecoin Technology ETF", category: "Multi-Asset", aum: 503.17e3, volatility: 0, expense: 0.69, inflow: 1e6 },
     { ticker: "WTIB", name: "USCF Oil Plus Bitcoin Strategy Fund", category: "Multi-Asset", aum: 374.72e3, volatility: 0, expense: 0.89, inflow: 1e6 }
 ];
-
         const categoryColors = {
             Bitcoin: '#f59e0b',
             Ethereum: '#8b5cf6',
             Solana: '#10b981',
             "Multi-Asset": '#0ea5e9'
         };
-
         let bubbleChart = null;
-
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
             if (bubbleChart) bubbleChart.destroy();
-
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
                 return toggle && toggle.checked;
             });
-
             const datasets = visibleETFs.map(etf => ({
                 label: etf.ticker,
                 data: [{
@@ -334,7 +184,6 @@
                 borderColor: categoryColors[etf.category],
                 borderWidth: 2
             }));
-
             bubbleChart = new Chart(ctx, {
                 type: 'bubble',
                 data: { datasets },
@@ -366,7 +215,6 @@
                 }
             });
         }
-
         function generateAIPredictions() {
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
@@ -385,11 +233,9 @@
             insight += "Expect continued institutional inflows in 2026.";
             return insight;
         }
-
         function updateAIInsights() {
             document.getElementById('ai-insight').textContent = generateAIPredictions();
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             // Theme toggle
             const saved = localStorage.getItem('theme') || 'light';
@@ -400,17 +246,14 @@
                 document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
                 localStorage.setItem('theme', t);
             });
-
             // Category toggle
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
                 renderBubbleChart();
                 updateAIInsights();
             }));
-
             // Initial render
             renderBubbleChart();
             updateAIInsights();
-
             // Particles background
             particlesJS('particles', {
                 particles: {
@@ -431,4 +274,3 @@
     </script>
 </body>
 </html>
-```
