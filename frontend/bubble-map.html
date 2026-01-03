@@ -249,16 +249,6 @@
                 });
             });
 
-            annotations.push({
-                type: 'box',
-                xMin: 40,
-                xMax: 60,
-                yMin: 0,
-                yMax: 10,
-                backgroundColor: 'rgba(255,0,0,0.1)',
-                label: { content: 'High Concentration Zone', enabled: true }
-            });
-
             bubbleChart = new Chart(ctx, {
                 type: 'bubble',
                 data: { datasets },
@@ -327,10 +317,7 @@
             });
 
             // Time period (simulated - no real change but updates insights)
-            document.getElementById('time-period').addEventListener('change', () => {
-                renderBubbleChart();
-                updateAIInsights();
-            });
+            document.getElementById('time-period').addEventListener('change', updateAIInsights);
 
             // Category toggle
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
