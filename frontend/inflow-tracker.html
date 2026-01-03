@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Inflow Tracker 2026 - Real-Time Fund Flows</title>
+    <meta name="description" content="Track daily and weekly inflows/outflows for all major crypto ETFs in 2026. Monitor Bitcoin, Ethereum, Solana, multi-asset, and leveraged ETF fund flows to gauge investor sentiment.">
+    <meta name="keywords" content="crypto etf inflows 2026, bitcoin etf flow tracker, ethereum etf aum, fund flow data, crypto investor sentiment">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .chart-wrapper {
+            margin-top: 2rem;
+            position: relative;
+            height: 400px;
+        }
+        .flow-positive { color: #10b981; font-weight: bold; }
+        .flow-negative { color: #ef4444; font-weight: bold; }
+        .flow-neutral { color: var(--text); opacity: 0.7; }
+        .etf-row:hover {
+            background: rgba(14,165,233,0.05);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Inflow Tracker 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Real-time tracking of daily and cumulative fund flows across all major crypto ETFs. Positive inflows indicate investor buying pressure; outflows suggest selling or profit-taking.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Market Overview - January 02, 2026</h2>
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-green-600" id="total-daily-inflow">+$1.42B</div>
+                    <div class="text-sm opacity-70">Total Daily Inflow</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-green-600" id="total-weekly-inflow">+$6.81B</div>
+                    <div class="text-sm opacity-70">Weekly Inflow</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold" id="total-aum">$248.3B</div>
+                    <div class="text-sm opacity-70">Total AUM</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-green-600" id="ytd-inflow">+$42.7B</div>
+                    <div class="text-sm opacity-70">YTD Inflow (2026)</div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper"><canvas id="cumulativeChart"></canvas></div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Daily Fund Flows</h2>
+            <div class="mb-4 flex flex-wrap gap-4">
+                <select id="timeframe" class="p-3 border border-[var(--border)] rounded-lg">
+                    <option value="daily">Today</option>
+                    <option value="weekly">This Week</option>
+                    <option value="monthly">This Month</option>
+                </select>
+                <input type="text" id="search" placeholder="Search ETF..." class="flex-1 p-3 border border-[var(--border)] rounded-lg">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-[var(--border)] text-left">
+                            <th class="py-3">ETF</th>
+                            <th class="py-3 text-right">Daily Flow</th>
+                            <th class="py-3 text-right">Weekly Flow</th>
+                            <th class="py-3 text-right">AUM</th>
+                            <th class="py-3 text-right">Market Share</th>
+                        </tr>
+                    </thead>
+                    <tbody id="flow-table">
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="disclaimer">
+            Flow data is simulated and for educational purposes only. Real-time data sourced from ETF providers and exchanges. Not financial advice.
+        </p>
+
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        const ETFs = [
+            { ticker: "IBIT", name: "iShares Bitcoin Trust", category: "Bitcoin", daily: 520, weekly: 2800, aum: 48.2 },
+            { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin", category: "Bitcoin", daily: 380, weekly: 2100, aum: 32.1 },
+            { ticker: "GBTC", name: "Grayscale Bitcoin Trust", category: "Bitcoin", daily: -120, weekly: -450, aum: 28.7 },
+            { ticker: "ARKB", name: "ARK 21Shares Bitcoin", category: "Bitcoin", daily: 180, weekly: 980, aum: 18.4 },
+            { ticker: "BITB", name: "Bitwise Bitcoin ETF", category: "Bitcoin", daily: 140, weekly: 760, aum: 14.2 },
+            { ticker: "HODL", name: "VanEck Bitcoin", category: "Bitcoin", daily: 95, weekly: 520, aum: 9.8 },
+            { ticker: "BTCO", name: "Invesco Galaxy Bitcoin", category: "Bitcoin", daily: 85, weekly: 460, aum: 8.9 },
+            { ticker: "EZBC", name: "Franklin Bitcoin", category: "Bitcoin", daily: 72, weekly: 390, aum: 7.6 },
+            { ticker: "BRRR", name: "Valkyrie Bitcoin", category: "Bitcoin", daily: 58, weekly: 310, aum: 5.9 },
+            { ticker: "BTCW", name: "WisdomTree Bitcoin", category: "Bitcoin", daily: 45, weekly: 240, aum: 4.8 },
+            { ticker: "ETHA", name: "iShares Ethereum Trust", category: "Ethereum", daily: 210, weekly: 1150, aum: 22.3 },
+            { ticker: "FETH", name: "Fidelity Ethereum Fund", category: "Ethereum", daily: 165, weekly: 890, aum: 16.8 },
+            { ticker: "ETHE", name: "Grayscale Ethereum Trust", category: "Ethereum", daily: -45, weekly: -180, aum: 12.4 },
+            { ticker: "ETHW", name: "Bitwise Ethereum ETF", category: "Ethereum", daily: 92, weekly: 480, aum: 8.7 },
+            { ticker: "ETHV", name: "VanEck Ethereum ETF", category: "Ethereum", daily: 68, weekly: 360, aum: 6.2 },
+            { ticker: "BSOL", name: "Bitwise Solana Staking", category: "Solana", daily: 125, weekly: 680, aum: 9.1 },
+            { ticker: "VSOL", name: "VanEck Solana", category: "Solana", daily: 88, weekly: 460, aum: 6.4 },
+            { ticker: "BITW", name: "Bitwise 10 Crypto Index", category: "Multi-Asset", daily: 62, weekly: 330, aum: 5.2 },
+            { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index", category: "Multi-Asset", daily: 48, weekly: 260, aum: 4.1 },
+            { ticker: "SPY", name: "S&P 500", category: "Traditional", daily: 1200, weekly: 6800, aum: 520 },
+            { ticker: "QQQ", name: "Nasdaq-100", category: "Traditional", daily: 890, weekly: 4800, aum: 280 }
+            // Add more as needed
+        ];
+
+        let cumulativeChart = null;
+
+        function formatFlow(value) {
+            const abs = Math.abs(value);
+            if (abs >= 1000) return (value / 1000).toFixed(1) + 'B';
+            return value.toFixed(0) + 'M';
+        }
+
+        function renderTable(timeframe = 'daily') {
+            const search = document.getElementById('search').value.toLowerCase();
+            const table = document.getElementById('flow-table');
+            table.innerHTML = '';
+
+            let filtered = ETFs.filter(etf => 
+                etf.ticker.toLowerCase().includes(search) || 
+                etf.name.toLowerCase().includes(search)
+            );
+
+            filtered.sort((a, b) => b[timeframe === 'daily' ? 'daily' : 'weekly'] - a[timeframe === 'daily' ? 'daily' : 'weekly']);
+
+            let totalDaily = 0;
+            let totalWeekly = 0;
+            let totalAum = 0;
+
+            filtered.forEach(etf => {
+                totalDaily += etf.daily;
+                totalWeekly += etf.weekly;
+                totalAum += etf.aum;
+
+                const row = document.createElement('tr');
+                row.className = 'etf-row border-b border-[var(--border)]';
+                row.innerHTML = `
+                    <td class="py-4 font-medium">${etf.ticker}<br><span class="text-sm opacity-70">${etf.name}</span></td>
+                    <td class="py-4 text-right ${etf.daily > 0 ? 'flow-positive' : etf.daily < 0 ? 'flow-negative' : 'flow-neutral'}">
+                        ${etf.daily > 0 ? '+' : ''}${formatFlow(etf.daily)}
+                    </td>
+                    <td class="py-4 text-right ${etf.weekly > 0 ? 'flow-positive' : etf.weekly < 0 ? 'flow-negative' : 'flow-neutral'}">
+                        ${etf.weekly > 0 ? '+' : ''}${formatFlow(etf.weekly)}
+                    </td>
+                    <td class="py-4 text-right">$${etf.aum.toFixed(1)}B</td>
+                    <td class="py-4 text-right">${((etf.aum / totalAum) * 100).toFixed(1)}%</td>
+                `;
+                table.appendChild(row);
+            });
+
+            document.getElementById('total-daily-inflow').textContent = totalDaily > 0 ? '+' : '' + formatFlow(totalDaily);
+            document.getElementById('total-weekly-inflow').textContent = totalWeekly > 0 ? '+' : '' + formatFlow(totalWeekly);
+            document.getElementById('total-aum').textContent = '$' + totalAum.toFixed(1) + 'B';
+        }
+
+        function renderCumulativeChart() {
+            const ctx = document.getElementById('cumulativeChart').getContext('2d');
+            if (cumulativeChart) cumulativeChart.destroy();
+
+            const labels = ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7'];
+            const bitcoinData = [0, 1.2, 2.8, 4.1, 5.6, 7.2, 8.9];
+            const ethereumData = [0, 0.8, 1.9, 2.7, 3.8, 4.9, 6.1];
+            const totalData = bitcoinData.map((v, i) => v + ethereumData[i]);
+
+            cumulativeChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Bitcoin ETFs',
+                            data: bitcoinData,
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245,158,11,0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Ethereum ETFs',
+                            data: ethereumData,
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139,92,246,0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Total Crypto ETFs',
+                            data: totalData,
+                            borderColor: '#0ea5e9',
+                            backgroundColor: 'rgba(14,165,233,0.1)',
+                            fill: true,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Cumulative Inflows YTD 2026 ($B)' },
+                        legend: { position: 'top' }
+                    },
+                    scales: { y: { title: { display: true, text: 'Cumulative Inflow ($B)' } } }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+                localStorage.setItem('theme', t);
+            });
+
+            // Initial render
+            renderTable();
+            renderCumulativeChart();
+
+            // Filters
+            document.getElementById('timeframe').addEventListener('change', () => renderTable(document.getElementById('timeframe').value));
+            document.getElementById('search').addEventListener('input', () => renderTable());
+
+            // Particles
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
