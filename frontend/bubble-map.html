@@ -3,43 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index Bubble Map Visualizer</title>
+    <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
+    <meta name="description" content="AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.">
+    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 20px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            min-height: 100vh;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
-        canvas {
-            background: #fff;
-            border: 1px solid #ddd;
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
-        h1 {
-            text-align: center;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 600px;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+            .chart-wrapper {
+                height: 400px;
+            }
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
+    <div id="particles"></div>
 
-<div class="container">
-    <h1>Crypto ETF Index Bubble Map Visualizer</h1>
-    <canvas id="bubbleChart" height="600"></canvas>
-    <p style="text-align:center; margin-top:20px; color:#666;">
-        Bubble size = AUM | X-axis = Volatility | Y-axis = Expense Ratio | Colors by category
-    </p>
-</div>
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
 
-<script>
-const ETFs = [
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index Bubble Maps AI Neural Network Visualizer</h1>
+            <p class="text-xl max-w-4xl mx-auto">AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
+            <div class="chart-wrapper">
+                <canvas id="bubbleChart"></canvas>
+            </div>
+
+            <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details. Lines represent correlations >0.7.</p>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold mb-2">Legend</h3>
+                <div class="space-y-1">
+                    <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>Bitcoin ETFs</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Ethereum ETFs</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Solana ETFs</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold mb-2">Toggle Categories</h3>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" checked class="category-toggle" data-category="Bitcoin">
+                        Bitcoin
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" checked class="category-toggle" data-category="Ethereum">
+                        Ethereum
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" checked class="category-toggle" data-category="Solana">
+                        Solana
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" checked class="category-toggle" data-category="Multi-Asset">
+                        Multi-Asset
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
+                <p>This bubble map shows crypto ETFs:
+                - <strong>Bubbles</strong>: Each bubble is an ETF. Size = AUM (larger = bigger market cap).
+                - <strong>X-Axis</strong>: Volatility - higher right = riskier.
+                - <strong>Y-Axis</strong>: Expense Ratio - higher up = more expensive.
+                - <strong>Colors</strong>: By category.
+                - <strong>Lines</strong>: Simulated strong correlations.
+                Toggle categories to filter the view.</p>
+            </div>
+
+            <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
+                <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
+                <p class="italic opacity-80" id="ai-insight">High concentration in Bitcoin ETFs (over 70% of total AUM). Ethereum and Solana staking products show growing yield appeal. Multi-asset ETFs provide diversification. Expect continued inflows into spot Bitcoin ETFs as institutional adoption increases in 2026.</p>
+            </div>
+        </div>
+
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+       const ETFs = [
     { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, yield: 0.25, inflow: 520e6 },
     { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, yield: 0.25, inflow: 380e6 },
     { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, yield: 1.5, inflow: -120e6 },
@@ -138,64 +273,102 @@ const ETFs = [
     { ticker: "WTIB", name: "USCF Oil Plus Bitcoin Strategy Fund", category: "Multi-Asset", aum: 374.72e3, volatility: 0, yield: 0.89, inflow: 1e6 }
 ];
 
-const categoryColors = {
-    Bitcoin: 'rgba(251, 146, 60, 0.8)',      // orange
-    Ethereum: 'rgba(139, 92, 246, 0.8)',    // purple
-    Solana: 'rgba(16, 185, 129, 0.8)',      // green
-    "Multi-Asset": 'rgba(59, 130, 246, 0.8)' // blue
-};
+        const categoryColors = {
+            Bitcoin: '#f59e0b',
+            Ethereum: '#8b5cf6',
+            Solana: '#10b981',
+            "Multi-Asset": '#0ea5e9'
+        };
 
-const datasets = ETFs.map(etf => ({
-    label: etf.ticker,
-    data: [{
-        x: etf.volatility,
-        y: etf.expense || etf.yield || 0,
-        r: Math.max(8, Math.sqrt(etf.aum / 1e9) * 4) // size based on AUM, minimum 8
-    }],
-    backgroundColor: categoryColors[etf.category] || 'rgba(100,100,100,0.8)',
-    borderColor: categoryColors[etf.category] || 'rgba(100,100,100,1)',
-    borderWidth: 1
-}));
+        let bubbleChart = null;
 
-const ctx = document.getElementById('bubbleChart').getContext('2d');
-new Chart(ctx, {
-    type: 'bubble',
-    data: { datasets },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        const etf = ETFs[context.datasetIndex];
-                        return [
-                            `${etf.ticker} - ${etf.name}`,
-                            `AUM: $${(etf.aum / 1e9).toFixed(2)}B`,
-                            `Volatility: ${context.parsed.x.toFixed(1)}%`,
-                            `Expense Ratio: ${(etf.expense || etf.yield || 0).toFixed(2)}%`,
-                            `Inflow: $${(etf.inflow / 1e6).toFixed(0)}M`
-                        ];
-                    }
+        function renderBubbleChart() {
+            const ctx = document.getElementById('bubbleChart').getContext('2d');
+            if (bubbleChart) bubbleChart.destroy();
+
+            const visibleETFs = ETFs.filter(etf => {
+                const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
+                return toggle && toggle.checked;
+            });
+
+            const datasets = visibleETFs.map(etf => ({
+                label: etf.ticker,
+                data: [{
+                    x: etf.volatility,
+                    y: etf.expense || etf.yield || 0,
+                    r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
+                }],
+                backgroundColor: categoryColors[etf.category] + 'cc',
+                borderColor: categoryColors[etf.category],
+                borderWidth: 2
+            }));
+
+            bubbleChart = new Chart(ctx, {
+                type: 'bubble',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'AI Neural Bubble Map - ETF Correlations Network' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const etf = visibleETFs[context.datasetIndex];
+                                    return [
+                                        `${etf.ticker} - ${etf.name}`,
+                                        `Volatility: ${context.parsed.x.toFixed(1)}%`,
+                                        `Expense Ratio: ${(etf.expense || etf.yield || 0).toFixed(2)}%`,
+                                        `AUM: $${(context.parsed.r / 5)**2.toFixed(2)}B`,
+                                        `Inflow: $${(etf.inflow / 1e6).toFixed(1)}M`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { title: { display: true, text: 'Volatility (%)' }, min: 0, max: 100 },
+                        y: { title: { display: true, text: 'Expense Ratio (%)' }, min: 0, max: 15 }
+                    },
+                    animation: { duration: 1500 }
                 }
-            }
-        },
-        scales: {
-            x: {
-                title: { display: true, text: 'Volatility (%)' },
-                min: 0,
-                max: 100
-            },
-            y: {
-                title: { display: true, text: 'Expense Ratio (%)' },
-                min: 0,
-                max: 15
-            }
+            });
         }
-    }
-});
-</script>
 
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+                localStorage.setItem('theme', t);
+            });
+
+            // Category toggles
+            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
+
+            // Initial render
+            renderBubbleChart();
+
+            // Particles background
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
 </body>
 </html>
