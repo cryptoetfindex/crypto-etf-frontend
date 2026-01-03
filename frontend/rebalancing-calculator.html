@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Rebalancing Calculator 2026 - Portfolio Optimization Tool</title>
+    <meta name="description" content="Calculate how to rebalance your crypto ETF portfolio to target allocations. Add Bitcoin, Ethereum, and altcoin ETFs, set target weights, and see exact buy/sell amounts needed.">
+    <meta name="keywords" content="crypto etf rebalancing calculator 2026, portfolio rebalance tool, bitcoin etf allocation, ethereum etf weights">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .portfolio-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .portfolio-header {
+            font-weight: 600;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        .action-buy { color: #10b981; font-weight: bold; }
+        .action-sell { color: #ef4444; font-weight: bold; }
+        .action-none { color: var(--text); opacity: 0.6; }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Rebalancing Calculator 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Enter your current holdings and target allocations. The calculator will show exactly how much to buy or sell of each crypto ETF to rebalance your portfolio.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-6">Portfolio Rebalancer</h2>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div>
+                    <label class="block mb-2 font-medium">Total Portfolio Value ($)</label>
+                    <input type="number" id="total-value" value="100000" min="0" step="1000" class="w-full p-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)]">
+                </div>
+                <div>
+                    <label class="block mb-2 font-medium">Rebalancing Frequency</label>
+                    <select id="frequency" class="w-full p-3 border border-[var(--border)] rounded-lg">
+                        <option value="quarterly">Quarterly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="annual">Annually</option>
+                        <option value="custom">Custom Threshold</option>
+                    </select>
+                </div>
+                <div id="threshold-group" class="hidden">
+                    <label class="block mb-2 font-medium">Drift Threshold (%)</label>
+                    <input type="number" id="drift-threshold" value="5" min="1" max="20" step="0.5" class="w-full p-3 border border-[var(--border)] rounded-lg">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex gap-4 mb-4">
+                    <select id="etf-select" class="flex-1 p-3 border border-[var(--border)] rounded-lg">
+                        <option value="">Select ETF to add...</option>
+                    </select>
+                    <button id="add-etf" class="bg-[var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">Add to Portfolio</button>
+                </div>
+            </div>
+
+            <div class="portfolio-header portfolio-row">
+                <div>ETF</div>
+                <div>Current Shares</div>
+                <div>Current Value ($)</div>
+                <div>Target Allocation (%)</div>
+                <div>Action</div>
+            </div>
+
+            <div id="portfolio-rows">
+                <!-- Rows injected by JS -->
+            </div>
+
+            <div class="mt-6 p-4 bg-[var(--accent)] bg-opacity-10 rounded-lg">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold" id="total-current"> $0</div>
+                        <div class="text-sm opacity-70">Current Value</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold" id="total-target">$0</div>
+                        <div class="text-sm opacity-70">Target Value</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-green-600" id="total-buy">$0</div>
+                        <div class="text-sm opacity-70">Total to Buy</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-red-600" id="total-sell">$0</div>
+                        <div class="text-sm opacity-70">Total to Sell</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="disclaimer">
+            This tool uses hypothetical prices and allocations for educational purposes only. Always verify current prices and consult a financial advisor before rebalancing. Not financial advice.
+        </p>
+
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        const ETFs = [
+            "IBIT", "FBTC", "GBTC", "BTC", "BITB", "ARKB", "HODL", "BTCO", "EZBC", "BRRR", "BTCW",
+            "ETHA", "FETH", "ETHE", "ETH", "ETHW", "ETHV", "QETH",
+            "XRPC", "XRP", "XRPZ", "XXRP", "XRPI", "XRPT", "XRPR", "UXRP", "XRPM", "XRPK", "TOXR",
+            "BSOL", "SSK", "GSOL", "VSOL", "TSOL", "QSOL", "SOEZ", "SOLC", "SOLM", "SOLX", "SLON",
+            "BITW", "GDLC", "NCIQ", "EZPZ", "GLNK", "HBR", "LTCC", "DOJE", "BWOW", "GDOG", "TXXD", "TXXS",
+            "DIME", "STBQ", "TKNQ", "ORO", "WTIB", "TTOP", "TXBC", "SPY", "QQQ"
+        ];
+
+        // Simulated current prices (as of Jan 2026 - hypothetical)
+        const PRICES = {
+            IBIT: 45.20, FBTC: 45.10, GBTC: 58.30, BTC: 28.50, BITB: 38.40, ARKB: 68.20, HODL: 78.90,
+            BTCO: 44.80, EZBC: 40.10, BRRR: 36.70, BTCW: 42.30,
+            ETHA: 28.50, FETH: 28.40, ETHE: 32.10, ETH: 18.20, ETHW: 27.90, ETHV: 29.10, QETH: 27.80,
+            XRPC: 12.30, XRP: 14.50, XRPZ: 13.80, XXRP: 28.40, XRPI: 11.90, XRPT: 26.70, XRPR: 12.10,
+            UXRP: 24.30, XRPM: 13.40, XRPK: 27.80, TOXR: 14.10,
+            BSOL: 42.30, SSK: 41.80, GSOL: 45.60, VSOL: 43.20, TSOL: 42.90, QSOL: 41.70, SOEZ: 43.50,
+            SOLC: 40.20, SOLM: 42.10, SOLX: 82.40, SLON: 80.30,
+            BITW: 68.40, GDLC: 52.30, NCIQ: 78.90, EZPZ: 72.50, GLNK: 18.40, HBR: 22.10, LTCC: 15.80,
+            DOJE: 32.40, BWOW: 31.90, GDOG: 30.20, TXXD: 58.70, TXXS: 62.30,
+            DIME: 48.20, STBQ: 25.40, TKNQ: 38.70, ORO: 85.30, WTIB: 52.10, TTOP: 92.40, TXBC: 88.70,
+            SPY: 520.40, QQQ: 480.20
+        };
+
+        let portfolio = []; // { ticker, shares, currentValue, targetPct }
+
+        function updateDisplay() {
+            const rows = document.getElementById('portfolio-rows');
+            rows.innerHTML = '';
+
+            let totalCurrent = 0;
+            let totalTarget = 0;
+            let totalBuy = 0;
+            let totalSell = 0;
+
+            portfolio.forEach((item, idx) => {
+                const currentValue = item.shares * PRICES[item.ticker];
+                const targetValue = (item.targetPct / 100) * document.getElementById('total-value').value;
+                const difference = targetValue - currentValue;
+                const action = difference > 0 ? 'buy' : difference < 0 ? 'sell' : 'none';
+                const sharesNeeded = Math.abs(difference / PRICES[item.ticker]);
+
+                totalCurrent += currentValue;
+                totalTarget += targetValue;
+                if (difference > 0) totalBuy += difference;
+                if (difference < 0) totalSell += Math.abs(difference);
+
+                const row = document.createElement('div');
+                row.className = 'portfolio-row';
+                row.innerHTML = `
+                    <div class="font-medium">${item.ticker}</div>
+                    <div><input type="number" data-idx="${idx}" value="${item.shares}" min="0" step="0.01" class="shares-input w-full p-2 border rounded"></div>
+                    <div>$${currentValue.toFixed(2)}</div>
+                    <div><input type="number" data-idx="${idx}" value="${item.targetPct}" min="0" max="100" step="0.5" class="target-input w-20 p-2 border rounded">%</div>
+                    <div class="${action === 'buy' ? 'action-buy' : action === 'sell' ? 'action-sell' : 'action-none'}">
+                        ${action === 'buy' ? 'Buy' : action === 'sell' ? 'Sell' : 'Hold'} ${sharesNeeded.toFixed(4)} shares ($${Math.abs(difference).toFixed(2)})
+                        <button data-idx="${idx}" class="remove-etf ml-4 text-red-600 font-bold">×</button>
+                    </div>
+                `;
+                rows.appendChild(row);
+            });
+
+            document.getElementById('total-current').textContent = '$' + totalCurrent.toFixed(2);
+            document.getElementById('total-target').textContent = '$' + totalTarget.toFixed(2);
+            document.getElementById('total-buy').textContent = '$' + totalBuy.toFixed(2);
+            document.getElementById('total-sell').textContent = '$' + totalSell.toFixed(2);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+                localStorage.setItem('theme', t);
+            });
+
+            // Populate ETF dropdown
+            const select = document.getElementById('etf-select');
+            ETFs.forEach(ticker => {
+                const option = document.createElement('option');
+                option.value = ticker;
+                option.textContent = ticker;
+                select.appendChild(option);
+            });
+
+            // Add ETF
+            document.getElementById('add-etf').addEventListener('click', () => {
+                const ticker = document.getElementById('etf-select').value;
+                if (ticker && !portfolio.find(p => p.ticker === ticker)) {
+                    portfolio.push({ ticker, shares: 0, targetPct: 0 });
+                    updateDisplay();
+                }
+            });
+
+            // Rebalancing frequency
+            document.getElementById('frequency').addEventListener('change', e => {
+                document.getElementById('threshold-group').classList.toggle('hidden', e.target.value !== 'custom');
+            });
+
+            // Total value change
+            document.getElementById('total-value').addEventListener('input', updateDisplay);
+
+            // Delegate events for dynamic inputs/buttons
+            document.getElementById('portfolio-rows').addEventListener('input', e => {
+                if (e.target.classList.contains('shares-input')) {
+                    const idx = e.target.dataset.idx;
+                    portfolio[idx].shares = parseFloat(e.target.value) || 0;
+                    updateDisplay();
+                }
+                if (e.target.classList.contains('target-input')) {
+                    const idx = e.target.dataset.idx;
+                    portfolio[idx].targetPct = parseFloat(e.target.value) || 0;
+                    updateDisplay();
+                }
+            });
+
+            document.getElementById('portfolio-rows').addEventListener('click', e => {
+                if (e.target.classList.contains('remove-etf')) {
+                    const idx = e.target.dataset.idx;
+                    portfolio.splice(idx, 1);
+                    updateDisplay();
+                }
+            });
+
+            // Particles
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
