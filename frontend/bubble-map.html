@@ -97,11 +97,18 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        .warning-message {
+            background: #f59e0b;
+            color: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
         .coming-soon {
             text-align: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            opacity: 0.7;
+            font-size: 1.5rem;
+            opacity: 0.6;
             margin: auto;
         }
         @media (max-width: 768px) {
@@ -154,13 +161,17 @@
             <div class="flex items-center gap-4 mb-4">
                 <label class="flex items-center gap-2">
                     <input type="checkbox" id="live-toggle">
-                    Enable Live Data Feed (updates from data oracles)
+                    Use Live Data (updates from data oracles)
                 </label>
             </div>
             <div class="chart-wrapper" id="chart-container">
-                <canvas id="bubbleChart"></canvas>
+                <div class="loading-spinner"></div>
+                <canvas id="bubbleChart" style="display: none;"></canvas>
             </div>
-            <p class="text-sm opacity-70 mt-2">Data last updated: <span id="last-update">Historical Data Loaded</span></p>
+            <div id="warning-message" class="warning-message hidden">
+                Data oracles are running slow today. Displaying last known data. Try refreshing or switching to historical mode.
+            </div>
+            <p class="text-sm opacity-70 mt-2">Data last updated: <span id="last-update">Historical Data Loaded</span>. Hover bubbles for AI predictions and inflow/outflow details. Lines represent correlations >0.7.</p>
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-2">Legend</h3>
                 <div class="space-y-1">
@@ -209,14 +220,12 @@
             </div>
             <div class="ai-prediction mt-6">
                 <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="prediction-text" id="ai-insight">High concentration in Bitcoin ETFs (45% of total AUM). Potential outflow in traditional ETFs if crypto rally continues. Solana staking ETFs show strong inflow momentum (+15% WoW). Neural correlations indicate Ethereum as hedge to Bitcoin volatility.</p>
+                <p class="prediction-text" id="ai-insight">Loading AI predictions...</p>
             </div>
         </div>
-
         <p class="disclaimer">
             Data is a combination of historical simulations and real-time Yahoo Finance quotes (delayed 15-30 min). AUM, yields, and correlations are hypothetical for 2026. AI predictions are generated for educational purposes. Not financial advice.
         </p>
-
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
                 <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
@@ -228,10 +237,9 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
-
     <script>
         const ETFs = [
-            { ticker: "IBIT", name: "iShares Bitcoin Trust", category: "Bitcoin", aum: 48.2e9, volatility: 52, yield: 0, inflow: 520e6 },
+            { ticker: "IBIT", name: "iShares Bitcoin Trust", category: "Bitcoin", aum: 48.2e9, volatility: 52, yield: 0, inflow: 520e6, correlation: {} },
             { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin", category: "Bitcoin", aum: 32.1e9, volatility: 51, yield: 0, inflow: 380e6 },
             { ticker: "GBTC", name: "Grayscale Bitcoin Trust", category: "Bitcoin", aum: 28.7e9, volatility: 55, yield: 0, inflow: -120e6 },
             { ticker: "ARKB", name: "ARK 21Shares Bitcoin", category: "Bitcoin", aum: 18.4e9, volatility: 53, yield: 0, inflow: 180e6 },
@@ -268,99 +276,67 @@
         };
 
         let bubbleChart = null;
-        let liveDataLoaded = false;
-        let liveAttemptInProgress = false;
 
-        function renderBubbleChart() {
-            const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) bubbleChart.destroy();
+        function updateData() {
+            const loading = document.querySelector('.loading-spinner');
+            const warning = document.getElementById('warning-message');
+            loading.style.display = 'block';
+            document.getElementById('bubbleChart').style.display = 'none';
+            warning.classList.add('hidden');
 
-            const visibleETFs = ETFs.filter(etf => document.querySelector(`.category-toggle[data-category="${etf.category}"]`).checked);
+            const isLive = document.getElementById('live-toggle').checked;
 
-            const datasets = visibleETFs.map(etf => ({
-                label: etf.ticker,
-                data: [{
-                    x: etf.volatility,
-                    y: etf.yield,
-                    r: Math.sqrt(etf.aum / 1e9) * 3
-                }],
-                backgroundColor: etf.inflow > 0 ? categoryColors[etf.category] + 'cc' : categoryColors[etf.category] + '66'
-            }));
+            if (!isLive) {
+                loadHistoricalData();
+                return;
+            }
 
-            // Correlation lines
-            const annotations = [];
-            visibleETFs.forEach((etf1, i) => {
-                visibleETFs.slice(i+1).forEach(etf2 => {
-                    if (Math.random() > 0.3) { // Simulated high correlation
-                        annotations.push({
-                            type: 'line',
-                            xMin: etf1.volatility,
-                            xMax: etf2.volatility,
-                            yMin: etf1.yield,
-                            yMax: etf2.yield,
-                            borderColor: 'rgba(165,165,165,0.3)',
-                            borderWidth: 1
-                        });
-                    }
-                });
-            });
-
-            // Concentration box
-            annotations.push({
-                type: 'box',
-                xMin: 40,
-                xMax: 60,
-                yMin: 0,
-                yMax: 5,
-                backgroundColor: 'rgba(255,0,0,0.1)',
-                label: { content: 'High Concentration Zone', position: 'center' }
-            });
-
-            bubbleChart = new Chart(ctx, {
-                type: 'bubble',
-                data: { datasets },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        annotation: { annotations },
-                        title: { display: true, text: 'AI Neural Bubble Map - ETF Correlations Network' },
-                        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: Vol ${ctx.parsed.x.toFixed(1)}%, Yield ${ctx.parsed.y.toFixed(1)}%, AUM $${(ctx.parsed.r / 3)**2.toFixed(1)}B, Inflow $${(etf.inflow / 1e6).toFixed(1)}M` } }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Volatility (%)' }, min: 10, max: 80 },
-                        y: { title: { display: true, text: 'Yield (%)' }, min: -2, max: 12 }
-                    },
-                    animation: { duration: 2000, easing: 'easeOutBounce' }
+            document.getElementById('loading-indicator').style.display = 'block';
+            liveDataLoaded = false;
+            liveAttemptInProgress = true;
+            const chartContainer = document.getElementById('chart-container');
+            chartContainer.innerHTML = '<div class="coming-soon">Live Data Feed: Coming Soon...</div>';
+            const timeout = setTimeout(() => {
+                if (!liveDataLoaded) {
+                    chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
+                    renderBubbleChart();
+                    document.getElementById('last-update').textContent = 'Live Feed Timeout - Using Historical Data';
+                    liveAttemptInProgress = false;
                 }
+            }, 10000);
+
+            const promises = ETFs.map(etf => fetchData(etf).then(data => {
+                etf.price = data.price;
+                etf.change = data.change;
+                etf.aum = etf.aum * (1 + etf.change / 100);
+                etf.volatility = data.volatility || etf.volatility;
+                etf.inflow = data.inflow || etf.inflow;
+            }));
+            Promise.all(promises).then(() => {
+                clearTimeout(timeout);
+                liveDataLoaded = true;
+                saveHistoricalData();
+                chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
+                renderBubbleChart();
+                document.getElementById('last-update').textContent = new Date().toLocaleString();
+                document.getElementById('ai-insight').textContent = generateAIPredictions(visibleETFs);
+                loading.style.display = 'none';
+                document.getElementById('bubbleChart').style.display = 'block';
+                liveAttemptInProgress = false;
+            }).catch(() => {
+                clearTimeout(timeout);
+                liveDataLoaded = true;
+                chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
+                renderBubbleChart();
+                document.getElementById('last-update').textContent = 'Live Feed Error - Using Historical Data';
+                liveAttemptInProgress = false;
             });
         }
 
-        function attemptLiveUpdate() {
-            if (liveAttemptInProgress) return;
-            liveAttemptInProgress = true;
-
-            const chartContainer = document.getElementById('chart-container');
-            chartContainer.innerHTML = '<div class="coming-soon">Live Data Feed: Coming Soon...</div>';
-
-            const timeout = setTimeout(() => {
-                chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
-                renderBubbleChart();
-                document.getElementById('last-update').textContent = 'Live Feed Timeout - Using Historical Data';
-                liveAttemptInProgress = false;
-            }, 10000);
-
-            // Simulate live data attempt (in real code, replace with actual fetch)
-            setTimeout(() => {
-                clearTimeout(timeout);
-                // If successful, render with live data
-                // For demo, always fall back
-                chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
-                renderBubbleChart();
-                document.getElementById('last-update').textContent = 'Live Data Loaded (Simulated)';
-                liveDataLoaded = true;
-                liveAttemptInProgress = false;
-            }, 3000); // Simulate 3s load for demo
+        function generateAIPredictions(visibleETFs) {
+            const bitcoinCount = visibleETFs.filter(e => e.category === 'Bitcoin').length;
+            const traditionalCount = visibleETFs.filter(e => e.category === 'Traditional').length;
+            return `AI Prediction: Showing ${visibleETFs.length} ETFs. Bitcoin concentration: ${bitcoinCount} ETFs. Traditional diversification: ${traditionalCount} ETFs. High volatility cluster in crypto (avg ${visibleETFs.reduce((s, e) => s + e.volatility, 0) / visibleETFs.length.toFixed(1)}%). Expect 10-15% inflow growth in staking ETFs.`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -374,24 +350,15 @@
                 localStorage.setItem('theme', t);
             });
 
-            // Initial load with historical data
-            renderBubbleChart();
-
             // Live toggle
-            document.getElementById('live-toggle').addEventListener('change', e => {
-                if (e.target.checked) {
-                    attemptLiveUpdate();
-                } else {
-                    document.getElementById('chart-container').innerHTML = '<canvas id="bubbleChart"></canvas>';
-                    renderBubbleChart();
-                    document.getElementById('last-update').textContent = 'Historical Data Loaded';
-                }
-            });
+            document.getElementById('live-toggle').addEventListener('change', updateData);
 
             // Category toggle listeners
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
 
-            // Particles
+            loadHistoricalData(); // Start with historical
+            setInterval(updateData, 1800000); // Every 30 min
+
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
