@@ -10,11 +10,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background: #f8fafc;
             color: #1e293b;
-            margin: 0;
         }
         [data-theme="dark"] body {
             background: #020617;
@@ -51,12 +56,13 @@
         }
         .chart-wrapper {
             position: relative;
-            height: 600px;
-            margin-bottom: 2rem;
+            width: 100%;
+            height: 700px; /* Fixed height */
+            margin: 2rem 0;
         }
         @media (max-width: 768px) {
             .chart-wrapper {
-                height: 400px;
+                height: 500px;
             }
         }
         .legend-item {
@@ -88,10 +94,10 @@
                 <li><a href="/frontend/comparisons.html">Comparisons</a></li>
                 <li><a href="/frontend/guides.html">Guides</a></li>
                 <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/tools.html" class="text-blue-500 hover:underline">Tools</a></li>
                 <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+            <select id="theme-select" class="bg-white border border-gray-300 rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
             </select>
@@ -104,69 +110,70 @@
             <p class="text-xl max-w-4xl mx-auto">AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.</p>
         </header>
 
-        <div class="card mb-8">
+        <div class="card">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
+
             <div class="chart-wrapper">
                 <canvas id="bubbleChart"></canvas>
             </div>
 
-            <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
+            <p class="text-sm opacity-70 mb-6">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
 
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">Legend</h3>
-                <div class="space-y-1">
-                    <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>Bitcoin ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Ethereum ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Solana ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Legend</h3>
+                    <div class="space-y-1">
+                        <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>Bitcoin ETFs</div>
+                        <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Ethereum ETFs</div>
+                        <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Solana ETFs</div>
+                        <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-2 mt-6">Toggle Categories</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="category-toggle" data-category="Bitcoin">
+                            Bitcoin
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="category-toggle" data-category="Ethereum">
+                            Ethereum
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="category-toggle" data-category="Solana">
+                            Solana
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="category-toggle" data-category="Multi-Asset">
+                            Multi-Asset
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">Toggle Categories</h3>
-                <div class="flex flex-wrap gap-4">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Bitcoin">
-                        Bitcoin
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Ethereum">
-                        Ethereum
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Solana">
-                        Solana
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Multi-Asset">
-                        Multi-Asset
-                    </label>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
+                    <p>This bubble map shows crypto ETFs:
+                    - <strong>Bubbles</strong>: Each bubble is an ETF. Size = AUM (larger = bigger market cap).
+                    - <strong>X-Axis</strong>: Volatility - higher right = riskier.
+                    - <strong>Y-Axis</strong>: Expense Ratio - higher up = more expensive.
+                    - <strong>Colors</strong>: By category.
+                    Toggle categories to filter the view.</p>
+
+                    <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
+                        <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
+                        <p class="italic opacity-80" id="ai-insight">Loading insights...</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
-                <p>This bubble map shows crypto ETFs:
-                - <strong>Bubbles</strong>: Each bubble is an ETF. Size = AUM (larger = bigger market cap).
-                - <strong>X-Axis</strong>: Volatility - higher right = riskier.
-                - <strong>Y-Axis</strong>: Expense Ratio - higher up = more expensive.
-                - <strong>Colors</strong>: By category.
-                Toggle categories to filter the view.</p>
-            </div>
-
-            <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
-                <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="italic opacity-80" id="ai-insight">Loading insights...</p>
             </div>
         </div>
 
-        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+        <footer class="text-center mt-12 pb-8 border-t border-gray-300 pt-8">
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
 
     <script>
-       const ETFs = [
+         const ETFs = [
     { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, expense: 0.25, inflow: 520e6 },
     { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, expense: 0.25, inflow: 380e6 },
     { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, expense: 1.5, inflow: -120e6 },
@@ -287,7 +294,7 @@
                 label: etf.ticker,
                 data: [{
                     x: etf.volatility,
-                    y: etf.yield,
+                    y: etf.expense || etf.yield || 0,
                     r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
                 }],
                 backgroundColor: categoryColors[etf.category] + 'cc',
@@ -310,7 +317,7 @@
                                     return [
                                         `${etf.ticker} - ${etf.name}`,
                                         `Volatility: ${context.parsed.x.toFixed(1)}%`,
-                                        `Expense Ratio: ${etf.yield.toFixed(2)}%`,
+                                        `Expense Ratio: ${(etf.expense || etf.yield || 0).toFixed(2)}%`,
                                         `AUM: $${(context.parsed.r / 5)**2.toFixed(2)}B`,
                                         `Inflow: $${(etf.inflow / 1e6).toFixed(1)}M`
                                     ];
