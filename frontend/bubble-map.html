@@ -3,61 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Bubble Map Visualizer</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <title>Crypto ETF Index Bubble Map - Historical Snapshot (Jan 2026)</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        canvas {
-            background: #fff;
-            border: 1px solid #ddd;
-            width: 100%;
-            height: 600px;
-        }
-        h1 {
-            text-align: center;
-        }
-        p {
-            line-height: 1.6;
-        }
-        .disclaimer {
-            font-style: italic;
-            color: #666;
-            margin-top: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f0f0; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #1e40af; }
+        canvas { display: block; margin: 30px auto; max-width: 100%; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+        .disclaimer { text-align: center; font-style: italic; color: #e11d48; font-weight: bold; margin: 20px 0; }
+        .explanation { line-height: 1.8; font-size: 1.1em; }
+        .legend { display: flex; justify-content: center; gap: 30px; margin: 30px 0; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 50%; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Crypto ETF Bubble Map Visualizer</h1>
+        <h1>Crypto ETF Index Bubble Map - Historical Snapshot (January 03, 2026)</h1>
         <canvas id="bubbleChart"></canvas>
         <p class="disclaimer">Live pricing bubble map: Coming soon.</p>
-        <h2>Detailed Historical Explanation</h2>
-        <p>
-            This bubble map provides a historical snapshot of the crypto ETF landscape as of January 3, 2026, based on simulated data for educational purposes. The visualization highlights key metrics for each ETF:
-        </p>
-        <ul>
-            <li><strong>Bubble Size</strong>: Represents Assets Under Management (AUM). Larger bubbles indicate higher AUM, showing dominant players like IBIT ($67.91B) in Bitcoin, reflecting institutional interest in spot Bitcoin ETFs.</li>
-            <li><strong>X-Axis (Volatility)</strong>: Measures price volatility. Bitcoin ETFs cluster in the 20-80% range, indicating high risk, while Ethereum ETFs show moderate volatility (20-60%), and Solana/multi-asset funds are lower, suggesting relative stability.</li>
-            <li><strong>Y-Axis (Expense Ratio)</strong>: Shows annual fees. Most spot ETFs have low ratios (<0.5%), making them cost-effective, but leveraged products (e.g., ETHU at 2.67%) have higher fees due to complexity.</li>
-            <li><strong>Colors</strong>: By category – Orange for Bitcoin (dominant with 45% of total AUM), Purple for Ethereum (focused on staking yields), Green for Solana (emerging with high growth potential), Blue for Multi-Asset (diversified options).</li>
-        </ul>
-        <p>
-            Historically, Bitcoin ETFs lead with $115B+ in combined AUM, driven by inflows ($1.5B+), signaling strong investor confidence. Ethereum follows with $17B AUM and moderate inflows, benefiting from staking. Solana and multi-asset ETFs are smaller ($0.5B combined) but show innovation in staking and diversification. Overall, the market shows a Bitcoin-heavy tilt (70% AUM), with average volatility of 35% and expense of 0.8%, hinting at maturing crypto investments in 2026.
-        </p>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> Bitcoin ETFs</div>
+            <div class="legend-item"><div class="legend-color" style="background:#8b5cf6;"></div> Ethereum ETFs</div>
+            <div class="legend-item"><div class="legend-color" style="background:#10b981;"></div> Solana ETFs</div>
+            <div class="legend-item"><div class="legend-color" style="background:#0ea5e9;"></div> Multi-Asset/Other</div>
+        </div>
+
+        <div class="explanation">
+            <h2>What This Historical Bubble Map Shows</h2>
+            <p>This visualization captures the state of the crypto ETF market as of January 3, 2026, based on comprehensive historical data.</p>
+            <ul>
+                <li><strong>Bubble Size = Assets Under Management (AUM)</strong>: The largest bubble is IBIT (iShares Bitcoin Trust) at $67.91 billion — the clear market leader. Bitcoin spot ETFs dominate with over $115 billion combined AUM, showing massive institutional adoption of direct Bitcoin exposure.</li>
+                <li><strong>X-Axis = Volatility</strong>: Bitcoin ETFs spread across high volatility (50-78%), reflecting crypto's inherent price swings. Ethereum ETFs cluster lower (20-60%), while many multi-asset and staking products show near-zero reported volatility (likely due to structured or covered call strategies).</li>
+                <li><strong>Y-Axis = Expense Ratio</strong>: Most spot ETFs charge very low fees (0-0.3%), making them attractive. Leveraged and complex products (e.g., 2x ETFs) have higher fees (up to 2.67%). Grayscale's legacy trusts (GBTC, ETHE) remain expensive at 1.5-2.5%.</li>
+                <li><strong>Colors</strong>: Bitcoin (orange) completely dominates the landscape. Ethereum (purple) forms a solid secondary cluster. Emerging Solana funds (green) and diversified/multi-asset ETFs (blue) are smaller but growing.</li>
+            </ul>
+            <p><strong>Key Historical Insights</strong>: Bitcoin spot ETFs attracted massive inflows ($1.5B+ estimated), while legacy trusts like GBTC saw outflows due to high fees. Ethereum ETFs gained traction with staking yields. The market shows maturation — low-cost spot products winning market share, while innovative leveraged/covered call strategies carve niches. Total crypto ETF AUM exceeds $130 billion, marking mainstream acceptance in 2026.</p>
+            <p>This is a static historical view. A real-time interactive version with live pricing is in development.</p>
+        </div>
     </div>
 
     <script>
@@ -89,187 +73,125 @@
             { ticker: "MSTX", name: "Defiance Daily Target 2x Long MSTR ETF", category: "Multi-Asset", aum: 292.77e6, volatility: 6.23, expense: 0, inflow: 20e6 },
             { ticker: "FDIG", name: "Fidelity Crypto Industry and Digital Payments ETF", category: "Multi-Asset", aum: 259.96e6, volatility: 20.7, expense: 0.39, inflow: 25e6 },
             { ticker: "STCE", name: "Schwab Crypto Thematic ETF", category: "Multi-Asset", aum: 249.32e6, volatility: 22.5, expense: 0.3, inflow: 30e6 },
-    { ticker: "WGMI", name: "CoinShares Bitcoin Mining ETF", category: "Multi-Asset", aum: 228.48e6, volatility: 13.5, expense: 0.75, inflow: 40e6 },
-    { ticker: "YBTC", name: "Roundhill Bitcoin Covered Call Strategy ETF", category: "Bitcoin", aum: 225.04e6, volatility: 24.5, expense: 0.96, inflow: 50e6 },
-    { ticker: "BLOX", name: "Nicholas Crypto Income ETF", category: "Multi-Asset", aum: 212.88e6, volatility: 21.1, expense: 1.03, inflow: 20e6 },
-    { ticker: "ETHV", name: "VanEck Ethereum ETF", category: "Ethereum", aum: 171.36e6, volatility: 28.7, expense: 0, inflow: 68e6 },
-    { ticker: "LFGY", name: "YieldMax Crypto Industry & Tech Portfolio Option Income ETF", category: "Multi-Asset", aum: 144.09e6, volatility: 17.6, expense: 1.02, inflow: 15e6 },
-    { ticker: "BTCW", name: "WisdomTree Bitcoin Fund", category: "Bitcoin", aum: 140.61e6, volatility: 23.6, expense: 0.25, inflow: 45e6 },
-    { ticker: "OBTC", name: "Osprey Bitcoin Trust", category: "Bitcoin", aum: 137.75e6, volatility: 18.1, expense: 0.49, inflow: 30e6 },
-    { ticker: "SBIT", name: "ProShares UltraShort Bitcoin ETF", category: "Bitcoin", aum: 123.90e6, volatility: 51.7, expense: 0.95, inflow: -20e6 },
-    { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index US ETF", category: "Multi-Asset", aum: 121.94e6, volatility: 26.4, expense: 0.25, inflow: 48e6 },
-    { ticker: "BITI", name: "ProShares Short Bitcoin ETF", category: "Bitcoin", aum: 114.47e6, volatility: 26.8, expense: 1.03, inflow: -15e6 },
-    { ticker: "CRPT", name: "First Trust SkyBridge Crypto Industry & Digital Economy ETF", category: "Multi-Asset", aum: 114.13e6, volatility: 32.2, expense: 0.85, inflow: 20e6 },
-    { ticker: "FSOL", name: "Fidelity Solana Fund", category: "Solana", aum: 113.58e6, volatility: 0, expense: 0, inflow: 125e6 },
-    { ticker: "YETH", name: "Roundhill Ether Covered Call Strategy ETF", category: "Ethereum", aum: 110.80e6, volatility: 21.6, expense: 0.95, inflow: 30e6 },
-    { ticker: "BTFX", name: "CoinShares Bitcoin Leverage ETF", category: "Bitcoin", aum: 7.93e6, volatility: 40.7, expense: 1.86, inflow: -10e6 },
-    { ticker: "CBTY", name: "Calamos Bitcoin 80 Series Structured Alt Protection ETF - July", category: "Bitcoin", aum: 7.69e6, volatility: 13.8, expense: 0.69, inflow: 5e6 },
-    { ticker: "CBOO", name: "Calamos Bitcoin Structured Alt Protection ETF - October", category: "Bitcoin", aum: 7.34e6, volatility: 0, expense: 0.69, inflow: 4e6 },
-    { ticker: "BITK", name: "Tuttle Capital IBIT 0DTE Covered Call ETF", category: "Bitcoin", aum: 7.25e6, volatility: 27.8, expense: 0.99, inflow: 6e6 },
-    { ticker: "CIFU", name: "T-REX 2X Long CIFR Daily Target ETF", category: "Multi-Asset", aum: 7.09e6, volatility: 0, expense: 1.5, inflow: 3e6 },
-    { ticker: "ETCO", name: "Grayscale Ethereum Covered Call ETF", category: "Ethereum", aum: 6.23e6, volatility: 23.0, expense: 0.66, inflow: 10e6 },
-    { ticker: "CBOY", name: "Calamos Bitcoin Structured Alt Protection ETF - July", category: "Bitcoin", aum: 6.15e6, volatility: 2.0, expense: 0.69, inflow: 2e6 },
-    { ticker: "ZZZ", name: "Cyber Hornet S&P 500 and Bitcoin 75/25 Strategy ETF", category: "Multi-Asset", aum: 6.02e6, volatility: 8.0, expense: 1.01, inflow: 3e6 },
-    { ticker: "BLKC", name: "Invesco Alerian Galaxy Blockchain Users and Decentralized Commerce ETF", category: "Multi-Asset", aum: 5.89e6, volatility: 18.8, expense: 0.6, inflow: 5e6 },
-    { ticker: "CBXA", name: "Calamos Bitcoin 90 Series Structured Alt Protection ETF - April", category: "Bitcoin", aum: 5.39e6, volatility: 7.6, expense: 0.69, inflow: 2e6 },
-    { ticker: "CBOA", name: "Calamos Bitcoin Structured Alt Protection ETF - April", category: "Bitcoin", aum: 5.15e6, volatility: 1.3, expense: 0.69, inflow: 1e6 },
-    { ticker: "BTOP", name: "Bitwise Trendwise BTC/ETH and Treasuries Rotation Strategy ETF", category: "Multi-Asset", aum: 5.04e6, volatility: 17.3, expense: 0.89, inflow: 2e6 },
-    { ticker: "BEGS", name: "Rareview 2x Bull Cryptocurrency & Precious Metals ETF", category: "Multi-Asset", aum: 4.66e6, volatility: 12.7, expense: 0.99, inflow: 1e6 },
-    { ticker: "COZX", name: "Tradr 2X Long CORZ Daily ETF", category: "Multi-Asset", aum: 4.16e6, volatility: 0, expense: 1.3, inflow: 1e6 },
-    { ticker: "BPI", name: "Grayscale Bitcoin Premium Income ETF", category: "Bitcoin", aum: 3.95e6, volatility: 22.3, expense: 0.66, inflow: 4e6 },
-    { ticker: "BTRN", name: "Global X Bitcoin Trend Strategy ETF", category: "Bitcoin", aum: 3.61e6, volatility: 8.8, expense: 0.95, inflow: 2e6 },
-    { ticker: "MAAY", name: "GraniteShares YieldBOOST MARA ETF", category: "Multi-Asset", aum: 3.55e6, volatility: 0, expense: 1.07, inflow: 1e6 },
-    { ticker: "BCOR", name: "Grayscale Bitcoin Adopters ETF", category: "Bitcoin", aum: 3.44e6, volatility: 24.8, expense: 0.59, inflow: 3e6 },
-    { ticker: "WTIP", name: "WisdomTree Inflation Plus Fund", category: "Multi-Asset", aum: 3.41e6, volatility: 7.5, expense: 0.65, inflow: 1e6 },
-    { ticker: "EHY", name: "Amplify Ethereum Max Income Covered Call ETF", category: "Ethereum", aum: 3.27e6, volatility: 0, expense: 0.75, inflow: 2e6 },
-    { ticker: "ORO", name: "Arrow Valtoro ETF", category: "Multi-Asset", aum: 3.19e6, volatility: 0, expense: 1.25, inflow: 1e6 },
-    { ticker: "ARKY", name: "ARK 21Shares Active Bitcoin Ethereum Strategy ETF", category: "Multi-Asset", aum: 2.93e6, volatility: 25.0, expense: 1.0, inflow: 3e6 },
-    { ticker: "CBTA", name: "Calamos Bitcoin 80 Series Structured Alt Protection ETF - April", category: "Bitcoin", aum: 2.78e6, volatility: 13.9, expense: 0.69, inflow: 1e6 },
-    { ticker: "BFJL", name: "FT Vest Bitcoin Strategy Floor15 ETF - July", category: "Bitcoin", aum: 2.72e6, volatility: 11.4, expense: 0.9, inflow: 1e6 },
-    { ticker: "ESK", name: "REX-Osprey ETH + Staking ETF", category: "Ethereum", aum: 2.71e6, volatility: 27.7, expense: 0.75, inflow: 5e6 },
-    { ticker: "ETTY", name: "Amplify Ethereum 3% Monthly Option Income ETF", category: "Ethereum", aum: 2.44e6, volatility: 0, expense: 0.75, inflow: 2e6 },
-    { ticker: "PXIU", name: "T-REX 2X Long UPXI Daily Target ETF", category: "Multi-Asset", aum: 2.29e6, volatility: 94.2, expense: 1.5, inflow: 1e6 },
-    { ticker: "YBMN", name: "Defiance BMNR Option Income ETF", category: "Multi-Asset", aum: 2.21e6, volatility: 0, expense: 0.85, inflow: 1e6 },
-    { ticker: "ARKC", name: "ARK 21Shares Active On-Chain Bitcoin Strategy ETF", category: "Bitcoin", aum: 2.03e6, volatility: 15.8, expense: 0.87, inflow: 1e6 },
-    { ticker: "ETQ", name: "T-Rex 2X Inverse Ether Daily Target ETF", category: "Ethereum", aum: 1.94e6, volatility: 29.5, expense: 0.95, inflow: -5e6 },
-    { ticker: "SOLC", name: "Canary Marinade Solana ETF", category: "Solana", aum: 1.93e6, volatility: 0, expense: 0.5, inflow: 5e6 },
-    { ticker: "RTYY", name: "GraniteShares YieldBoost RIOT ETF", category: "Multi-Asset", aum: 1.91e6, volatility: 0, expense: 1.07, inflow: 1e6 },
-    { ticker: "BFAP", name: "FT Vest Bitcoin Strategy Floor15 ETF April", category: "Bitcoin", aum: 1.82e6, volatility: 11.1, expense: 0.9, inflow: 1e6 },
-    { ticker: "CBOL", name: "Calamos Laddered Bitcoin Structured Alt Protection ETF", category: "Bitcoin", aum: 1.79e6, volatility: 0, expense: 0.79, inflow: 1e6 },
-    { ticker: "BLSX", name: "Tradr 2X Long BLSH Daily ETF", category: "Multi-Asset", aum: 1.79e6, volatility: 0, expense: 1.3, inflow: 1e6 },
-    { ticker: "DIME", name: "CoinShares Altcoins ETF", category: "Multi-Asset", aum: 1.76e6, volatility: 0, expense: 0.0, inflow: 1e6 },
-    { ticker: "CBXL", name: "Calamos Laddered Bitcoin 90 Series Structured Alt Protection ETF", category: "Bitcoin", aum: 1.67e6, volatility: 0, expense: 0.79, inflow: 1e6 },
-    { ticker: "CBTL", name: "Calamos Laddered Bitcoin 80 Series Structured Alt Protection ETF", category: "Bitcoin", aum: 1.57e6, volatility: 0, expense: 0.79, inflow: 1e6 },
-    { ticker: "MTYY", name: "GraniteShares YieldBOOST MSTR ETF", category: "Multi-Asset", aum: 1.38e6, volatility: 52.3, expense: 1.07, inflow: 1e6 },
-    { ticker: "OOQB", name: "One One Nasdaq-100 and Bitcoin ETF 1Shs", category: "Multi-Asset", aum: 1.37e6, volatility: 23.9, expense: 0.85, inflow: 1e6 },
-    { ticker: "BLSG", name: "Leverage Shares 2X Long BLSH Daily ETF", category: "Multi-Asset", aum: 1.33e6, volatility: 0, expense: 0.75, inflow: 1e6 },
-    { ticker: "HOII", name: "REX HOOD Growth & Income ETF", category: "Multi-Asset", aum: 1.27e6, volatility: 0, expense: 0.99, inflow: 1e6 },
-    { ticker: "BWOW", name: "Bitwise Dogecoin ETF", category: "Multi-Asset", aum: 1.21e6, volatility: 0, expense: 0.0, inflow: 1e6 },
-    { ticker: "TRIL", name: "Defiance Trillion Dollar Club Index ETF", category: "Multi-Asset", aum: 1.01e6, volatility: 0.4, expense: 0.49, inflow: 1e6 },
-    { ticker: "APED", name: "STKd 150% MSTR & 150% COIN ETF", category: "Multi-Asset", aum: 968.99e3, volatility: 70.6, expense: 1.29, inflow: 1e6 },
-    { ticker: "IETH", name: "Bitwise Ethereum Option Income Strategy ETF", category: "Ethereum", aum: 945.76e3, volatility: 0, expense: 0.97, inflow: 1e6 },
-    { ticker: "HBTC", name: "Fortuna Hedged Bitcoin Fund", category: "Bitcoin", aum: 918.29e3, volatility: 14.3, expense: 1.75, inflow: 1e6 },
-    { ticker: "TTOP", name: "21Shares FTSE Crypto 10 Index ETF", category: "Multi-Asset", aum: 858.05e3, volatility: 0, expense: 0.5, inflow: 1e6 },
-    { ticker: "TXBC", name: "21Shares FTSE Crypto 10 ex-BTC Index ETF", category: "Multi-Asset", aum: 839.57e3, volatility: 0, expense: 0.65, inflow: 1e6 },
-    { ticker: "GEMG", name: "Leverage Shares 2X Long GEMI Daily ETF", category: "Multi-Asset", aum: 701.86e3, volatility: 0, expense: 0.75, inflow: 1e6 },
-    { ticker: "CIFG", name: "Leverage Shares 2X Long CIFR Daily ETF", category: "Multi-Asset", aum: 658.41e3, volatility: 0, expense: 0.75, inflow: 1e6 },
-    { ticker: "SATG", name: "Leverage Shares 2X Long SATS Daily ETF", category: "Multi-Asset", aum: 654.76e3, volatility: 0, expense: 0.75, inflow: 1e6 },
-    { ticker: "IREG", name: "Leverage Shares 2X Long IREN Daily ETF", category: "Multi-Asset", aum: 591.50e3, volatility: 0, expense: 0.75, inflow: 1e6 },
-    { ticker: "OOSB", name: "One One S&P 500 and Bitcoin ETF", category: "Multi-Asset", aum: 519.22e3, volatility: 22.5, expense: 0.85, inflow: 1e6 },
-    { ticker: "STBQ", name: "Amplify Stablecoin Technology ETF", category: "Multi-Asset", aum: 503.17e3, volatility: 0, expense: 0.69, inflow: 1e6 },
-    { ticker: "WTIB", name: "USCF Oil Plus Bitcoin Strategy Fund", category: "Multi-Asset", aum: 374.72e3, volatility: 0, expense: 0.89, inflow: 1e6 }
-];
+            { ticker: "WGMI", name: "CoinShares Bitcoin Mining ETF", category: "Multi-Asset", aum: 228.48e6, volatility: 13.5, expense: 0.75, inflow: 40e6 },
+            { ticker: "YBTC", name: "Roundhill Bitcoin Covered Call Strategy ETF", category: "Bitcoin", aum: 225.04e6, volatility: 24.5, expense: 0.96, inflow: 50e6 },
+            { ticker: "BLOX", name: "Nicholas Crypto Income ETF", category: "Multi-Asset", aum: 212.88e6, volatility: 21.1, expense: 1.03, inflow: 20e6 },
+            { ticker: "ETHV", name: "VanEck Ethereum ETF", category: "Ethereum", aum: 171.36e6, volatility: 28.7, expense: 0, inflow: 68e6 },
+            { ticker: "LFGY", name: "YieldMax Crypto Industry & Tech Portfolio Option Income ETF", category: "Multi-Asset", aum: 144.09e6, volatility: 17.6, expense: 1.02, inflow: 15e6 },
+            { ticker: "BTCW", name: "WisdomTree Bitcoin Fund", category: "Bitcoin", aum: 140.61e6, volatility: 23.6, expense: 0.25, inflow: 45e6 },
+            { ticker: "OBTC", name: "Osprey Bitcoin Trust", category: "Bitcoin", aum: 137.75e6, volatility: 18.1, expense: 0.49, inflow: 30e6 },
+            { ticker: "SBIT", name: "ProShares UltraShort Bitcoin ETF", category: "Bitcoin", aum: 123.90e6, volatility: 51.7, expense: 0.95, inflow: -20e6 },
+            { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index US ETF", category: "Multi-Asset", aum: 121.94e6, volatility: 26.4, expense: 0.25, inflow: 48e6 },
+            { ticker: "BITI", name: "ProShares Short Bitcoin ETF", category: "Bitcoin", aum: 114.47e6, volatility: 26.8, expense: 1.03, inflow: -15e6 },
+            { ticker: "CRPT", name: "First Trust SkyBridge Crypto Industry & Digital Economy ETF", category: "Multi-Asset", aum: 114.13e6, volatility: 32.2, expense: 0.85, inflow: 20e6 },
+            { ticker: "FSOL", name: "Fidelity Solana Fund", category: "Solana", aum: 113.58e6, volatility: 0, expense: 0, inflow: 125e6 },
+            { ticker: "YETH", name: "Roundhill Ether Covered Call Strategy ETF", category: "Ethereum", aum: 110.80e6, volatility: 21.6, expense: 0.95, inflow: 30e6 },
+            { ticker: "BTFX", name: "CoinShares Bitcoin Leverage ETF", category: "Bitcoin", aum: 7.93e6, volatility: 40.7, expense: 1.86, inflow: -10e6 },
+            { ticker: "CBTY", name: "Calamos Bitcoin 80 Series Structured Alt Protection ETF - July", category: "Bitcoin", aum: 7.69e6, volatility: 13.8, expense: 0.69, inflow: 5e6 },
+            { ticker: "CBOO", name: "Calamos Bitcoin Structured Alt Protection ETF - October", category: "Bitcoin", aum: 7.34e6, volatility: 0, expense: 0.69, inflow: 4e6 },
+            { ticker: "BITK", name: "Tuttle Capital IBIT 0DTE Covered Call ETF", category: "Bitcoin", aum: 7.25e6, volatility: 27.8, expense: 0.99, inflow: 6e6 },
+            { ticker: "CIFU", name: "T-REX 2X Long CIFR Daily Target ETF", category: "Multi-Asset", aum: 7.09e6, volatility: 0, expense: 1.5, inflow: 3e6 },
+            { ticker: "ETCO", name: "Grayscale Ethereum Covered Call ETF", category: "Ethereum", aum: 6.23e6, volatility: 23.0, expense: 0.66, inflow: 10e6 },
+            { ticker: "CBOY", name: "Calamos Bitcoin Structured Alt Protection ETF - July", category: "Bitcoin", aum: 6.15e6, volatility: 2.0, expense: 0.69, inflow: 2e6 },
+            { ticker: "ZZZ", name: "Cyber Hornet S&P 500 and Bitcoin 75/25 Strategy ETF", category: "Multi-Asset", aum: 6.02e6, volatility: 8.0, expense: 1.01, inflow: 3e6 },
+            { ticker: "BLKC", name: "Invesco Alerian Galaxy Blockchain Users and Decentralized Commerce ETF", category: "Multi-Asset", aum: 5.89e6, volatility: 18.8, expense: 0.6, inflow: 5e6 },
+            { ticker: "CBXA", name: "Calamos Bitcoin 90 Series Structured Alt Protection ETF - April", category: "Bitcoin", aum: 5.39e6, volatility: 7.6, expense: 0.69, inflow: 2e6 },
+            { ticker: "CBOA", name: "Calamos Bitcoin Structured Alt Protection ETF - April", category: "Bitcoin", aum: 5.15e6, volatility: 1.3, expense: 0.69, inflow: 1e6 },
+            { ticker: "BTOP", name: "Bitwise Trendwise BTC/ETH and Treasuries Rotation Strategy ETF", category: "Multi-Asset", aum: 5.04e6, volatility: 17.3, expense: 0.89, inflow: 2e6 },
+            { ticker: "BEGS", name: "Rareview 2x Bull Cryptocurrency & Precious Metals ETF", category: "Multi-Asset", aum: 4.66e6, volatility: 12.7, expense: 0.99, inflow: 1e6 },
+            { ticker: "COZX", name: "Tradr 2X Long CORZ Daily ETF", category: "Multi-Asset", aum: 4.16e6, volatility: 0, expense: 1.3, inflow: 1e6 },
+            { ticker: "BPI", name: "Grayscale Bitcoin Premium Income ETF", category: "Bitcoin", aum: 3.95e6, volatility: 22.3, expense: 0.66, inflow: 4e6 },
+            { ticker: "BTRN", name: "Global X Bitcoin Trend Strategy ETF", category: "Bitcoin", aum: 3.61e6, volatility: 8.8, expense: 0.95, inflow: 2e6 },
+            { ticker: "MAAY", name: "GraniteShares YieldBOOST MARA ETF", category: "Multi-Asset", aum: 3.55e6, volatility: 0, expense: 1.07, inflow: 1e6 },
+            { ticker: "BCOR", name: "Grayscale Bitcoin Adopters ETF", category: "Bitcoin", aum: 3.44e6, volatility: 24.8, expense: 0.59, inflow: 3e6 },
+            { ticker: "WTIP", name: "WisdomTree Inflation Plus Fund", category: "Multi-Asset", aum: 3.41e6, volatility: 7.5, expense: 0.65, inflow: 1e6 },
+            { ticker: "EHY", name: "Amplify Ethereum Max Income Covered Call ETF", category: "Ethereum", aum: 3.27e6, volatility: 0, expense: 0.75, inflow: 2e6 },
+            { ticker: "ORO", name: "Arrow Valtoro ETF", category: "Multi-Asset", aum: 3.19e6, volatility: 0, expense: 1.25, inflow: 1e6 },
+            { ticker: "ARKY", name: "ARK 21Shares Active Bitcoin Ethereum Strategy ETF", category: "Multi-Asset", aum: 2.93e6, volatility: 25.0, expense: 1.0, inflow: 3e6 },
+            { ticker: "CBTA", name: "Calamos Bitcoin 80 Series Structured Alt Protection ETF - April", category: "Bitcoin", aum: 2.78e6, volatility: 13.9, expense: 0.69, inflow: 1e6 },
+            { ticker: "BFJL", name: "FT Vest Bitcoin Strategy Floor15 ETF - July", category: "Bitcoin", aum: 2.72e6, volatility: 11.4, expense: 0.9, inflow: 1e6 },
+            { ticker: "ESK", name: "REX-Osprey ETH + Staking ETF", category: "Ethereum", aum: 2.71e6, volatility: 27.7, expense: 0.75, inflow: 5e6 },
+            { ticker: "ETTY", name: "Amplify Ethereum 3% Monthly Option Income ETF", category: "Ethereum", aum: 2.44e6, volatility: 0, expense: 0.75, inflow: 2e6 },
+            { ticker: "PXIU", name: "T-REX 2X Long UPXI Daily Target ETF", category: "Multi-Asset", aum: 2.29e6, volatility: 94.2, expense: 1.5, inflow: 1e6 },
+            { ticker: "YBMN", name: "Defiance BMNR Option Income ETF", category: "Multi-Asset", aum: 2.21e6, volatility: 0, expense: 0.85, inflow: 1e6 },
+            { ticker: "ARKC", name: "ARK 21Shares Active On-Chain Bitcoin Strategy ETF", category: "Bitcoin", aum: 2.03e6, volatility: 15.8, expense: 0.87, inflow: 1e6 },
+            { ticker: "ETQ", name: "T-Rex 2X Inverse Ether Daily Target ETF", category: "Ethereum", aum: 1.94e6, volatility: 29.5, expense: 0.95, inflow: -5e6 },
+            { ticker: "SOLC", name: "Canary Marinade Solana ETF", category: "Solana", aum: 1.93e6, volatility: 0, expense: 0.5, inflow: 5e6 },
+            { ticker: "RTYY", name: "GraniteShares YieldBoost RIOT ETF", category: "Multi-Asset", aum: 1.91e6, volatility: 0, expense: 1.07, inflow: 1e6 },
+            { ticker: "BFAP", name: "FT Vest Bitcoin Strategy Floor15 ETF April", category: "Bitcoin", aum: 1.82e6, volatility: 11.1, expense: 0.9, inflow: 1e6 },
+            { ticker: "CBOL", name: "Calamos Laddered Bitcoin Structured Alt Protection ETF", category: "Bitcoin", aum: 1.79e6, volatility: 0, expense: 0.79, inflow: 1e6 },
+            { ticker: "BLSX", name: "Tradr 2X Long BLSH Daily ETF", category: "Multi-Asset", aum: 1.79e6, volatility: 0, expense: 1.3, inflow: 1e6 },
+            { ticker: "DIME", name: "CoinShares Altcoins ETF", category: "Multi-Asset", aum: 1.76e6, volatility: 0, expense: 0.0, inflow: 1e6 },
+            { ticker: "CBXL", name: "Calamos Laddered Bitcoin 90 Series Structured Alt Protection ETF", category: "Bitcoin", aum: 1.67e6, volatility: 0, expense: 0.79, inflow: 1e6 },
+            { ticker: "CBTL", name: "Calamos Laddered Bitcoin 80 Series Structured Alt Protection ETF", category: "Bitcoin", aum: 1.57e6, volatility: 0, expense: 0.79, inflow: 1e6 },
+            { ticker: "MTYY", name: "GraniteShares YieldBOOST MSTR ETF", category: "Multi-Asset", aum: 1.38e6, volatility: 52.3, expense: 1.07, inflow: 1e6 },
+            { ticker: "OOQB", name: "One One Nasdaq-100 and Bitcoin ETF 1Shs", category: "Multi-Asset", aum: 1.37e6, volatility: 23.9, expense: 0.85, inflow: 1e6 },
+            { ticker: "BLSG", name: "Leverage Shares 2X Long BLSH Daily ETF", category: "Multi-Asset", aum: 1.33e6, volatility: 0, expense: 0.75, inflow: 1e6 },
+            { ticker: "HOII", name: "REX HOOD Growth & Income ETF", category: "Multi-Asset", aum: 1.27e6, volatility: 0, expense: 0.99, inflow: 1e6 },
+            { ticker: "BWOW", name: "Bitwise Dogecoin ETF", category: "Multi-Asset", aum: 1.21e6, volatility: 0, expense: 0.0, inflow: 1e6 },
+            { ticker: "TRIL", name: "Defiance Trillion Dollar Club Index ETF", category: "Multi-Asset", aum: 1.01e6, volatility: 0.4, expense: 0.49, inflow: 1e6 },
+            { ticker: "APED", name: "STKd 150% MSTR & 150% COIN ETF", category: "Multi-Asset", aum: 968.99e3, volatility: 70.6, expense: 1.29, inflow: 1e6 },
+            { ticker: "IETH", name: "Bitwise Ethereum Option Income Strategy ETF", category: "Ethereum", aum: 945.76e3, volatility: 0, expense: 0.97, inflow: 1e6 },
+            { ticker: "HBTC", name: "Fortuna Hedged Bitcoin Fund", category: "Bitcoin", aum: 918.29e3, volatility: 14.3, expense: 1.75, inflow: 1e6 },
+            { ticker: "TTOP", name: "21Shares FTSE Crypto 10 Index ETF", category: "Multi-Asset", aum: 858.05e3, volatility: 0, expense: 0.5, inflow: 1e6 },
+            { ticker: "TXBC", name: "21Shares FTSE Crypto 10 ex-BTC Index ETF", category: "Multi-Asset", aum: 839.57e3, volatility: 0, expense: 0.65, inflow: 1e6 },
+            { ticker: "GEMG", name: "Leverage Shares 2X Long GEMI Daily ETF", category: "Multi-Asset", aum: 701.86e3, volatility: 0, expense: 0.75, inflow: 1e6 },
+            { ticker: "CIFG", name: "Leverage Shares 2X Long CIFR Daily ETF", category: "Multi-Asset", aum: 658.41e3, volatility: 0, expense: 0.75, inflow: 1e6 },
+            { ticker: "SATG", name: "Leverage Shares 2X Long SATS Daily ETF", category: "Multi-Asset", aum: 654.76e3, volatility: 0, expense: 0.75, inflow: 1e6 },
+            { ticker: "IREG", name: "Leverage Shares 2X Long IREN Daily ETF", category: "Multi-Asset", aum: 591.50e3, volatility: 0, expense: 0.75, inflow: 1e6 },
+            { ticker: "OOSB", name: "One One S&P 500 and Bitcoin ETF", category: "Multi-Asset", aum: 519.22e3, volatility: 22.5, expense: 0.85, inflow: 1e6 },
+            { ticker: "STBQ", name: "Amplify Stablecoin Technology ETF", category: "Multi-Asset", aum: 503.17e3, volatility: 0, expense: 0.69, inflow: 1e6 },
+            { ticker: "WTIB", name: "USCF Oil Plus Bitcoin Strategy Fund", category: "Multi-Asset", aum: 374.72e3, volatility: 0, expense: 0.89, inflow: 1e6 }
+        ];
+
         const categoryColors = {
             Bitcoin: '#f59e0b',
             Ethereum: '#8b5cf6',
             Solana: '#10b981',
             "Multi-Asset": '#0ea5e9'
         };
-        let bubbleChart = null;
-        function renderBubbleChart() {
-            const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) bubbleChart.destroy();
-            const visibleETFs = ETFs.filter(etf => {
-                const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
-                return toggle && toggle.checked;
-            });
-            const datasets = visibleETFs.map(etf => ({
-                label: etf.ticker,
-                data: [{
-                    x: etf.volatility,
-                    y: etf.expense || etf.yield || 0,
-                    r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
-                }],
-                backgroundColor: categoryColors[etf.category] + 'cc',
-                borderColor: categoryColors[etf.category],
-                borderWidth: 2
-            }));
-            bubbleChart = new Chart(ctx, {
-                type: 'bubble',
-                data: { datasets },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: { display: true, text: 'AI Neural Bubble Map - ETF Correlations Network' },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const etf = visibleETFs[context.datasetIndex];
-                                    return [
-                                        `${etf.ticker} - ${etf.name}`,
-                                        `Volatility: ${context.parsed.x.toFixed(1)}%`,
-                                        `Expense Ratio: ${(etf.expense || etf.yield || 0).toFixed(2)}%`,
-                                        `AUM: $${(context.parsed.r / 5)**2.toFixed(2)}B`,
-                                        `Inflow: $${(etf.inflow / 1e6).toFixed(1)}M`
-                                    ];
-                                }
+
+        const ctx = document.getElementById('bubbleChart').getContext('2d');
+        const datasets = ETFs.map(etf => ({
+            label: etf.ticker,
+            data: [{
+                x: etf.volatility,
+                y: etf.expense,
+                r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
+            }],
+            backgroundColor: categoryColors[etf.category] + 'cc',
+            borderColor: categoryColors[etf.category],
+            borderWidth: 2
+        }));
+
+        new Chart(ctx, {
+            type: 'bubble',
+            data: { datasets },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Crypto ETF Bubble Map - Historical Snapshot (Jan 2026)', font: { size: 18 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const etf = ETFs[context.datasetIndex];
+                                return [
+                                    `${etf.ticker} - ${etf.name}`,
+                                    `AUM: $${(etf.aum / 1e9).toFixed(2)}B`,
+                                    `Volatility: ${context.parsed.x.toFixed(1)}%`,
+                                    `Expense Ratio: ${etf.expense.toFixed(2)}%`,
+                                    `Estimated Inflow: $${(etf.inflow / 1e6).toFixed(0)}M`
+                                ];
                             }
                         }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Volatility (%)' }, min: 0, max: 100 },
-                        y: { title: { display: true, text: 'Expense Ratio (%)' }, min: 0, max: 15 }
-                    },
-                    animation: { duration: 1500 }
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Volatility (%)' }, min: 0, max: 100 },
+                    y: { title: { display: true, text: 'Expense Ratio (%)' }, min: 0, max: 3 }
                 }
-            });
-        }
-        function generateAIPredictions() {
-            const visibleETFs = ETFs.filter(etf => {
-                const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
-                return toggle && toggle.checked;
-            });
-            const bitcoinCount = visibleETFs.filter(e => e.category === 'Bitcoin').length;
-            const ethereumCount = visibleETFs.filter(e => e.category === 'Ethereum').length;
-            const solanaCount = visibleETFs.filter(e => e.category === 'Solana').length;
-            const multiCount = visibleETFs.filter(e => e.category === 'Multi-Asset').length;
-            const totalAUM = visibleETFs.reduce((sum, e) => sum + e.aum, 0) / 1e9;
-            const avgVol = visibleETFs.reduce((sum, e) => sum + e.volatility, 0) / visibleETFs.length || 0;
-            let insight = `Showing ${visibleETFs.length} ETFs (Bitcoin: ${bitcoinCount}, Ethereum: ${ethereumCount}, Solana: ${solanaCount}, Multi-Asset: ${multiCount}). Total AUM: $${totalAUM.toFixed(1)}B. Average volatility: ${avgVol.toFixed(1)}%. `;
-            if (bitcoinCount > visibleETFs.length / 2) insight += "Heavy Bitcoin dominance - consider diversification. ";
-            if (solanaCount > 0) insight += "Solana staking products show high yield potential. ";
-            if (ethereumCount > 0) insight += "Ethereum ETFs provide yield hedge against Bitcoin volatility. ";
-            insight += "Expect continued institutional inflows in 2026.";
-            return insight;
-        }
-        function updateAIInsights() {
-            document.getElementById('ai-insight').textContent = generateAIPredictions();
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            // Theme toggle
-            const saved = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', saved);
-            document.getElementById('theme-select').value = saved;
-            document.getElementById('theme-select').addEventListener('change', e => {
-                const t = e.target.value;
-                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
-                localStorage.setItem('theme', t);
-            });
-            // Category toggle
-            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
-                renderBubbleChart();
-                updateAIInsights();
-            }));
-            // Initial render
-            renderBubbleChart();
-            updateAIInsights();
-            // Particles background
-            particlesJS('particles', {
-                particles: {
-                    number: { value: 80 },
-                    color: { value: '#0ea5e9' },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.5 },
-                    size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 2 }
-                },
-                interactivity: {
-                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
-                },
-                retina_detect: true
-            });
+            }
         });
     </script>
 </body>
