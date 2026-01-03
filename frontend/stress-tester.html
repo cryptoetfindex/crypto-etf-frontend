@@ -141,7 +141,7 @@
 
             <div class="card">
                 <h2 class="text-2xl font-semibold mb-4">Stress Test Scenarios</h2>
-                <div class="grid grid-cols-1 gap-4">
+                <div class="grid grid-cols-1 gap-4 mb-4">
                     <div class="scenario-card" data-scenario="2022-bear">
                         <div class="font-bold">2022 Crypto Winter</div>
                         <div class="text-sm opacity-80">-75% Bitcoin drawdown over 12 months</div>
@@ -162,6 +162,14 @@
                         <div class="font-bold">Prolonged Bear Market</div>
                         <div class="text-sm opacity-80">-80% over 24 months</div>
                     </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mb-2">Custom Scenario</h3>
+                <div class="space-y-3">
+                    <input id="custom-name" placeholder="Scenario Name" class="w-full p-3 border rounded">
+                    <input id="custom-drawdown" type="number" placeholder="Max Drawdown (%)" class="w-full p-3 border rounded">
+                    <input id="custom-duration" type="number" placeholder="Duration (days)" class="w-full p-3 border rounded">
+                    <button id="add-custom" class="bg-[var(--accent)] text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90">Add Custom Scenario</button>
                 </div>
             </div>
         </div>
@@ -188,6 +196,34 @@
             </div>
 
             <div class="chart-wrapper"><canvas id="stressChart"></canvas></div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Value at Risk (VaR) Calculator</h2>
+            <p class="mb-4">Estimate the maximum expected loss over a given time period at a certain confidence level.</p>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block mb-2 font-medium">Confidence Level</label>
+                    <select id="var-confidence" class="w-full p-3 border rounded">
+                        <option value="95">95%</option>
+                        <option value="99">99%</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2 font-medium">Time Horizon</label>
+                    <select id="var-horizon" class="w-full p-3 border rounded">
+                        <option value="1">1 Day</option>
+                        <option value="5">1 Week</option>
+                        <option value="21">1 Month</option>
+                    </select>
+                </div>
+            </div>
+            <button id="calculate-var" class="bg-[var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">Calculate VaR</button>
+            <div class="mt-6 text-center">
+                <div class="metric-big text-red-600" id="var-result">- %</div>
+                <div class="text-sm opacity-70">Value at Risk</div>
+            </div>
+            <p class="text-sm opacity-70 mt-4">VaR is calculated using historical simulation method with ETF-specific correlations.</p>
         </div>
 
         <p class="disclaimer">
@@ -230,6 +266,22 @@
             "long-bear": { name: "Prolonged Bear Market", path: generateDrawdownPath(0.80, 504).slice(0,252) }
         };
 
+        // ETF-specific correlations (simplified matrix, 1 for same, 0.8 for same group, 0.5 cross-group, 0.3 others)
+        const groups = {
+            bitcoin: btcTickers,
+            ethereum: ethTickers,
+            other: otherTickers
+        };
+
+        function getCorrelation(ticker1, ticker2) {
+            if (ticker1 === ticker2) return 1;
+            for (const group in groups) {
+                if (groups[group].includes(ticker1) && groups[group].includes(ticker2)) return 0.85;
+            }
+            if ((btcTickers.includes(ticker1) && ethTickers.includes(ticker2)) || vice versa) return 0.5;
+            return 0.3;
+        }
+
         function generateDrawdownPath(maxDrawdown, days) {
             const path = [];
             let value = 1;
@@ -246,7 +298,7 @@
             const path = Array(252).fill(1);
             path[5] = 0.5; // 50% drop on day 5
             for (let i = 6; i < 252; i++) {
-                path[i] = path[i-1] * (1 + (Math.random() - 0.55) * 0.03);
+                path[i] = path[i-1] * (1 + (Math.random() - 0.45) * 0.03);
             }
             return path;
         }
@@ -293,7 +345,6 @@
 
             document.getElementById('total-allocation').textContent = total;
 
-            // Event listeners
             document.querySelectorAll('.allocation-input').forEach(input => {
                 input.addEventListener('change', e => {
                     const idx = e.target.dataset.idx;
@@ -312,38 +363,46 @@
                     runStressTest();
                 });
             });
+
+            runStressTest();
         }
 
         function runStressTest() {
-            if (portfolio.length === 0 || !selectedScenario) {
-                document.getElementById('max-drawdown').textContent = '- %';
-                document.getElementById('recovery-time').textContent = '- days';
-                document.getElementById('ending-value').textContent = '$100';
-                document.getElementById('volatility').textContent = '- %';
-                return;
-            }
+            if (portfolio.length === 0 || !selectedScenario) return;
 
             const scenarioPath = scenarios[selectedScenario].path;
             const weights = portfolio.map(p => p.allocation / 100);
 
-            // Assume all ETFs follow the same stress path (simplified)
-            const portfolioPath = scenarioPath.map((factor, i) => {
-                return 100 * weights.reduce((sum, w, j) => sum + w, 0) * factor;
+            // Adjust for ETF-specific correlations
+            const portfolioPath = scenarioPath.map((baseFactor, i) => {
+                let adjusted = 0;
+                for (let j = 0; j < n; j++) {
+                    let etfFactor = baseFactor;
+                    for (let k = 0; k < n; k++) {
+                        if (j !== k) {
+                            etfFactor *= getCorrelation(selected[j], selected[k]);
+                        }
+                    }
+                    adjusted += weights[j] * etfFactor;
+                }
+                return 100 * adjusted;
             });
 
-            const maxDrawdown = Math.min(...portfolioPath) / 100 - 1;
+            const maxDrawdown = (Math.min(...portfolioPath) / 100 - 1) * 100;
             const ending = portfolioPath[portfolioPath.length - 1];
-            const volatility = std(portfolioPath.map(v => (v / 100 - 1) * Math.sqrt(252))) * 100;
+            const volatility = std(portfolioPath.map(v => (v / 100 - 1))) * Math.sqrt(252) * 100;
 
             let recoveryDays = '-';
-            for (let i = 0; i < portfolioPath.length; i++) {
-                if (portfolioPath[i] >= 100) {
-                    recoveryDays = i;
+            const peak = 100;
+            let troughIndex = portfolioPath.indexOf(Math.min(...portfolioPath));
+            for (let i = troughIndex; i < portfolioPath.length; i++) {
+                if (portfolioPath[i] >= peak) {
+                    recoveryDays = i - troughIndex;
                     break;
                 }
             }
 
-            document.getElementById('max-drawdown').textContent = (maxDrawdown * 100).toFixed(1) + '%';
+            document.getElementById('max-drawdown').textContent = maxDrawdown.toFixed(1) + '%';
             document.getElementById('recovery-time').textContent = recoveryDays;
             document.getElementById('ending-value').textContent = '$' + ending.toFixed(0);
             document.getElementById('volatility').textContent = volatility.toFixed(1) + '%';
@@ -367,10 +426,38 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { title: { display: true, text: scenarios[selectedScenario].name } },
+                    plugins: { title: { display: true, text: scenarios[selectedScenario].name + ' (ETF-Correlated Adjustment)' } },
                     scales: { y: { title: { display: true, text: 'Portfolio Value ($)' } } }
                 }
             });
+        }
+
+        function calculateVaR() {
+            if (portfolio.length === 0) return;
+
+            const confidence = parseFloat(document.getElementById('var-confidence').value) / 100;
+            const horizon = parseInt(document.getElementById('var-horizon').value);
+
+            // Historical simulation VaR
+            const returns = [];
+            for (let d = 0; d < 252 - horizon; d++) {
+                let periodRet = 0;
+                for (let i = 0; i < n; i++) {
+                    const series = HISTORICAL_DAILY_RETURNS[selected[i]];
+                    let ret = 1;
+                    for (let j = 0; j < horizon; j++) {
+                        ret *= (1 + (series[d + j] - mean(series)));
+                    }
+                    periodRet += (ret - 1) * (portfolio[i].allocation / 100);
+                }
+                returns.push(periodRet);
+            }
+
+            returns.sort((a, b) => a - b);
+            const varIndex = Math.floor((1 - confidence) * returns.length);
+            const varResult = returns[varIndex] * 100;
+
+            document.getElementById('var-result').textContent = varResult.toFixed(1) + '%';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -411,6 +498,33 @@
                     runStressTest();
                 });
             });
+
+            // Custom scenario
+            document.getElementById('add-custom').addEventListener('click', () => {
+                const name = document.getElementById('custom-name').value || 'Custom Scenario';
+                const maxDrawdown = parseFloat(document.getElementById('custom-drawdown').value) / 100 || 0.5;
+                const duration = parseInt(document.getElementById('custom-duration').value) || 252;
+                const customId = 'custom-' + Date.now();
+                scenarios[customId] = { name, path: generateDrawdownPath(maxDrawdown, Math.min(duration, 252)) };
+
+                const card = document.createElement('div');
+                card.className = 'scenario-card';
+                card.dataset.scenario = customId;
+                card.innerHTML = `
+                    <div class="font-bold">${name}</div>
+                    <div class="text-sm opacity-80">${maxDrawdown * 100}% drawdown over ${duration} days</div>
+                `;
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selectedScenario = customId;
+                    runStressTest();
+                });
+                document.querySelector('.grid.grid-cols-1.gap-4').appendChild(card);
+            });
+
+            // VaR button
+            document.getElementById('calculate-var').addEventListener('click', calculateVaR);
 
             // Particles
             particlesJS('particles', {
