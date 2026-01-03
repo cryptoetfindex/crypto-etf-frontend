@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Stress Tester 2026 - Portfolio Risk Simulator</title>
+    <meta name="description" content="Stress test your crypto ETF portfolio against historical and hypothetical market crashes, bear markets, volatility spikes, and black swan events in 2026.">
+    <meta name="keywords" content="crypto etf stress test 2026, portfolio risk simulator, drawdown calculator, bitcoin crash test, ethereum bear market">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .chart-wrapper {
+            margin-top: 2rem;
+            position: relative;
+            height: 400px;
+        }
+        .scenario-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .scenario-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(14,165,233,0.2);
+        }
+        .metric-big {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Stress Tester 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Build a portfolio and stress test it against historical crashes, bear markets, volatility spikes, and hypothetical black swan events. See maximum drawdown, recovery time, and portfolio resilience.</p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="card">
+                <h2 class="text-2xl font-semibold mb-4">Build Your Portfolio</h2>
+                <div id="portfolio-builder" class="space-y-4">
+                    <div class="flex gap-4 mb-4">
+                        <select id="etf-select" class="flex-1 p-3 border border-[var(--border)] rounded-lg">
+                            <option value="">Select an ETF to add...</option>
+                            <!-- Populated by JS -->
+                        </select>
+                        <button id="add-etf" class="bg-[var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">Add</button>
+                    </div>
+
+                    <div id="portfolio-items" class="space-y-3">
+                        <!-- Portfolio items injected here -->
+                    </div>
+
+                    <div class="text-right mt-4">
+                        <strong>Total Allocation: <span id="total-allocation">0</span>%</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="text-2xl font-semibold mb-4">Stress Test Scenarios</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="scenario-card" data-scenario="2022-bear">
+                        <div class="font-bold">2022 Crypto Winter</div>
+                        <div class="text-sm opacity-80">-75% Bitcoin drawdown over 12 months</div>
+                    </div>
+                    <div class="scenario-card" data-scenario="march-2020">
+                        <div class="font-bold">March 2020 Flash Crash</div>
+                        <div class="text-sm opacity-80">-50% in 2 days</div>
+                    </div>
+                    <div class="scenario-card" data-scenario="vol-spike">
+                        <div class="font-bold">Volatility Spike</div>
+                        <div class="text-sm opacity-80">VIX to 80, 3x normal volatility for 3 months</div>
+                    </div>
+                    <div class="scenario-card" data-scenario="black-swan">
+                        <div class="font-bold">2026 Black Swan</div>
+                        <div class="text-sm opacity-80">-85% crypto market crash in 1 month</div>
+                    </div>
+                    <div class="scenario-card" data-scenario="long-bear">
+                        <div class="font-bold">Prolonged Bear Market</div>
+                        <div class="text-sm opacity-80">-80% over 24 months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Stress Test Results</h2>
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="metric-big text-red-600" id="max-drawdown">- %</div>
+                    <div class="text-sm opacity-70">Maximum Drawdown</div>
+                </div>
+                <div class="text-center">
+                    <div class="metric-big text-orange-600" id="recovery-time">- days</div>
+                    <div class="text-sm opacity-70">Recovery Time</div>
+                </div>
+                <div class="text-center">
+                    <div class="metric-big text-blue-600" id="ending-value">$100</div>
+                    <div class="text-sm opacity-70">Ending Value ($100 start)</div>
+                </div>
+                <div class="text-center">
+                    <div class="metric-big text-purple-600" id="volatility">- %</div>
+                    <div class="text-sm opacity-70">Annualized Volatility</div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper"><canvas id="stressChart"></canvas></div>
+        </div>
+
+        <p class="disclaimer">
+            Results are based on simulated historical and hypothetical scenarios for educational purposes only. Past performance is not indicative of future results. Not financial advice.
+        </p>
+
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        const ETFs = [
+            "IBIT", "FBTC", "GBTC", "BTC", "BITB", "ARKB", "HODL", "BTCO", "EZBC", "BRRR", "BTCW",
+            "ETHA", "FETH", "ETHE", "ETH", "ETHW", "ETHV", "QETH",
+            "XRPC", "XRP", "XRPZ", "XXRP", "XRPI", "XRPT", "XRPR", "UXRP", "XRPM", "XRPK", "TOXR",
+            "BSOL", "SSK", "GSOL", "VSOL", "TSOL", "QSOL", "SOEZ", "SOLC", "SOLM", "SOLX", "SLON",
+            "BITW", "GDLC", "NCIQ", "EZPZ", "GLNK", "HBR", "LTCC", "DOJE", "BWOW", "GDOG", "TXXD", "TXXS",
+            "DIME", "STBQ", "TKNQ", "ORO", "WTIB", "TTOP", "TXBC", "SPY", "QQQ"
+        ];
+
+        const portfolio = []; // { ticker, allocation }
+
+        let stressChart = null;
+        let selectedScenario = null;
+
+        // Simulated stress scenarios (drawdown path over 252 days)
+        const scenarios = {
+            "2022-bear": { name: "2022 Crypto Winter", path: generateDrawdownPath(0.75, 252) },
+            "march-2020": { name: "March 2020 Flash Crash", path: generateFlashCrash() },
+            "vol-spike": { name: "Volatility Spike", path: generateVolSpike() },
+            "black-swan": { name: "2026 Black Swan", path: generateBlackSwan() },
+            "long-bear": { name: "Prolonged Bear Market", path: generateDrawdownPath(0.80, 504).slice(0,252) }
+        };
+
+        function generateDrawdownPath(maxDrawdown, days) {
+            const path = [];
+            let value = 1;
+            for (let i = 0; i < days; i++) {
+                const progress = i / days;
+                const target = 1 - maxDrawdown * Math.sin(progress * Math.PI / 2);
+                value = value * 0.99 + target * 0.01 + (Math.random() - 0.5) * 0.01;
+                path.push(value);
+            }
+            return path;
+        }
+
+        function generateFlashCrash() {
+            const path = Array(252).fill(1);
+            path[5] = 0.5; // 50% drop on day 5
+            for (let i = 6; i < 252; i++) {
+                path[i] = path[i-1] * (1 + (Math.random() - 0.55) * 0.03);
+            }
+            return path;
+        }
+
+        function generateVolSpike() {
+            const path = [];
+            let value = 1;
+            for (let i = 0; i < 252; i++) {
+                const vol = i < 60 ? 0.1 : 0.03;
+                value *= (1 + (Math.random() - 0.5) * vol);
+                path.push(value);
+            }
+            return path;
+        }
+
+        function generateBlackSwan() {
+            const path = Array(252).fill(1);
+            for (let i = 10; i < 40; i++) {
+                path[i] = path[i-1] * 0.95;
+            }
+            for (let i = 40; i < 252; i++) {
+                path[i] = path[i-1] * (1 + (Math.random() - 0.6) * 0.02);
+            }
+            return path;
+        }
+
+        function updatePortfolio() {
+            const items = document.getElementById('portfolio-items');
+            items.innerHTML = '';
+            let total = 0;
+
+            portfolio.forEach((item, idx) => {
+                total += item.allocation;
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-4';
+                div.innerHTML = `
+                    <span class="flex-1 font-medium">${item.ticker}</span>
+                    <input type="number" data-idx="${idx}" value="${item.allocation}" min="0" max="100" class="allocation-input w-20 p-2 border rounded">
+                    <span>%</span>
+                    <button data-idx="${idx}" class="remove-etf text-red-600 font-bold">×</button>
+                `;
+                items.appendChild(div);
+            });
+
+            document.getElementById('total-allocation').textContent = total;
+
+            // Event listeners
+            document.querySelectorAll('.allocation-input').forEach(input => {
+                input.addEventListener('change', e => {
+                    const idx = e.target.dataset.idx;
+                    const val = parseFloat(e.target.value) || 0;
+                    portfolio[idx].allocation = Math.max(0, Math.min(100, val));
+                    updatePortfolio();
+                    runStressTest();
+                });
+            });
+
+            document.querySelectorAll('.remove-etf').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const idx = e.target.dataset.idx;
+                    portfolio.splice(idx, 1);
+                    updatePortfolio();
+                    runStressTest();
+                });
+            });
+        }
+
+        function runStressTest() {
+            if (portfolio.length === 0 || !selectedScenario) {
+                document.getElementById('max-drawdown').textContent = '- %';
+                document.getElementById('recovery-time').textContent = '- days';
+                document.getElementById('ending-value').textContent = '$100';
+                document.getElementById('volatility').textContent = '- %';
+                return;
+            }
+
+            const scenarioPath = scenarios[selectedScenario].path;
+            const weights = portfolio.map(p => p.allocation / 100);
+
+            // Assume all ETFs follow the same stress path (simplified)
+            const portfolioPath = scenarioPath.map((factor, i) => {
+                return 100 * weights.reduce((sum, w, j) => sum + w, 0) * factor;
+            });
+
+            const maxDrawdown = Math.min(...portfolioPath) / 100 - 1;
+            const ending = portfolioPath[portfolioPath.length - 1];
+            const volatility = std(portfolioPath.map(v => (v / 100 - 1) * Math.sqrt(252))) * 100;
+
+            let recoveryDays = '-';
+            for (let i = 0; i < portfolioPath.length; i++) {
+                if (portfolioPath[i] >= 100) {
+                    recoveryDays = i;
+                    break;
+                }
+            }
+
+            document.getElementById('max-drawdown').textContent = (maxDrawdown * 100).toFixed(1) + '%';
+            document.getElementById('recovery-time').textContent = recoveryDays;
+            document.getElementById('ending-value').textContent = '$' + ending.toFixed(0);
+            document.getElementById('volatility').textContent = volatility.toFixed(1) + '%';
+
+            // Chart
+            if (stressChart) stressChart.destroy();
+            const ctx = document.getElementById('stressChart').getContext('2d');
+            stressChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array(252).fill().map((_, i) => i % 30 === 0 ? `Day ${i}` : ''),
+                    datasets: [{
+                        label: 'Portfolio Value ($100 start)',
+                        data: portfolioPath,
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239,68,68,0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { title: { display: true, text: scenarios[selectedScenario].name } },
+                    scales: { y: { title: { display: true, text: 'Portfolio Value ($)' } } }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+                localStorage.setItem('theme', t);
+            });
+
+            // Populate ETF select
+            const select = document.getElementById('etf-select');
+            ETFs.forEach(ticker => {
+                const option = document.createElement('option');
+                option.value = ticker;
+                option.textContent = ticker;
+                select.appendChild(option);
+            });
+
+            // Add ETF
+            document.getElementById('add-etf').addEventListener('click', () => {
+                const ticker = document.getElementById('etf-select').value;
+                if (ticker && !portfolio.find(p => p.ticker === ticker)) {
+                    portfolio.push({ ticker, allocation: 0 });
+                    updatePortfolio();
+                }
+            });
+
+            // Scenario selection
+            document.querySelectorAll('.scenario-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selectedScenario = card.dataset.scenario;
+                    runStressTest();
+                });
+            });
+
+            // Particles
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
