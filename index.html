@@ -30,6 +30,7 @@
             --text: #1e293b;
             --card: #ffffff;
             --accent: #0ea5e9;
+            --accent-dark: #f59e0b;
             --border: #e2e8f0;
         }
         [data-theme="dark"] {
@@ -58,7 +59,8 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .btn {
             background: var(--accent);
@@ -74,10 +76,10 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
         th, td {
-            padding: 0.75rem;
+            padding: 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
@@ -85,60 +87,6 @@
             background: rgba(14, 165, 233, 0.05);
             color: var(--accent);
             font-weight: 600;
-        }
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .news-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.2s;
-        }
-        .news-card:hover { transform: translateY(-4px); }
-        .disclaimer {
-            font-size: 0.875rem;
-            opacity: 0.8;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .ticker-bar {
-            background: #000;
-            color: #fff;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 0.5rem 0;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .ticker-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: ticker 90s linear infinite;
-        }
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-        .ticker-item {
-            display: inline-block;
-            margin-right: 3rem;
-        }
-        .ticker-item a {
-            color: #00ffea;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        .ticker-item a:hover {
-            opacity: 0.8;
-        }
-        .ticker-section {
-            font-weight: bold;
-            color: #ffffff;
-            margin-right: 4rem;
         }
         .tool-grid {
             display: grid;
@@ -152,46 +100,90 @@
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .tool-card:hover { transform: translateY(-4px); }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .tool-card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--accent);
         }
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(14,165,233,0.05), rgba(251,146,60,0.05));
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .ticker-bar {
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: 600;
+        }
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 80s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .ticker-item {
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        .ticker-item a {
+            color: #00ffea;
+            text-decoration: underline;
+        }
+        .ticker-section {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 4rem;
+        }
+        .premium-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 <body data-theme="light">
-    <!-- Three Separate Ticker Rows -->
+    <!-- Three Ticker Rows -->
     <div class="ticker-bar">
         <div class="ticker-content" id="bitcoin-ticker">
-            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM (Jan 01, 2026):</span>
-            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $67.6B</span>
-            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $17.7B</span>
-            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $14.5B</span>
-            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $3.3B</span>
-            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $3.4B</span>
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $67.91B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $17.81B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $14.55B</span>
+            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $3.40B</span>
+            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $3.40B</span>
         </div>
     </div>
     <div class="ticker-bar">
         <div class="ticker-content" id="ethereum-ticker">
-            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM (Jan 01, 2026):</span>
-            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $10.3B</span>
-            <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $2.2B</span>
-            <span class="ticker-item">3. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $2.6B</span>
-            <span class="ticker-item">4. <a href="/frontend/eth-mini.html">ETH Mini</a> (Grayscale) – $2.1B</span>
-            <span class="ticker-item">5. <a href="/frontend/ethw.html">ETHW</a> (Bitwise) – $0.34B</span>
+            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $10.30B</span>
+            <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $2.21B</span>
+            <span class="ticker-item">3. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $2.69B</span>
+            <span class="ticker-item">4. <a href="/frontend/eth-mini.html">ETH Mini</a> (Grayscale) – $2.17B</span>
         </div>
     </div>
     <div class="ticker-bar">
         <div class="ticker-content" id="thematic-ticker">
-            <span class="ticker-item ticker-section">Top Thematic Crypto ETFs by AUM (Jan 01, 2026):</span>
-            <span class="ticker-item">1. BITQ (Bitwise Innovators) – $379M</span>
-            <span class="ticker-item">2. MSTX (Defiance 2x MSTR) – $303M</span>
-            <span class="ticker-item">3. WGMI (CoinShares Mining) – $251M</span>
-            <span class="ticker-item">4. STCE (Schwab Thematic) – $267M</span>
-            <span class="ticker-item">5. MNRS (Bitwise Miners) – $150M</span>
+            <span class="ticker-item ticker-section">Top Thematic & Leveraged ETFs:</span>
+            <span class="ticker-item">MSTX (2x MSTR) – $292M</span>
+            <span class="ticker-item">BITX (2x Bitcoin) – $1.44B</span>
+            <span class="ticker-item">BITQ (Crypto Innovators) – $357M</span>
+            <span class="ticker-item">WGMI (Mining) – $228M</span>
         </div>
     </div>
 
@@ -222,13 +214,44 @@
     <!-- Main Content -->
     <main class="container max-w-1400 mx-auto p-6">
         <header class="text-center py-12">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index</h1>
-            <p class="text-xl max-w-4xl mx-auto opacity-90">Your #1 independent resource for tracking Bitcoin, Ethereum, leveraged, and thematic crypto ETFs – with live data, comparisons, news, and guides.</p>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Crypto ETF Index</h1>
+            <p class="text-2xl max-w-5xl mx-auto opacity-90 leading-relaxed">
+                The definitive independent resource for tracking Bitcoin, Ethereum, leveraged, and thematic crypto ETFs — with real-time data, in-depth comparisons, expert analysis, and powerful tools.
+            </p>
         </header>
 
-        <!-- Crypto ETF Ten - Top 10 Overall by AUM -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Crypto ETF Ten – Top 10 Crypto ETFs by AUM</h2>
+        <!-- Highlight Tools Section -->
+        <section class="highlight-section text-center mb-12">
+            <h2 class="text-3xl font-bold mb-8">Powerful Tools for Serious Investors</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h3>ROI Calculator</h3>
+                    <p class="mb-4">Model hypothetical returns across all major crypto ETFs using historical performance data.</p>
+                    <a href="/frontend/roi-calculator.html" class="btn">Launch Calculator →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Performance Comparator</h3>
+                    <p class="mb-4">Compare returns side-by-side with interactive charts (YTD, 1Y, since inception).</p>
+                    <a href="/frontend/performance-comparator.html" class="btn">Compare ETFs →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Tax Efficiency Estimator</h3>
+                    <p class="mb-4">Estimate tax implications for different holding periods and account types.</p>
+                    <a href="/frontend/tax-estimator.html" class="btn">Run Estimator →</a>
+                </div>
+            </div>
+            <p class="mt-8"><a href="/frontend/tools.html" class="btn text-lg px-8 py-3">Explore All Tools →</a></p>
+        </section>
+
+        <!-- Crypto ETF Ten – Enhanced -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                Crypto ETF Ten 
+                <span class="premium-badge">Top 10 by AUM</span>
+            </h2>
+            <p class="text-center mb-8 text-lg opacity-90 max-w-4xl mx-auto">
+                The most widely held crypto ETFs in the world — representing over $115 billion in assets and the core of institutional crypto exposure. These funds have consistently attracted the largest inflows and dominate trading volume.
+            </p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
@@ -238,28 +261,36 @@
                             <th>Name</th>
                             <th>Issuer</th>
                             <th>AUM</th>
+                            <th>Expense Ratio</th>
                             <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>IBIT</td><td>iShares Bitcoin Trust ETF</td><td>BlackRock</td><td>$67.6B</td><td><a href="/frontend/ibit.html">View →</a></td></tr>
-                        <tr><td>2</td><td>FBTC</td><td>Fidelity Wise Origin Bitcoin Fund</td><td>Fidelity</td><td>$17.7B</td><td><a href="/frontend/fbtc.html">View →</a></td></tr>
-                        <tr><td>3</td><td>GBTC</td><td>Grayscale Bitcoin Trust ETF</td><td>Grayscale</td><td>$14.5B</td><td><a href="/frontend/gbtc.html">View →</a></td></tr>
-                        <tr><td>4</td><td>ETHA</td><td>iShares Ethereum Trust ETF</td><td>BlackRock</td><td>$10.3B</td><td><a href="/frontend/etha.html">View →</a></td></tr>
-                        <tr><td>5</td><td>ETHE</td><td>Grayscale Ethereum Trust ETF</td><td>Grayscale</td><td>$2.6B</td><td><a href="/frontend/ethe.html">View →</a></td></tr>
-                        <tr><td>6</td><td>FETH</td><td>Fidelity Ethereum Fund ETF</td><td>Fidelity</td><td>$2.2B</td><td><a href="/frontend/feth.html">View →</a></td></tr>
-                        <tr><td>7</td><td>ETH</td><td>Grayscale Ethereum Mini Trust ETF</td><td>Grayscale</td><td>$2.1B</td><td><a href="/frontend/eth-mini.html">View →</a></td></tr>
-                        <tr><td>8</td><td>BITO</td><td>ProShares Bitcoin ETF</td><td>ProShares</td><td>$2.2B</td><td><a href="/frontend/bito.html">View →</a></td></tr>
-                        <tr><td>9</td><td>ETHU</td><td>2x Ether ETF</td><td>ProShares</td><td>$1.6B</td><td><a href="/frontend/ethu.html">View →</a></td></tr>
-                        <tr><td>10</td><td>BITW</td><td>Bitwise 10 Crypto Index ETF</td><td>Bitwise</td><td>$1.0B</td><td><a href="/frontend/bitw.html">View →</a></td></tr>
+                        <tr><td>1</td><td>IBIT</td><td>iShares Bitcoin Trust ETF</td><td>BlackRock</td><td>$67.91B</td><td>0.25%</td><td><a href="/frontend/ibit.html">View →</a></td></tr>
+                        <tr><td>2</td><td>FBTC</td><td>Fidelity Wise Origin Bitcoin Fund</td><td>Fidelity</td><td>$17.81B</td><td>0.25%</td><td><a href="/frontend/fbtc.html">View →</a></td></tr>
+                        <tr><td>3</td><td>GBTC</td><td>Grayscale Bitcoin Trust ETF</td><td>Grayscale</td><td>$14.55B</td><td>1.50%</td><td><a href="/frontend/gbtc.html">View →</a></td></tr>
+                        <tr><td>4</td><td>ETHA</td><td>iShares Ethereum Trust ETF</td><td>BlackRock</td><td>$10.30B</td><td>0.25%</td><td><a href="/frontend/etha.html">View →</a></td></tr>
+                        <tr><td>5</td><td>BTC</td><td>Grayscale Bitcoin Mini Trust ETF</td><td>Grayscale</td><td>$4.26B</td><td>0.15%</td><td><a href="/frontend/btc-mini.html">View →</a></td></tr>
+                        <tr><td>6</td><td>ARKB</td><td>ARK 21Shares Bitcoin ETF</td><td>ARK/21Shares</td><td>$3.40B</td><td>0.21%</td><td><a href="/frontend/arkb.html">View →</a></td></tr>
+                        <tr><td>7</td><td>BITB</td><td>Bitwise Bitcoin ETF Trust</td><td>Bitwise</td><td>$3.40B</td><td>0.20%</td><td><a href="/frontend/bitb.html">View →</a></td></tr>
+                        <tr><td>8</td><td>ETHE</td><td>Grayscale Ethereum Trust ETF</td><td>Grayscale</td><td>$2.69B</td><td>2.50%</td><td><a href="/frontend/ethe.html">View →</a></td></tr>
+                        <tr><td>9</td><td>FETH</td><td>Fidelity Ethereum Fund ETF</td><td>Fidelity</td><td>$2.21B</td><td>0.25%</td><td><a href="/frontend/feth.html">View →</a></td></tr>
+                        <tr><td>10</td><td>BITO</td><td>ProShares Bitcoin ETF</td><td>ProShares</td><td>$2.21B</td><td>0.95%</td><td><a href="/frontend/bito.html">View →</a></td></tr>
                     </tbody>
                 </table>
             </div>
+            <p class="text-center mt-6 opacity-80">These ten ETFs represent the institutional backbone of crypto exposure — trusted by major wealth managers and used in model portfolios worldwide.</p>
         </section>
 
-        <!-- Crypto ETF Index Platinum - Top 5 Performers -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Crypto ETF Index Platinum – Top 5 Performers (2025)</h2>
+        <!-- Crypto ETF Index Platinum – Enhanced -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                Crypto ETF Index Platinum 
+                <span class="premium-badge">Top 5 Performers of 2025</span>
+            </h2>
+            <p class="text-center mb-8 text-lg opacity-90 max-w-4xl mx-auto">
+                The highest-returning crypto ETFs of 2025 — selected based on total return performance. These funds delivered exceptional results through leveraged exposure, strategic covered calls, and targeted thematic bets during the year's bull run.
+            </p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
@@ -267,163 +298,99 @@
                             <th>Rank</th>
                             <th>Ticker</th>
                             <th>Name</th>
+                            <th>Strategy</th>
                             <th>2025 Return</th>
                             <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>MSTX</td><td>Defiance Daily Target 2x Long MSTR ETF</td><td>+87.5%</td><td><a href="/frontend/mstx.html">View →</a></td></tr>
-                        <tr><td>2</td><td>BITX</td><td>2x Bitcoin Strategy ETF</td><td>+76.2%</td><td><a href="/frontend/bitx.html">View →</a></td></tr>
-                        <tr><td>3</td><td>BITU</td><td>ProShares Ultra Bitcoin ETF</td><td>+72.8%</td><td><a href="/frontend/bitu.html">View →</a></td></tr>
-                        <tr><td>4</td><td>WGMI</td><td>CoinShares Bitcoin Mining ETF</td><td>+64.5%</td><td><a href="/frontend/wgmi.html">View →</a></td></tr>
-                        <tr><td>5</td><td>BITQ</td><td>Bitwise Crypto Industry Innovators ETF</td><td>+48.3%</td><td><a href="/frontend/bitq.html">View →</a></td></tr>
+                        <tr><td>1</td><td>MSTX</td><td>Defiance Daily Target 2x Long MSTR ETF</td><td>2x MicroStrategy</td><td>+87.5%</td><td><a href="/frontend/mstx.html">View →</a></td></tr>
+                        <tr><td>2</td><td>BITX</td><td>2x Bitcoin Strategy ETF</td><td>2x Bitcoin Daily</td><td>+76.2%</td><td><a href="/frontend/bitx.html">View →</a></td></tr>
+                        <tr><td>3</td><td>BITU</td><td>ProShares Ultra Bitcoin ETF</td><td>2x Bitcoin</td><td>+72.8%</td><td><a href="/frontend/bitu.html">View →</a></td></tr>
+                        <tr><td>4</td><td>WGMI</td><td>CoinShares Bitcoin Mining ETF</td><td>Mining Companies</td><td>+64.5%</td><td><a href="/frontend/wgmi.html">View →</a></td></tr>
+                        <tr><td>5</td><td>BITQ</td><td>Bitwise Crypto Industry Innovators ETF</td><td>Digital Economy</td><td>+48.3%</td><td><a href="/frontend/bitq.html">View →</a></td></tr>
                     </tbody>
                 </table>
             </div>
+            <p class="text-center mt-6 opacity-80">These top performers showcase the power of leveraged and thematic strategies during strong market cycles — used by sophisticated investors seeking enhanced returns.</p>
         </section>
 
-        <!-- Latest Tools -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-6 text-center">Latest Tools – Now Live!</h2>
-            <div class="tool-grid">
-                <div class="tool-card">
-                    <h3>ROI Calculator</h3>
-                    <p class="mb-4">Calculate hypothetical returns using historical performance for all major crypto ETFs.</p>
-                    <a href="/frontend/roi-calculator.html" class="btn">Open ROI Calculator →</a>
+        <!-- Latest News & Insights -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">Latest News & Market Insights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="news-card p-6">
+                    <h3 class="text-xl font-bold mb-3"><a href="/frontend/news/bitcoin-etf-inflows-dec2025.html" class="text-[var(--accent)] hover:underline">Bitcoin ETFs See Record $2.4B Weekly Inflow</a></h3>
+                    <p>Led by BlackRock and Fidelity — strongest week since launch.</p>
                 </div>
-                <div class="tool-card">
-                    <h3>Performance Comparator</h3>
-                    <p class="mb-4">Side-by-side returns (YTD, 1Y, since inception) with 7 interactive chart types.</p>
-                    <a href="/frontend/performance-comparator.html" class="btn">Compare Performance →</a>
+                <div class="news-card p-6">
+                    <h3 class="text-xl font-bold mb-3"><a href="/frontend/news/ethereum-staking-yield.html" class="text-[var(--accent)] hover:underline">Ethereum ETFs Begin Reporting Staking Yields</a></h3>
+                    <p>First on-chain yield data integrated into major funds.</p>
                 </div>
-                <div class="tool-card">
-                    <h3>Tax Efficiency Estimator</h3>
-                    <p class="mb-4">Estimate capital gains impact and tax implications for different holding periods.</p>
-                    <a href="/frontend/tax-estimator.html" class="btn">Estimate Taxes →</a>
+                <div class="news-card p-6">
+                    <h3 class="text-xl font-bold mb-3"><a href="/frontend/news/2026-outlook.html" class="text-[var(--accent)] hover:underline">2026 Outlook: Altcoin ETFs on the Horizon</a></h3>
+                    <p>Solana, XRP, and multi-asset funds expected in Q1.</p>
                 </div>
             </div>
-            <p class="text-center mt-6"><a href="/frontend/tools.html" class="btn">View All Tools →</a></p>
+            <p class="text-center mt-8"><a href="/frontend/news.html" class="btn">Read All News →</a></p>
         </section>
 
-        <!-- Key Insights & Latest News -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Key Insights & Latest News</h2>
-            <ul class="space-y-4 text-lg">
-                <li>• <strong>Q4 Rebound:</strong> Bitcoin ETFs saw strong inflows in mid-December after profit-taking. <a href="/frontend/news/bitcoin-etf-weekly-dec18-2025.html" class="text-[var(--accent)] underline">Read weekly review →</a></li>
-                <li>• <strong>Ethereum Momentum:</strong> Spot Ethereum ETFs added billions in Q4, led by BlackRock and Fidelity. <a href="/frontend/news/ethereum-etf-inflows-dec2025.html" class="text-[var(--accent)] underline">See inflows report →</a></li>
-                <li>• <strong>Altcoin Breakthrough:</strong> XRP ETFs crossed $1B AUM with zero outflows – fastest growth ever. <a href="/frontend/news/xrp-etf-1b-milestone.html" class="text-[var(--accent)] underline">Full story →</a></li>
-                <li>• <strong>2025 Outlook:</strong> Record $150B+ total AUM, institutional adoption, and new launches define the year. <a href="/frontend/news/2025-crypto-etf-deep-dive.html" class="text-[var(--accent)] underline">Deep dive review →</a></li>
-                <li>• <strong>Look Ahead:</strong> Final week volatility expected; Q1 2026 may bring staking yields and more altcoin ETFs. <a href="/frontend/news/crypto-etf-lookahead-dec2025.html" class="text-[var(--accent)] underline">2026 forecast →</a></li>
-            </ul>
-        </section>
-
-        <!-- Latest Articles -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-6 text-center">Latest Articles & Analysis</h2>
-            <div id="home-news-grid" class="news-grid">
-                <div class="text-center opacity-70">Loading latest articles...</div>
-            </div>
-        </section>
-
-        <!-- Quick Start -->
-        <section class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">New to Crypto ETFs? Start Here</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <!-- Quick Start for New Investors -->
+        <section class="highlight-section text-center">
+            <h2 class="text-3xl font-bold mb-8">New to Crypto ETFs? Start Here</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-2">How to Buy</h3>
-                    <p class="mb-4">Step-by-step guide to purchasing crypto ETFs in your brokerage.</p>
-                    <a href="/frontend/guides/how-to-buy-crypto-etfs.html" class="btn">Read Guide →</a>
+                    <h3 class="text-2xl font-bold mb-4">Beginner's Guide</h3>
+                    <p class="mb-6">Everything you need to know before investing in crypto ETFs.</p>
+                    <a href="/frontend/guides/beginner-guide.html" class="btn">Start Learning →</a>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Taxes & Risks</h3>
-                    <p class="mb-4">Understand capital gains, account types, and key risks.</p>
-                    <a href="/frontend/guides/crypto-etf-taxes.html" class="btn">Tax Guide →</a>
+                    <h3 class="text-2xl font-bold mb-4">How to Buy</h3>
+                    <p class="mb-6">Step-by-step instructions for major brokerages.</p>
+                    <a href="/frontend/guides/how-to-buy.html" class="btn">Buying Guide →</a>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Beginner Overview</h3>
-                    <p class="mb-4">Everything new investors need to know about crypto ETFs.</p>
-                    <a href="/frontend/guides.html" class="btn">All Guides →</a>
+                    <h3 class="text-2xl font-bold mb-4">Tax Implications</h3>
+                    <p class="mb-6">Understand reporting, capital gains, and tax-advantaged accounts.</p>
+                    <a href="/frontend/guides/tax-guide.html" class="btn">Tax Guide →</a>
                 </div>
             </div>
         </section>
 
-        <p class="disclaimer">
-            Not financial advice. Crypto investments are volatile and carry risk of loss. Data as of January 01, 2026; verify with issuers.
+        <p class="disclaimer text-center mt-12">
+            Not financial advice. Cryptocurrency investments are volatile and carry risk of loss. All data is for informational purposes only.
         </p>
-
-        <!-- Footer -->
-        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
-            <div class="flex flex-wrap gap-4 justify-center mb-6">
-                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
-                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
-                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
-                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
-                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
-            </div>
-            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
-        </footer>
     </main>
 
+    <!-- Footer -->
+    <footer class="text-center py-12 border-t border-[var(--border)]">
+        <div class="flex flex-wrap gap-6 justify-center mb-8">
+            <a href="/frontend/privacy-policy.html" class="hover:text-[var(--accent)]">Privacy Policy</a>
+            <a href="/frontend/terms-of-service.html" class="hover:text-[var(--accent)]">Terms of Service</a>
+            <a href="/frontend/risk-policy.html" class="hover:text-[var(--accent)]">Risk Disclosure</a>
+            <a href="/frontend/affiliate-disclosure.html" class="hover:text-[var(--accent)]">Affiliate Disclosure</a>
+            <a href="/frontend/sitemap.html" class="hover:text-[var(--accent)]">Site Map</a>
+        </div>
+        <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026. All rights reserved.</p>
+    </footer>
+
     <script>
+        // Duplicate ticker content for smooth scrolling
         document.addEventListener('DOMContentLoaded', () => {
-            const duplicateContent = (id) => {
-                const ticker = document.getElementById(id);
-                if (ticker) ticker.innerHTML += ticker.innerHTML;
-            };
-            duplicateContent('bitcoin-ticker');
-            duplicateContent('ethereum-ticker');
-            duplicateContent('thematic-ticker');
-        });
-
-        const NEWS_ARTICLES = [
-            { file: "crypto-etf-lookahead-dec2025.html", date: "2025-12-21", title: "Look Ahead: Final Week of 2025 & Q1 2026 Crypto ETF Forecast", desc: "Q4 recap, top performers, and 2026 outlook" },
-            { file: "bitcoin-etf-weekly-dec18-2025.html", date: "2025-12-18", title: "Bitcoin ETFs Weekly Review: Strong Rebound Inflows (Dec 11–18)", desc: "Record single-day inflows; FBTC leads" },
-            { file: "2025-crypto-etf-deep-dive.html", date: "2025-12-17", title: "2025 Crypto ETF Ecosystem Deep Dive", desc: "Year in review: milestones, flows, regulation" },
-            { file: "xrp-etf-1b-milestone.html", date: "2025-12-16", title: "XRP ETFs Surpass $1B AUM Milestone", desc: "Zero outflow days since launch" },
-            { file: "bitcoin-etf-outflows-dec2025.html", date: "2025-12-15", title: "Bitcoin ETFs Record $582M Weekly Outflow", desc: "Profit-taking amid correction" }
-        ];
-
-        function formatDate(d) {
-            return new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-        }
-
-        function loadHomeNews() {
-            const grid = document.getElementById('home-news-grid');
-            grid.innerHTML = '';
-            const latest = NEWS_ARTICLES.sort((a,b) => b.date.localeCompare(a.date)).slice(0,4);
-            latest.forEach(a => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                card.innerHTML = `
-                    <div class="text-sm opacity-70 mb-2">${formatDate(a.date)}</div>
-                    <h3 class="text-xl font-bold mb-2"><a href="/frontend/news/${a.file}" class="text-[var(--accent)] hover:underline">${a.title}</a></h3>
-                    <p>${a.desc}</p>
-                `;
-                grid.appendChild(card);
+            ['bitcoin-ticker', 'ethereum-ticker', 'thematic-ticker'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML += el.innerHTML;
             });
-            const archive = document.createElement('div');
-            archive.className = 'news-card text-center';
-            archive.innerHTML = `<h3 class="text-2xl font-bold mb-4">Older Articles</h3><p class="mb-6">View all past analysis</p><a href="/frontend/news.html" class="btn inline-block">Browse All News →</a>`;
-            grid.appendChild(archive);
-        }
 
-        document.addEventListener('DOMContentLoaded', loadHomeNews);
-
-        // Theme switcher (Light / Dark only)
-        function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-        }
-
-        window.addEventListener('load', () => {
+            // Theme persistence
             const saved = localStorage.getItem('theme') || 'light';
-            applyTheme(saved);
-            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+                localStorage.setItem('theme', t);
+            });
         });
     </script>
 </body>
