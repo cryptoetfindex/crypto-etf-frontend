@@ -54,15 +54,38 @@
             background: #0f172a;
             border: 1px solid #1e293b;
         }
-        .chart-wrapper {
+        .chart-container {
             position: relative;
             width: 100%;
-            height: 700px; /* Fixed height */
+            height: 70vh; /* Takes 70% of viewport height */
+            min-height: 500px;
+            max-height: 800px;
             margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        [data-theme="dark"] .chart-container {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .chart-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            transform: translate(-50%, -50%);
+        }
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
         }
         @media (max-width: 768px) {
-            .chart-wrapper {
-                height: 500px;
+            .chart-container {
+                height: 60vh;
+                min-height: 400px;
             }
         }
         .legend-item {
@@ -113,8 +136,11 @@
         <div class="card">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
 
-            <div class="chart-wrapper">
-                <canvas id="bubbleChart"></canvas>
+            <!-- Fixed, centered, responsive chart container -->
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="bubbleChart"></canvas>
+                </div>
             </div>
 
             <p class="text-sm opacity-70 mb-6">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
@@ -173,7 +199,7 @@
     </div>
 
     <script>
-         const ETFs = [
+       const ETFs = [
     { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, expense: 0.25, inflow: 520e6 },
     { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, expense: 0.25, inflow: 380e6 },
     { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, expense: 1.5, inflow: -120e6 },
@@ -378,7 +404,7 @@
             renderBubbleChart();
             updateAIInsights();
 
-            // Particles
+            // Particles background
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
