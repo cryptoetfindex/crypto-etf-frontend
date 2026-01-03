@@ -338,23 +338,29 @@
         }
 
         function loadHistoricalData(timePeriod = 'all') {
-            const savedData = localStorage.getItem('etfData');
-            if (savedData) {
-                ETFs.forEach((etf, i) => {
-                    const saved = JSON.parse(savedData)[i];
-                    etf.price = saved.price || etf.price;
-                    etf.change = saved.change || etf.change;
-                    etf.aum = saved.aum || etf.aum;
-                    etf.volatility = saved.volatility || etf.volatility;
-                    etf.inflow = saved.inflow || etf.inflow;
-                });
-            }
-
-            // Adjust for time period (simulated)
+            // Adjust data based on time period (simulated adjustment)
             ETFs.forEach(etf => {
-                etf.volatility = etf.volatility * (1 - Math.random() * 0.1);
-                etf.yield = etf.yield * (1 + Math.random() * 0.1);
-                etf.inflow = etf.inflow * (1 + Math.random() * 0.2 - 0.1);
+                switch (timePeriod) {
+                    case 'year':
+                        etf.volatility *= 0.8;
+                        etf.yield *= 1.2;
+                        break;
+                    case 'month':
+                        etf.volatility *= 0.9;
+                        etf.yield *= 1.1;
+                        break;
+                    case 'week':
+                        etf.volatility *= 0.95;
+                        etf.yield *= 1.05;
+                        break;
+                    case 'day':
+                        etf.volatility *= 0.98;
+                        etf.yield *= 1.02;
+                        break;
+                    default:
+                        // all time - no adjustment
+                        break;
+                }
             });
 
             document.getElementById('last-update').textContent = 'Historical Data Loaded (' + timePeriod.charAt(0).toUpperCase() + timePeriod.slice(1) + ')';
@@ -420,6 +426,35 @@
             return `AI Prediction: Showing ${visibleETFs.length} ETFs. Bitcoin concentration: ${bitcoinCount} ETFs. Traditional diversification: ${traditionalCount} ETFs. High volatility cluster in crypto (avg ${visibleETFs.reduce((s, e) => s + e.volatility, 0) / visibleETFs.length.toFixed(1)}%). Expect 10-15% inflow growth in staking ETFs.`;
         }
 
+        function attemptLiveUpdate() {
+            if (liveAttemptInProgress) return;
+            liveAttemptInProgress = true;
+
+            const chartContainer = document.getElementById('chart-container');
+            chartContainer.innerHTML = '<div class="coming-soon">Live Data Feed: Coming Soon...</div>';
+
+            const timeout = setTimeout(() => {
+                if (!liveDataLoaded) {
+                    chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
+                    renderBubbleChart();
+                    document.getElementById('last-update').textContent = 'Live Feed Timeout - Using Historical Data';
+                    liveAttemptInProgress = false;
+                }
+            }, 10000);
+
+            // Simulate live data attempt (in real code, replace with actual fetch)
+            setTimeout(() => {
+                clearTimeout(timeout);
+                // If successful, render with live data
+                // For demo, always fall back
+                chartContainer.innerHTML = '<canvas id="bubbleChart"></canvas>';
+                renderBubbleChart();
+                document.getElementById('last-update').textContent = 'Live Data Loaded (Simulated)';
+                liveDataLoaded = true;
+                liveAttemptInProgress = false;
+            }, 3000); // Simulate 3s load for demo
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Theme
             const saved = localStorage.getItem('theme') || 'light';
@@ -440,7 +475,7 @@
             // Category toggle listeners
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
 
-            updateData(); // Initial
+            loadHistoricalData(); // Start with historical
             setInterval(updateData, 1800000); // Every 30 min
 
             particlesJS('particles', {
