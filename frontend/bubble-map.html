@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
+    <title>Crypto ETF Bubble Map 2026 - AI Neural Network Visualizer</title>
+    <meta name="description" content="AI-powered bubble map visualizing correlations between crypto and traditional ETFs like a neural network. Real-time inflows/outflows, AI predictions, concentrations, and updates every 30 minutes from data oracles.">
+    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart, yahoo finance real-time inflows outflows">
+    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,15 +14,27 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            margin: 0;
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
         }
-        [data-theme="dark"] body {
-            background: #020617;
-            color: #e2e8f0;
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
         }
         #particles {
             position: absolute;
@@ -30,34 +45,22 @@
             z-index: -1;
         }
         .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
         }
-        [data-theme="dark"] .navbar {
-            background: #0f172a;
-            border-bottom: 1px solid #1e293b;
-        }
         .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
         }
-        [data-theme="dark"] .card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-        }
         .chart-wrapper {
+            margin-top: 2rem;
             position: relative;
             height: 600px;
-        }
-        @media (max-width: 768px) {
-            .chart-wrapper {
-                height: 400px;
-            }
         }
         .legend-item {
             display: flex;
@@ -70,11 +73,31 @@
             height: 12px;
             border-radius: 50%;
         }
+        .ai-prediction {
+            background: rgba(14,165,233,0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .prediction-text {
+            font-style: italic;
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            .chart-wrapper {
+                height: 400px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            p.text-xl {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body data-theme="light">
     <div id="particles"></div>
-
     <nav class="navbar py-4 px-6">
         <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
             <a href="/" class="flex items-center">
@@ -88,26 +111,25 @@
                 <li><a href="/frontend/comparisons.html">Comparisons</a></li>
                 <li><a href="/frontend/guides.html">Guides</a></li>
                 <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-blue-500 hover:underline">Tools</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
                 <li><a href="/frontend/about.html">About</a></li>
             </ul>
-            <select id="theme-select" class="bg-white border border-gray-300 rounded px-3 py-2 text-sm">
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
             </select>
         </div>
     </nav>
-
     <div class="container max-w-1400 mx-auto p-4">
         <header class="text-center py-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index Bubble Maps AI Neural Network Visualizer</h1>
-            <p class="text-xl max-w-4xl mx-auto">AI-powered visualization of crypto ETFs. View correlations as a neural network with connecting lines, historical inflows/outflows as color gradients, and concentrations based on simulated 2026 data.</p>
+            <p class="text-xl max-w-4xl mx-auto">AI-powered visualization of fintech innovations in crypto ETFs. View correlations as a neural network with connecting lines, historical inflows/outflows as color gradients, and concentrations based on simulated 2026 data.</p>
         </header>
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
             <div class="flex items-center gap-4 mb-4">
-                <select id="time-period" class="p-3 border border-gray-300 rounded-lg">
+                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
                     <option value="all">All Time</option>
                     <option value="year">Last Year</option>
                     <option value="month">Last Month</option>
@@ -119,7 +141,6 @@
                 <canvas id="bubbleChart"></canvas>
             </div>
             <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details and inflow/outflow insights. Lines represent correlations >0.7.</p>
-
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-2">Legend</h3>
                 <div class="space-y-1">
@@ -129,7 +150,6 @@
                     <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
                 </div>
             </div>
-
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-2">Toggle Categories</h3>
                 <div class="flex flex-wrap gap-4">
@@ -151,7 +171,6 @@
                     </label>
                 </div>
             </div>
-
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
                 <p>This bubble map represents a neural network-like view of ETF correlations:
@@ -163,22 +182,25 @@
                 - <strong>AI Insights</strong>: Generated predictions below based on data trends.
                 Deselect categories above to focus the view.</p>
             </div>
-
-            <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg mt-6">
+            <div class="ai-prediction mt-6">
                 <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="italic opacity-80" id="ai-insight">High concentration in Bitcoin ETFs (over 70% of total AUM). Ethereum and Solana staking products show growing yield appeal. Multi-asset ETFs provide diversification. Expect continued inflows into spot Bitcoin ETFs as institutional adoption increases in 2026.</p>
+                <p class="prediction-text" id="ai-insight">Loading AI predictions...</p>
             </div>
         </div>
-
-        <p class="text-sm opacity-70">
-            Data is based on historical simulations for 2026. AUM, volatility, yields, and inflows are hypothetical. Not financial advice.
+        <p class="disclaimer">
+            Data is a combination of historical simulations and real-time Yahoo Finance quotes (delayed 15-30 min). AUM, yields, and correlations are hypothetical for 2026. AI predictions are generated for educational purposes. Not financial advice.
         </p>
-
-        <footer class="text-center mt-12 pb-8 border-t border-gray-300 pt-8">
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
-
     <script>
         const ETFs = [
             { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, yield: 0, inflow: 520e6 },
@@ -228,9 +250,7 @@
 
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) {
-                bubbleChart.destroy();
-            }
+            if (bubbleChart) bubbleChart.destroy();
 
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
@@ -329,7 +349,7 @@
             document.getElementById('theme-select').value = saved;
             document.getElementById('theme-select').addEventListener('change', e => {
                 const t = e.target.value;
-                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', t);
                 localStorage.setItem('theme', t);
             });
 
