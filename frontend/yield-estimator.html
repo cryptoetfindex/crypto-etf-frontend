@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto ETF Yield Estimator 2026 - Dividend & Staking Rewards Calculator</title>
+    <meta name="description" content="Estimate annual yield from staking rewards and dividends across spot and leveraged crypto ETFs in 2026. Compare Bitcoin, Ethereum, Solana staking ETFs and income-generating products.">
+    <meta name="keywords" content="crypto etf yield estimator 2026, staking yield calculator, bitcoin etf dividend, ethereum staking rewards, solana etf income">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --accent: #0ea5e9;
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e2e8f0;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --border: #1e293b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .yield-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .yield-high { background: #10b981; color: #fff; }
+        .yield-medium { background: #f59e0b; color: #000; }
+        .yield-low { background: #94a3b8; color: #fff; }
+        .yield-none { background: #e2e8f0; color: #64748b; }
+        .etf-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .etf-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="particles"></div>
+
+    <nav class="navbar py-4 px-6">
+        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="flex items-center">
+                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
+            </a>
+            <ul class="flex flex-wrap gap-6 text-lg">
+                <li><a href="/">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
+                <li><a href="/frontend/guides.html">Guides</a></li>
+                <li><a href="/frontend/news.html">News</a></li>
+                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
+                <li><a href="/frontend/about.html">About</a></li>
+            </ul>
+            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container max-w-1400 mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Yield Estimator 2026</h1>
+            <p class="text-xl max-w-4xl mx-auto">Estimate annual income from staking rewards, dividends, and yield-generating mechanisms across spot and leveraged crypto ETFs. Compare income potential for Bitcoin, Ethereum, Solana staking, and multi-asset funds.</p>
+        </header>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-6">Yield Overview</h2>
+            <p class="mb-6">Select ETFs below to see estimated annual yield based on 2026 network staking rewards, fund distributions, and product structure.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="yield-grid">
+                <!-- Yield cards injected by JavaScript -->
+            </div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-6">Custom Yield Calculator</h2>
+            <p class="mb-6">Build a portfolio and estimate total annual income.</p>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div>
+                    <label class="block mb-2 font-medium">Total Investment Amount ($)</label>
+                    <input type="number" id="investment-amount" value="100000" min="0" step="1000" class="w-full p-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)]">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex gap-4 mb-4">
+                    <select id="etf-select" class="flex-1 p-3 border border-[var(--border)] rounded-lg">
+                        <option value="">Select ETF to add...</option>
+                    </select>
+                    <button id="add-etf" class="bg-[var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">Add to Portfolio</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-b border-[var(--border)]">
+                            <th class="text-left py-3">ETF</th>
+                            <th class="text-right py-3">Allocation (%)</th>
+                            <th class="text-right py-3">Investment ($)</th>
+                            <th class="text-right py-3">Est. Yield (%)</th>
+                            <th class="text-right py-3">Annual Income ($)</th>
+                            <th class="py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolio-table">
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-8 p-6 bg-[var(--accent)] bg-opacity-10 rounded-lg text-center">
+                <div class="text-4xl font-bold mb-2" id="total-income">$0</div>
+                <div class="text-xl opacity-80">Estimated Annual Income</div>
+                <div class="text-lg mt-4" id="weighted-yield">Weighted Yield: 0%</div>
+            </div>
+        </div>
+
+        <div class="card mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Yield Methodology</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li><strong>Staking ETFs</strong>: Based on current network staking rewards (e.g., Ethereum ~4%, Solana ~7%) minus ETF fees.</li>
+                <li><strong>Income Funds</strong>: Hypothetical distributions from covered call strategies or lending.</li>
+                <li><strong>Spot ETFs</strong>: Generally 0% yield unless specified (no staking pass-through).</li>
+                <li><strong>Leveraged/Inverse</strong>: Typically 0% yield due to daily reset mechanics.</li>
+            </ul>
+            <p class="mt-4 text-sm opacity-70">Yields are estimates for 2026 and subject to network changes, fees, and market conditions.</p>
+        </div>
+
+        <p class="disclaimer">
+            Yield estimates are hypothetical and for educational purposes only. Actual distributions may vary significantly. Past performance is not indicative of future results. Not financial advice.
+        </p>
+
+        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
+                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
+                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
+                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
+                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
+            </div>
+            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        const ETFs = [
+            { ticker: "IBIT", name: "iShares Bitcoin Trust", type: "spot", yield: 0 },
+            { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin", type: "spot", yield: 0 },
+            { ticker: "GBTC", name: "Grayscale Bitcoin Trust", type: "spot", yield: 0 },
+            { ticker: "BTC", name: "Grayscale Bitcoin Mini Trust", type: "spot", yield: 0 },
+            { ticker: "BITB", name: "Bitwise Bitcoin ETF", type: "spot", yield: 0 },
+            { ticker: "ARKB", name: "ARK 21Shares Bitcoin", type: "spot", yield: 0 },
+            { ticker: "HODL", name: "VanEck Bitcoin", type: "spot", yield: 0 },
+            { ticker: "BTCO", name: "Invesco Galaxy Bitcoin", type: "spot", yield: 0 },
+            { ticker: "EZBC", name: "Franklin Bitcoin", type: "spot", yield: 0 },
+            { ticker: "BRRR", name: "Valkyrie Bitcoin", type: "spot", yield: 0 },
+            { ticker: "BTCW", name: "WisdomTree Bitcoin", type: "spot", yield: 0 },
+            { ticker: "ETHA", name: "iShares Ethereum Trust", type: "staking", yield: 3.8 },
+            { ticker: "FETH", name: "Fidelity Ethereum Fund", type: "staking", yield: 3.9 },
+            { ticker: "ETHE", name: "Grayscale Ethereum Trust", type: "spot", yield: 0 },
+            { ticker: "ETH", name: "Grayscale Ethereum Mini Trust", type: "staking", yield: 3.7 },
+            { ticker: "ETHW", name: "Bitwise Ethereum ETF", type: "staking", yield: 4.0 },
+            { ticker: "ETHV", name: "VanEck Ethereum ETF", type: "staking", yield: 3.8 },
+            { ticker: "QETH", name: "Invesco Galaxy Ethereum", type: "staking", yield: 3.6 },
+            { ticker: "BSOL", name: "Bitwise Solana Staking", type: "staking", yield: 6.8 },
+            { ticker: "SSK", name: "REX-Osprey SOL + Staking", type: "staking", yield: 6.5 },
+            { ticker: "GSOL", name: "Grayscale Solana Trust", type: "spot", yield: 0 },
+            { ticker: "VSOL", name: "VanEck Solana", type: "staking", yield: 7.0 },
+            { ticker: "TSOL", name: "21Shares Solana", type: "staking", yield: 6.7 },
+            { ticker: "QSOL", name: "Invesco Galaxy Solana", type: "staking", yield: 6.4 },
+            { ticker: "SOEZ", name: "Franklin Solana", type: "staking", yield: 6.9 },
+            { ticker: "SOLC", name: "Canary Marinade Solana", type: "staking", yield: 7.2 },
+            { ticker: "SOLM", name: "Amplify Solana 3% Monthly", type: "income", yield: 3.0 },
+            { ticker: "SOLX", name: "T-REX 2X Long SOL", type: "leveraged", yield: 0 },
+            { ticker: "SLON", name: "ProShares Ultra Solana", type: "leveraged", yield: 0 },
+            { ticker: "BITW", name: "Bitwise 10 Crypto Index", type: "basket", yield: 1.2 },
+            { ticker: "GDLC", name: "Grayscale CoinDesk Crypto 5", type: "basket", yield: 0 },
+            { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index", type: "basket", yield: 1.5 },
+            { ticker: "EZPZ", name: "Franklin Crypto Index", type: "basket", yield: 1.8 },
+            { ticker: "STBQ", name: "Amplify Stablecoin Technology", type: "income", yield: 4.5 },
+            { ticker: "TKNQ", name: "Amplify Tokenization Technology", type: "income", yield: 3.8 },
+            { ticker: "SPY", name: "S&P 500", type: "equity", yield: 1.3 },
+            { ticker: "QQQ", name: "Nasdaq-100", type: "equity", yield: 0.6 }
+        ];
+
+        let portfolio = [];
+
+        function getYieldClass(yieldPct) {
+            if (yieldPct >= 5) return 'yield-high';
+            if (yieldPct >= 2) return 'yield-medium';
+            if (yieldPct > 0) return 'yield-low';
+            return 'yield-none';
+        }
+
+        function renderYieldGrid() {
+            const grid = document.getElementById('yield-grid');
+            grid.innerHTML = '';
+
+            ETFs.sort((a, b) => b.yield - a.yield).forEach(etf => {
+                const card = document.createElement('div');
+                card.className = 'etf-card';
+                card.innerHTML = `
+                    <div class="font-bold text-xl mb-1">${etf.ticker}</div>
+                    <div class="text-sm opacity-80 mb-4">${etf.name}</div>
+                    <div class="yield-badge ${getYieldClass(etf.yield)} mb-3">
+                        ${etf.yield > 0 ? etf.yield + '%' : 'No Yield'}
+                    </div>
+                    <div class="text-sm">
+                        <strong>Type:</strong> ${etf.type.charAt(0).toUpperCase() + etf.type.slice(1)}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function updateCalculator() {
+            const table = document.getElementById('portfolio-table');
+            table.innerHTML = '';
+
+            const investment = parseFloat(document.getElementById('investment-amount').value) || 0;
+            let totalIncome = 0;
+            let weightedYield = 0;
+
+            portfolio.forEach((item, idx) => {
+                const etf = ETFs.find(e => e.ticker === item.ticker);
+                const allocationValue = investment * (item.allocation / 100);
+                const annualIncome = allocationValue * (etf.yield / 100);
+
+                totalIncome += annualIncome;
+                weightedYield += item.allocation * etf.yield;
+
+                const row = document.createElement('tr');
+                row.className = 'border-b border-[var(--border)]';
+                row.innerHTML = `
+                    <td class="py-3">${item.ticker}</td>
+                    <td class="py-3 text-right">
+                        <input type="number" data-idx="${idx}" value="${item.allocation}" min="0" max="100" step="0.5" class="allocation-input w-20 p-2 border rounded text-right">
+                    </td>
+                    <td class="py-3 text-right">$${allocationValue.toFixed(0)}</td>
+                    <td class="py-3 text-right">${etf.yield}%</td>
+                    <td class="py-3 text-right font-semibold">$${annualIncome.toFixed(0)}</td>
+                    <td class="py-3 text-center">
+                        <button data-idx="${idx}" class="remove-etf text-red-600 font-bold">×</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+
+            document.getElementById('total-income').textContent = '$' + totalIncome.toFixed(0);
+            document.getElementById('weighted-yield').textContent = 'Weighted Yield: ' + (weightedYield / 100).toFixed(2) + '%';
+
+            // Event listeners
+            document.querySelectorAll('.allocation-input').forEach(input => {
+                input.addEventListener('change', e => {
+                    const idx = e.target.dataset.idx;
+                    const val = parseFloat(e.target.value) || 0;
+                    portfolio[idx].allocation = Math.max(0, Math.min(100, val));
+                    updateCalculator();
+                });
+            });
+
+            document.querySelectorAll('.remove-etf').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const idx = e.target.dataset.idx;
+                    portfolio.splice(idx, 1);
+                    updateCalculator();
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+                localStorage.setItem('theme', t);
+            });
+
+            // Render yield grid
+            renderYieldGrid();
+
+            // Populate dropdown
+            const select = document.getElementById('etf-select');
+            ETFs.forEach(etf => {
+                const option = document.createElement('option');
+                option.value = etf.ticker;
+                option.textContent = `${etf.ticker} - ${etf.name} (${etf.yield}% yield)`;
+                select.appendChild(option);
+            });
+
+            // Add ETF
+            document.getElementById('add-etf').addEventListener('click', () => {
+                const ticker = document.getElementById('etf-select').value;
+                if (ticker && !portfolio.find(p => p.ticker === ticker)) {
+                    portfolio.push({ ticker, allocation: 0 });
+                    updateCalculator();
+                }
+            });
+
+            // Investment amount change
+            document.getElementById('investment-amount').addEventListener('input', updateCalculator);
+
+            // Particles
+            particlesJS('particles', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#0ea5e9' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2 }
+                },
+                interactivity: {
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
