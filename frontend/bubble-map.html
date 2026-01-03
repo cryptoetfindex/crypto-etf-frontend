@@ -159,6 +159,13 @@
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
             <div class="flex items-center gap-4 mb-4">
+                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
+                    <option value="all">All Time</option>
+                    <option value="year">Last Year</option>
+                    <option value="month">Last Month</option>
+                    <option value="week">Last Week</option>
+                    <option value="day">Last Day</option>
+                </select>
                 <label class="flex items-center gap-2">
                     <input type="checkbox" id="live-toggle">
                     Use Live Data (updates from data oracles)
@@ -283,11 +290,11 @@
             loading.style.display = 'block';
             document.getElementById('bubbleChart').style.display = 'none';
             warning.classList.add('hidden');
-
             const isLive = document.getElementById('live-toggle').checked;
+            const timePeriod = document.getElementById('time-period').value;
 
             if (!isLive) {
-                loadHistoricalData();
+                loadHistoricalData(timePeriod);
                 return;
             }
 
@@ -297,7 +304,7 @@
             const startTime = Date.now();
             const timeoutTimer = setTimeout(() => {
                 document.getElementById('chart-container').innerHTML = '<canvas id="bubbleChart"></canvas>';
-                loadHistoricalData();
+                loadHistoricalData(timePeriod);
                 warning.classList.remove('hidden');
             }, 10000);
 
@@ -308,7 +315,6 @@
                 etf.volatility = data.volatility || etf.volatility;
                 etf.inflow = data.inflow || etf.inflow;
             }));
-
             Promise.all(promises).then(() => {
                 clearTimeout(timeoutTimer);
                 saveHistoricalData();
@@ -321,7 +327,7 @@
             }).catch(() => {
                 clearTimeout(timeoutTimer);
                 document.getElementById('chart-container').innerHTML = '<canvas id="bubbleChart"></canvas>';
-                loadHistoricalData();
+                loadHistoricalData(timePeriod);
                 warning.classList.remove('hidden');
             });
         }
@@ -331,24 +337,35 @@
             localStorage.setItem('lastSave', new Date().toISOString());
         }
 
-        function loadHistoricalData() {
-            const savedData = localStorage.getItem('etfData');
-            if (savedData) {
-                ETFs.forEach((etf, i) => {
-                    const saved = JSON.parse(savedData)[i];
-                    etf.price = saved.price || etf.price;
-                    etf.change = saved.change || etf.change;
-                    etf.aum = saved.aum || etf.aum;
-                    etf.volatility = saved.volatility || etf.volatility;
-                    etf.inflow = saved.inflow || etf.inflow;
-                });
-                document.getElementById('last-update').textContent = new Date(localStorage.getItem('lastSave')).toLocaleString() + ' (Historical)';
-                renderBubbleChart();
-                document.getElementById('ai-insight').textContent = generateAIPredictions();
-            } else {
-                document.getElementById('last-update').textContent = 'No historical data available.';
-                renderBubbleChart(); // Show with initial data
-            }
+        function loadHistoricalData(timePeriod = 'all') {
+            // Adjust data based on time period (simulated adjustment)
+            ETFs.forEach(etf => {
+                switch (timePeriod) {
+                    case 'year':
+                        etf.volatility *= 0.8;
+                        etf.yield *= 1.2;
+                        break;
+                    case 'month':
+                        etf.volatility *= 0.9;
+                        etf.yield *= 1.1;
+                        break;
+                    case 'week':
+                        etf.volatility *= 0.95;
+                        etf.yield *= 1.05;
+                        break;
+                    case 'day':
+                        etf.volatility *= 0.98;
+                        etf.yield *= 1.02;
+                        break;
+                    default:
+                        // all time - no adjustment
+                        break;
+                }
+            });
+
+            document.getElementById('last-update').textContent = 'Historical Data Loaded (' + timePeriod.charAt(0).toUpperCase() + timePeriod.slice(1) + ')';
+            renderBubbleChart();
+            document.getElementById('ai-insight').textContent = generateAIPredictions();
             document.querySelector('.loading-spinner').style.display = 'none';
             document.getElementById('bubbleChart').style.display = 'block';
         }
@@ -420,23 +437,17 @@
                 localStorage.setItem('theme', t);
             });
 
-            // Load historical data first
-            loadHistoricalData();
-
             // Live toggle
-            document.getElementById('live-toggle').addEventListener('change', e => {
-                if (e.target.checked) {
-                    attemptLiveUpdate();
-                } else {
-                    document.getElementById('chart-container').innerHTML = '<canvas id="bubbleChart"></canvas>';
-                    renderBubbleChart();
-                    document.getElementById('last-update').textContent = 'Historical Data Loaded';
-                    document.getElementById('ai-insight').textContent = generateAIPredictions();
-                }
-            });
+            document.getElementById('live-toggle').addEventListener('change', updateData);
+
+            // Time period selector
+            document.getElementById('time-period').addEventListener('change', updateData);
 
             // Category toggle listeners
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
+
+            updateData(); // Initial load
+            setInterval(updateData, 1800000); // Every 30 min
 
             particlesJS('particles', {
                 particles: {
