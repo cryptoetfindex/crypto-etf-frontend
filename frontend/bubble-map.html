@@ -105,6 +105,12 @@
             margin-top: 1rem;
             text-align: center;
         }
+        .coming-soon {
+            text-align: center;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            margin: auto;
+        }
         @media (max-width: 768px) {
             .chart-wrapper {
                 height: 400px;
@@ -159,7 +165,7 @@
                 </label>
             </div>
             <div class="chart-wrapper" id="chart-container">
-                <div class="loading-spinner"></div>
+                <div class="loading-spinner" id="loading-indicator"></div>
                 <canvas id="bubbleChart" style="display: none;"></canvas>
             </div>
             <div id="warning-message" class="warning-message hidden">
@@ -217,11 +223,9 @@
                 <p class="prediction-text" id="ai-insight">Loading AI predictions...</p>
             </div>
         </div>
-
         <p class="disclaimer">
             Data is a combination of historical simulations and real-time Yahoo Finance quotes (delayed 15-30 min). AUM, yields, and correlations are hypothetical for 2026. AI predictions are generated for educational purposes. Not financial advice.
         </p>
-
         <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
             <div class="flex flex-wrap gap-4 justify-center mb-6">
                 <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
@@ -233,7 +237,6 @@
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
     </div>
-
     <script>
         const ETFs = [
             { ticker: "IBIT", name: "iShares Bitcoin Trust", category: "Bitcoin", aum: 48.2e9, volatility: 52, yield: 0, inflow: 520e6, correlation: {} },
@@ -262,7 +265,6 @@
             { ticker: "VTI", name: "Vanguard Total Stock Market", category: "Traditional", aum: 320e9, volatility: 16, yield: 1.2, inflow: 610e6 }
             // Add all other ETFs with similar data
         ];
-
         // Category colors
         const categoryColors = {
             Bitcoin: '#f59e0b',
@@ -271,29 +273,23 @@
             "Multi-Asset": '#0ea5e9',
             Traditional: '#ef4444'
         };
-
         let bubbleChart = null;
-
         function updateData() {
             const loading = document.querySelector('.loading-spinner');
             const warning = document.getElementById('warning-message');
             loading.style.display = 'block';
             document.getElementById('bubbleChart').style.display = 'none';
             warning.classList.add('hidden');
-
             const isLive = document.getElementById('live-toggle').checked;
-
             if (!isLive) {
                 loadHistoricalData();
                 return;
             }
-
             const startTime = Date.now();
             const timeoutTimer = setTimeout(() => {
                 warning.classList.remove('hidden');
                 loadHistoricalData();
             }, 10000);
-
             const promises = ETFs.map(etf => fetchData(etf).then(data => {
                 etf.price = data.price;
                 etf.change = data.change;
@@ -301,7 +297,6 @@
                 etf.volatility = data.volatility || etf.volatility;
                 etf.inflow = data.inflow || etf.inflow;
             }));
-
             Promise.all(promises).then(() => {
                 clearTimeout(timeoutTimer);
                 saveHistoricalData();
@@ -316,12 +311,10 @@
                 loadHistoricalData();
             });
         }
-
         function saveHistoricalData() {
             localStorage.setItem('etfData', JSON.stringify(ETFs));
             localStorage.setItem('lastSave', new Date().toISOString());
         }
-
         function loadHistoricalData() {
             const savedData = localStorage.getItem('etfData');
             if (savedData) {
@@ -342,7 +335,6 @@
             document.querySelector('.loading-spinner').style.display = 'none';
             document.getElementById('bubbleChart').style.display = 'block';
         }
-
         function fetchData(etf) {
             const sources = [
                 fetchYahoo(etf.ticker),
@@ -350,10 +342,8 @@
                 etf.category === 'Ethereum' ? fetchCoinGecko('ethereum') : Promise.reject('Not crypto'),
                 etf.category === 'Solana' ? fetchCoinGecko('solana') : Promise.reject('Not crypto')
             ].filter(p => p.then); // Filter valid promises
-
             return Promise.race(sources).catch(() => fallback(etf));
         }
-
         async function fetchYahoo(ticker) {
             const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=1mo&interval=1d`);
             const data = await response.json();
@@ -366,7 +356,6 @@
                 inflow: Math.random() * 1000e6 * (Math.random() > 0.5 ? 1 : -1) // Simulated
             };
         }
-
         async function fetchCoinGecko(id) {
             const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
             const data = await response.json();
@@ -378,7 +367,6 @@
                 inflow: (coin.usd_market_cap * 0.001) * (Math.random() > 0.5 ? 1 : -1) // Simulated
             };
         }
-
         function fallback(etf) {
             return {
                 price: 100 + Math.random() * 50,
@@ -387,22 +375,17 @@
                 inflow: (Math.random() - 0.5) * 500e6
             };
         }
-
         function calculateVolatility(prices) {
             const returns = prices.slice(1).map((p, i) => (p - prices[i]) / prices[i]);
             return Math.sqrt(returns.reduce((s, r) => s + r**2, 0) / returns.length) * Math.sqrt(252) * 100;
         }
-
         function generateAIPredictions() {
             return "AI Prediction: High concentration in Bitcoin ETFs (45% of total AUM). Potential outflow in traditional ETFs if crypto rally continues. Solana staking ETFs show strong inflow momentum (+15% WoW). Neural correlations indicate Ethereum as hedge to Bitcoin volatility.";
         }
-
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
             if (bubbleChart) bubbleChart.destroy();
-
             const visibleETFs = ETFs.filter(etf => document.querySelector(`.category-toggle[data-category="${etf.category}"]`).checked);
-
             const datasets = visibleETFs.map(etf => ({
                 label: etf.ticker,
                 data: [{
@@ -412,7 +395,6 @@
                 }],
                 backgroundColor: etf.inflow > 0 ? categoryColors[etf.category] + 'cc' : categoryColors[etf.category] + '66'
             }));
-
             // Correlation lines
             const annotations = [];
             visibleETFs.forEach((etf1, i) => {
@@ -430,7 +412,6 @@
                     }
                 });
             });
-
             // Concentration box
             annotations.push({
                 type: 'box',
@@ -441,7 +422,6 @@
                 backgroundColor: 'rgba(255,0,0,0.1)',
                 label: { content: 'High Concentration Zone', position: 'center' }
             });
-
             bubbleChart = new Chart(ctx, {
                 type: 'bubble',
                 data: { datasets },
@@ -461,7 +441,6 @@
                 }
             });
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             // Theme
             const saved = localStorage.getItem('theme') || 'light';
@@ -472,518 +451,12 @@
                 document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
                 localStorage.setItem('theme', t);
             });
-
             // Live toggle
             document.getElementById('live-toggle').addEventListener('change', updateData);
-
-            // Initial
-            updateData();
-            setInterval(updateData, 1800000); // Every 30 min
-
-            particlesJS('particles', {
-                particles: {
-                    number: { value: 80 },
-                    color: { value: '#0ea5e9' },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.5 },
-                    size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 2 }
-                },
-                interactivity: {
-                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } }
-                },
-                retina_detect: true
-            });
-        });
-    </script>
-</body>
-</html>
-```<|control12|>```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
-    <meta name="description" content="AI-powered bubble map visualizing correlations between crypto and traditional ETFs like a neural network. Real-time inflows/outflows, AI predictions, concentrations, and updates every 30 minutes from data oracles.">
-    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart, real-time inflows outflows">
-    <meta name="robots" content="index, follow">
-    <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <style>
-        :root {
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --card: #ffffff;
-            --accent: #0ea5e9;
-            --border: #e2e8f0;
-        }
-        [data-theme="dark"] {
-            --bg: #020617;
-            --text: #e2e8f0;
-            --card: #0f172a;
-            --accent: #f59e0b;
-            --border: #1e293b;
-        }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            transition: background 0.3s ease;
-        }
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .navbar {
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        .chart-wrapper {
-            margin-top: 2rem;
-            position: relative;
-            height: 600px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .ai-prediction {
-            background: rgba(14,165,233,0.1);
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        .prediction-text {
-            font-style: italic;
-            opacity: 0.8;
-        }
-        .loading-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--accent);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: auto;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .warning-message {
-            background: #f59e0b;
-            color: #000;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            .chart-wrapper {
-                height: 400px;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-            p.text-xl {
-                font-size: 1rem;
-            }
-        }
-    </style>
-</head>
-<body data-theme="light">
-    <div id="particles"></div>
-
-    <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
-            <a href="/" class="flex items-center">
-                <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
-            </a>
-            <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
-                <li><a href="/frontend/guides.html">Guides</a></li>
-                <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html" class="text-[var(--accent)] hover:underline">Tools</a></li>
-                <li><a href="/frontend/about.html">About</a></li>
-            </ul>
-            <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
-                <option value="light">Light Mode</option>
-                <option value="dark">Dark Mode</option>
-            </select>
-        </div>
-    </nav>
-
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Index Bubble Maps AI Neural Network Visualizer</h1>
-            <p class="text-xl max-w-4xl mx-auto">AI-powered visualization of fintech innovations in crypto and traditional ETFs. View correlations as a neural network with connecting lines, real-time inflows/outflows as color gradients, concentrations, and AI-generated forward-looking predictions. Data updates every 30 minutes from data oracles.</p>
-        </header>
-
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
-            <div class="flex items-center gap-4 mb-4">
-                <label class="flex items-center gap-2">
-                    <input type="checkbox" id="live-toggle" checked>
-                    Use Live Data (updates from data oracles)
-                </label>
-            </div>
-            <div class="chart-wrapper" id="chart-container">
-                <div class="loading-spinner"></div>
-                <canvas id="bubbleChart" style="display: none;"></canvas>
-            </div>
-            <div id="warning-message" class="warning-message hidden">
-                Data oracles are running slow today. Displaying last known data. Try refreshing or switching to historical mode.
-            </div>
-            <p class="text-sm opacity-70 mt-2">Data last updated: <span id="last-update">Loading...</span>. Hover bubbles for AI predictions and inflow/outflow details. Lines represent correlations >0.7.</p>
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">Legend</h3>
-                <div class="space-y-1">
-                    <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>Bitcoin ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Ethereum ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Solana ETFs</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #0ea5e9;"></div>Multi-Asset/Other</div>
-                    <div class="legend-item"><div class="legend-color" style="background: #ef4444;"></div>Traditional ETFs</div>
-                </div>
-            </div>
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">Toggle Categories</h3>
-                <div class="flex flex-wrap gap-4">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Bitcoin">
-                        Bitcoin
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Ethereum">
-                        Ethereum
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Solana">
-                        Solana
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Multi-Asset">
-                        Multi-Asset
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="category-toggle" data-category="Traditional">
-                        Traditional
-                    </label>
-                </div>
-            </div>
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">What You're Looking At</h3>
-                <p>This bubble map represents a neural network-like view of ETF correlations:
-                - <strong>Bubbles</strong>: Each bubble is an ETF. Size = AUM (larger = bigger market cap).
-                - <strong>X-Axis</strong>: Volatility - higher right = riskier.
-                - <strong>Y-Axis</strong>: Yield - higher up = higher returns/staking rewards.
-                - <strong>Colors</strong>: Category-specific with opacity based on inflows (brighter = positive inflow).
-                - <strong>Lines</strong>: Connections show strong correlations (>0.7) like neural links.
-                - <strong>AI Insights</strong>: Generated predictions below based on data trends.
-                Deselect categories above to focus the view.</p>
-            </div>
-            <div class="ai-prediction mt-6">
-                <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="prediction-text" id="ai-insight">Loading AI predictions...</p>
-            </div>
-        </div>
-
-        <p class="disclaimer">
-            Data is a combination of historical simulations and real-time Yahoo Finance quotes (delayed 15-30 min). AUM, yields, and correlations are hypothetical for 2026. AI predictions are generated for educational purposes. Not financial advice.
-        </p>
-
-        <footer class="text-center mt-12 pb-8 border-t border-[var(--border)] pt-8">
-            <div class="flex flex-wrap gap-4 justify-center mb-6">
-                <a href="/frontend/privacy-policy.html" class="btn">Privacy Policy</a>
-                <a href="/frontend/terms-of-service.html" class="btn">Terms of Service</a>
-                <a href="/frontend/risk-policy.html" class="btn">Risk Policy</a>
-                <a href="/frontend/affiliate-disclosure.html" class="btn">Affiliate Disclosure</a>
-                <a href="/frontend/sitemap.html" class="btn">Site Map</a>
-            </div>
-            <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
-        </footer>
-    </div>
-
-    <script>
-        const ETFs = [
-            { ticker: "IBIT", name: "iShares Bitcoin Trust", category: "Bitcoin", aum: 48.2e9, volatility: 52, yield: 0, inflow: 520e6, correlation: {} },
-            { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin", category: "Bitcoin", aum: 32.1e9, volatility: 51, yield: 0, inflow: 380e6 },
-            { ticker: "GBTC", name: "Grayscale Bitcoin Trust", category: "Bitcoin", aum: 28.7e9, volatility: 55, yield: 0, inflow: -120e6 },
-            { ticker: "ARKB", name: "ARK 21Shares Bitcoin", category: "Bitcoin", aum: 18.4e9, volatility: 53, yield: 0, inflow: 180e6 },
-            { ticker: "BITB", name: "Bitwise Bitcoin ETF", category: "Bitcoin", aum: 14.2e9, volatility: 50, yield: 0, inflow: 140e6 },
-            { ticker: "HODL", name: "VanEck Bitcoin", category: "Bitcoin", aum: 9.8e9, volatility: 54, yield: 0, inflow: 95e6 },
-            { ticker: "BTCO", name: "Invesco Galaxy Bitcoin", category: "Bitcoin", aum: 8.9e9, volatility: 52, yield: 0, inflow: 85e6 },
-            { ticker: "EZBC", name: "Franklin Bitcoin", category: "Bitcoin", aum: 7.6e9, volatility: 51, yield: 0, inflow: 72e6 },
-            { ticker: "BRRR", name: "Valkyrie Bitcoin", category: "Bitcoin", aum: 5.9e9, volatility: 53, yield: 0, inflow: 58e6 },
-            { ticker: "BTCW", name: "WisdomTree Bitcoin", category: "Bitcoin", aum: 4.8e9, volatility: 55, yield: 0, inflow: 45e6 },
-            { ticker: "ETHA", name: "iShares Ethereum Trust", category: "Ethereum", aum: 22.3e9, volatility: 45, yield: 3.8, inflow: 210e6 },
-            { ticker: "FETH", name: "Fidelity Ethereum Fund", category: "Ethereum", aum: 16.8e9, volatility: 44, yield: 3.9, inflow: 165e6 },
-            { ticker: "ETHE", name: "Grayscale Ethereum Trust", category: "Ethereum", aum: 12.4e9, volatility: 47, yield: 0, inflow: -45e6 },
-            { ticker: "ETHW", name: "Bitwise Ethereum ETF", category: "Ethereum", aum: 8.7e9, volatility: 46, yield: 4.0, inflow: 92e6 },
-            { ticker: "ETHV", name: "VanEck Ethereum ETF", category: "Ethereum", aum: 6.2e9, volatility: 45, yield: 3.8, inflow: 68e6 },
-            { ticker: "BSOL", name: "Bitwise Solana Staking", category: "Solana", aum: 9.1e9, volatility: 62, yield: 6.8, inflow: 125e6 },
-            { ticker: "VSOL", name: "VanEck Solana", category: "Solana", aum: 6.4e9, volatility: 60, yield: 7.0, inflow: 88e6 },
-            { ticker: "BITW", name: "Bitwise 10 Crypto Index", category: "Multi-Asset", aum: 5.2e9, volatility: 48, yield: 1.2, inflow: 62e6 },
-            { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index", category: "Multi-Asset", aum: 4.1e9, volatility: 50, yield: 1.5, inflow: 48e6 },
-            { ticker: "SPY", name: "S&P 500", category: "Traditional", aum: 520e9, volatility: 15, yield: 1.3, inflow: 1200e6 },
-            { ticker: "QQQ", name: "Nasdaq-100", category: "Traditional", aum: 280e9, volatility: 22, yield: 0.6, inflow: 890e6 },
-            { ticker: "VOO", name: "Vanguard S&P 500", category: "Traditional", aum: 450e9, volatility: 14, yield: 1.4, inflow: 950e6 },
-            { ticker: "IVV", name: "iShares Core S&P 500", category: "Traditional", aum: 380e9, volatility: 15, yield: 1.3, inflow: 720e6 },
-            { ticker: "VTI", name: "Vanguard Total Stock Market", category: "Traditional", aum: 320e9, volatility: 16, yield: 1.2, inflow: 610e6 }
-            // Add all other ETFs with similar data
-        ];
-
-        // Category colors
-        const categoryColors = {
-            Bitcoin: '#f59e0b',
-            Ethereum: '#8b5cf6',
-            Solana: '#10b981',
-            "Multi-Asset": '#0ea5e9',
-            Traditional: '#ef4444'
-        };
-
-        let bubbleChart = null;
-
-        async function fetchYahoo(ticker) {
-            const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=1mo&interval=1d`);
-            const data = await response.json();
-            const quote = data.chart.result[0].meta;
-            const prices = data.chart.result[0].indicators.quote[0].close;
-            return {
-                price: quote.regularMarketPrice,
-                change: quote.regularMarketChangePercent,
-                volatility: calculateVolatility(prices),
-                inflow: Math.random() * 1000e6 * (Math.random() > 0.5 ? 1 : -1) // Simulated
-            };
-        }
-
-        async function fetchCoinGecko(id) {
-            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
-            const data = await response.json();
-            const coin = data[id];
-            return {
-                price: coin.usd,
-                change: coin.usd_24h_change,
-                volatility: Math.random() * 50 + 30, // Simulated
-                inflow: (coin.usd_market_cap * 0.001) * (Math.random() > 0.5 ? 1 : -1) // Simulated
-            };
-        }
-
-        function fallback(etf) {
-            return {
-                price: 100 + Math.random() * 50,
-                change: (Math.random() - 0.5) * 5,
-                volatility: 40 + Math.random() * 40,
-                inflow: (Math.random() - 0.5) * 500e6
-            };
-        }
-
-        async function fetchData(etf) {
-            const sources = [
-                fetchYahoo(etf.ticker),
-                etf.category === 'Bitcoin' ? fetchCoinGecko('bitcoin') : Promise.reject('Not crypto'),
-                etf.category === 'Ethereum' ? fetchCoinGecko('ethereum') : Promise.reject('Not crypto'),
-                etf.category === 'Solana' ? fetchCoinGecko('solana') : Promise.reject('Not crypto')
-            ].filter(p => p.then); // Filter valid promises
-
-            return Promise.race(sources).catch(() => fallback(etf));
-        }
-
-        function updateData() {
-            const loading = document.querySelector('.loading-spinner');
-            const warning = document.getElementById('warning-message');
-            loading.style.display = 'block';
-            document.getElementById('bubbleChart').style.display = 'none';
-            warning.classList.add('hidden');
-
-            const isLive = document.getElementById('live-toggle').checked;
-
-            if (!isLive) {
-                loadHistoricalData();
-                return;
-            }
-
-            const startTime = Date.now();
-            const timeoutTimer = setTimeout(() => {
-                warning.classList.remove('hidden');
-                loadHistoricalData();
-            }, 10000);
-
-            const promises = ETFs.map(etf => fetchData(etf).then(data => {
-                etf.price = data.price;
-                etf.change = data.change;
-                etf.aum = etf.aum * (1 + etf.change / 100);
-                etf.volatility = data.volatility || etf.volatility;
-                etf.inflow = data.inflow || etf.inflow;
-            }));
-
-            Promise.all(promises).then(() => {
-                clearTimeout(timeoutTimer);
-                saveHistoricalData();
-                renderBubbleChart();
-                document.getElementById('last-update').textContent = new Date().toLocaleString();
-                document.getElementById('ai-insight').textContent = generateAIPredictions();
-                loading.style.display = 'none';
-                document.getElementById('bubbleChart').style.display = 'block';
-            }).catch(() => {
-                clearTimeout(timeoutTimer);
-                warning.classList.remove('hidden');
-                loadHistoricalData();
-            });
-        }
-
-        function saveHistoricalData() {
-            localStorage.setItem('etfData', JSON.stringify(ETFs));
-            localStorage.setItem('lastSave', new Date().toISOString());
-        }
-
-        function loadHistoricalData() {
-            const savedData = localStorage.getItem('etfData');
-            if (savedData) {
-                ETFs.forEach((etf, i) => {
-                    const saved = JSON.parse(savedData)[i];
-                    etf.price = saved.price;
-                    etf.change = saved.change;
-                    etf.aum = saved.aum;
-                    etf.volatility = saved.volatility;
-                    etf.inflow = saved.inflow;
-                });
-                document.getElementById('last-update').textContent = new Date(localStorage.getItem('lastSave')).toLocaleString() + ' (Historical)';
-                renderBubbleChart();
-                document.getElementById('ai-insight').textContent = generateAIPredictions();
-            } else {
-                document.getElementById('last-update').textContent = 'No historical data available.';
-            }
-            document.querySelector('.loading-spinner').style.display = 'none';
-            document.getElementById('bubbleChart').style.display = 'block';
-        }
-
-        function calculateVolatility(prices) {
-            const returns = prices.slice(1).map((p, i) => (p - prices[i]) / prices[i]);
-            return Math.sqrt(returns.reduce((s, r) => s + r**2, 0) / returns.length) * Math.sqrt(252) * 100;
-        }
-
-        function generateAIPredictions() {
-            return "AI Prediction: High concentration in Bitcoin ETFs (45% of total AUM). Potential outflow in traditional ETFs if crypto rally continues. Solana staking ETFs show strong inflow momentum (+15% WoW). Neural correlations indicate Ethereum as hedge to Bitcoin volatility.";
-        }
-
-        function renderBubbleChart() {
-            const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) bubbleChart.destroy();
-
-            const visibleETFs = ETFs.filter(etf => document.querySelector(`.category-toggle[data-category="${etf.category}"]`).checked);
-
-            const datasets = visibleETFs.map(etf => ({
-                label: etf.ticker,
-                data: [{
-                    x: etf.volatility,
-                    y: etf.yield,
-                    r: Math.sqrt(etf.aum / 1e9) * 3
-                }],
-                backgroundColor: etf.inflow > 0 ? categoryColors[etf.category] + 'cc' : categoryColors[etf.category] + '66'
-            }));
-
-            // Correlation lines
-            const annotations = [];
-            visibleETFs.forEach((etf1, i) => {
-                visibleETFs.slice(i+1).forEach(etf2 => {
-                    if (Math.random() > 0.3) { // Simulated
-                        annotations.push({
-                            type: 'line',
-                            xMin: etf1.volatility,
-                            xMax: etf2.volatility,
-                            yMin: etf1.yield,
-                            yMax: etf2.yield,
-                            borderColor: 'rgba(165,165,165,0.3)',
-                            borderWidth: 1
-                        });
-                    }
-                });
-            });
-
-            // Concentration box
-            annotations.push({
-                type: 'box',
-                xMin: 40,
-                xMax: 60,
-                yMin: 0,
-                yMax: 5,
-                backgroundColor: 'rgba(255,0,0,0.1)',
-                label: { content: 'High Concentration Zone', position: 'center' }
-            });
-
-            bubbleChart = new Chart(ctx, {
-                type: 'bubble',
-                data: { datasets },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        annotation: { annotations },
-                        title: { display: true, text: 'AI Neural Bubble Map - ETF Correlations Network' },
-                        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: Vol ${ctx.parsed.x.toFixed(1)}%, Yield ${ctx.parsed.y.toFixed(1)}%, AUM $${(ctx.parsed.r / 3)**2.toFixed(1)}B, Inflow $${(ctx.raw.inflow / 1e6).toFixed(1)}M, AI Pred: +${Math.random() * 20.toFixed(1)}% growth` } }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Volatility (%)' }, min: 10, max: 80 },
-                        y: { title: { display: true, text: 'Yield (%)' }, min: -2, max: 12 }
-                    },
-                    animation: { duration: 2000, easing: 'easeOutBounce' }
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Theme
-            const saved = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', saved);
-            document.getElementById('theme-select').value = saved;
-            document.getElementById('theme-select').addEventListener('change', e => {
-                const t = e.target.value;
-                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
-                localStorage.setItem('theme', t);
-            });
-
-            // Live toggle
-            document.getElementById('live-toggle').addEventListener('change', updateData);
-
             // Category toggle listeners
             document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
-
             updateData(); // Initial
             setInterval(updateData, 1800000); // Every 30 min
-
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
