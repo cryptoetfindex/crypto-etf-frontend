@@ -4,36 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Index Bubble Maps AI Neural Network Visualizer</title>
-    <meta name="description" content="AI-powered bubble map of crypto ETFs. Bubble size = AUM, X-axis = Volatility, Y-axis = Expense Ratio. Colors by category. Hover for details.">
-    <meta name="keywords" content="crypto etf bubble map 2026, fintech neural network visualizer, etf correlations chart">
-    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        :root {
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --card: #ffffff;
-            --accent: #0ea5e9;
-            --border: #e2e8f0;
-        }
-        [data-theme="dark"] {
-            --bg: #020617;
-            --text: #e2e8f0;
-            --card: #0f172a;
-            --accent: #f59e0b;
-            --border: #1e293b;
-        }
         body {
-            background: var(--bg);
-            color: var(--text);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            background: #f8fafc;
+            color: #1e293b;
             margin: 0;
-            min-height: 100vh;
+        }
+        [data-theme="dark"] body {
+            background: #020617;
+            color: #e2e8f0;
         }
         #particles {
             position: fixed;
@@ -44,17 +29,25 @@
             z-index: -1;
         }
         .navbar {
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
             position: sticky;
             top: 0;
             z-index: 50;
         }
+        [data-theme="dark"] .navbar {
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+        }
         .card {
-            background: var(--card);
-            border: 1px solid var(--border);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 1.5rem;
+        }
+        [data-theme="dark"] .card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
         }
         .chart-wrapper {
             position: relative;
@@ -113,11 +106,19 @@
 
         <div class="card mb-8">
             <h2 class="text-2xl font-semibold mb-4">AI Neural Bubble Map</h2>
+            <div class="flex items-center gap-4 mb-4">
+                <select id="time-period" class="p-3 border border-[var(--border)] rounded-lg">
+                    <option value="all">All Time</option>
+                    <option value="year">Last Year</option>
+                    <option value="month">Last Month</option>
+                    <option value="week">Last Week</option>
+                    <option value="day">Last Day</option>
+                </select>
+            </div>
             <div class="chart-wrapper">
                 <canvas id="bubbleChart"></canvas>
             </div>
-
-            <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details. Lines represent correlations >0.7.</p>
+            <p class="text-sm opacity-70 mt-2">Data last updated: January 03, 2026 (Historical). Hover bubbles for details.</p>
 
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-2">Legend</h3>
@@ -158,7 +159,6 @@
                 - <strong>X-Axis</strong>: Volatility - higher right = riskier.
                 - <strong>Y-Axis</strong>: Expense Ratio - higher up = more expensive.
                 - <strong>Colors</strong>: By category.
-                - <strong>Lines</strong>: Simulated strong correlations.
                 Toggle categories to filter the view.</p>
             </div>
 
@@ -174,7 +174,7 @@
     </div>
 
     <script>
-       const ETFs = [
+        const ETFs = [
     { ticker: "IBIT", name: "iShares Bitcoin Trust ETF", category: "Bitcoin", aum: 67.91e9, volatility: 50.94, yield: 0.25, inflow: 520e6 },
     { ticker: "FBTC", name: "Fidelity Wise Origin Bitcoin Fund", category: "Bitcoin", aum: 17.81e9, volatility: 78.19, yield: 0.25, inflow: 380e6 },
     { ticker: "GBTC", name: "Grayscale Bitcoin Trust ETF", category: "Bitcoin", aum: 14.55e9, volatility: 70.14, yield: 1.5, inflow: -120e6 },
@@ -284,7 +284,9 @@
 
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) bubbleChart.destroy();
+            if (bubbleChart) {
+                bubbleChart.destroy();
+            }
 
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
@@ -335,6 +337,29 @@
             });
         }
 
+        function generateAIPredictions() {
+            const visibleETFs = ETFs.filter(etf => {
+                const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
+                return toggle && toggle.checked;
+            });
+            const bitcoinCount = visibleETFs.filter(e => e.category === 'Bitcoin').length;
+            const ethereumCount = visibleETFs.filter(e => e.category === 'Ethereum').length;
+            const solanaCount = visibleETFs.filter(e => e.category === 'Solana').length;
+            const multiCount = visibleETFs.filter(e => e.category === 'Multi-Asset').length;
+            const totalAUM = visibleETFs.reduce((sum, e) => sum + e.aum, 0) / 1e9;
+            const avgVol = visibleETFs.reduce((sum, e) => sum + e.volatility, 0) / visibleETFs.length || 0;
+            let insight = `Showing ${visibleETFs.length} ETFs (Bitcoin: ${bitcoinCount}, Ethereum: ${ethereumCount}, Solana: ${solanaCount}, Multi-Asset: ${multiCount}). Total AUM: $${totalAUM.toFixed(1)}B. Average volatility: ${avgVol.toFixed(1)}%. `;
+            if (bitcoinCount > visibleETFs.length / 2) insight += "Heavy Bitcoin dominance - consider diversification. ";
+            if (solanaCount > 0) insight += "Solana staking products show high yield potential. ";
+            if (ethereumCount > 0) insight += "Ethereum ETFs provide yield hedge against Bitcoin volatility. ";
+            insight += "Expect continued institutional inflows in 2026.";
+            return insight;
+        }
+
+        function updateAIInsights() {
+            document.getElementById('ai-insight').textContent = generateAIPredictions();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Theme toggle
             const saved = localStorage.getItem('theme') || 'light';
@@ -346,11 +371,21 @@
                 localStorage.setItem('theme', t);
             });
 
-            // Category toggles
-            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
+            // Time period selector (simulated)
+            document.getElementById('time-period').addEventListener('change', () => {
+                renderBubbleChart();
+                updateAIInsights();
+            });
+
+            // Category toggle
+            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
+                renderBubbleChart();
+                updateAIInsights();
+            }));
 
             // Initial render
             renderBubbleChart();
+            updateAIInsights();
 
             // Particles background
             particlesJS('particles', {
