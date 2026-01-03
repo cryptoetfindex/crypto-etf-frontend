@@ -219,21 +219,8 @@
             { ticker: "BITI", name: "ProShares Short Bitcoin ETF", category: "Bitcoin", aum: 0.11447e9, volatility: 26.8, yield: 1.03, inflow: -15e6 },
             { ticker: "CRPT", name: "First Trust SkyBridge Crypto Industry & Digital Economy ETF", category: "Multi-Asset", aum: 0.11413e9, volatility: 32.2, yield: 0.85, inflow: 20e6 },
             { ticker: "FSOL", name: "Fidelity Solana Fund", category: "Solana", aum: 0.11358e9, volatility: 0, yield: 0, inflow: 125e6 },
-            { ticker: "YETH", name: "Roundhill Ether Covered Call Strategy ETF", category: "Ethereum", aum: 0.11080e9, volatility: 21.6, yield: 0.95, inflow: 30e6 },
-            { ticker: "STCE", name: "Schwab Crypto Thematic ETF", category: "Multi-Asset", aum: 0.24932e9, volatility: 22.5, yield: 0.3, inflow: 30e6 },
-            { ticker: "YBTC", name: "Roundhill Bitcoin Covered Call Strategy ETF", category: "Bitcoin", aum: 0.22504e9, volatility: 24.5, yield: 0.96, inflow: 50e6 },
-            { ticker: "BLOX", name: "Nicholas Crypto Income ETF", category: "Multi-Asset", aum: 0.21288e9, volatility: 21.1, yield: 1.03, inflow: 20e6 },
-            { ticker: "ETHV", name: "VanEck Ethereum ETF", category: "Ethereum", aum: 0.17136e9, volatility: 28.7, yield: 0, inflow: 68e6 },
-            { ticker: "LFGY", name: "YieldMax Crypto Industry & Tech Portfolio Option Income ETF", category: "Multi-Asset", aum: 0.14409e9, volatility: 17.6, yield: 1.02, inflow: 15e6 },
-            { ticker: "BTCW", name: "WisdomTree Bitcoin Fund", category: "Bitcoin", aum: 0.14061e9, volatility: 23.6, yield: 0.25, inflow: 45e6 },
-            { ticker: "OBTC", name: "Osprey Bitcoin Trust", category: "Bitcoin", aum: 0.13775e9, volatility: 18.1, yield: 0.49, inflow: 30e6 },
-            { ticker: "SBIT", name: "ProShares UltraShort Bitcoin ETF", category: "Bitcoin", aum: 0.12390e9, volatility: 51.7, yield: 0.95, inflow: -20e6 },
-            { ticker: "NCIQ", name: "Hashdex Nasdaq Crypto Index US ETF", category: "Multi-Asset", aum: 0.12194e9, volatility: 26.4, yield: 0.25, inflow: 48e6 },
-            { ticker: "BITI", name: "ProShares Short Bitcoin ETF", category: "Bitcoin", aum: 0.11447e9, volatility: 26.8, yield: 1.03, inflow: -15e6 },
-            { ticker: "CRPT", name: "First Trust SkyBridge Crypto Industry & Digital Economy ETF", category: "Multi-Asset", aum: 0.11413e9, volatility: 32.2, yield: 0.85, inflow: 20e6 },
-            { ticker: "FSOL", name: "Fidelity Solana Fund", category: "Solana", aum: 0.11358e9, volatility: 0, yield: 0, inflow: 125e6 },
             { ticker: "YETH", name: "Roundhill Ether Covered Call Strategy ETF", category: "Ethereum", aum: 0.11080e9, volatility: 21.6, yield: 0.95, inflow: 30e6 }
-            // Add more if needed
+            // Full list truncated for brevity - add all your ETFs here
         ];
 
         const categoryColors = {
@@ -247,7 +234,9 @@
 
         function renderBubbleChart() {
             const ctx = document.getElementById('bubbleChart').getContext('2d');
-            if (bubbleChart) bubbleChart.destroy();
+            if (bubbleChart) {
+                bubbleChart.destroy();
+            }
 
             const visibleETFs = ETFs.filter(etf => {
                 const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
