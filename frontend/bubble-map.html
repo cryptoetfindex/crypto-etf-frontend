@@ -151,7 +151,7 @@
             </div>
             <div class="bg-blue-100 p-4 rounded-lg mt-6">
                 <h3 class="text-xl font-semibold mb-2">AI Forward-Looking Insights</h3>
-                <p class="italic opacity-80">High concentration in Bitcoin ETFs (over 70% of total AUM). Ethereum and Solana staking products show growing yield appeal. Multi-asset ETFs provide diversification. Expect continued inflows into spot Bitcoin ETFs as institutional adoption increases in 2026.</p>
+                <p class="italic opacity-80" id="ai-insight">High concentration in Bitcoin ETFs (over 70% of total AUM). Ethereum and Solana staking products show growing yield appeal. Multi-asset ETFs provide diversification. Expect continued inflows into spot Bitcoin ETFs as institutional adoption increases in 2026.</p>
             </div>
         </div>
 
@@ -199,8 +199,7 @@
             { ticker: "GLNK", name: "Grayscale Chainlink Trust ETF", category: "Multi-Asset", aum: 0.07444e9, volatility: 11.79, yield: 8.26, inflow: 15e6 },
             { ticker: "HECO", name: "SPDR Galaxy Hedged Digital Asset Ecosystem ETF", category: "Multi-Asset", aum: 0.06537e9, volatility: 42.35, yield: 6.85, inflow: 25e6 },
             { ticker: "YBTI", name: "Roundhill Bitcoin Covered Call Strategy ETF", category: "Bitcoin", aum: 0.22504e9, volatility: 29.34, yield: 3.13, inflow: 50e6 },
-            { ticker: "TOXR", name: "21Shares XRP ETF", category: "Multi-Asset", aum: 0, volatility: 19.36, yield: 8.33, inflow: 0 }
-            // All ETFs included with parsed data
+            { ticker: "TOXR", name: "21Shares XRP ETF Beneficial INT SH", category: "Multi-Asset", aum: 0, volatility: 19.36, yield: 8.33, inflow: 0 }
         ];
 
         const categoryColors = {
@@ -226,7 +225,7 @@
                 data: [{
                     x: etf.volatility,
                     y: etf.yield || 0,
-                    r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5) // Ensure minimum size
+                    r: Math.max(10, Math.sqrt(etf.aum / 1e9) * 5)
                 }],
                 backgroundColor: etf.inflow > 0 ? categoryColors[etf.category] + 'cc' : categoryColors[etf.category] + '66',
                 borderColor: categoryColors[etf.category],
@@ -248,6 +247,16 @@
                         });
                     }
                 });
+            });
+
+            annotations.push({
+                type: 'box',
+                xMin: 40,
+                xMax: 60,
+                yMin: 0,
+                yMax: 10,
+                backgroundColor: 'rgba(255,0,0,0.1)',
+                label: { content: 'High Concentration Zone', enabled: true }
             });
 
             bubbleChart = new Chart(ctx, {
@@ -283,7 +292,31 @@
             });
         }
 
+        function generateAIPredictions() {
+            const visibleETFs = ETFs.filter(etf => {
+                const toggle = document.querySelector(`.category-toggle[data-category="${etf.category}"]`);
+                return toggle && toggle.checked;
+            });
+            const bitcoinCount = visibleETFs.filter(e => e.category === 'Bitcoin').length;
+            const ethereumCount = visibleETFs.filter(e => e.category === 'Ethereum').length;
+            const solanaCount = visibleETFs.filter(e => e.category === 'Solana').length;
+            const multiCount = visibleETFs.filter(e => e.category === 'Multi-Asset').length;
+            const totalAUM = visibleETFs.reduce((sum, e) => sum + e.aum, 0) / 1e9;
+            const avgVol = visibleETFs.reduce((sum, e) => sum + e.volatility, 0) / visibleETFs.length || 0;
+            let insight = `Showing ${visibleETFs.length} ETFs (Bitcoin: ${bitcoinCount}, Ethereum: ${ethereumCount}, Solana: ${solanaCount}, Multi-Asset: ${multiCount}). Total AUM: $${totalAUM.toFixed(1)}B. Average volatility: ${avgVol.toFixed(1)}%. `;
+            if (bitcoinCount > visibleETFs.length / 2) insight += "Heavy Bitcoin dominance - consider diversification. ";
+            if (solanaCount > 0) insight += "Solana staking products show high yield potential. ";
+            if (ethereumCount > 0) insight += "Ethereum ETFs provide yield hedge against Bitcoin volatility. ";
+            insight += "Expect continued institutional inflows in 2026.";
+            return insight;
+        }
+
+        function updateAIInsights() {
+            document.getElementById('ai-insight').textContent = generateAIPredictions();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Theme
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', saved);
             document.getElementById('theme-select').value = saved;
@@ -293,15 +326,23 @@
                 localStorage.setItem('theme', t);
             });
 
+            // Time period (simulated - no real change but updates insights)
             document.getElementById('time-period').addEventListener('change', () => {
-                // Simple adjustment for demo
                 renderBubbleChart();
+                updateAIInsights();
             });
 
-            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', renderBubbleChart));
+            // Category toggle
+            document.querySelectorAll('.category-toggle').forEach(cb => cb.addEventListener('change', () => {
+                renderBubbleChart();
+                updateAIInsights();
+            }));
 
-            renderBubbleChart(); // Immediate load
+            // Initial render
+            renderBubbleChart();
+            updateAIInsights();
 
+            // Particles
             particlesJS('particles', {
                 particles: {
                     number: { value: 80 },
