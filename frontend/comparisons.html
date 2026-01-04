@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto ETF Comparisons 2026 - Bitcoin vs Ethereum vs Altcoins</title>
-    <meta name="description" content="Side-by-side comparisons of the best crypto ETFs in 2026. Compare fees, AUM, performance, inflows, and key features across Bitcoin, Ethereum, XRP, Solana, and multi-asset funds.">
-    <meta name="keywords" content="crypto etf comparison 2026, bitcoin etf vs ethereum etf, best bitcoin etf, lowest fee crypto etf, ibit vs fbtc, xrp solana etf comparison">
+    <title>Complete Bitcoin ETFs & ETPs Directory - All Funds 2025</title>
+    <meta name="description" content="Full list of every U.S. Bitcoin-related ETF and ETP in 2025 – spot, leveraged, inverse, strategy, and thematic funds. Compare AUM, fees, performance, and official links.">
+    <meta name="keywords" content="all bitcoin etfs 2025, complete bitcoin etf list, spot bitcoin etfs, leveraged bitcoin etfs, bitcoin mini trust">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Comparisons 2026">
-    <meta property="og:description" content="In-depth side-by-side comparisons of top spot crypto ETFs by category, fees, performance, and more.">
-    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://cryptoetfindex.com/frontend/comparisons.html">
-    <link rel="canonical" href="https://cryptoetfindex.com/frontend/comparisons.html">
+    <meta property="og:title" content="Complete Bitcoin ETFs & ETPs Directory 2025">
+    <meta property="og:description" content="Every Bitcoin-related ETF and ETP – spot, leveraged, inverse, strategy – with latest AUM, fees, and performance data.">
+    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
+    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --bg: #f8fafc;
@@ -41,14 +40,6 @@
             margin: 0;
             transition: background 0.3s ease;
         }
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
         .navbar {
             background: var(--card);
             border-bottom: 1px solid var(--border);
@@ -60,7 +51,8 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .btn {
             background: var(--accent);
@@ -73,52 +65,176 @@
             transition: all 0.2s;
         }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
         }
-        .comparison-card {
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(14, 165, 233, 0.05);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .news-card {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .comparison-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
+        .news-card:hover { transform: translateY(-4px); }
         .disclaimer {
             font-size: 0.875rem;
             opacity: 0.8;
             text-align: center;
             margin: 2rem 0;
         }
+        .ticker-bar {
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 90s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .ticker-item {
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        .ticker-item a {
+            color: #00ffea;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .ticker-item a:hover {
+            opacity: 0.8;
+        }
+        .ticker-section {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 4rem;
+        }
+        .tool-carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .tool-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 1.5rem;
+        }
+        .tool-carousel-item {
+            min-width: 320px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .tool-carousel-item:hover { transform: translateY(-4px); }
+        .tool-carousel-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .tool-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .tool-carousel-btn-left {
+            left: 0;
+        }
+        .tool-carousel-btn-right {
+            right: 0;
+        }
+        .premium-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 <body data-theme="light">
-    <div id="particles"></div>
+    <!-- Three Ticker Rows -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="bitcoin-ticker">
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $67.91B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $17.81B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $14.55B</span>
+            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $3.40B</span>
+            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $3.40B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="ethereum-ticker">
+            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $10.30B</span>
+            <span class="ticker-item">2. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $2.69B</span>
+            <span class="ticker-item">3. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $2.21B</span>
+            <span class="ticker-item">4. <a href="/frontend/eth-mini.html">ETH Mini</a> (Grayscale) – $2.17B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="thematic-ticker">
+            <span class="ticker-item ticker-section">Top Thematic & Leveraged ETFs:</span>
+            <span class="ticker-item">MSTX (2x MSTR) – $292M</span>
+            <span class="ticker-item">BITX (2x Bitcoin) – $1.44B</span>
+            <span class="ticker-item">BITQ (Crypto Innovators) – $357M</span>
+            <span class="ticker-item">WGMI (Mining) – $228M</span>
+        </div>
+    </div>
 
-    <!-- Sticky Navbar -->
+    <!-- Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html" class="text-[var(--accent)] hover:underline">Comparisons</a></li>
-                <li><a href="/frontend/guides.html">Guides</a></li>
-                <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html">Tools</a></li>
-                <li><a href="/frontend/about.html">About</a></li>
+                <li><a href="/" class="text-[var(--accent)] font-semibold hover:underline">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="text-[var(--accent)] font-semibold hover:underline">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-[var(--accent)]">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
             </ul>
             <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
@@ -128,13 +244,16 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Comparisons</h1>
-            <p class="text-xl max-w-4xl mx-auto">In-depth side-by-side comparisons to help you evaluate the best spot crypto ETFs by fees, AUM, performance, and more. Data as of January 01, 2026.</p>
+    <main class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Crypto ETF Comparisons 2026</h1>
+            <p class="text-2xl max-w-5xl mx-auto opacity-90 leading-relaxed">
+                Side-by-side comparisons of the best crypto ETFs in 2026. Compare fees, AUM, performance, inflows, and key features across Bitcoin, Ethereum, XRP, Solana, and multi-asset funds.
+            </p>
         </header>
 
-        <div class="comparison-grid">
+        <!-- Comparison Grid -->
+        <section class="comparison-grid">
             <!-- Top Bitcoin ETFs -->
             <div class="comparison-card">
                 <h3>Top Bitcoin ETFs</h3>
@@ -241,11 +360,7 @@
             </div>
         </div>
 
-        <div class="card mt-12 text-center">
-            <p class="text-lg">All comparisons based on latest available data. Use our tools for custom analysis.</p>
-        </div>
-
-        <p class="disclaimer">
+        <p class="disclaimer text-center mt-12">
             Not financial advice. Comparisons are informational only. Always conduct your own research and consult a financial advisor.
         </p>
 
@@ -260,43 +375,25 @@
             </div>
             <p class="text-sm opacity-70">Copyright © Crypto ETF Index 2026</p>
         </footer>
-    </div>
+    </main>
 
     <script>
-        // Theme switcher (light/dark only)
-        function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-        }
+        // Duplicate ticker content for smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            ['bitcoin-ticker', 'ethereum-ticker', 'thematic-ticker'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML += el.innerHTML;
+            });
 
-        window.addEventListener('load', () => {
+            // Theme persistence
             const saved = localStorage.getItem('theme') || 'light';
-            applyTheme(saved);
-            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-        });
-
-        // Particles.js
-        particlesJS('particles', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#0ea5e9' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+                localStorage.setItem('theme', t);
+            });
         });
     </script>
 </body>
