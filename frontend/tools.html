@@ -6,14 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto ETF Tools & Calculators 2026 - Advanced Fintech Suite</title>
-    <meta name="description" content="Full suite of advanced crypto ETF tools for 2026: ROI calculator, portfolio simulator, ETF screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, and more forward-thinking fintech features.">
-    <meta name="keywords" content="crypto etf tools 2026, bitcoin etf calculator, ethereum etf portfolio simulator, etf screener, fee comparator, inflow tracker">
+    <meta name="description" content="Advanced crypto ETF tools for 2026: ROI calculator, portfolio simulator, ETF screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, ESG screener, stress tester, rebalancing calculator, and yield estimator. Forward-thinking fintech for blockchain investments.">
+    <meta name="keywords" content="crypto etf tools 2026, bitcoin etf calculator, ethereum etf portfolio simulator, etf screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, esg screener, stress tester, rebalancing calculator, yield estimator, blockchain etf tools">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Crypto ETF Index">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
     <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Crypto ETF Tools & Calculators 2026">
-    <meta property="og:description" content="Comprehensive, forward-thinking suite of free tools to analyze, compare, and optimize crypto ETF investments in 2026.">
+    <meta property="og:title" content="Crypto ETF Tools & Calculators 2026 - Advanced Fintech Suite">
+    <meta property="og:description" content="Full suite of advanced crypto ETF tools: ROI calculator, portfolio simulator, ETF screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, ESG screener, stress tester, rebalancing calculator, and yield estimator.">
     <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
     <meta property="og:url" content="https://cryptoetfindex.com/frontend/tools.html">
     <meta property="og:type" content="website">
@@ -21,13 +21,13 @@
     <link rel="canonical" href="https://cryptoetfindex.com/frontend/tools.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --bg: #f8fafc;
             --text: #1e293b;
             --card: #ffffff;
             --accent: #0ea5e9;
+            --accent-dark: #f59e0b;
             --border: #e2e8f0;
         }
         [data-theme="dark"] {
@@ -45,14 +45,6 @@
             margin: 0;
             transition: background 0.3s ease;
         }
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
         .navbar {
             background: var(--card);
             border-bottom: 1px solid var(--border);
@@ -64,7 +56,8 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .btn {
             background: var(--accent);
@@ -89,13 +82,54 @@
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .tool-card:hover { transform: translateY(-4px); }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .tool-card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--accent);
+        }
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(14,165,233,0.05), rgba(251,146,60,0.05));
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .ticker-bar {
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 90s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .ticker-item {
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        .ticker-item a {
+            color: #00ffea;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .ticker-item a:hover {
+            opacity: 0.8;
+        }
+        .ticker-section {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 4rem;
         }
         .disclaimer {
             font-size: 0.875rem;
@@ -106,7 +140,35 @@
     </style>
 </head>
 <body data-theme="light">
-    <div id="particles"></div>
+    <!-- Three Ticker Rows -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="bitcoin-ticker">
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $67.91B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $17.81B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $14.55B</span>
+            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $3.40B</span>
+            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $3.40B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="ethereum-ticker">
+            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $10.30B</span>
+            <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $2.21B</span>
+            <span class="ticker-item">3. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $2.69B</span>
+            <span class="ticker-item">4. <a href="/frontend/eth-mini.html">ETH Mini</a> (Grayscale) – $2.17B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="thematic-ticker">
+            <span class="ticker-item ticker-section">Top Thematic & Leveraged ETFs:</span>
+            <span class="ticker-item">MSTX (2x MSTR) – $292M</span>
+            <span class="ticker-item">BITX (2x Bitcoin) – $1.44B</span>
+            <span class="ticker-item">BITQ (Crypto Innovators) – $357M</span>
+            <span class="ticker-item">WGMI (Mining) – $228M</span>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <nav class="navbar py-4 px-6">
@@ -135,101 +197,80 @@
     <!-- Main Content -->
     <main class="container max-w-1400 mx-auto p-6">
         <header class="text-center py-12">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crypto ETF Tools & Calculators 2026</h1>
-            <p class="text-xl max-w-4xl mx-auto opacity-90">The most advanced, forward-thinking suite of free tools for analyzing and optimizing crypto ETF investments. Updated for January 01, 2026.</p>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Crypto ETF Tools & Calculators 2026</h1>
+            <p class="text-2xl max-w-5xl mx-auto opacity-90 leading-relaxed">
+                The most advanced, forward-thinking fintech suite for crypto ETF analysis — featuring ROI modeling, portfolio simulation, risk assessment, and more specialized tools for blockchain investment optimization.
+            </p>
         </header>
 
-        <div class="tool-grid">
-            <!-- 1. ROI Calculator -->
-            <div class="tool-card">
-                <h3>ROI Calculator</h3>
-                <p class="mb-4">Calculate hypothetical returns with historical data for any crypto ETF or portfolio.</p>
-                <a href="/frontend/roi-calculator.html" class="btn">Open ROI Calculator →</a>
+        <!-- Highlight Tools Section -->
+        <section class="highlight-section text-center mb-12">
+            <h2 class="text-3xl font-bold mb-8">Our Complete Fintech Toolkit</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h3>ROI Calculator</h3>
+                    <p class="mb-4">Model hypothetical returns with historical data for any crypto ETF or portfolio.</p>
+                    <a href="/frontend/roi-calculator.html" class="btn">Launch Calculator →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Advanced Portfolio Simulator</h3>
+                    <p class="mb-4">Build and backtest custom portfolios with rebalancing, Monte Carlo projections, and risk metrics.</p>
+                    <a href="/frontend/portfolio-simulator.html" class="btn">Simulate Portfolio →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Advanced ETF Screener</h3>
+                    <p class="mb-4">Filter, sort, compare ETFs with AI recommendations, ESG/carbon filters, and watchlists.</p>
+                    <a href="/frontend/etf-screener.html" class="btn">Open Screener →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Fee Comparator & Impact Calculator</h3>
+                    <p class="mb-4">Compare expense ratios and see long-term fee drag on returns across all funds.</p>
+                    <a href="/frontend/fee-comparator.html" class="btn">Compare Fees →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Performance Comparator</h3>
+                    <p class="mb-4">Side-by-side returns with interactive charts across multiple time periods.</p>
+                    <a href="/frontend/performance-comparator.html" class="btn">Compare Performance →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Daily Inflow/Outflow Tracker</h3>
+                    <p class="mb-4">Real-time flows across Bitcoin, Ethereum, XRP, Solana, and thematic ETFs.</p>
+                    <a href="/frontend/inflow-tracker.html" class="btn">View Flows →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Tax Impact Estimator</h3>
+                    <p class="mb-4">Estimate capital gains, tax-loss harvesting potential, and retirement account benefits.</p>
+                    <a href="/frontend/tax-estimator.html" class="btn">Estimate Taxes →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Correlation & Risk Analyzer</h3>
+                    <p class="mb-4">Analyze correlations between ETFs, volatility, Sharpe ratio, and drawdown history.</p>
+                    <a href="/frontend/correlation-analyzer.html" class="btn">Analyze Risk →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>ESG & Sustainability Screener</h3>
+                    <p class="mb-4">Filter ETFs by hypothetical ESG ratings and estimated carbon footprint.</p>
+                    <a href="/frontend/esg-screener.html" class="btn">Screen for Sustainability →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Scenario Stress Tester</h3>
+                    <p class="mb-4">Test portfolio performance under historical crashes or custom scenarios (e.g., 50% BTC drop).</p>
+                    <a href="/frontend/stress-tester.html" class="btn">Run Stress Test →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Rebalancing Calculator</h3>
+                    <p class="mb-4">Plan optimal rebalancing frequency and threshold for your crypto allocation.</p>
+                    <a href="/frontend/rebalancing-calculator.html" class="btn">Plan Rebalancing →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Yield & Income Estimator</h3>
+                    <p class="mb-4">Project staking and option income from Solana, XRP income, and thematic funds.</p>
+                    <a href="/frontend/yield-estimator.html" class="btn">Estimate Yield →</a>
+                </div>
             </div>
+        </section>
 
-            <!-- 2. Portfolio Simulator -->
-            <div class="tool-card">
-                <h3>Advanced Portfolio Simulator</h3>
-                <p class="mb-4">Build and backtest custom portfolios with rebalancing, Monte Carlo projections, and risk metrics.</p>
-                <a href="/frontend/portfolio-simulator.html" class="btn">Simulate Portfolio →</a>
-            </div>
-
-            <!-- 3. ETF Screener -->
-            <div class="tool-card">
-                <h3>Advanced ETF Screener</h3>
-                <p class="mb-4">Filter, sort, compare ETFs with AI recommendations, ESG/carbon filters, and watchlists.</p>
-                <a href="/frontend/etf-screener.html" class="btn">Open Screener →</a>
-            </div>
-
-            <!-- 4. Fee Comparator -->
-            <div class="tool-card">
-                <h3>Fee Comparator & Impact Calculator</h3>
-                <p class="mb-4">Compare expense ratios and see long-term fee drag on returns across all funds.</p>
-                <a href="/frontend/fee-comparator.html" class="btn">Compare Fees →</a>
-            </div>
-
-            <!-- 5. Performance Comparator -->
-            <div class="tool-card">
-                <h3>Performance Comparator</h3>
-                <p class="mb-4">Side-by-side returns with interactive charts across multiple time periods.</p>
-                <a href="/frontend/performance-comparator.html" class="btn">Compare Performance →</a>
-            </div>
-
-            <!-- 6. Inflow/Outflow Tracker -->
-            <div class="tool-card">
-                <h3>Daily Inflow/Outflow Tracker</h3>
-                <p class="mb-4">Real-time flows across Bitcoin, Ethereum, XRP, Solana, and thematic ETFs.</p>
-                <a href="/frontend/inflow-tracker.html" class="btn">View Flows →</a>
-            </div>
-
-            <!-- 7. Tax Efficiency Estimator -->
-            <div class="tool-card">
-                <h3>Tax Impact Estimator</h3>
-                <p class="mb-4">Estimate capital gains, tax-loss harvesting potential, and retirement account benefits.</p>
-                <a href="/frontend/tax-estimator.html" class="btn">Estimate Taxes →</a>
-            </div>
-
-            <!-- 8. Correlation & Risk Analyzer -->
-            <div class="tool-card">
-                <h3>Correlation & Risk Analyzer</h3>
-                <p class="mb-4">Analyze correlations between ETFs, volatility, Sharpe ratio, and drawdown history.</p>
-                <a href="/frontend/correlation-analyzer.html" class="btn">Analyze Risk →</a>
-            </div>
-
-            <!-- 9. ESG & Carbon Footprint Screener -->
-            <div class="tool-card">
-                <h3>ESG & Sustainability Screener</h3>
-                <p class="mb-4">Filter ETFs by hypothetical ESG ratings and estimated carbon footprint.</p>
-                <a href="/frontend/esg-screener.html" class="btn">Screen for Sustainability →</a>
-            </div>
-
-            <!-- 10. Scenario Stress Tester -->
-            <div class="tool-card">
-                <h3>Scenario Stress Tester</h3>
-                <p class="mb-4">Test portfolio performance under historical crashes or custom scenarios (e.g., 50% BTC drop).</p>
-                <a href="/frontend/stress-tester.html" class="btn">Run Stress Test →</a>
-            </div>
-
-            <!-- 11. Rebalancing Calculator -->
-            <div class="tool-card">
-                <h3>Rebalancing Calculator</h3>
-                <p class="mb-4">Plan optimal rebalancing frequency and threshold for your crypto allocation.</p>
-                <a href="/frontend/rebalancing-calculator.html" class="btn">Plan Rebalancing →</a>
-            </div>
-
-            <!-- 12. Yield & Income Estimator -->
-            <div class="tool-card">
-                <h3>Yield & Income Estimator</h3>
-                <p class="mb-4">Project staking and option income from Solana, XRP income, and thematic funds.</p>
-                <a href="/frontend/yield-estimator.html" class="btn">Estimate Yield →</a>
-            </div>
-        </div>
-
-        <div class="card mt-12 text-center">
-            <p class="text-lg">All tools are fully functional and updated for 2026. Use them to make informed, data-driven decisions about crypto ETF investing.</p>
-        </div>
-
-        <p class="disclaimer">
+        <p class="disclaimer text-center">
             All tools are for educational and informational purposes only. Not financial advice. Crypto investments are highly volatile and carry risk of substantial loss. Verify all data independently.
         </p>
 
@@ -247,7 +288,7 @@
     </main>
 
     <script>
-        // Theme switcher (light/dark only)
+        // Theme switcher
         function applyTheme(t) {
             if (t === 'light') {
                 document.documentElement.removeAttribute('data-theme');
