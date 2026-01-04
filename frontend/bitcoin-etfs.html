@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1700485948734233"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Bitcoin ETFs & ETPs Directory - All Funds 2025</title>
-    <meta name="description" content="Full list of every U.S. Bitcoin-related ETF and ETP in 2025 – spot, leveraged, inverse, strategy, and thematic funds. Compare AUM, fees, performance, and official links.">
-    <meta name="keywords" content="all bitcoin etfs 2025, complete bitcoin etf list, spot bitcoin etfs, leveraged bitcoin etfs, bitcoin mini trust">
+    <title>Crypto ETF Tools & Calculators 2026 - Advanced Fintech Suite</title>
+    <meta name="description" content="Full suite of advanced crypto ETF tools for 2026: ROI calculator, portfolio simulator, ETF screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, ESG screener, stress tester, rebalancing calculator, and yield estimator. Forward-thinking fintech for blockchain investments.">
+    <meta name="keywords" content="crypto etf tools 2026, bitcoin etf calculator, ethereum etf portfolio simulator, etf screener, fee comparator, inflow tracker, tax estimator, correlation analyzer, esg screener, stress tester, rebalancing calculator, yield estimator, blockchain etf tools">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="Crypto ETF Index">
     <link rel="icon" type="image/png" href="/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:title" content="Complete Bitcoin ETFs & ETPs Directory 2025">
-    <meta property="og:description" content="Every Bitcoin-related ETF and ETP – spot, leveraged, inverse, strategy – with latest AUM, fees, and performance data.">
-    <meta property="og:image" content="https://crypto-etf-frontend.pages.dev/frontend/CryptoETFIndex%20Logo.png">
-    <meta property="og:url" content="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
-    <link rel="canonical" href="https://crypto-etf-frontend.pages.dev/frontend/bitcoin-etfs.html">
+    <link rel="apple-touch-icon" href="/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:title" content="Crypto ETF Tools & Calculators 2026 - Advanced Fintech Suite">
+    <meta property="og:description" content="Comprehensive, forward-thinking suite of free tools to analyze, compare, and optimize crypto ETF investments in 2026.">
+    <meta property="og:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <meta property="og:url" content="https://cryptoetfindex.com/frontend/tools.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Crypto ETF Tools & Calculators 2026 - Advanced Fintech Suite">
+    <meta name="twitter:description" content="Comprehensive, forward-thinking suite of free tools to analyze, compare, and optimize crypto ETF investments in 2026.">
+    <meta name="twitter:image" content="https://cryptoetfindex.com/frontend/CryptoETFIndex%20Logo.png">
+    <link rel="canonical" href="https://cryptoetfindex.com/frontend/tools.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --bg: #f8fafc;
@@ -40,14 +46,6 @@
             line-height: 1.6;
             margin: 0;
             transition: background 0.3s ease;
-        }
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
         .navbar {
             background: var(--card);
@@ -75,9 +73,8 @@
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 1rem;
+            border-collapse: collapse;
+            margin: 1rem 0;
         }
         th, td {
             padding: 0.75rem;
@@ -87,74 +84,163 @@
         th {
             background: rgba(14, 165, 233, 0.05);
             color: var(--accent);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            font-weight: 600;
         }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .news-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .news-card:hover { transform: translateY(-4px); }
         .disclaimer {
-            font-size: 0.8rem;
+            font-size: 0.875rem;
             opacity: 0.8;
-            margin-top: 2rem;
             text-align: center;
+            margin: 2rem 0;
         }
-        a {
+        .ticker-bar {
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 90s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .ticker-item {
+            display: inline-block;
+            margin-right: 3rem;
+        }
+        .ticker-item a {
+            color: #00ffea;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .ticker-item a:hover {
+            opacity: 0.8;
+        }
+        .ticker-section {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 4rem;
+        }
+        .tool-carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .tool-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 1.5rem;
+        }
+        .tool-carousel-item {
+            min-width: 320px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .tool-carousel-item:hover { transform: translateY(-4px); }
+        .tool-carousel-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
             color: var(--accent);
         }
-        a:hover {
-            text-decoration: underline;
+        .tool-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
         }
-        @media (max-width: 768px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            tr {
-                border: 1px solid var(--accent);
-                border-radius: 8px;
-                margin-bottom: 1rem;
-                padding: 1rem;
-            }
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-            }
-            td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                width: 45%;
-                font-weight: bold;
-                color: var(--accent);
-            }
+        .tool-carousel-btn-left {
+            left: 0;
         }
-        .positive { color: #10b981; font-weight: bold; }
-        .negative { color: #ef4444; font-weight: bold; }
+        .tool-carousel-btn-right {
+            right: 0;
+        }
+        .premium-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 <body data-theme="light">
-    <div id="particles"></div>
+    <!-- Three Ticker Rows -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="bitcoin-ticker">
+            <span class="ticker-item ticker-section">Top Bitcoin ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/ibit.html">IBIT</a> (BlackRock) – $67.91B</span>
+            <span class="ticker-item">2. <a href="/frontend/fbtc.html">FBTC</a> (Fidelity) – $17.81B</span>
+            <span class="ticker-item">3. <a href="/frontend/gbtc.html">GBTC</a> (Grayscale) – $14.55B</span>
+            <span class="ticker-item">4. <a href="/frontend/arkb.html">ARKB</a> (ARK/21Shares) – $3.40B</span>
+            <span class="ticker-item">5. <a href="/frontend/bitb.html">BITB</a> (Bitwise) – $3.40B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="ethereum-ticker">
+            <span class="ticker-item ticker-section">Top Ethereum ETFs by AUM:</span>
+            <span class="ticker-item">1. <a href="/frontend/etha.html">ETHA</a> (BlackRock) – $10.30B</span>
+            <span class="ticker-item">2. <a href="/frontend/feth.html">FETH</a> (Fidelity) – $2.21B</span>
+            <span class="ticker-item">3. <a href="/frontend/ethe.html">ETHE</a> (Grayscale) – $2.69B</span>
+            <span class="ticker-item">4. <a href="/frontend/eth-mini.html">ETH Mini</a> (Grayscale) – $2.17B</span>
+        </div>
+    </div>
+    <div class="ticker-bar">
+        <div class="ticker-content" id="thematic-ticker">
+            <span class="ticker-item ticker-section">Top Thematic & Leveraged ETFs:</span>
+            <span class="ticker-item">MSTX (2x MSTR) – $292M</span>
+            <span class="ticker-item">BITX (2x Bitcoin) – $1.44B</span>
+            <span class="ticker-item">BITQ (Crypto Innovators) – $357M</span>
+            <span class="ticker-item">WGMI (Mining) – $228M</span>
+        </div>
+    </div>
 
-    <!-- Sticky Navbar -->
+    <!-- Navbar -->
     <nav class="navbar py-4 px-6">
-        <div class="max-w-1400 mx-auto flex flex-wrap justify-between items-center gap-4">
+        <div class="max-w-1400 mx-auto flex flex-wrap items-center justify-between gap-4">
             <a href="/" class="flex items-center">
                 <img src="/frontend/CryptoETFIndex%20Logo.png" alt="Crypto ETF Index Logo" class="h-12">
             </a>
             <ul class="flex flex-wrap gap-6 text-lg">
-                <li><a href="/">Home</a></li>
-                <li><a href="/frontend/bitcoin-etfs.html" class="text-[var(--accent)] hover:underline">Bitcoin ETFs</a></li>
-                <li><a href="/frontend/ethereum-etfs.html">Ethereum ETFs</a></li>
-                <li><a href="/frontend/other-crypto-etfs.html">Other Crypto ETFs</a></li>
-                <li><a href="/frontend/comparisons.html">Comparisons</a></li>
-                <li><a href="/frontend/guides.html">Guides</a></li>
-                <li><a href="/frontend/news.html">News</a></li>
-                <li><a href="/frontend/tools.html">Tools</a></li>
-                <li><a href="/frontend/about.html">About</a></li>
+                <li><a href="/" class="text-[var(--accent)] font-semibold hover:underline">Home</a></li>
+                <li><a href="/frontend/bitcoin-etfs.html" class="hover:text-[var(--accent)]">Bitcoin ETFs</a></li>
+                <li><a href="/frontend/ethereum-etfs.html" class="hover:text-[var(--accent)]">Ethereum ETFs</a></li>
+                <li><a href="/frontend/other-crypto-etfs.html" class="hover:text-[var(--accent)]">Other Crypto ETFs</a></li>
+                <li><a href="/frontend/comparisons.html" class="hover:text-[var(--accent)]">Comparisons</a></li>
+                <li><a href="/frontend/guides.html" class="hover:text-[var(--accent)]">Guides</a></li>
+                <li><a href="/frontend/news.html" class="hover:text-[var(--accent)]">News</a></li>
+                <li><a href="/frontend/tools.html" class="hover:text-[var(--accent)]">Tools</a></li>
+                <li><a href="/frontend/about.html" class="hover:text-[var(--accent)]">About</a></li>
             </ul>
             <select id="theme-select" class="bg-[var(--card)] border border-[var(--border)] rounded px-3 py-2 text-sm">
                 <option value="light">Light Mode</option>
@@ -164,563 +250,146 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container max-w-1400 mx-auto p-4">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Complete Bitcoin ETFs & ETPs Directory</h1>
-            <p class="text-xl max-w-4xl mx-auto">Full list of all U.S. Bitcoin-related ETFs and ETPs – spot, leveraged, inverse, strategy, and thematic funds. Data approximate; verify with issuers.</p>
+    <main class="container max-w-1400 mx-auto p-6">
+        <header class="text-center py-12">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Bitcoin ETFs & ETPs 2026</h1>
+            <p class="text-2xl max-w-5xl mx-auto opacity-90 leading-relaxed">
+                Comprehensive directory of all Bitcoin-related ETFs and ETPs — spot, leveraged, inverse, strategy, and thematic. Updated for January 2026 with AUM, fees, performance, and more.
+            </p>
         </header>
 
-        <!-- Pure Spot Bitcoin ETFs Section -->
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Pure Spot Bitcoin ETFs</h2>
+        <!-- Pure Spot Bitcoin ETFs -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">Pure Spot Bitcoin ETFs</h2>
+            <p class="text-center mb-8 text-lg opacity-90 max-w-4xl mx-auto">
+                Direct physical Bitcoin-backed ETFs — the most popular way for institutions to gain BTC exposure. These hold actual Bitcoin and track its price minus fees.
+            </p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
+                            <th>Rank</th>
                             <th>Ticker</th>
-                            <th>ETF Name</th>
+                            <th>Name</th>
                             <th>Issuer</th>
-                            <th>Total Assets ($MM)</th>
+                            <th>AUM</th>
                             <th>Expense Ratio</th>
-                            <th>YTD Return (%)</th>
-                            <th>1-Year Return (%)</th>
-                            <th>3-Year Return (%)</th>
-                            <th>Avg Volume</th>
-                            <th>Prev Close ($)</th>
-                            <th>1-Day Change (%)</th>
-                            <th>Details Page</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Ticker">IBIT</td>
-                            <td data-label="ETF Name">iShares Bitcoin Trust ETF</td>
-                            <td data-label="Issuer">BlackRock</td>
-                            <td data-label="Total Assets ($MM)">$67,170</td>
-                            <td data-label="Expense Ratio">0.25%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.18%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+79.48%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">64,098,408</td>
-                            <td data-label="Prev Close ($)">$49.65</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.36%</td>
-                            <td data-label="Details Page"><a href="/frontend/ibit.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">FBTC</td>
-                            <td data-label="ETF Name">Fidelity Wise Origin Bitcoin Fund</td>
-                            <td data-label="Issuer">Fidelity</td>
-                            <td data-label="Total Assets ($MM)">$17,570</td>
-                            <td data-label="Expense Ratio">0.25%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.25%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+79.91%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">6,354,806</td>
-                            <td data-label="Prev Close ($)">$76.23</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.42%</td>
-                            <td data-label="Details Page"><a href="/frontend/fbtc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">GBTC</td>
-                            <td data-label="ETF Name">Grayscale Bitcoin Trust ETF</td>
-                            <td data-label="Issuer">Grayscale</td>
-                            <td data-label="Total Assets ($MM)">$14,420</td>
-                            <td data-label="Expense Ratio">1.50%</td>
-                            <td data-label="YTD Return (%)" class="negative">-9.35%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+79.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">5,247,183</td>
-                            <td data-label="Prev Close ($)">$68.36</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.36%</td>
-                            <td data-label="Details Page"><a href="/frontend/gbtc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BTC</td>
-                            <td data-label="ETF Name">Grayscale Bitcoin Mini Trust ETF</td>
-                            <td data-label="Issuer">Grayscale</td>
-                            <td data-label="Total Assets ($MM)">$4,220</td>
-                            <td data-label="Expense Ratio">0.15%</td>
-                            <td data-label="YTD Return (%)" class="negative">-9.29%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.50%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">2,388,091</td>
-                            <td data-label="Prev Close ($)">$38.73</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.36%</td>
-                            <td data-label="Details Page"><a href="/frontend/btc-mini.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITB</td>
-                            <td data-label="ETF Name">Bitwise Bitcoin ETF Trust</td>
-                            <td data-label="Issuer">Bitwise</td>
-                            <td data-label="Total Assets ($MM)">$3,350</td>
-                            <td data-label="Expense Ratio">0.20%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.30%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+79.20%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">2,675,817</td>
-                            <td data-label="Prev Close ($)">$47.56</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.36%</td>
-                            <td data-label="Details Page"><a href="/frontend/bitb.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">ARKB</td>
-                            <td data-label="ETF Name">ARK 21Shares Bitcoin ETF</td>
-                            <td data-label="Issuer">ARK / 21Shares</td>
-                            <td data-label="Total Assets ($MM)">$3,260</td>
-                            <td data-label="Expense Ratio">0.21%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.30%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.80%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">4,641,881</td>
-                            <td data-label="Prev Close ($)">$29.04</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.45%</td>
-                            <td data-label="Details Page"><a href="/frontend/arkb.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">HODL</td>
-                            <td data-label="ETF Name">VanEck Bitcoin ETF</td>
-                            <td data-label="Issuer">VanEck</td>
-                            <td data-label="Total Assets ($MM)">$1,380</td>
-                            <td data-label="Expense Ratio">0.20%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.13%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.90%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">2,295,091</td>
-                            <td data-label="Prev Close ($)">$24.73</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.48%</td>
-                            <td data-label="Details Page"><a href="/frontend/hodl.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BTCO</td>
-                            <td data-label="ETF Name">Invesco Galaxy Bitcoin ETF</td>
-                            <td data-label="Issuer">Invesco Galaxy</td>
-                            <td data-label="Total Assets ($MM)">$541.45</td>
-                            <td data-label="Expense Ratio">0.25%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.29%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.70%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">190,166</td>
-                            <td data-label="Prev Close ($)">$87.17</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.37%</td>
-                            <td data-label="Details Page"><a href="/frontend/btco.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">EZBC</td>
-                            <td data-label="ETF Name">Franklin Bitcoin ETF</td>
-                            <td data-label="Issuer">Franklin Templeton</td>
-                            <td data-label="Total Assets ($MM)">$504.52</td>
-                            <td data-label="Expense Ratio">0.19%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.25%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+79.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">278,591</td>
-                            <td data-label="Prev Close ($)">$50.60</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.39%</td>
-                            <td data-label="Details Page"><a href="/frontend/ezbc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BRRR</td>
-                            <td data-label="ETF Name">Coinshares Bitcoin ETF</td>
-                            <td data-label="Issuer">CoinShares</td>
-                            <td data-label="Total Assets ($MM)">$502.90</td>
-                            <td data-label="Expense Ratio">0.25%</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.32%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.60%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">421,482</td>
-                            <td data-label="Prev Close ($)">$24.73</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.28%</td>
-                            <td data-label="Details Page"><a href="/frontend/brrr.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BTCW</td>
-                            <td data-label="ETF Name">WisdomTree Bitcoin Fund</td>
-                            <td data-label="Issuer">WisdomTree</td>
-                            <td data-label="Total Assets ($MM)">$139.37</td>
-                            <td data-label="Expense Ratio">0.30%</td>
-                            <td data-label="YTD Return (%)" class="negative">-7.79%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+78.20%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">58,754</td>
-                            <td data-label="Prev Close ($)">$92.68</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.33%</td>
-                            <td data-label="Details Page"><a href="/frontend/btcw.html">View →</a></td>
-                        </tr>
+                        <tr><td>1</td><td>IBIT</td><td>iShares Bitcoin Trust ETF</td><td>BlackRock</td><td>$67.91B</td><td>0.25%</td><td><a href="/frontend/ibit.html">View →</a></td></tr>
+                        <tr><td>2</td><td>FBTC</td><td>Fidelity Wise Origin Bitcoin Fund</td><td>Fidelity</td><td>$17.81B</td><td>0.25%</td><td><a href="/frontend/fbtc.html">View →</a></td></tr>
+                        <tr><td>3</td><td>GBTC</td><td>Grayscale Bitcoin Trust ETF</td><td>Grayscale</td><td>$14.55B</td><td>1.50%</td><td><a href="/frontend/gbtc.html">View →</a></td></tr>
+                        <tr><td>4</td><td>BTC</td><td>Grayscale Bitcoin Mini Trust ETF</td><td>Grayscale</td><td>$4.26B</td><td>0.15%</td><td><a href="/frontend/btc-mini.html">View →</a></td></tr>
+                        <tr><td>5</td><td>ARKB</td><td>ARK 21Shares Bitcoin ETF</td><td>ARK/21Shares</td><td>$3.40B</td><td>0.21%</td><td><a href="/frontend/arkb.html">View →</a></td></tr>
+                        <tr><td>6</td><td>BITB</td><td>Bitwise Bitcoin ETF Trust</td><td>Bitwise</td><td>$3.40B</td><td>0.20%</td><td><a href="/frontend/bitb.html">View →</a></td></tr>
+                        <tr><td>7</td><td>HODL</td><td>VanEck Bitcoin ETF</td><td>VanEck</td><td>$1.40B</td><td>0.20%</td><td><a href="/frontend/hodl.html">View →</a></td></tr>
+                        <tr><td>8</td><td>BTCO</td><td>Invesco Galaxy Bitcoin ETF</td><td>Invesco</td><td>$546.26M</td><td>0.25%</td><td><a href="/frontend/btco.html">View →</a></td></tr>
+                        <tr><td>9</td><td>EZBC</td><td>Franklin Bitcoin ETF</td><td>Franklin Templeton</td><td>$509.03M</td><td>0.19%</td><td><a href="/frontend/ezbc.html">View →</a></td></tr>
+                        <tr><td>10</td><td>BRRR</td><td>Coinshares Bitcoin ETF</td><td>CoinShares</td><td>$507.40M</td><td>0.25%</td><td><a href="/frontend/brrr.html">View →</a></td></tr>
+                        <tr><td>11</td><td>BTCW</td><td>WisdomTree Bitcoin Fund</td><td>WisdomTree</td><td>$140.61M</td><td>0.30%</td><td><a href="/frontend/btcw.html">View →</a></td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm mt-4 text-center">Pure spot Bitcoin ETFs hold actual BTC. Total AUM ~$120B+.</p>
-        </div>
+            <p class="text-center mt-6 opacity-80">These spot Bitcoin ETFs hold actual BTC and represent the core of direct cryptocurrency exposure, with combined AUM exceeding $120B.</p>
+        </section>
 
-        <!-- Leveraged / Inverse / Strategy Bitcoin ETPs -->
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Leveraged, Inverse & Strategy Bitcoin ETPs</h2>
+        <!-- Leveraged, Inverse & Strategy Bitcoin ETPs -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">Leveraged, Inverse & Strategy Bitcoin ETPs</h2>
+            <p class="text-center mb-8 text-lg opacity-90 max-w-4xl mx-auto">
+                Sophisticated products for advanced traders — including daily leveraged exposure, inverse funds for hedging, and option-based income strategies. These offer amplified returns but with significantly higher risk.
+            </p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
-                            <th>ETF Name</th>
+                            <th>Name</th>
                             <th>Issuer</th>
-                            <th>Total Assets ($MM)</th>
+                            <th>AUM</th>
                             <th>Expense Ratio</th>
-                            <th>YTD Return (%)</th>
-                            <th>1-Year Return (%)</th>
-                            <th>3-Year Return (%)</th>
-                            <th>Avg Volume</th>
-                            <th>Prev Close ($)</th>
-                            <th>1-Day Change (%)</th>
-                            <th>Type</th>
-                            <th>Details Page</th>
+                            <th>Strategy</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Ticker">BITO</td>
-                            <td data-label="ETF Name">ProShares Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$2,160</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-12.80%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+65.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">27,966,884</td>
-                            <td data-label="Prev Close ($)">$12.16</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.49%</td>
-                            <td data-label="Type">Futures-based</td>
-                            <td data-label="Details Page"><a href="/frontend/bito.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITX</td>
-                            <td data-label="ETF Name">2x Bitcoin Strategy ETF</td>
-                            <td data-label="Issuer">Volatility Shares</td>
-                            <td data-label="Total Assets ($MM)">$1,440</td>
-                            <td data-label="Expense Ratio">1.85%</td>
-                            <td data-label="YTD Return (%)" class="negative">-40.44%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-20.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">10,712,780</td>
-                            <td data-label="Prev Close ($)">$27.74</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.93%</td>
-                            <td data-label="Type">2x Leveraged</td>
-                            <td data-label="Details Page"><a href="/frontend/bitx.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITU</td>
-                            <td data-label="ETF Name">ProShares Ultra Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$556.83</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-38.95%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-15.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">3,750,597</td>
-                            <td data-label="Prev Close ($)">$22.09</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.85%</td>
-                            <td data-label="Type">2x Leveraged</td>
-                            <td data-label="Details Page"><a href="/frontend/bitu.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITI</td>
-                            <td data-label="ETF Name">ProShares Short Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$115.38</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-0.17%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-60.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">2,687,063</td>
-                            <td data-label="Prev Close ($)">$23.17</td>
-                            <td data-label="1-Day Change (%)" class="positive">+0.43%</td>
-                            <td data-label="Type">Inverse (-1x)</td>
-                            <td data-label="Details Page"><a href="/frontend/biti.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">SBIT</td>
-                            <td data-label="ETF Name">ProShares UltraShort Bitcoin ETF</td>
-                            <td data-label="Issuer">ProShares</td>
-                            <td data-label="Total Assets ($MM)">$125.96</td>
-                            <td data-label="Expense Ratio">0.95%</td>
-                            <td data-label="YTD Return (%)" class="negative">-22.42%</td>
-                            <td data-label="1-Year Return (%)" class="negative">-85.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">2,727,094</td>
-                            <td data-label="Prev Close ($)">$43.92</td>
-                            <td data-label="1-Day Change (%)" class="positive">+0.87%</td>
-                            <td data-label="Type">Inverse (-2x)</td>
-                            <td data-label="Details Page"><a href="/frontend/sbit.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">MSTX</td>
-                            <td data-label="ETF Name">Defiance Daily Target 2x Long MSTR ETF</td>
-                            <td data-label="Issuer">Defiance</td>
-                            <td data-label="Total Assets ($MM)">$294.00</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)" class="negative">-87.58%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">20,631,780</td>
-                            <td data-label="Prev Close ($)">$3.85</td>
-                            <td data-label="1-Day Change (%)" class="negative">-4.47%</td>
-                            <td data-label="Type">2x MicroStrategy</td>
-                            <td data-label="Details Page"><a href="/frontend/mstx.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BTCI</td>
-                            <td data-label="ETF Name">NEOS Bitcoin High Income ETF</td>
-                            <td data-label="Issuer">NEOS</td>
-                            <td data-label="Total Assets ($MM)">$894.03</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)" class="negative">-3.04%</td>
-                            <td data-label="1-Year Return (%)" class="positive">+70.00%</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">650,705</td>
-                            <td data-label="Prev Close ($)">$44.13</td>
-                            <td data-label="1-Day Change (%)" class="negative">-1.98%</td>
-                            <td data-label="Type">Option Income</td>
-                            <td data-label="Details Page"><a href="/frontend/btci.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITY</td>
-                            <td data-label="ETF Name">Amplify Bitcoin 2% Monthly Option Income ETF</td>
-                            <td data-label="Issuer">Amplify</td>
-                            <td data-label="Total Assets ($MM)">$16.30</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)">N/A</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">10,809</td>
-                            <td data-label="Prev Close ($)">$39.99</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.32%</td>
-                            <td data-label="Type">Option Income</td>
-                            <td data-label="Details Page"><a href="/frontend/bity.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITC</td>
-                            <td data-label="ETF Name">Bitwise Trendwise Bitcoin and Treasuries Rotation Strategy ETF</td>
-                            <td data-label="Issuer">Bitwise</td>
-                            <td data-label="Total Assets ($MM)">$15.06</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)" class="negative">-20.48%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">9,543</td>
-                            <td data-label="Prev Close ($)">$36.47</td>
-                            <td data-label="1-Day Change (%)" class="positive">+0.05%</td>
-                            <td data-label="Type">Rotation Strategy</td>
-                            <td data-label="Details Page"><a href="/frontend/bitc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">DEFI</td>
-                            <td data-label="ETF Name">Hashdex Bitcoin ETF</td>
-                            <td data-label="Issuer">Hashdex</td>
-                            <td data-label="Total Assets ($MM)">$11.91</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)" class="negative">-8.51%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">1,023</td>
-                            <td data-label="Prev Close ($)">$98.92</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.46%</td>
-                            <td data-label="Type">Futures-based</td>
-                            <td data-label="Details Page"><a href="/frontend/defi.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BAGY</td>
-                            <td data-label="ETF Name">Amplify Bitcoin Max Income Covered Call ETF</td>
-                            <td data-label="Issuer">Amplify</td>
-                            <td data-label="Total Assets ($MM)">$11.28</td>
-                            <td data-label="Expense Ratio">Varies</td>
-                            <td data-label="YTD Return (%)">N/A</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">9,797</td>
-                            <td data-label="Prev Close ($)">$36.69</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.41%</td>
-                            <td data-label="Type">Covered Call</td>
-                            <td data-label="Details Page"><a href="/frontend/bagy.html">View →</a></td>
-                        </tr>
+                        <tr><td>BITO</td><td>ProShares Bitcoin ETF</td><td>ProShares</td><td>$2.16B</td><td>0.95%</td><td>Futures-based</td><td><a href="/frontend/bito.html">View →</a></td></tr>
+                        <tr><td>BITX</td><td>2x Bitcoin Strategy ETF</td><td>Volatility Shares</td><td>$1.44B</td><td>1.85%</td><td>2x Leveraged</td><td><a href="/frontend/bitx.html">View →</a></td></tr>
+                        <tr><td>BITU</td><td>ProShares Ultra Bitcoin ETF</td><td>ProShares</td><td>$556.83M</td><td>0.95%</td><td>2x Leveraged</td><td><a href="/frontend/bitu.html">View →</a></td></tr>
+                        <tr><td>BITI</td><td>ProShares Short Bitcoin ETF</td><td>ProShares</td><td>$115.38M</td><td>0.95%</td><td>Inverse (-1x)</td><td><a href="/frontend/biti.html">View →</a></td></tr>
+                        <tr><td>SBIT</td><td>ProShares UltraShort Bitcoin ETF</td><td>ProShares</td><td>$125.96M</td><td>0.95%</td><td>Inverse (-2x)</td><td><a href="/frontend/sbit.html">View →</a></td></tr>
+                        <tr><td>MSTX</td><td>Defiance Daily Target 2x Long MSTR ETF</td><td>Defiance</td><td>$294M</td><td>Varies</td><td>2x MicroStrategy</td><td><a href="/frontend/mstx.html">View →</a></td></tr>
+                        <tr><td>BTCI</td><td>NEOS Bitcoin High Income ETF</td><td>NEOS</td><td>$894.03M</td><td>Varies</td><td>Option Income</td><td><a href="/frontend/btci.html">View →</a></td></tr>
+                        <tr><td>BITY</td><td>Amplify Bitcoin 2% Monthly Option Income ETF</td><td>Amplify</td><td>$16.30M</td><td>Varies</td><td>Option Income</td><td><a href="/frontend/bity.html">View →</a></td></tr>
+                        <tr><td>BITC</td><td>Bitwise Trendwise Bitcoin and Treasuries Rotation Strategy ETF</td><td>Bitwise</td><td>$15.06M</td><td>Varies</td><td>Rotation Strategy</td><td><a href="/frontend/bitc.html">View →</a></td></tr>
+                        <tr><td>DEFI</td><td>Hashdex Bitcoin ETF</td><td>Hashdex</td><td>$11.91M</td><td>Varies</td><td>Futures-based</td><td><a href="/frontend/defi.html">View →</a></td></tr>
+                        <tr><td>BAGY</td><td>Amplify Bitcoin Max Income Covered Call ETF</td><td>Amplify</td><td>$11.28M</td><td>Varies</td><td>Covered Call</td><td><a href="/frontend/bagy.html">View →</a></td></tr>
                     </tbody>
                 </table>
             </div>
-        </div>
+            <p class="text-center mt-6 opacity-80">These products offer enhanced exposure but are best suited for experienced traders due to daily reset mechanics and potential for amplified losses.</p>
+        </section>
 
         <!-- Thematic & Related Bitcoin ETFs -->
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Thematic & Related Bitcoin ETFs</h2>
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">Thematic & Related Bitcoin ETFs</h2>
+            <p class="text-center mb-8 text-lg opacity-90 max-w-4xl mx-auto">
+                ETFs providing indirect exposure to Bitcoin through mining companies, blockchain technology, or hybrid strategies. These offer diversification within the crypto ecosystem.
+            </p>
             <div class="overflow-x-auto">
                 <table>
                     <thead>
                         <tr>
                             <th>Ticker</th>
-                            <th>ETF Name</th>
+                            <th>Name</th>
                             <th>Issuer</th>
-                            <th>Total Assets ($MM)</th>
-                            <th>YTD Return (%)</th>
-                            <th>1-Year Return (%)</th>
-                            <th>3-Year Return (%)</th>
-                            <th>Avg Volume</th>
-                            <th>Prev Close ($)</th>
-                            <th>1-Day Change (%)</th>
-                            <th>Type</th>
-                            <th>Details Page</th>
+                            <th>AUM</th>
+                            <th>YTD Return</th>
+                            <th>Strategy</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Ticker">BITQ</td>
-                            <td data-label="ETF Name">Bitwise Crypto Industry Innovators ETF</td>
-                            <td data-label="Issuer">Bitwise</td>
-                            <td data-label="Total Assets ($MM)">$364.89</td>
-                            <td data-label="YTD Return (%)" class="positive">+16.22%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">243,006</td>
-                            <td data-label="Prev Close ($)">$19.93</td>
-                            <td data-label="1-Day Change (%)" class="negative">-1.34%</td>
-                            <td data-label="Type">Crypto Companies</td>
-                            <td data-label="Details Page"><a href="/frontend/bitq.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">MSTX</td>
-                            <td data-label="ETF Name">Defiance Daily Target 2x Long MSTR ETF</td>
-                            <td data-label="Issuer">Defiance</td>
-                            <td data-label="Total Assets ($MM)">$294.00</td>
-                            <td data-label="YTD Return (%)" class="negative">-87.58%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">20,631,780</td>
-                            <td data-label="Prev Close ($)">$3.85</td>
-                            <td data-label="1-Day Change (%)" class="negative">-4.47%</td>
-                            <td data-label="Type">2x MicroStrategy</td>
-                            <td data-label="Details Page"><a href="/frontend/mstx.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">STCE</td>
-                            <td data-label="ETF Name">Schwab Crypto Thematic ETF</td>
-                            <td data-label="Issuer">Schwab</td>
-                            <td data-label="Total Assets ($MM)">$254.94</td>
-                            <td data-label="YTD Return (%)" class="positive">+36.75%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">148,649</td>
-                            <td data-label="Prev Close ($)">$59.96</td>
-                            <td data-label="1-Day Change (%)" class="negative">-1.48%</td>
-                            <td data-label="Type">Crypto Thematic</td>
-                            <td data-label="Details Page"><a href="/frontend/stce.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">WGMI</td>
-                            <td data-label="ETF Name">CoinShares Bitcoin Mining ETF</td>
-                            <td data-label="Issuer">CoinShares</td>
-                            <td data-label="Total Assets ($MM)">$217.92</td>
-                            <td data-label="YTD Return (%)" class="positive">+64.53%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">866,015</td>
-                            <td data-label="Prev Close ($)">$38.27</td>
-                            <td data-label="1-Day Change (%)" class="negative">-2.35%</td>
-                            <td data-label="Type">Bitcoin Miners</td>
-                            <td data-label="Details Page"><a href="/frontend/wgmi.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">SPBC</td>
-                            <td data-label="ETF Name">Simplify US Equity PLUS Bitcoin Strategy ETF</td>
-                            <td data-label="Issuer">Simplify</td>
-                            <td data-label="Total Assets ($MM)">$53.43</td>
-                            <td data-label="YTD Return (%)" class="positive">+14.58%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">16,843</td>
-                            <td data-label="Prev Close ($)">$43.96</td>
-                            <td data-label="1-Day Change (%)" class="negative">-1.26%</td>
-                            <td data-label="Type">Equity + Bitcoin</td>
-                            <td data-label="Details Page"><a href="/frontend/spbc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BITS</td>
-                            <td data-label="ETF Name">Global X Blockchain & Bitcoin Strategy ETF</td>
-                            <td data-label="Issuer">Global X</td>
-                            <td data-label="Total Assets ($MM)">$35.11</td>
-                            <td data-label="YTD Return (%)" class="positive">+13.48%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">5,563</td>
-                            <td data-label="Prev Close ($)">$62.72</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.02%</td>
-                            <td data-label="Type">Blockchain + Bitcoin</td>
-                            <td data-label="Details Page"><a href="/frontend/bits.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">MNRS</td>
-                            <td data-label="ETF Name">Grayscale Bitcoin Miners ETF</td>
-                            <td data-label="Issuer">Grayscale</td>
-                            <td data-label="Total Assets ($MM)">$10.21</td>
-                            <td data-label="YTD Return (%)">N/A</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">15,431</td>
-                            <td data-label="Prev Close ($)">$29.34</td>
-                            <td data-label="1-Day Change (%)" class="negative">-5.11%</td>
-                            <td data-label="Type">Bitcoin Miners</td>
-                            <td data-label="Details Page"><a href="/frontend/mnrs.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">SATO</td>
-                            <td data-label="ETF Name">Invesco Alerian Galaxy Crypto Economy ETF</td>
-                            <td data-label="Issuer">Invesco</td>
-                            <td data-label="Total Assets ($MM)">$9.81</td>
-                            <td data-label="YTD Return (%)" class="positive">+3.46%</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">5,757</td>
-                            <td data-label="Prev Close ($)">$17.74</td>
-                            <td data-label="1-Day Change (%)" class="negative">-0.37%</td>
-                            <td data-label="Type">Crypto Economy</td>
-                            <td data-label="Details Page"><a href="/frontend/sato.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BLKC</td>
-                            <td data-label="ETF Name">Invesco Alerian Galaxy Blockchain Users ETF</td>
-                            <td data-label="Issuer">Invesco</td>
-                            <td data-label="Total Assets ($MM)">$6.15</td>
-                            <td data-label="YTD Return (%)">N/A</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">N/A</td>
-                            <td data-label="Prev Close ($)">N/A</td>
-                            <td data-label="1-Day Change (%)">0.00%</td>
-                            <td data-label="Type">Blockchain Companies</td>
-                            <td data-label="Details Page"><a href="/frontend/blkc.html">View →</a></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Ticker">BCOR</td>
-                            <td data-label="ETF Name">Grayscale Bitcoin Adopters ETF</td>
-                            <td data-label="Issuer">Grayscale</td>
-                            <td data-label="Total Assets ($MM)">$3.56</td>
-                            <td data-label="YTD Return (%)">N/A</td>
-                            <td data-label="1-Year Return (%)">N/A</td>
-                            <td data-label="3-Year Return (%)">N/A</td>
-                            <td data-label="Avg Volume">1,452</td>
-                            <td data-label="Prev Close ($)">$26.62</td>
-                            <td data-label="1-Day Change (%)" class="negative">-2.99%</td>
-                            <td data-label="Type">Bitcoin Adopters</td>
-                            <td data-label="Details Page"><a href="/frontend/bcor.html">View →</a></td>
-                        </tr>
+                        <tr><td>BITQ</td><td>Bitwise Crypto Industry Innovators ETF</td><td>Bitwise</td><td>$364.89M</td><td>+16.22%</td><td>Crypto Companies</td><td><a href="/frontend/bitq.html">View →</a></td></tr>
+                        <tr><td>MSTX</td><td>Defiance Daily Target 2x Long MSTR ETF</td><td>Defiance</td><td>$294M</td><td>-87.58%</td><td>2x MicroStrategy</td><td><a href="/frontend/mstx.html">View →</a></td></tr>
+                        <tr><td>STCE</td><td>Schwab Crypto Thematic ETF</td><td>Schwab</td><td>$254.94M</td><td>+36.75%</td><td>Crypto Thematic</td><td><a href="/frontend/stce.html">View →</a></td></tr>
+                        <tr><td>WGMI</td><td>CoinShares Bitcoin Mining ETF</td><td>CoinShares</td><td>$217.92M</td><td>+64.53%</td><td>Bitcoin Miners</td><td><a href="/frontend/wgmi.html">View →</a></td></tr>
+                        <tr><td>SPBC</td><td>Simplify US Equity PLUS Bitcoin Strategy ETF</td><td>Simplify</td><td>$53.43M</td><td>+14.58%</td><td>Equity + Bitcoin</td><td><a href="/frontend/spbc.html">View →</a></td></tr>
+                        <tr><td>BITS</td><td>Global X Blockchain & Bitcoin Strategy ETF</td><td>Global X</td><td>$35.11M</td><td>+13.48%</td><td>Blockchain + Bitcoin</td><td><a href="/frontend/bits.html">View →</a></td></tr>
+                        <tr><td>MNRS</td><td>Grayscale Bitcoin Miners ETF</td><td>Grayscale</td><td>$10.21M</td><td>N/A</td><td>Bitcoin Miners</td><td><a href="/frontend/mnrs.html">View →</a></td></tr>
+                        <tr><td>SATO</td><td>Invesco Alerian Galaxy Crypto Economy ETF</td><td>Invesco</td><td>$9.81M</td><td>+3.46%</td><td>Crypto Economy</td><td><a href="/frontend/sato.html">View →</a></td></tr>
+                        <tr><td>BLKC</td><td>Invesco Alerian Galaxy Blockchain Users ETF</td><td>Invesco</td><td>$6.15M</td><td>N/A</td><td>Blockchain Companies</td><td><a href="/frontend/blkc.html">View →</a></td></tr>
+                        <tr><td>BCOR</td><td>Grayscale Bitcoin Adopters ETF</td><td>Grayscale</td><td>$3.56M</td><td>N/A</td><td>Bitcoin Adopters</td><td><a href="/frontend/bcor.html">View →</a></td></tr>
                     </tbody>
                 </table>
             </div>
-        </div>
+            <p class="text-center mt-6 opacity-80">These ETFs provide indirect exposure to Bitcoin through related companies and technologies, offering diversification beyond direct BTC holdings.</p>
+        </section>
 
-        <div class="card mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Key Insights</h2>
-            <ul class="space-y-4 text-lg">
-                <li>• Pure spot Bitcoin ETFs dominate with ~$120B+ AUM; leveraged/strategy products add volatility exposure.</li>
-                <li>• Top 5 spot funds hold ~90% of spot AUM.</li>
-                <li>• Leveraged and inverse ETPs popular for short-term trading but carry high risk.</li>
-                <li>• Thematic/mining ETFs provide indirect exposure to Bitcoin ecosystem.</li>
-            </ul>
-        </div>
+        <!-- Key Insights -->
+        <section class="card mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">Key Insights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Spot Dominance</h3>
+                    <p>Pure spot ETFs hold over $120B in AUM, with top 5 controlling 90% — showing concentrated institutional interest in direct BTC exposure.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Leveraged Growth</h3>
+                    <p>Leveraged products like BITX ($1.44B AUM) offer amplified returns but with high risk, popular for short-term trading in volatile markets.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Thematic Opportunities</h3>
+                    <p>Miners and blockchain ETFs (e.g., WGMI +64.5% YTD) provide indirect BTC exposure, outperforming in bull runs due to operational leverage.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Risk Considerations</h3>
+                    <p>Inverse ETFs like SBIT (-85% 1-Year) highlight the dangers of shorting crypto — suitable only for sophisticated, short-term strategies.</p>
+                </div>
+            </div>
+        </section>
 
         <p class="disclaimer text-center">
             Not financial advice. Crypto investments are volatile and carry risk of loss. Data approximate as of January 01, 2026; verify with issuers.
@@ -740,40 +409,22 @@
     </main>
 
     <script>
-        // Theme switcher (only light/dark)
-        function applyTheme(t) {
-            if (t === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-            localStorage.setItem('theme', t);
-            document.getElementById('theme-select').value = t;
-        }
+        // Duplicate ticker content for smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            ['bitcoin-ticker', 'ethereum-ticker', 'thematic-ticker'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML += el.innerHTML;
+            });
 
-        window.addEventListener('load', () => {
+            // Theme persistence
             const saved = localStorage.getItem('theme') || 'light';
-            applyTheme(saved);
-            document.getElementById('theme-select').addEventListener('change', e => applyTheme(e.target.value));
-        });
-
-        // Particles.js
-        particlesJS('particles', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#0ea5e9' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#0ea5e9', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-select').value = saved;
+            document.getElementById('theme-select').addEventListener('change', e => {
+                const t = e.target.value;
+                document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+                localStorage.setItem('theme', t);
+            });
         });
     </script>
 </body>
